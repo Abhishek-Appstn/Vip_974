@@ -1,12 +1,13 @@
 import {View, Text, TextInput} from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import Constants from '../../Constants';
 
-const CustomTextInput = ({name, type, onChangeText, borderColor, value}) => {
+const CustomTextInput = ({name, type, onChangeText,value}) => {
+  const [IsFocussed, setIsFocussed] = useState(false)
   return (
     <View
       style={{
-        borderColor: borderColor,
+        borderColor: IsFocussed?Constants.Colors.Green1:Constants.Colors.Black,
         borderWidth: 0.7,
         borderRadius: 5,
         height: 60,
@@ -35,6 +36,9 @@ const CustomTextInput = ({name, type, onChangeText, borderColor, value}) => {
           </Text>
         ) : null}
         <TextInput
+        onFocus={()=>setIsFocussed(true)}
+        onBlur={()=>{setIsFocussed(false)}}
+        inputMode= { type == 'PhoneNumber'?'numeric':'default'}
           style={{
             height: 25,
             fontSize: 16,

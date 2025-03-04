@@ -9,16 +9,15 @@ import { useNavigation } from '@react-navigation/native';
 
 const Login = () => {
     const [MobileNumber, setMobileNumber] = useState('')
-    const [borderColor, setborderColor] = useState(Constants.Colors.Green1)
-
+    const MobileRegex = /^[0-9]{7,}$/;
     const handleTextChange=(value)=>{
         setMobileNumber(value)
     }
 const navigation=useNavigation()
-    const HandleNavigation=()=>{
-        setborderColor(Constants.Colors.Green1)
-MobileNumber.length>5?(
-        navigation.navigate('OtpValidation')):(Alert.alert("Invalid"),setborderColor(Constants.Colors.AccentColor5))
+    const HandleNavigation=(name)=>{
+      name!=='Signup'?
+MobileRegex.test(MobileNumber)?(
+        navigation.navigate(name)):(Alert.alert("Invalid Mobile Number")):navigation.navigate(name)
     }
   return (
     <Layout>
@@ -50,31 +49,32 @@ MobileNumber.length>5?(
           We Will Send You A Verification Code On This Mobile Number
         </Text>
         <View style={{marginTop: 20, marginBottom: 10}}>
-          <CustomTextInput value={MobileNumber} borderColor={borderColor} name="Phone Number" type="PhoneNumber"onChangeText={text=>handleTextChange(text)} />
+          <CustomTextInput value={MobileNumber} name="Phone Number" type="PhoneNumber"onChangeText={text=>handleTextChange(text)} />
         </View>
         <View style={{alignItems: 'center', flexDirection: 'row'}}>
           <Text style={{color: Constants.Colors.White_Text}}>
             Don't Have An Account?{' '}
           </Text>
-          <Pressable>
+          <Pressable onPress={()=>HandleNavigation("Signup")}>
             <Text style={{color: Constants.Colors.AccentColor5}}>SIGN UP</Text>
           </Pressable>
         </View>
         <View style={{marginVertical: 30}}>
-          <CustomButton title={'Send'} onPress={HandleNavigation} />
+          <CustomButton title={'Send'} onPress={()=>HandleNavigation('OtpValidation')} />
         </View>
-
+<Pressable style={{alignSelf:'center'}}onPress={()=>HandleNavigation("Home")}>
         <Text
           style={{
             fontSize: 12,
             fontFamily: 'Gibson-Regular',
             color: Constants.Colors.White_Text,
-            alignSelf: 'center',
-            bottom: 25,
-            position: 'absolute',
+           
+          
           }}>
           Continue As Guest{' '}
         </Text>
+</Pressable>
+
       </SafeAreaView>
     </Layout>
   );

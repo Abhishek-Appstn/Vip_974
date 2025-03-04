@@ -8,7 +8,6 @@ import { Logo_White } from '../../assets/Images'
 import { useNavigation } from '@react-navigation/native'
 
 const Signup = () => {
-  const [borderColor, setborderColor] = useState(Constants.Colors.Green1)
   const [FormData, setFormData] = useState({
     FirstName:'',
     LastName:'',
@@ -27,7 +26,6 @@ const navigation=useNavigation()
     ]
     const HandleNavigation=(name)=>{
     const FIlled =Object.values(FormData).every(value=>value!=='')
-      console.log(FIlled)
 navigation.navigate(name)
     }
     const handleTextChange=(text,key)=>{
@@ -60,7 +58,7 @@ navigation.navigate(name)
       <FlatList showsVerticalScrollIndicator={false} scrollEnabled={false} data={data} renderItem={({item,index})=>{
         return(
           <View style={{marginTop: 20, marginBottom: 10}}>
-          <CustomTextInput value={FormData[item.key]} placeholder={item.name} borderColor={borderColor} name={item.name} type={item.name=='Phone'?"PhoneNumber":null} onChangeText={text=>handleTextChange(text,item.key)} />
+          <CustomTextInput value={FormData[item.key]} placeholder={item.name} name={item.name} type={item.name=='Phone'?"PhoneNumber":null} onChangeText={text=>handleTextChange(text,item.key)} />
         </View>
         )
 
@@ -70,7 +68,7 @@ navigation.navigate(name)
         <Text style={{color: Constants.Colors.White_Text}}>
          Do You Have An Account?{' '}
         </Text>
-        <Pressable>
+        <Pressable onPress={()=>HandleNavigation("Login")}>
           <Text style={{color: Constants.Colors.AccentColor5}}>SIGN IN</Text>
         </Pressable>
       </View>
@@ -83,7 +81,7 @@ navigation.navigate(name)
           fontFamily: 'Gibson-Regular',
           color: Constants.Colors.White_Text,
           alignSelf: 'center',
-        marginVertical:20
+        marginVertical:17
         }}>
         Continue As Guest{' '}
       </Text>
