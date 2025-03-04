@@ -1,0 +1,37 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "Src/assets/fonts/Gibson RegularItalic.ttf",
+      "sha1": "8ecdeb9172d8257b67d306d24747870377017cab"
+    },
+    {
+      "path": "Src/assets/fonts/Gibson-Bold.ttf",
+      "sha1": "dfc67af155b2a663ea4a3ffe43b8e0e95fb08916"
+    },
+    {
+      "path": "Src/assets/fonts/Gibson-BoldItalic.ttf",
+      "sha1": "da89d7943a458aaad1014757ecace45dc383cafa"
+    },
+    {
+      "path": "Src/assets/fonts/Gibson-Light.ttf",
+      "sha1": "8571beccec35cd07fa35613c0391ce945fc30548"
+    },
+    {
+      "path": "Src/assets/fonts/Gibson-LightItalic.ttf",
+      "sha1": "7d2f81231c6d680c38dd32aea378ae19c819bd4f"
+    },
+    {
+      "path": "Src/assets/fonts/Gibson-Regular.ttf",
+      "sha1": "4c94233f73e32fd6ef0fef3bc529b7d6cc4a470b"
+    },
+    {
+      "path": "Src/assets/fonts/Gibson-SemiBold.ttf",
+      "sha1": "1068028adba82d04a31b1d763281ecbdb9cd8011"
+    },
+    {
+      "path": "Src/assets/fonts/Gibson-SemiBoldItalic.ttf",
+      "sha1": "bf362c5aa56e3b31e1cefde7ceb0dd0f1349e1c3"
+    }
+  ]
+}
