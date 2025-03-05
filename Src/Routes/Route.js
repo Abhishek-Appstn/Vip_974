@@ -7,6 +7,11 @@ import Login from '../screens/Login/Login'
 import OtpValidation from '../screens/OtpValidation/OtpValidation'
 import Signup from '../screens/Signup/Signup'
 import Home from '../screens/Home/Home'
+import ChooseServices from '../screens/ChooseServices/ChooseServices'
+import { createDrawerNavigator } from '@react-navigation/drawer'
+import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent'
+import ScheduleService from '../screens/ScheduleService'
+const drawer=createDrawerNavigator()
 
 const Route = () => {
     const stack=createNativeStackNavigator()
@@ -17,13 +22,22 @@ const Route = () => {
         <stack.Screen name='Login' component={Login}/>
         <stack.Screen name='OtpValidation' component={OtpValidation}/>
         <stack.Screen name='Signup' component={Signup}/>
-        <stack.Screen name='Home' component={Home}/>
-
-
-
+        <stack.Screen name='Drawer' component={DrawerNavigation}/>
     </stack.Navigator>
     </NavigationContainer>
     )
+}
+
+const DrawerNavigation=()=>{
+  return(
+  <drawer.Navigator screenOptions={{headerShown:false}} >
+    <drawer.Screen name='Home' component={Home}/>
+    <drawer.Screen name='ChooseServices' component={ChooseServices}/>
+    <drawer.Screen name='ScheduleServices' component={ScheduleService}/>
+
+
+  </drawer.Navigator>
+  )
 }
 
 export default Route

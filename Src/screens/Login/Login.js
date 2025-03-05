@@ -62,7 +62,7 @@ MobileRegex.test(MobileNumber)?(
         <View style={{marginVertical: 30}}>
           <CustomButton title={'Send'} onPress={()=>HandleNavigation('OtpValidation')} />
         </View>
-<Pressable style={{alignSelf:'center'}}onPress={()=>HandleNavigation("Home")}>
+<Pressable style={{alignSelf:'center'}}onPress={()=>HandleNavigation("Drawer")}>
         <Text
           style={{
             fontSize: 12,

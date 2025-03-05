@@ -73,7 +73,7 @@ navigation.navigate(name)
         </Pressable>
       </View>
       <View style={{marginTop: 30}}>
-        <CustomButton title={'SIGN UP'} onPress={()=>HandleNavigation("Home")} />
+        <CustomButton title={'SIGN UP'} onPress={()=>HandleNavigation("Drawer")} />
       </View>  
       <Text
         style={{

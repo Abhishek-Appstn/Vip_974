@@ -25,7 +25,8 @@ const Colors = {
   Black_Bg: '#181D23',
   White_Text: '#DBDBDB',
   Black_2: '#0E1216',
-  Gray_Text:'#636B74'
+  Gray_Text:'#636B74',
+  Gray_Border:'#8AA8C7'
 };
 
 const SCREEN_DIMENSIONS = {

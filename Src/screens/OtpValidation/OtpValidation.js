@@ -60,7 +60,7 @@ name!='Login'?
           </Pressable>
      
         <View style={{marginVertical: 30}}>
-          <CustomButton title={'Submit'} onPress={()=>HandleNavigation("Home")} />
+          <CustomButton title={'Submit'} onPress={()=>HandleNavigation("Drawer")} />
         </View>
         <Pressable style={{alignSelf:'center'}}>
             <Text style={{color: Constants.Colors.AccentColor5}}>Send Again ?</Text>

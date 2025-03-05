@@ -5,11 +5,12 @@ import Constants from '../../Constants'
 import { Background_Icon, Build_Icon, Drawer, Logo_White, Rent_Icon, Search, Service_Icon } from '../../assets/Images'
 import Svg, { G, Path } from 'react-native-svg'
 import { useNavigation } from '@react-navigation/native'
+import DrawerHeaderComponent from '../../components/DrawerHeaderComponent/DrawerHeaderComponent'
 
 const Home = () => {
     const navigation=useNavigation()
-    const HandleNavigation=(name)=>{
-        navigation.navigate(name)
+    const HandleNavigation=(name,params)=>{
+        navigation.navigate(name,params)
     }
      const LowerSvg = () => {
         return (
@@ -48,22 +49,18 @@ const Home = () => {
       };
 
       const ServiceData=[
-        {header:'Rent',Description:'the best water and desert bikes',icon:Rent_Icon,},
-        {header:'Services',Description:'towing and cleaning service for containers',icon:Service_Icon,},
-        {header:'Build',Description:'Easily create your own Cabana',icon:Build_Icon,},
+        {header:'Rent',Description:'the best water and desert bikes',icon:Rent_Icon,params:'rent'},
+        {header:'Services',Description:'towing and cleaning service for containers',icon:Service_Icon,params:'services'},
+        {header:'Build',Description:'Easily create your own Cabana',icon:Build_Icon,params:'build'},
 
       ]
-    const HeaderComponent=()=>{
+const HeaderComponent=()=>{
         return(
              <View style={{backgroundColor:Constants.Colors.Black_Bg,height:Constants.SCREEN_DIMENSIONS.SCREEN_HEIGHT/2.25,width:Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH,overflow:'hidden'}}>
                 <Image style={{position:'absolute',top:0,right:-110,opacity:.45,height:Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH*.7,resizeMode:'contain'}} source={Background_Icon}/>
               
                <SafeAreaView style={{marginHorizontal:25}}>
-            <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'flex-end'}}>
-                <Image source={Drawer}/>
-                <Text style={{color:Constants.Colors.White_Text,fontSize:17,fontFamily:'Gibson-SemiBold'}}>VIP-974</Text>
-                <Image source={Search}/>
-            </View>
+           <DrawerHeaderComponent name="Vip-974"/>
             <View style={{alignItems:'center',justifyContent:'center',height:Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH*.7}}>
                 <Image source={Logo_White}/>
                 <Text style={{width:Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH*.4,color:Constants.Colors.White_Text,fontSize:24,fontFamily:'Gibson-SemiBold',textAlign:'center',lineHeight:30,marginTop:50}}>Welcome to Vip-974</Text>
@@ -118,10 +115,10 @@ const Home = () => {
 
        <FlatList scrollEnabled={false} data={ServiceData} contentContainerStyle={{height:Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH*1.21,backgroundColor:Constants.Colors.Black,paddingHorizontal:25,paddingTop:19}} renderItem={({item,index})=>{
         return(
-<Pressable style={{height:Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH/3.3,alignItems:'center',flexDirection:'row',backgroundColor:Constants.Colors.Black_Bg,borderRadius:7,marginVertical:10,paddingHorizontal:25}}>
+<Pressable style={{height:Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH/3.3,alignItems:'center',flexDirection:'row',backgroundColor:Constants.Colors.Black_Bg,borderRadius:7,marginVertical:10,paddingHorizontal:25}} onPress={()=>HandleNavigation('ChooseServices',item.params)}>
     <Pressable onPress={()=>{}}><Image source={item.icon} style={{height:75,width:75}}resizeMode='contain' /></Pressable>
     <View style={{marginLeft:20,width:Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH*.5}}>
-<Text style={{fontSize:24,fontFamily:"Gibson-Bold",color:Constants.Colors.White_Text,textTransform:'uppercase'}}>{item.header}</Text>
+<Text style={{fontSize:24,fontFamily:"Gibson",color:Constants.Colors.White_Text,textTransform:'uppercase',fontWeight:'600'}}>{item.header}</Text>
 <Text style={{fontSize:16,fontFamily:"Gibson-Regular",color:Constants.Colors.Gray_Text,textTransform:'capitalize'}}>{item.Description}</Text>
     </View>
     <FlatlistSvg/>
