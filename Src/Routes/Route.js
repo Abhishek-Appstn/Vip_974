@@ -11,6 +11,9 @@ import ChooseServices from '../screens/ChooseServices/ChooseServices'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent'
 import ScheduleService from '../screens/ScheduleService'
+import ServicesList from '../screens/ServicesList'
+import ProductPage from '../screens/ProductPage'
+import BookingSummary from '../screens/BookingSummary'
 const drawer=createDrawerNavigator()
 
 const Route = () => {
@@ -34,6 +37,12 @@ const DrawerNavigation=()=>{
     <drawer.Screen name='Home' component={Home}/>
     <drawer.Screen name='ChooseServices' component={ChooseServices}/>
     <drawer.Screen name='ScheduleServices' component={ScheduleService}/>
+    <drawer.Screen name='ServicesList' component={ServicesList}/>
+    <drawer.Screen name='ProductPage' component={ProductPage}/>
+    <drawer.Screen name='BookingSummary' component={BookingSummary}/>
+
+
+
 
 
   </drawer.Navigator>

@@ -5,14 +5,18 @@ import ItemLayout from '../components/ItemLayout';
 import CalendarStrip from 'react-native-calendar-strip';
 import Constants from '../Constants';
 import { ChevronLeftGreen, ChevronRight, ChevronRightGreen } from '../assets/Images';
+import { useNavigation } from '@react-navigation/native';
 
 const ScheduleService = () => {
   const { Colors } = Constants;
+  const navigation=useNavigation()
   const { SCREEN_HEIGHT,SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
   const [currentDate, setCurrentDate] = useState(moment());
   const [SelectedTime, setSelectedTime] = useState('');
 
-
+const HandleNavigation=()=>{
+  navigation.navigate('ServicesList')
+}
   const goToPreviousWeek = () => {
     const newDate = moment(currentDate).subtract(1, 'week');
     setCurrentDate(newDate);
@@ -51,7 +55,8 @@ const ScheduleService = () => {
   
 const TimeDisplay=()=>{
     return(
-       <View style={{marginTop:SCREEN_WIDTH*.06}}>
+       <View style={{marginTop:SCREEN_WIDTH*.06,width:SCREEN_WIDTH,backgroundColor:Colors.Black,height:SCREEN_HEIGHT*.6,zIndex:-1,paddingHorizontal:SCREEN_WIDTH*.02,paddingTop:20
+       }}>
         <Text style={{color:Colors.White,fontSize:18,fontFamily:"Gibson-BoldItalic",fontWeight:'500'}}>Select Time</Text>
         <FlatList contentContainerStyle={{marginTop:SCREEN_WIDTH*.02}} scrollEnabled={false} numColumns={4} data={Data} renderItem={({item,index})=>{
 return(
@@ -64,8 +69,12 @@ return(
     )
 }
   return (
-    <ItemLayout name='Submit'>
-      <View style={{marginTop:20,backgroundColor:Colors.Black_Bg}}>
+    <ItemLayout name='Submit' colors={Colors.Black_Bg} onPress={HandleNavigation}>
+      <View style={{marginHorizontal:SCREEN_WIDTH*.03}}>
+
+      <View style={{marginTop:20,backgroundColor:Colors.Black_Bg,marginHorizontal:SCREEN_WIDTH*.02}}>
+                
+        
         <View
           style={{
             flexDirection: 'row',
@@ -110,7 +119,7 @@ return(
         </View>
 
         <CalendarStrip
-          style={{ height: 50,marginTop:10}}
+          style={{ height: 50,marginTop:10,width:SCREEN_WIDTH*.95}}
           calendarHeaderStyle={{ display: 'none' }}
           dateNumberStyle={{ color: 'white' }}
           dateNameStyle={{ color: 'white' }}
@@ -131,7 +140,10 @@ return(
           startingDate={currentDate} 
         />
       </View>
+    </View>
     <TimeDisplay/>
+
+
     </ItemLayout>
   );
 };
