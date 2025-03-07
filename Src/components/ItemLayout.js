@@ -12,7 +12,7 @@ const ItemLayout = ({name,children,size,colors,onPress,screenname}) => {
     <View>
        <View style={{backgroundColor:colors?colors:Colors.Black,height:SCREEN_HEIGHT*.92,width:SCREEN_WIDTH,borderRadius:15,zIndex:9}}>
        <SafeAreaView style={{width:SCREEN_WIDTH,alignSelf:'center',marginTop:SCREEN_WIDTH*.2,overflow:'hidden'}}>
-     <View style={{marginHorizontal:SCREEN_WIDTH*.07,overflow:'hidden'}}>
+     <View style={{marginHorizontal:SCREEN_WIDTH*.07,}}>
      {/* <DrawerHeaderComponent name={screenname?screenname:"Rent"} search={true} type='login'/> */}
      </View> 
         {children}

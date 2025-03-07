@@ -36,24 +36,7 @@ import LifeJacket from './LifeJacket/LifeJacket.png';
 import Tick from './Tick/Tick.png';
 import ChevronDown from './ChevronDown/ChevronDown.png';
 import Barcode from './Barcode/Barcode.png';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import CabanSize from './CabanSize/CabanSize.png';
 
 export {
   Background_Icon,
@@ -79,5 +62,20 @@ export {
   Star_Filled_Yellow,
   Star_outline,
   Location_White,
-  YamahaJetski1,Expand,LocationPin,CompassNorthEast,Plus,Minus,Dew,Pepsi,Fanta,CrossMark,Gopro,LifeJacket,Tick,ChevronDown,Barcode
+  YamahaJetski1,
+  Expand,
+  LocationPin,
+  CompassNorthEast,
+  Plus,
+  Minus,
+  Dew,
+  Pepsi,
+  Fanta,
+  CrossMark,
+  Gopro,
+  LifeJacket,
+  Tick,
+  ChevronDown,
+  Barcode,
+  CabanSize
 };

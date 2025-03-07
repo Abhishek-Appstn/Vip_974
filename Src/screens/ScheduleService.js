@@ -17,6 +17,9 @@ const ScheduleService = () => {
 const route=useRoute()
 const params=route.params
 const HandleNavigation=()=>{
+  params?.type=='Washing'?
+  navigation.navigate('CabanSize')
+  :
   navigation.navigate('ServicesList')
 }
   const goToPreviousWeek = () => {

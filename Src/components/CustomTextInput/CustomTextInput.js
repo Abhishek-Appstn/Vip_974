@@ -38,7 +38,7 @@ const CustomTextInput = ({name, type, onChangeText,value}) => {
         <TextInput
         onFocus={()=>setIsFocussed(true)}
         onBlur={()=>{setIsFocussed(false)}}
-        inputMode= { type == 'PhoneNumber'?'numeric':'default'}
+        inputMode= { type == 'PhoneNumber'||type=='size'?'numeric':'default'}
           style={{
             height: 25,
             fontSize: 16,
@@ -46,7 +46,7 @@ const CustomTextInput = ({name, type, onChangeText,value}) => {
             width:
               type == 'PhoneNumber'
                 ? Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH * 0.68
-                : Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH * 0.82,
+                :type == 'size'?Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH * 0.76 :Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH * 0.82,
             color: Constants.Colors.White,
            
           }}
@@ -54,6 +54,17 @@ const CustomTextInput = ({name, type, onChangeText,value}) => {
           placeholder={name}
           placeholderTextColor={Constants.Colors.White_Text}
         />
+        {type == 'size' &&  value ? (
+          <Text
+            style={{
+              color: Constants.Colors.White,
+              fontSize: 16,
+              fontFamily: 'Gibson-Regular',
+              alignSelf:'flex-end'
+            }}>
+            M²
+          </Text>
+        ) : null}
       </View>
     </View>
   );

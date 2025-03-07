@@ -17,6 +17,8 @@ import BookingSummary from '../screens/BookingSummary'
 import MyActivities from '../screens/MyActivities'
 import BookedTicket from '../screens/BookedTicket'
 import ChooseLocation from '../screens/ChooseLocation'
+import CabanSizeDetail from '../screens/CabanSizeDetail'
+
 const drawer=createDrawerNavigator()
 
 const Route = () => {
@@ -46,6 +48,8 @@ const DrawerNavigation=()=>{
     <drawer.Screen name='MyActivities' component={MyActivities}/>
     <drawer.Screen name='BookedTicket' component={BookedTicket}/>
     <drawer.Screen name='ChooseLocation' component={ChooseLocation}/>
+    <drawer.Screen name='CabanSize' component={CabanSizeDetail}/>
+
 
     
 
