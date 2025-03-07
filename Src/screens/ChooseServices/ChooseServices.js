@@ -92,7 +92,9 @@ const HandleNavigation=()=>{
         return(
             <Pressable style={{backgroundColor:Colors.Black_Bg,height:SCREEN_WIDTH*.55,width:SCREEN_WIDTH*.42,borderRadius:10,overflow:'hidden',}} onPress={()=>{Active===index?setActive(null):setActive(index)}}>
 <LowerSvg/>
-<View style={{position:'absolute',left:5,top:5,height:SCREEN_WIDTH*.065,width:SCREEN_WIDTH*.065,borderRadius:SCREEN_WIDTH*.075,borderColor:Colors.Green1,borderWidth:0.5,backgroundColor:Active==index?Colors.Green1:null}}/>
+<View style={{position:'absolute',left:5,top:5,height:SCREEN_WIDTH*.065,width:SCREEN_WIDTH*.065,borderRadius:SCREEN_WIDTH*.075,borderColor:Colors.Green1,borderWidth:0.5,alignItems:'center',justifyContent:'center'}}>
+<View style={{height:SCREEN_WIDTH*.04,width:SCREEN_WIDTH*.04,borderRadius:SCREEN_WIDTH*.075,backgroundColor:Active==index?Colors.Green1:null}}>
+</View></View>
 
 <Image source={Background_Icon} style={{position:'absolute',left:-20,height:SCREEN_WIDTH*.35,resizeMode:'contain'}}/>
 <View style={{alignSelf:'center',justifyContent:'center',height:SCREEN_WIDTH*.54,paddingTop:10}}>

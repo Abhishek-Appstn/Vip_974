@@ -14,6 +14,9 @@ import ScheduleService from '../screens/ScheduleService'
 import ServicesList from '../screens/ServicesList'
 import ProductPage from '../screens/ProductPage'
 import BookingSummary from '../screens/BookingSummary'
+import MyActivities from '../screens/MyActivities'
+import BookedTicket from '../screens/BookedTicket'
+import ChooseLocation from '../screens/ChooseLocation'
 const drawer=createDrawerNavigator()
 
 const Route = () => {
@@ -40,6 +43,12 @@ const DrawerNavigation=()=>{
     <drawer.Screen name='ServicesList' component={ServicesList}/>
     <drawer.Screen name='ProductPage' component={ProductPage}/>
     <drawer.Screen name='BookingSummary' component={BookingSummary}/>
+    <drawer.Screen name='MyActivities' component={MyActivities}/>
+    <drawer.Screen name='BookedTicket' component={BookedTicket}/>
+    <drawer.Screen name='ChooseLocation' component={ChooseLocation}/>
+
+    
+
 
 
 

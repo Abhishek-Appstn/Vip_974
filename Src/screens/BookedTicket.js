@@ -1,24 +1,19 @@
 import {View, Text, Image, SafeAreaView, Pressable, FlatList, Modal} from 'react-native';
 import React, { useRef, useState } from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import ItemLayout from '../components/ItemLayout';
 import Constants from '../Constants';
-import {calendar, ChevronLeft, ChevronRight, CompassNorthEast, CrossMark, Dew, Fanta, GoPro, LifeJacket, LocationPin, Minus, Pepsi, Plus, Tick, YamahaJetski1} from '../assets/Images';
-import BookingLayout from '../components/BookingLayout';
+import {Barcode, calendar, ChevronLeft, ChevronRight, CompassNorthEast, CrossMark, Dew, Fanta, GoPro, LifeJacket, LocationPin, Minus, Pepsi, Plus, Tick, YamahaJetski1} from '../assets/Images';
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent';
 import ActionSheet from 'react-native-actions-sheet'; 
-import CustomButton from '../components/CustomButton/CustomButton';
+import QRCode from 'react-native-qrcode-svg';
 
-const BookingSummary = () => {
+const BookedTicket = () => {
   const route = useRoute();
   const {Colors} = Constants;
   const {SCREEN_HEIGHT, SCREEN_WIDTH} = Constants.SCREEN_DIMENSIONS;
-  const [Choosen, setChoosen] = useState('')
-  const [Visible, setVisible] = useState(false)
-const navigation=useNavigation()
   const params = route.params;
   const ActionsheetRef=useRef()
-  console.log(params);
+
   const paymentData=[
     {name:'Rent',amt:150},
     {name:'Drinks Box',amt:90},
@@ -26,122 +21,46 @@ const navigation=useNavigation()
     {name:'Fee',amt:30},
 
   ]
-  const softDrinks = [
-    { name: 'Coca-Cola', price: 50,image:Dew },
-    { name: 'Pepsi', price: 45,image:Pepsi  },
-    { name: 'Sprite', price: 40,image:Dew  },
-    { name: 'Fanta', price: 42,image:Fanta },
-    { name: 'Mountain Dew', price: 48,image:Dew  },
-    { name: '7-Up', price: 38,image:Pepsi },
-    { name: 'Thums Up', price: 47,image:Fanta},
-    { name: 'Dr Pepper', price: 55,image:Dew  },
-    { name: 'Limca', price: 43,image:Fanta  },
-    { name: 'Mirinda', price: 40 ,image:Pepsi },
-  ];
-  const Services = [
-  { name: 'Waterproof Phone Case Rental', price: 300,image:LifeJacket },
-  { name: 'Life Jacket Upgrade (Premium Comfort)', price: 500,image:LifeJacket },
-  { name: 'GoPro Camera Rental', price: 1500 ,image:GoPro},
-  { name: 'Extra Fuel for Extended Rides', price: 800,image:LifeJacket },
-  { name: 'Professional Instructor Assistance', price: 1000,image:GoPro },
-  { name: 'Photo & Video Package', price: 2000,image:LifeJacket },
-  { name: 'Sun Protection Kit (Sunscreen & Hat)', price: 400,image:LifeJacket },
-  { name: 'Dry Bag for Belongings', price: 350,image:GoPro },
-  { name: 'Locker Rental', price: 200,image:LifeJacket },]
   const ActionsheetComponent=()=>{
     return(
       <ActionSheet closable={true} containerStyle={{backgroundColor:Colors.Black_Bg,height:SCREEN_HEIGHT*.9}}  ref={ActionsheetRef}>
-      <View style={{marginTop:10,marginHorizontal:SCREEN_WIDTH*.07,}}>
-        
-        <View
-          style={{
-            width: 40,
-            height: 5,
-            backgroundColor: '#ccc',
-            borderRadius: 2.5,
-            alignSelf: 'center',
-            marginVertical: 10,
-          }}
-        />
-        <Pressable style={{position:'absolute',right:5,top:3}} onPress={()=>ActionsheetRef.current?.hide()}>
-        <Image source={CrossMark} />
-
-        </Pressable>
-
-        <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-        <Text style={{textTransform:'uppercase',color:Colors.White,fontFamily:'Gibson',fontSize:18,fontWeight:'400'}}>{Choosen=='Drinks Box'?'Drinks Box':'Home Businesses'}</Text>
-        <Text style={{color:Colors.Green1,fontFamily:'Gibson',fontSize:12}}>(3) Items</Text>
-        </View>
-      
-<FlatList  contentContainerStyle={{marginTop:10,paddingBottom:50}} data={Choosen=='Drinks Box'?softDrinks:Services} renderItem={({item,index})=>{
-  return(
-    <Pressable style={{marginVertical:10,flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
-    <View style={{flexDirection:'row',alignItems:'center'}}>
+         <View style={{top:10,marginHorizontal:SCREEN_WIDTH*.07,}}>
+            
+            <View
+              style={{
+                width: 40,
+                height: 5,
+                backgroundColor: '#ccc',
+                borderRadius: 2.5,
+                alignSelf: 'center',
+                marginVertical: 10,
+              }}
+            />
+            <Pressable style={{position:'absolute',right:5,top:3}} onPress={()=>ActionsheetRef.current?.hide()}>
+            <Image source={CrossMark} />
+            </Pressable>
+            </View>
+            <View style={{alignItems:'center',justifyContent:'center',marginTop:SCREEN_WIDTH/2.5,}}>
+    <Text style={{fontFamily:'Gibson',fontSize:23,color:Colors.White,marginVertical:SCREEN_WIDTH*.06,textTransform:'uppercase',alignSelf:'center'}}>Beach</Text>
+    <Text style={{fontFamily:'Gibson',fontSize:23,color:Colors.White,marginBottom:SCREEN_WIDTH*.06,alignSelf:'center'}}>{params.name}</Text>
      
-      <Image source={item.image} style={{height:SCREEN_WIDTH*.15,width:SCREEN_WIDTH*.15,borderRadius:SCREEN_WIDTH*.04/4,borderColor:Colors.White_Text,borderWidth:2}}/>
-    <View style={{marginLeft:SCREEN_WIDTH*.02}}>
-    <Text style={{color:Colors.White,fontFamily:'Gibson',fontSize:16,textTransform:'uppercase',width:SCREEN_WIDTH*.45}}>{item.name}</Text>
-    <Text style={{color:Colors.Green1,fontFamily:'Gibson',fontSize:16}}>{item.price} QAR</Text>
+     <View style={{padding:SCREEN_WIDTH*.035,borderColor:Colors.White,borderWidth:1,borderRadius:5,alignSelf:'center'}}> 
+        <QRCode
+      value={JSON.stringify(params.name,params.brand,params.location,params.date)}
+    backgroundColor={Colors.Black_Bg}size={200}
+      color={Colors.White}
+    />
     </View>
-    </View>
-    <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-evenly',width:SCREEN_WIDTH*.25}}>
-    <Image
-              source={Minus}
-              style={{
-                height: SCREEN_WIDTH * 0.06,
-                width: SCREEN_WIDTH * 0.06,
-                backgroundColor: Colors.Black,
-                padding: SCREEN_WIDTH * 0.015,
-                resizeMode: 'contain',
-                borderRadius: 4,
-                borderColor: Colors.Green1,
-                borderWidth: 0.5,
-              }}
-            />
-    <Text style={{color:Colors.Green1,fontFamily:'Gibson',fontSize:12,fontWeight:'500',}}>0</Text>
+    <Text style={{fontFamily:'Gibson',fontSize:16,color:Colors.White_Text,marginVertical:SCREEN_WIDTH*.06,alignSelf:'center',width:SCREEN_WIDTH*.55,textAlign:'center'}}>Please take a screenshot to Scan this QR Code </Text>
 
-            <Image
-              source={Plus}
-              style={{
-                height: SCREEN_WIDTH * 0.06,
-                width: SCREEN_WIDTH * 0.06,
-                backgroundColor: Colors.Black,
-                padding: SCREEN_WIDTH * 0.015,
-                resizeMode: 'contain',
-                borderRadius: 4,
-                borderColor: Colors.Green1,
-                borderWidth: 0.5,
-              }}
-            />
     </View>
-    </Pressable>
-  )
-}}/>
-  </View>
-
   </ActionSheet>
     )
   }
 
   
 
-  const ModalComponent=()=>{
-    return(
-      <Modal visible={Visible} >
-        <View style={{flex:1,backgroundColor:'rgba(0,0,0,0.5)',alignItems:'center',justifyContent:'center'}}>
-<View style={{height:SCREEN_WIDTH*.9,backgroundColor:Colors.Black,width:SCREEN_WIDTH*.8,borderRadius:15,alignItems:'center',paddingTop:SCREEN_WIDTH*.078}}>
-<View style={{ height:SCREEN_WIDTH*.2,width:SCREEN_WIDTH*.2,backgroundColor:Colors.Green1,alignItems:'center',justifyContent:'center',padding:SCREEN_WIDTH*.01,borderRadius:SCREEN_WIDTH}}>
-<Image source={Tick} style={{resizeMode:'contain'}}/>
-
-</View>
-<Text style={{fontFamily:'Gibson',fontWeight:'semibold',fontSize:18,marginHorizontal:SCREEN_WIDTH*.045,textTransform:'uppercase',color:Colors.White,marginTop:SCREEN_WIDTH*.08}}>Rental Done Successfully</Text>
-<Text style={{fontFamily:'Gibson',fontWeight:'light',fontSize:14,alignSelf:'center',width:SCREEN_WIDTH*.6,color:Colors.White,textAlign:'center',marginVertical:SCREEN_WIDTH*.04}}>Thank you. The lease has been successful. You can follow the order from the My Rentals  page</Text>
-<CustomButton width={SCREEN_WIDTH*.55} title="My Rentals" onPress={()=>{setVisible(false),navigation.navigate("MyActivities")}}/>
-</View>
-        </View>
-      </Modal>
-    )
-  }
+ 
 const Timeslot=()=>{
     return(
        <View style={{marginTop:SCREEN_WIDTH*.04}}>
@@ -169,14 +88,21 @@ const Timeslot=()=>{
 }
 const ButtonComponent=({name})=>{
     return(
-        <Pressable style={{backgroundColor:Colors.Green1,height:SCREEN_WIDTH*.244,top:-SCREEN_WIDTH*.11,zIndex:-1,alignItems:'center',justifyContent:'center',flexDirection:'row'}}onPress={()=>{setVisible(true)}}>
-   <Image source={ChevronRight} style={{opacity:.3,marginRight:SCREEN_WIDTH*.003}}/>
-   <Image source={ChevronRight} style={{opacity:.5,marginRight:SCREEN_WIDTH*.003}}/> 
-   <Image source={ChevronRight} style={{opacity:1,marginRight:SCREEN_WIDTH*.003}}/> 
+        <Pressable style={{backgroundColor:Colors.Green1,height:SCREEN_WIDTH*.244,top:-SCREEN_WIDTH*.11,zIndex:-1,alignItems:'center',justifyContent:'center',flexDirection:'row'}}onPress={()=>{ActionsheetRef.current?.show()}}>
+   <Image
+                 source={Barcode}
+                 style={{
+                   height: SCREEN_WIDTH * 0.08,
+                   width: SCREEN_WIDTH * 0.08,
+                   backgroundColor: Colors.Black,
+                   padding: SCREEN_WIDTH * 0.011,
+                   resizeMode: 'contain',
+                   borderRadius: 4,
+                   borderColor: Colors.Green1,
+                   borderWidth: 0.5,
+                 }}
+               />
    <Text style={{fontFamily:'Gibson',fontWeight:'semibold',fontSize:18,marginHorizontal:SCREEN_WIDTH*.045,textTransform:'uppercase'}}>{name}</Text>
-   <Image source={ChevronLeft} style={{opacity:1,marginRight:SCREEN_WIDTH*.003}}/>
-   <Image source={ChevronLeft} style={{opacity:.5,marginRight:SCREEN_WIDTH*.003}}/> 
-   <Image source={ChevronLeft} style={{opacity:.3,marginRight:SCREEN_WIDTH*.003}}/> 
     </Pressable>
     )
 }
@@ -320,7 +246,7 @@ const ButtonComponent=({name})=>{
     return(
         <FlatList data={params.addOn} contentContainerStyle={{marginHorizontal:SCREEN_WIDTH * 0.07,paddingVertical:SCREEN_WIDTH*.025}} scrollEnabled={false} renderItem={({item,index})=>{
             return(
-<Pressable style={{flexDirection:'row',alignItems:'center', justifyContent:'space-between', paddingBottom:SCREEN_WIDTH*.05,marginTop:SCREEN_WIDTH*.02,}} onPress={()=>{setChoosen(item.name),ActionsheetRef.current?.show()}}>
+<Pressable style={{flexDirection:'row',alignItems:'center', justifyContent:'space-between', paddingBottom:SCREEN_WIDTH*.05,marginTop:SCREEN_WIDTH*.02,}}>
 <View>
     <Text
                 style={{
@@ -334,7 +260,7 @@ const ButtonComponent=({name})=>{
               </Text>
               <Text
               style={{
-                color: Colors.Green1,
+                color: Colors.White_Text,
                 fontSize: 12,
                 fontFamily: 'Gibson',
                 fontWeight: '450',
@@ -343,19 +269,6 @@ marginTop:SCREEN_WIDTH*.01
               No Items Selected
             </Text>
    </View>
-   <Image
-              source={Plus}
-              style={{
-                height: SCREEN_WIDTH * 0.08,
-                width: SCREEN_WIDTH * 0.08,
-                backgroundColor: Colors.Black,
-                padding: SCREEN_WIDTH * 0.015,
-                resizeMode: 'contain',
-                borderRadius: 4,
-                borderColor: Colors.Green1,
-                borderWidth: 0.5,
-              }}
-            />
    </Pressable>
       )
     }}/>
@@ -367,7 +280,7 @@ marginTop:SCREEN_WIDTH*.01
     return(
         <View
         style={{  
-          backgroundColor:Colors.Black_Bg,top:-SCREEN_WIDTH*.075,borderRadius:15,paddingHorizontal:SCREEN_WIDTH*.07,paddingVertical:SCREEN_WIDTH*.05,
+          backgroundColor:Colors.Black,top:-SCREEN_WIDTH*.075,borderRadius:15,paddingHorizontal:SCREEN_WIDTH*.07,paddingVertical:SCREEN_WIDTH*.05,
         }}>
                <Text
                 style={{
@@ -432,7 +345,7 @@ marginTop:SCREEN_WIDTH*.01
      <HeaderComponent />
         </SafeAreaView>
    </View>
-   <View style={{backgroundColor:Colors.Black,top:-SCREEN_WIDTH*.03,paddingTop:SCREEN_WIDTH*.04}}>
+   <View style={{backgroundColor:Colors.Black_Bg,top:-SCREEN_WIDTH*.03,paddingTop:SCREEN_WIDTH*.04}}>
 <MiddleComponent/>
 
    </View>
@@ -440,11 +353,10 @@ marginTop:SCREEN_WIDTH*.01
 
    </View>
    
-<ButtonComponent name="Proceed to payment"/> 
+<ButtonComponent name="scan Barcode "/> 
 <ActionsheetComponent/>
-<ModalComponent/>
     </View>
   );
 };
 
-export default BookingSummary;
+export default BookedTicket;

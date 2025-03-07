@@ -5,7 +5,8 @@ import ItemLayout from '../components/ItemLayout';
 import CalendarStrip from 'react-native-calendar-strip';
 import Constants from '../Constants';
 import { ChevronLeftGreen, ChevronRight, ChevronRightGreen } from '../assets/Images';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent';
 
 const ScheduleService = () => {
   const { Colors } = Constants;
@@ -13,7 +14,8 @@ const ScheduleService = () => {
   const { SCREEN_HEIGHT,SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
   const [currentDate, setCurrentDate] = useState(moment());
   const [SelectedTime, setSelectedTime] = useState('');
-
+const route=useRoute()
+const params=route.params
 const HandleNavigation=()=>{
   navigation.navigate('ServicesList')
 }
@@ -71,7 +73,7 @@ return(
   return (
     <ItemLayout name='Submit' colors={Colors.Black_Bg} onPress={HandleNavigation}>
       <View style={{marginHorizontal:SCREEN_WIDTH*.03}}>
-
+<DrawerHeaderComponent type='login'name={params?.type?params.type:"Rent"} search={true}/>
       <View style={{marginTop:20,backgroundColor:Colors.Black_Bg,marginHorizontal:SCREEN_WIDTH*.02}}>
                 
         
