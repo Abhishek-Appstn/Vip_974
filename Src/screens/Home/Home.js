@@ -115,7 +115,7 @@ const HeaderComponent=()=>{
 
        <FlatList scrollEnabled={false} data={ServiceData} contentContainerStyle={{height:Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH*1.21,backgroundColor:Constants.Colors.Black,paddingHorizontal:25,paddingTop:19}} renderItem={({item,index})=>{
         return(
-<Pressable style={{height:Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH/3.3,alignItems:'center',flexDirection:'row',backgroundColor:Constants.Colors.Black_Bg,borderRadius:7,marginVertical:10,paddingHorizontal:25}} onPress={()=>HandleNavigation('ChooseServices',item.params)}>
+<Pressable style={{height:Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH/3.3,alignItems:'center',flexDirection:'row',backgroundColor:Constants.Colors.Black_Bg,borderRadius:7,marginVertical:10,paddingHorizontal:25}} onPress={()=>HandleNavigation('Test',item.params)}>
     <Pressable onPress={()=>{}}><Image source={item.icon} style={{height:75,width:75}}resizeMode='contain' /></Pressable>
     <View style={{marginLeft:20,width:Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH*.5}}>
 <Text style={{fontSize:24,fontFamily:"Gibson",color:Constants.Colors.White_Text,textTransform:'uppercase',fontWeight:'600'}}>{item.header}</Text>
