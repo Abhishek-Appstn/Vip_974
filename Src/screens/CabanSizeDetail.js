@@ -6,13 +6,30 @@ import Constants from '../Constants'
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent'
 import CustomTextInput from '../components/CustomTextInput/CustomTextInput'
 import CustomButton from '../components/CustomButton/CustomButton'
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 const CabanSizeDetail = () => {
     const {SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
     const [Size, setSize] = useState('')
     const {Colors}=Constants
-const HandleTextChange=(text)=>{
+    const route=useRoute()
+    const params=route.params
+    const navigation=useNavigation()
+    console.log(params)
+const HandleTextChange=(text,key)=>{
+  key?setSizeDimensions({...SizeDimensions, [key]:text})
+  :
   setSize(text)
+}
+const [SizeDimensions, setSizeDimensions] = useState({
+  length:'',
+  width:''
+})
+const HandleNavigation=()=>{
+  params?.type=='services'?
+  navigation.navigate('ServicesPage',params):
+  navigation.navigate('BuildLocations',params)
+
 }
   return (
   <View style={{backgroundColor:Constants.Colors.Black_Bg,height:SCREEN_HEIGHT,width:SCREEN_WIDTH}}>
@@ -24,10 +41,17 @@ const HandleTextChange=(text)=>{
    <Text style={{fontSize:24,fontFamily:'Gibson',textTransform:'uppercase',fontWeight:'semibold',marginTop:30,color:Colors.White}}>Caban Size</Text>
    <Text style={{fontSize:16,fontFamily:'Gibson',fontWeight:'semibold',marginTop:30,color:Colors.White,width:SCREEN_WIDTH*.7,textAlign:'center',textTransform:'capitalize'}}>Please enter the cubicle area to be washed in square meters</Text>
 <View style={{marginVertical:SCREEN_WIDTH*.07}}>
-<CustomTextInput value={Size} onChangeText={text=>HandleTextChange(text)} name={"Caban Size"}type='size'/>
+  {params?.type!=='build'?
+<CustomTextInput value={Size} onChangeText={text=>HandleTextChange(text)} name={"Caban Size"}type='size'/>:
+<View style={{flexDirection:'row',alignSelf:'center',justifyContent:'space-evenly',width:SCREEN_WIDTH*.9}}>
+<CustomTextInput width={SCREEN_WIDTH*.4} value={SizeDimensions.length} onChangeText={text=>HandleTextChange(text,'length')} name={"Length"}/>
+<CustomTextInput width={SCREEN_WIDTH*.4} value={SizeDimensions.width} onChangeText={text=>HandleTextChange(text,'width')} name={"Width"}/>
+  
+  </View>
+  }
 </View>
 <View style={{marginVertical:SCREEN_WIDTH*.2}}>
-<CustomButton title="NExt" width={SCREEN_WIDTH*.8}/>
+<CustomButton title="NExt" width={SCREEN_WIDTH*.8} onPress={HandleNavigation}/>
 
 </View>
 </View>

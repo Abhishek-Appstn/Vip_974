@@ -11,9 +11,9 @@ const MyActivities = () => {
     const [SelectedIndex, setSelectedIndex] = useState(0)
     const navigation=useNavigation()
 
-    const HandleNavigation=(item)=>{
+    const HandleNavigation=({item,type})=>{
 
-        navigation.navigate('BookedTicket',item)
+        navigation.navigate('BookedTicket',{...item,type:type})
     }
 const Data=[
         {name:'2021 FX SVHO',price:50,rating:5,brand:'Yamaha',location:'Abu Hamour, Doha',image:YamahaJetski1,model:'2021 Cruising, 2021 Yamaha Waverunners',detail:' Feel the adrenaline rush and conquer the waves, or explore FX SVHO’s calm personality, when it becomes the smoothest ride you could wish for. Supercharge your adventures in the Yamaha way',detailSub:'From our unique, revolutionary RiDE system and lightweight NanoXcel2® hulls – to our exclusive electronic control systems – to the top range supercharged',addOn:[{name:'Drinks Box'},{name:'Home Businesses'}],status:'completed',date:'23,December,2020',time:'09:00 am | 10:00 am | 11:00 am'},
@@ -190,7 +190,7 @@ return(
         {SelectedIndex==0?
 <FlatList contentContainerStyle={{marginHorizontal:SCREEN_WIDTH*.07,paddingBottom:SCREEN_WIDTH*.2,paddingTop:SCREEN_WIDTH*.05}} data={Data} renderItem={({item,index})=>{
     return(
-        <Pressable onPress={()=>HandleNavigation(item)} style={{marginVertical:10,}}>
+        <Pressable onPress={()=>HandleNavigation({item:item,type:"rent"})} style={{marginVertical:10,}}>
             <View style={{flexDirection:'row'}}>
             <Image source={YamahaJetski1} style={{height:SCREEN_WIDTH*.12,width:SCREEN_WIDTH*.12,borderRadius:10}}/>
 <View style={{marginHorizontal:SCREEN_WIDTH*.03}}>
@@ -229,7 +229,7 @@ return(
 :SelectedIndex==1?
 <FlatList contentContainerStyle={{marginHorizontal:SCREEN_WIDTH*.07,paddingBottom:SCREEN_WIDTH*.2,paddingTop:SCREEN_WIDTH*.05,}} data={services} renderItem={({item,index})=>{
     return(
-        <Pressable onPress={()=>HandleNavigation(item)}  style={{marginVertical:10}}>
+        <Pressable onPress={()=>HandleNavigation({item:item,type:"services"})}  style={{marginVertical:10}}>
             <View style={{flexDirection:'row',width:SCREEN_WIDTH*.9}}>
             <Image source={YamahaJetski1} style={{height:SCREEN_WIDTH*.15,width:SCREEN_WIDTH*.15,borderRadius:SCREEN_WIDTH,borderColor:Colors.Gray_Border,borderWidth:3}}/>
 <View style={{margin:SCREEN_WIDTH*.03,width:SCREEN_WIDTH*.6}}>
@@ -266,7 +266,7 @@ return(
 }}/>
 :SelectedIndex==2?<FlatList contentContainerStyle={{marginHorizontal:SCREEN_WIDTH*.05,paddingBottom:SCREEN_WIDTH*.2,paddingTop:SCREEN_WIDTH*.05,}} data={build} renderItem={({item,index})=>{
     return(
-        <Pressable onPress={()=>HandleNavigation(item)}  style={{paddingHorizontal:SCREEN_WIDTH*.02, marginVertical:10,backgroundColor:Colors.Black_Bg,overflow:'hidden',width:SCREEN_WIDTH*.9,padding:SCREEN_WIDTH*.03,}}>
+        <Pressable onPress={()=>HandleNavigation({item:item,type:"build"})}  style={{paddingHorizontal:SCREEN_WIDTH*.02, marginVertical:10,backgroundColor:Colors.Black_Bg,overflow:'hidden',width:SCREEN_WIDTH*.9,padding:SCREEN_WIDTH*.03,}}>
             <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',borderColor:`${Colors.Gray_Text}50`,paddingBottom:SCREEN_WIDTH*.04, borderBottomWidth:1,width:SCREEN_WIDTH*.82,alignSelf:'center',paddingTop:SCREEN_WIDTH*.02}}>
 <View style={{justifyContent:'center'}}>
    <Text style={{fontFamily:'Gibson',fontWeight:'400',fontSize:18,textTransform:'uppercase',color:Colors.White,}}>{item.name}</Text>

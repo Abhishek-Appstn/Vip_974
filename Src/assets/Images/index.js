@@ -37,6 +37,16 @@ import Tick from './Tick/Tick.png';
 import ChevronDown from './ChevronDown/ChevronDown.png';
 import Barcode from './Barcode/Barcode.png';
 import CabanSize from './CabanSize/CabanSize.png';
+import Maps from './Maps/Maps.png';
+import Crane from './Crane/Crane.png';
+import LocationPin_green from './LocationPin_green/LocationPin_green.png';
+import PickupDot from './PickupDot/PickupDot.png';
+
+
+
+
+
+
 
 export {
   Background_Icon,
@@ -77,5 +87,5 @@ export {
   Tick,
   ChevronDown,
   Barcode,
-  CabanSize
+  CabanSize,Maps,Crane,PickupDot,LocationPin_green
 };

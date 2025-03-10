@@ -1,18 +1,79 @@
 import {View, Text, Image, SafeAreaView, Pressable, FlatList, Modal} from 'react-native';
 import React, { useRef, useState } from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import ItemLayout from '../components/ItemLayout';
 import Constants from '../Constants';
-import {calendar, ChevronLeft, ChevronRight, CompassNorthEast, CrossMark, Dew, Fanta, GoPro, LifeJacket, LocationPin, Minus, Pepsi, Plus, Tick, YamahaJetski1} from '../assets/Images';
-import BookingLayout from '../components/BookingLayout';
+import {calendar, ChevronLeft, ChevronRight, CompassNorthEast, CrossMark, Dew, Fanta, GoPro, LifeJacket, LocationPin, Maps, Minus, Pepsi, Plus, Tick, YamahaJetski1} from '../assets/Images';
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent';
 import ActionSheet from 'react-native-actions-sheet'; 
 import CustomButton from '../components/CustomButton/CustomButton';
+const {Colors} = Constants;
+const {SCREEN_HEIGHT, SCREEN_WIDTH} = Constants.SCREEN_DIMENSIONS;
+const LocationComponent=({params})=>{
+  return(
+    <View style={{marginHorizontal:SCREEN_WIDTH*.03}}>
 
+<Text style={{textTransform:'uppercase',color:Colors.White,fontFamily:'Gibson',fontSize:18,fontWeight:'400'}}>Enter Location</Text>
+<Image source={Maps} style={{alignSelf:'center',marginVertical:SCREEN_WIDTH*.026}}/>
+<View
+            style={{
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+              alignItems: 'center',
+              backgroundColor:Colors.Black_Bg,padding:10
+            }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginTop: SCREEN_WIDTH * 0.02,
+                justifyContent: 'center',
+              }}>
+              <Image
+                source={LocationPin}
+                style={{
+                  height: SCREEN_WIDTH * 0.1,
+                  width: SCREEN_WIDTH * 0.1,
+                  backgroundColor: Colors.Black,
+                  padding: SCREEN_WIDTH * 0.015,
+                  resizeMode: 'contain',
+                  borderRadius: 4,
+                }}
+              />
+              <Text
+                style={{
+                  lineHeight: 19,
+                  fontWeight: '400',
+                  color: Colors.White_Text,
+                  fontSize: 14,
+                  fontFamily: 'Gibson',
+                  textTransform: 'capitalize',
+                  marginLeft: SCREEN_WIDTH * 0.01,
+                  maxWidth: SCREEN_WIDTH * 0.4,
+                }}>
+                {params.location}
+              </Text>
+            </View>
+            <Image
+              source={CompassNorthEast}
+              style={{
+                height: SCREEN_WIDTH * 0.08,
+                width: SCREEN_WIDTH * 0.08,
+                backgroundColor: Colors.Black,
+                padding: SCREEN_WIDTH * 0.015,
+                resizeMode: 'contain',
+                borderRadius: 4,
+                borderColor: Colors.Green1,
+                borderWidth: 0.5,
+              }}
+            />
+          </View>
+    </View>
+
+  )
+}
 const BookingSummary = () => {
   const route = useRoute();
-  const {Colors} = Constants;
-  const {SCREEN_HEIGHT, SCREEN_WIDTH} = Constants.SCREEN_DIMENSIONS;
+
   const [Choosen, setChoosen] = useState('')
   const [Visible, setVisible] = useState(false)
 const navigation=useNavigation()
@@ -26,6 +87,12 @@ const navigation=useNavigation()
     {name:'Fee',amt:30},
 
   ]
+  const ServicePay=[
+    {name:'Rent',amt:150},
+    {name:'Fee',amt:30},
+
+  ]
+
   const softDrinks = [
     { name: 'Coca-Cola', price: 50,image:Dew },
     { name: 'Pepsi', price: 45,image:Pepsi  },
@@ -145,7 +212,7 @@ const navigation=useNavigation()
 const Timeslot=()=>{
     return(
        <View style={{marginTop:SCREEN_WIDTH*.04}}>
-        <Text
+         {params.type!=='services'?  <Text
             style={{
               fontFamily: 'Gibson',
               color: Colors.White,
@@ -153,7 +220,7 @@ const Timeslot=()=>{
               fontWeight: '400',marginBottom:SCREEN_WIDTH*.03
             }}>
             TIME SLOT
-          </Text>
+          </Text>:null}
            <View style={{flexDirection:'row',alignItems:'center'}}>
                  <View style={{padding:7,backgroundColor:Colors.Black}}>
                  <Image source={calendar} style={{height:SCREEN_WIDTH*.05,width:SCREEN_WIDTH*.05, resizeMode:'contain'}} />
@@ -195,7 +262,7 @@ const ButtonComponent=({name})=>{
             alignItems: 'center',
           }}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Image
+          {params.type!=='services'? <Image
               source={params.image}
               style={{
                 height: SCREEN_WIDTH * 0.14,
@@ -203,7 +270,19 @@ const ButtonComponent=({name})=>{
                 resizeMode: 'cover',
                 borderRadius: (SCREEN_WIDTH * 0.1) / 5,
               }}
+            />:
+            <View style={{padding:SCREEN_WIDTH*.02,borderColor:Colors.Gray_Border,borderWidth:1,borderRadius:SCREEN_WIDTH}}>
+            <Image
+              source={params.image}
+              style={{
+                height: SCREEN_WIDTH * 0.1,
+                width: SCREEN_WIDTH * 0.1,
+                resizeMode: 'contain',
+                borderRadius: SCREEN_WIDTH * 0.1
+              }}
             />
+            </View>}
+
             <View style={{marginLeft: SCREEN_WIDTH * 0.03}}>
               <Text
                 style={{
@@ -222,7 +301,7 @@ const ButtonComponent=({name})=>{
                   fontFamily: 'Gibson',
                   textTransform: 'capitalize',
                 }}>
-                {params.brand}
+               {params.type=='services'?`${params.size}  M² CABANA`: params.brand}
               </Text>
             </View>
           </View>
@@ -235,7 +314,7 @@ const ButtonComponent=({name})=>{
                 fontWeight: '600',
                 textAlign: 'right',
               }}>
-              {params.price}
+             {params.type=='services'?params.total:params.price}
             </Text>
             <Text
               style={{
@@ -248,7 +327,7 @@ const ButtonComponent=({name})=>{
             </Text>
           </View>
         </View>
-        <View style={{marginTop: SCREEN_WIDTH * 0.05}}>
+        {params.type!=='services'?  <View style={{marginTop: SCREEN_WIDTH * 0.05}}>
           <Text
             style={{
               fontFamily: 'Gibson',
@@ -310,7 +389,7 @@ const ButtonComponent=({name})=>{
               }}
             />
           </View>
-        </View>
+        </View>:null}
 
         <Timeslot/>
       </View>
@@ -318,7 +397,9 @@ const ButtonComponent=({name})=>{
   };
   const MiddleComponent=()=>{
     return(
-        <FlatList data={params.addOn} contentContainerStyle={{marginHorizontal:SCREEN_WIDTH * 0.07,paddingVertical:SCREEN_WIDTH*.025}} scrollEnabled={false} renderItem={({item,index})=>{
+      <View style={{height:params.type=='services'?SCREEN_WIDTH*.9: SCREEN_WIDTH*.4,padding:SCREEN_WIDTH*.04}}>{
+     params.type=='services'? <LocationComponent params={params}/>:
+        <FlatList data={params.addOn} contentContainerStyle={{marginHorizontal:SCREEN_WIDTH * 0.07,paddingVertical:SCREEN_WIDTH*.025,}} scrollEnabled={false} renderItem={({item,index})=>{
             return(
 <Pressable style={{flexDirection:'row',alignItems:'center', justifyContent:'space-between', paddingBottom:SCREEN_WIDTH*.05,marginTop:SCREEN_WIDTH*.02,}} onPress={()=>{setChoosen(item.name),ActionsheetRef.current?.show()}}>
 <View>
@@ -359,7 +440,7 @@ marginTop:SCREEN_WIDTH*.01
    </Pressable>
       )
     }}/>
-
+  }</View>
 
     )
   }
@@ -379,7 +460,7 @@ marginTop:SCREEN_WIDTH*.01
                   marginVertical: SCREEN_WIDTH * 0.01,
                 }}>Payments</Text>
 
-          <FlatList scrollEnabled={false} data={paymentData} renderItem={({item,index})=>{
+          <FlatList scrollEnabled={false} data={params.type=='services'?ServicePay:paymentData} renderItem={({item,index})=>{
             return(
                 <View style={{flexDirection:'row',justifyContent:'space-between',marginVertical:SCREEN_WIDTH*.014}}>
 <Text
@@ -424,10 +505,10 @@ marginTop:SCREEN_WIDTH*.01
   return (
     <View>
           <View>
-       <View style={{backgroundColor:Colors.Black_Bg,height:SCREEN_HEIGHT*.44,width:SCREEN_WIDTH,borderRadius:15,zIndex:9}}>
+       <View style={{backgroundColor:Colors.Black_Bg,height:params.type!=='services'? SCREEN_HEIGHT*.44:SCREEN_HEIGHT*.3,width:SCREEN_WIDTH,borderRadius:15,zIndex:9}}>
        <SafeAreaView style={{width:SCREEN_WIDTH,alignSelf:'center',marginTop:SCREEN_WIDTH*.2,overflow:'hidden'}}>
      <View style={{marginHorizontal:SCREEN_WIDTH*.07}}>
-     <DrawerHeaderComponent name={"Rent"} search={true} type='login'/>
+     <DrawerHeaderComponent name={params.type=='services'?"Summary":"Rent"} search={true} type='login'/>
      </View> 
      <HeaderComponent />
         </SafeAreaView>

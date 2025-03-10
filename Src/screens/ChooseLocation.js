@@ -4,12 +4,15 @@ import ItemLayout from '../components/ItemLayout'
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent'
 import Constants from '../Constants'
 import { Search } from '../assets/Images'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 const ChooseLocation = () => {
     const{SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
     const{Colors}=Constants
 const navigation=useNavigation()
+const route=useRoute()
+const params=route.params
+console.log(params)
 const [Active, setActive] = useState(null)
    const places = [
         {name: 'New York'},
@@ -25,7 +28,7 @@ const [Active, setActive] = useState(null)
       ];
       const HandleNavigation=()=>{
 Active!==null?
-navigation.navigate('ScheduleServices',{Active,type:'Washing'}):Alert.alert("Please select an item to continue")
+navigation.navigate('ScheduleServices',{Active,type:params}):Alert.alert("Please select an item to continue")
       }
   return (
    <ItemLayout name="Done" colors={Colors.Black_Bg} onPress={HandleNavigation} >
