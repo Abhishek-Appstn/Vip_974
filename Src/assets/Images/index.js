@@ -41,14 +41,55 @@ import Maps from './Maps/Maps.png';
 import Crane from './Crane/Crane.png';
 import LocationPin_green from './LocationPin_green/LocationPin_green.png';
 import PickupDot from './PickupDot/PickupDot.png';
-
-
-
+import CoffeeCabana from './CoffeeCabana/CoffeeCabana.png';
+import XlCabana from './XlCabana/XlCabana.png';
+import Family_Cabana from './Family_Cabana/Family_Cabana.png';
+import RoomFloor from './RoomFloor/RoomFloor.png';
+import Wardrobe from './Wardrobe/Wardrobe.png';
+import Wall from './Wall/Wall.png';
+import WindowSize from './WindowSize/WindowSize.png';
+import WindowShutter from './WindowShutter/WindowShutter.png';
+import Lifters from './Lifters/Lifters.png';
+import BathroomType from './BathroomType/BathroomType.png';
+import Condition from './Condition/Condition.png';
+import OuterCover from './OuterCover/OuterCover.png';
+import WaterTank from './WaterTank/WaterTank.png';
+import TowHook from './TowHook/TowHook.png';
+import BathroomSize from './BathroomSize/BathroomSize.png';
+import Nothing from './Nothing/Nothing.png';
+import tile from './tile/tile.png';
+import carpet from './carpet/carpet.png';
+import parquet from './parquet/parquet.png';
+import SlidingDoor from './SlidingDoor/SlidingDoor.png';
+import HingeDoor from './HingeDoor/HingeDoor.png';
+import CornerWardrobe from './CornerWardrobe/CornerWardrobe.png';
+import WalkinWardrobe from './WalkinWardrobe/WalkinWardrobe.png';
+import Fiber from './Fiber/Fiber.png';
+import GalvanisedIron from './GalvanisedIron/GalvanisedIron.png';
+import Paint from './Paint/Paint.png';
+import Wallpaper from './Wallpaper/Wallpaper.png';
+import BathroomSide from './BathroomSide/BathroomSide.png';
+import Rooms from './Rooms/Rooms.png';
+import Kitchen from './Kitchen/Kitchen.png';
+import Call from './Call/Call.png';
+import email from './email/email.png';
 
 
 
 
 export {
+  RoomFloor,
+  Wardrobe,
+  Wall,
+  WaterTank,
+  WindowSize,
+  WindowShutter,
+  Lifters,
+  BathroomType,
+  Condition,
+  OuterCover,
+  TowHook,
+  BathroomSize,
   Background_Icon,
   Logo_White,
   Drawer,
@@ -87,5 +128,22 @@ export {
   Tick,
   ChevronDown,
   Barcode,
-  CabanSize,Maps,Crane,PickupDot,LocationPin_green
+  CabanSize,
+  Maps,
+  Crane,
+  PickupDot,
+  LocationPin_green,
+  Family_Cabana,
+  XlCabana,
+  CoffeeCabana,
+  Nothing,
+  parquet,
+  tile,
+  carpet,
+  HingeDoor,
+  SlidingDoor,
+  CornerWardrobe,
+  WalkinWardrobe,
+  Fiber,
+  Wallpaper,GalvanisedIron,Paint,BathroomSide,Rooms,Kitchen,Call,email
 };

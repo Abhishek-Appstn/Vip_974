@@ -26,6 +26,8 @@ const ChooseServices = route => {
   const {SCREEN_HEIGHT, SCREEN_WIDTH} = Constants.SCREEN_DIMENSIONS;
   const {Colors} = Constants;
   const [Active, setActive] = useState(null);
+  const [SelectedItem, setSelectedItem] = useState();
+
   const navigation = useNavigation({});
   const routes = useRoute();
   const params = routes.params;
@@ -47,8 +49,8 @@ const ChooseServices = route => {
   const HandleNavigation = () => {
     Active !== null
       ? params == 'rent'
-        ? navigation.navigate('ScheduleServices', params)
-        : navigation.navigate('ChooseLocation', params)
+        ? navigation.navigate('ScheduleServices', {params,subtype:SelectedItem})
+        :params == 'services'? navigation.navigate('ChooseLocation', {params,subtype:SelectedItem}):SelectedItem==='Custom'? navigation.navigate('CustomBuild', {params,subtype:SelectedItem}) :navigation.navigate('SelectCabanas', {params,subtype:SelectedItem})
       : null;
   };
   const HeaderComponent = () => {
@@ -169,7 +171,7 @@ const ChooseServices = route => {
           overflow: 'hidden',
         }}
         onPress={() => {
-          Active === index ? setActive(null) : setActive(index);
+          Active === index ? setActive(null) : setActive(index),setSelectedItem(name);
         }}>
         <LowerSvg />
         <View

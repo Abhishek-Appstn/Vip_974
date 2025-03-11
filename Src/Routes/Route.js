@@ -20,6 +20,11 @@ import ChooseLocation from '../screens/ChooseLocation'
 import CabanSizeDetail from '../screens/CabanSizeDetail'
 import ServicesPage from '../screens/ServicesPage'
 import BuildLocations from '../screens/BuildLocations'
+import SelectCabanas from '../screens/SelectCabanas'
+import MyBuilds from '../screens/MyBuilds'
+import CustomBuild from '../screens/CustomBuild'
+import CabanaView from '../screens/CabanaView'
+import RequestConfirmation from '../screens/RequestConfirmation'
 
 
 const drawer=createDrawerNavigator()
@@ -54,7 +59,18 @@ const DrawerNavigation=()=>{
     <drawer.Screen name='CabanSize' component={CabanSizeDetail}/>
     <drawer.Screen name='ServicesPage' component={ServicesPage}/>
     <drawer.Screen name='BuildLocations' component={BuildLocations}/>
+    <drawer.Screen name='SelectCabanas' component={SelectCabanas}/>
+    <drawer.Screen name='MyBuilds' component={MyBuilds}/>
+    <drawer.Screen name='CustomBuild' component={CustomBuild}/>
+    <drawer.Screen name='CabanaView' component={CabanaView}/>
+    <drawer.Screen name='RequestConfirmation' component={RequestConfirmation}/>
 
+
+
+    
+
+
+    
 
     
 

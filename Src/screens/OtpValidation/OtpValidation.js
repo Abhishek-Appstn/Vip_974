@@ -52,7 +52,7 @@ name!='Login'?
          <OtpInput autoFocus theme={{
           pinCodeContainerStyle:{borderColor:Constants.Colors.Black_2,elevation:10,backgroundColor:Constants.Colors.Black_2,height:56,width:56,borderRadius:5},
           pinCodeTextStyle:{color:Constants.Colors.White_Text}
-         }} numberOfDigits={5} focusColor={Constants.Colors.Green1} onFilled={text=>setOtp(text)} />
+         }} numberOfDigits={5} focusColor={Constants.Colors.Green1} onTextChange={text=>setOtp(text)} />
         </View>
       
         <Pressable style={{}}onPress={()=>HandleNavigation("Login")}>

@@ -198,7 +198,7 @@ const ButtonComponent=({name})=>{
             </Text>
           </View>
         </View>
-       {params.type!=='services'? <View style={{marginTop: SCREEN_WIDTH * 0.05}}>
+       {params.type!=='services'||params.type!=='build'? <View style={{marginTop: SCREEN_WIDTH * 0.05}}>
           <Text
             style={{
               fontFamily: 'Gibson',
@@ -327,7 +327,7 @@ const ButtonComponent=({name})=>{
                 </View>
           </View>
       :params.type=='build'?
-      <View style={{backgroundColor:Colors.Black,height:SCREEN_WIDTH*1.44,padding:SCREEN_WIDTH*.03}}>
+      <View style={{backgroundColor:Colors.Black,height:SCREEN_WIDTH*.7 ,padding:SCREEN_WIDTH*.03}}>
     
       <Text
               style={{
