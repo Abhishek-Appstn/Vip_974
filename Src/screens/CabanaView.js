@@ -21,7 +21,7 @@ const FeatureRenderItem=({item,index})=>{
     )
 }
 const CabanaView = (props) => {
-    console.log(props)
+    console.log('CabanaProps',props)
   const params=props.route.params
     const navigation=useNavigation()
  
