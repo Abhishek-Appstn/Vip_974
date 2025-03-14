@@ -6,7 +6,7 @@ import {
   FlatList,
   Pressable,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Layout from '../../components/Layout/Layout';
 import Constants from '../../Constants';
 import {
@@ -21,15 +21,72 @@ import {
 import Svg, {G, Path} from 'react-native-svg';
 import {useNavigation} from '@react-navigation/native';
 import DrawerHeaderComponent from '../../components/DrawerHeaderComponent/DrawerHeaderComponent';
-
+import { useDrawerProgress } from '@react-navigation/drawer';
+import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated';
+// const {Colors}=Constants.SCREEN_DIMENSIONS
+  const UpperSvg = () => {
+    return (
+      <View style={{position: 'absolute', left: 20, top: -210}}>
+        <Svg
+          id="Group_12531"
+          data-name="Group 12531"
+          width={223.778}
+          height={305.401}
+          viewBox="0 0 223.778 405.401">
+          <Path
+            id="Path_8641"
+            data-name="Path 8641"
+            d="M129.2,133.71h31.526L31.526,361.567H0Z"
+            transform="translate(46.875 -49.916)"
+            fill="#0fc1a1"
+          />
+          <Path
+            id="Path_8642"
+            data-name="Path 8642"
+            d="M129.2,133.71h31.526L31.526,361.567H0Z"
+            transform="translate(56.83 43.833)"
+            fill="#e50c58"
+          />
+          <Path
+            id="Path_8645"
+            data-name="Path 8645"
+            d="M129.2,133.71h31.526L31.526,361.567H0Z"
+            transform="translate(31.112 -133.71)"
+            fill="#1ec0de"
+          />
+          <Path
+            id="Path_8643"
+            data-name="Path 8643"
+            d="M129.2,133.71h31.526L31.526,361.567H0Z"
+            transform="translate(43.556 11.477)"
+            fill="#ff5f00"
+          />
+          <Path
+            id="Path_8646"
+            data-name="Path 8646"
+            d="M129.2,133.71h31.526L31.526,361.567H0Z"
+            transform="translate(0 -133.71)"
+            fill="#e91ccf"
+          />
+          <Path
+            id="Path_8644"
+            data-name="Path 8644"
+            d="M129.2,133.71h31.526L31.526,361.567H0Z"
+            transform="translate(63.053 -133.71)"
+            fill="#8a50ee"
+          />
+        </Svg>
+      </View>
+    );
+  };
 const Home = () => {
   const navigation = useNavigation();
   const HandleNavigation = (name, params) => {
     navigation.navigate(name, params);
   };
-  const LowerSvg = () => {
+  const LowerSvg = ({style}) => {
     return (
-      <View style={{position: 'absolute', bottom: 0}}>
+      <View style={{position: 'absolute', bottom: 0,...style}}>
         <Svg width={40.186} height={88.879} viewBox="0 0 40.186 88.879">
           <G
             id="Group_13630"
@@ -165,9 +222,23 @@ const Home = () => {
       </View>
     );
   };
+const DrawerProgress=useDrawerProgress()
+const animatedStyle = useAnimatedStyle(() => {
+  const scale = interpolate(DrawerProgress.value, [0, 1], [1, 0.7]);
+  const borderRadius = interpolate(DrawerProgress.value, [0, 1], [0, Constants.SCREEN_DIMENSIONS.SCREEN_HEIGHT*.03]);
+
+  return {
+    transform: [{ scale }],
+    borderRadius, 
+  };
+});
+
+
 
   return (
-    <>
+    <View style={{backgroundColor:Constants.Colors.Black_Bg}}>
+<UpperSvg/>
+    <Animated.View style={[animatedStyle,{overflow:'hidden'}]}>
       <HeaderComponent />
       <View style={{backgroundColor: Constants.Colors.Black}}>
         <FlatList
@@ -230,7 +301,9 @@ const Home = () => {
           }}
         />
       </View>
-    </>
+    </Animated.View>
+    </View>
+
   );
 };
 

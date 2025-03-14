@@ -73,11 +73,26 @@ import Rooms from './Rooms/Rooms.png';
 import Kitchen from './Kitchen/Kitchen.png';
 import Call from './Call/Call.png';
 import email from './email/email.png';
-
-
-
+import ProfileDP from './ProfileDP/ProfileDP.png';
+import Gift from './Gift/Gift.png';
+import ChevronRightWhite from './ChevronRightWhite/ChevronRightWhite.png';
+import Home from './Home/Home.png';
+import Profile from './Profile/Profile.png';
+import Logout from './Logout/Logout.png';
+import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy.png';
+import Support from './Support/Support.png';
+import AboutUS from './AboutUS/AboutUS.png';
+import Profile_Damu from './Profile_Damu/Profile_Damu.png';
+import Clipboard from './Clipboard/Clipboard.png';
+import Gift0 from './Gift0/Gift0.png';
 
 export {
+  Home,
+  Profile,
+  Logout,
+  PrivacyPolicy,
+  Support,
+  AboutUS,
   RoomFloor,
   Wardrobe,
   Wall,
@@ -89,6 +104,7 @@ export {
   Condition,
   OuterCover,
   TowHook,
+  Profile_Damu,
   BathroomSize,
   Background_Icon,
   Logo_White,
@@ -109,6 +125,7 @@ export {
   ChevronRightGreen,
   ChevronLeftGreen,
   Filter,
+  ChevronRightWhite,
   calendar,
   Star_Filled_Yellow,
   Star_outline,
@@ -122,6 +139,7 @@ export {
   Dew,
   Pepsi,
   Fanta,
+  Gift,
   CrossMark,
   Gopro,
   LifeJacket,
@@ -145,5 +163,14 @@ export {
   CornerWardrobe,
   WalkinWardrobe,
   Fiber,
-  Wallpaper,GalvanisedIron,Paint,BathroomSide,Rooms,Kitchen,Call,email
+  ProfileDP,
+  Wallpaper,
+  GalvanisedIron,
+  Paint,
+  BathroomSide,
+  Rooms,
+  Kitchen,
+  Call,
+  email,
+  Clipboard,Gift0
 };

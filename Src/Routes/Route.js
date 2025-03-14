@@ -25,8 +25,13 @@ import MyBuilds from '../screens/MyBuilds'
 import CustomBuild from '../screens/CustomBuild'
 import CabanaView from '../screens/CabanaView'
 import RequestConfirmation from '../screens/RequestConfirmation'
+import CustomDrawer from '../components/CustomDrawer'
+import Constants from '../Constants'
+import Myprofile from '../screens/Myprofile'
+import EditProfile from '../screens/EditProfile'
+import Membership from '../screens/Membership'
 
-
+const {SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
 const drawer=createDrawerNavigator()
 
 const Route = () => {
@@ -46,7 +51,7 @@ const Route = () => {
 
 const DrawerNavigation=()=>{
   return(
-  <drawer.Navigator screenOptions={{headerShown:false}} >
+  <drawer.Navigator screenOptions={{headerShown:false,drawerType:'slide',drawerStatusBarAnimation:'fade' ,overlayColor:'transparent',drawerStyle:{width:SCREEN_WIDTH*.6}}}  drawerContent={(props) => <CustomDrawer {...props} />}  >
     <drawer.Screen name='Home' component={Home}/>
     <drawer.Screen name='ChooseServices' component={ChooseServices}/>
     <drawer.Screen name='ScheduleServices' component={ScheduleService}/>
@@ -64,6 +69,9 @@ const DrawerNavigation=()=>{
     <drawer.Screen name='CustomBuild' component={CustomBuild}/>
     <drawer.Screen name='CabanaView' component={CabanaView}/>
     <drawer.Screen name='RequestConfirmation' component={RequestConfirmation}/>
+    <drawer.Screen name='MyProfile' component={Myprofile}/>
+    <drawer.Screen name='EditProfile' component={EditProfile}/>
+    <drawer.Screen name='Membership' component={Membership}/>
 
 
 
