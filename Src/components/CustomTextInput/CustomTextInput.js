@@ -1,24 +1,25 @@
 import {View, Text, TextInput} from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Constants from '../../Constants';
-
-const CustomTextInput = ({name, type, onChangeText,value,width}) => {
+const {Colors}=Constants
+const CustomTextInput = ({name, type, onChangeText,value,width,error}) => {
   const [IsFocussed, setIsFocussed] = useState(false)
+useEffect
   return (
     <View
       style={{
-        borderColor: IsFocussed?Constants.Colors.Green1:Constants.Colors.Black,
+        borderColor: error?'#fa5a5a':IsFocussed?Colors.Green1:Colors.Black,
         borderWidth: 0.7,
         borderRadius: 5,
         height: 60,
         padding: 10,
         paddingHorizontal: 20,
         width:width?width:null,
-        backgroundColor:Constants.Colors.Black_2
+        backgroundColor:Colors.Black_2
       }}>
       {value?<Text
         style={{
-          color: Constants.Colors.Green1,
+          color: Colors.Green1,
           fontSize: 12,
           fontFamily: 'Gibson-SemiBold',
         }}>
@@ -28,7 +29,7 @@ const CustomTextInput = ({name, type, onChangeText,value,width}) => {
         {type == 'PhoneNumber' &&  value ? (
           <Text
             style={{
-              color: Constants.Colors.Green1,
+              color: Colors.Green1,
               fontSize: 16,
               fontFamily: 'Gibson-Regular',
               marginRight: 10,
@@ -37,7 +38,7 @@ const CustomTextInput = ({name, type, onChangeText,value,width}) => {
           </Text>
         ) : null}
         <TextInput
-        onFocus={()=>setIsFocussed(true)}
+        onFocus={()=>{setIsFocussed(true)}}
         onBlur={()=>{setIsFocussed(false)}}
         value={value}
         inputMode= { type == 'PhoneNumber'||type=='size'?'numeric':'default'}
@@ -49,17 +50,17 @@ const CustomTextInput = ({name, type, onChangeText,value,width}) => {
               type == 'PhoneNumber'
                 ? Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH * 0.68
                 :type == 'size'?Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH * 0.76 :Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH * 0.82,
-            color: Constants.Colors.White,
+            color: Colors.White,
            
           }}
           onChangeText={onChangeText}
           placeholder={name}
-          placeholderTextColor={Constants.Colors.White_Text}
+          placeholderTextColor={Colors.White_Text}
         />
         {type == 'size' &&  value ? (
           <Text
             style={{
-              color: Constants.Colors.White,
+              color: Colors.White,
               fontSize: 16,
               fontFamily: 'Gibson-Regular',
               alignSelf:'flex-end'
