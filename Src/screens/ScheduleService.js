@@ -8,27 +8,27 @@ import { ChevronLeftGreen, ChevronRight, ChevronRightGreen } from '../assets/Ima
 import { useNavigation, useRoute } from '@react-navigation/native';
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent';
 import CustomCalenderStrip from './CustomCalenderStrip';
+const { Colors } = Constants;
+const { SCREEN_HEIGHT,SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 
-const ScheduleService = () => {
-  const { Colors } = Constants;
+const ScheduleService = (props) => {
+const params=props.route.params
   const navigation=useNavigation()
-  const { SCREEN_HEIGHT,SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
-  const [SelectedTime, setSelectedTime] = useState('');
-const route=useRoute()
-const params=route.params
-console.log("#############",params)
+  const [selectedDate, setselectedDate] = useState(moment());
+  const [selectedTime, setselectedTime] = useState();
+console.log('Daaata',selectedDate,selectedTime)
 const HandleNavigation=()=>{
   params?.type=='services'|| params?.type=='build'?
-  navigation.navigate('CabanSize',params)
+  navigation.navigate('CabanSize',{...params,selectedDate:selectedDate,selectedTime:selectedTime})
   :
-  navigation.navigate('ServicesList',params)
+  navigation.navigate('ServicesList',{...params,selectedDate:selectedDate.format("DD MMMM YYYY"),selectedTime:selectedTime})
 }
   return (
     <ItemLayout name='Submit' colors={Colors.Black_Bg} onPress={HandleNavigation}>
       <View style={{marginHorizontal:SCREEN_WIDTH*.03}}>
 <DrawerHeaderComponent type='login'name={params?.type?params.type:"Rent"} search={true}/>
 </View>
-<CustomCalenderStrip params={params}/>
+<CustomCalenderStrip params={params} selectedDate={selectedDate} selectedTime={selectedTime} setselectedDate={setselectedDate} setselectedTime={setselectedTime}/>
     </ItemLayout>
   );
 };

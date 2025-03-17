@@ -6,6 +6,11 @@ import CustomButton from '../../components/CustomButton/CustomButton'
 import Constants from '../../Constants'
 import { Logo_White } from '../../assets/Images'
 import { useNavigation } from '@react-navigation/native'
+import DataConstants from '../../assets/DataConstants'
+import Snackbar from 'react-native-snackbar'
+import Helpers from '../../Helpers'
+const {SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
+const {Colors}=Constants
 
 const Signup = () => {
   const [FormData, setFormData] = useState({
@@ -15,75 +20,68 @@ const Signup = () => {
     Phone:'',
     Qid:''
   })
+  const [Unfilled, setUnfilled] = useState(null)
 const navigation=useNavigation()
-  
-   const data=[
-        {name:'First Name',key:'FirstName'},
-        {name:'Last Name',key:'LastName'},
-        {name:'Email',key:'Email'},
-        {name:'Phone',key:'Phone'},
-        {name:'Qid',key:'Qid'},
-    ]
     const HandleNavigation=(name)=>{
-    const FIlled =Object.values(FormData).every(value=>value!=='')
-navigation.navigate(name)
+    const Filled =Object.values(FormData).every(value=>value!=='')
+    Filled?
+    Helpers({type:'email',data:FormData.Email})? Helpers({type:'mobilenumber',data:FormData.Phone})?(
+Snackbar.show({text:'Success',backgroundColor:'green'}),navigation.navigate(name)):Snackbar.show({text:"Phone Number is invalid",backgroundColor:"red"}):Snackbar.show({text:"Email is invalid",backgroundColor:"red"}):Snackbar.show({text:"Pls fill all Fields",backgroundColor:'red'}),setUnfilled(Object.keys(FormData).filter((key) => FormData[key] === ''));
     }
-    const handleTextChange=(text,key)=>{
+    const handleTextChange=(text,key)=>{  
       setFormData({
         ...FormData,
         [key]:text
-      }
-      )
+      })
     }
   return (
     <Layout>
     <SafeAreaView
       style={{
         justifyContent: 'center',
-        height: Constants.SCREEN_DIMENSIONS.SCREEN_HEIGHT,
-        marginHorizontal: 25,
+        height: SCREEN_HEIGHT,
+        marginHorizontal: SCREEN_WIDTH*.05,
       }}>
         <ScrollView showsVerticalScrollIndicator={false}>
 
-      <Image source={Logo_White} style={{width: 60}} resizeMode="contain" />
+      <Image source={Logo_White} style={{width: SCREEN_WIDTH*.16}} resizeMode="contain" />
       <Text
         style={{
           fontFamily: 'Gibson',
-          color: Constants.Colors.Green1,
+          color:Colors.Green1,
           fontSize: 48,
-          marginTop: 20,
+          marginTop: SCREEN_HEIGHT*.02,
         }}>
         SIGNUP
       </Text>
-      <FlatList showsVerticalScrollIndicator={false} scrollEnabled={false} data={data} renderItem={({item,index})=>{
+      <FlatList showsVerticalScrollIndicator={false} contentContainerStyle={{marginTop:SCREEN_HEIGHT*.03}} scrollEnabled={false} data={DataConstants.SignupFields} renderItem={({item,index})=>{
         return(
-          <View style={{marginTop: 20, marginBottom: 10}}>
-          <CustomTextInput value={FormData[item.key]} placeholder={item.name} name={item.name} type={item.name=='Phone'?"PhoneNumber":null} onChangeText={text=>handleTextChange(text,item.key)} />
+          <View style={{marginVertical:SCREEN_HEIGHT*.016}}>
+          <CustomTextInput error={Unfilled?Unfilled.includes(item.key)?true:false:null} value={FormData[item.key]} placeholder={item.name} name={item.name} type={item.name=='Phone'?"PhoneNumber":null} onChangeText={text=>handleTextChange(text,item.key)} />
         </View>
         )
-
       }}/>
     
       <View style={{alignItems: 'center', flexDirection: 'row'}}>
-        <Text style={{color: Constants.Colors.White_Text}}>
-         Do You Have An Account?{' '}
+        <Text style={{color:Colors.White_Text}}>
+         Do You Have An Account?
         </Text>
         <Pressable onPress={()=>HandleNavigation("Login")}>
-          <Text style={{color: Constants.Colors.AccentColor5}}>SIGN IN</Text>
+          <Text style={{color:Colors.AccentColor5}}>SIGN IN</Text>
         </Pressable>
       </View>
-      <View style={{marginTop: 30}}>
+      <View style={{marginTop:SCREEN_HEIGHT*.02}}>
         <CustomButton title={'SIGN UP'} onPress={()=>HandleNavigation("Drawer")} />
       </View>  
       <Text
         style={{
           fontSize: 12,
           fontFamily: 'Gibson-Regular',
-          color: Constants.Colors.White_Text,
+          color:Colors.White_Text,
           alignSelf: 'center',
-        marginVertical:17
+        marginVertical:SCREEN_HEIGHT*.02
         }}>
-        Continue As Guest{' '}
+        Continue As Guest
       </Text>
         </ScrollView>
        

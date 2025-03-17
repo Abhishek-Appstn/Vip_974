@@ -8,14 +8,18 @@ import CustomTextInput from '../components/CustomTextInput/CustomTextInput'
 import CustomButton from '../components/CustomButton/CustomButton'
 import { useNavigation, useRoute } from '@react-navigation/native'
 
-const CabanSizeDetail = () => {
+const HandleNavigation=({navigation,params,SizeDimensions})=>{
+  params?.type=='services'?
+  navigation.navigate('ServicesPage',{...params,...SizeDimensions}):
+  navigation.navigate('BuildLocations',{...params,...SizeDimensions})
+
+}
+const CabanSizeDetail = (props) => {
     const {SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
     const [Size, setSize] = useState('')
     const {Colors}=Constants
-    const route=useRoute()
-    const params=route.params
+    const params=props.route.params
     const navigation=useNavigation()
-    console.log(params)
 const HandleTextChange=(text,key)=>{
   key?setSizeDimensions({...SizeDimensions, [key]:text})
   :
@@ -25,12 +29,7 @@ const [SizeDimensions, setSizeDimensions] = useState({
   length:'',
   width:''
 })
-const HandleNavigation=()=>{
-  params?.type=='services'?
-  navigation.navigate('ServicesPage',params):
-  navigation.navigate('BuildLocations',params)
 
-}
   return (
   <View style={{backgroundColor:Constants.Colors.Black_Bg,height:SCREEN_HEIGHT,width:SCREEN_WIDTH}}>
     <Image style={{position:'absolute',top:0,right:-110,opacity:.45,height:SCREEN_WIDTH*.7,resizeMode:'contain'}} source={Background_Icon}/>
@@ -51,7 +50,7 @@ const HandleNavigation=()=>{
   }
 </View>
 <View style={{marginVertical:SCREEN_WIDTH*.2}}>
-<CustomButton title="NExt" width={SCREEN_WIDTH*.8} onPress={HandleNavigation}/>
+<CustomButton title="NExt" width={SCREEN_WIDTH*.8} onPress={()=>HandleNavigation({ navigation:navigation,params:params,SizeDimensions:SizeDimensions})}/>
 
 </View>
 </View>

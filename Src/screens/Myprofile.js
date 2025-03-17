@@ -9,7 +9,7 @@ const{SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
 const Data=[
    {icon:Profile, title:"Edit Profile",navigate:'EditProfile'},
    {icon:Clipboard, title:"My Activities",navigate:'MyActivities'},
-   {icon:Gift0, title:"Membership",navigate:'MyActivities'},
+   {icon:Gift0, title:"Membership",navigate:'Membership'},
 
 ]
 const UserData={Name:'Hisham Tourbaq',Points:1039,MobileNo:'+97444621428'}
@@ -35,7 +35,7 @@ const HeaderComponent = () => {
         />
 
         <SafeAreaView style={{marginHorizontal: 25}}>
-          <DrawerHeaderComponent name="Vip-974" />
+          <DrawerHeaderComponent name="My Profile" search={true} type={"login"}/>
             <View style={{marginTop:SCREEN_HEIGHT*.07,alignItems:'center',justifyContent:'center'}}>
                 <View style={{borderColor:Colors.Green1,borderWidth:1 ,height:SCREEN_WIDTH*.3,width:SCREEN_WIDTH*.3,borderRadius:SCREEN_HEIGHT,overflow:'hidden',alignItems:"center",justifyContent:'center'}}>
                     <Image style={{height:SCREEN_WIDTH*.28,width:SCREEN_WIDTH*.28,overflow:'hidden',resizeMode:'cover',borderRadius:SCREEN_HEIGHT}} source={ProfileDP}/>

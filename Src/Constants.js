@@ -28,7 +28,8 @@ const Colors = {
   Gray_Text:'#636B74',
   Gray_Border:'#8AA8C7',
   Circle_Border:'#252B31',
-  Gold:'#ecca4b'
+  Gold:'#ecca4b',
+  Black_M:'#0E1114'
 };
 
 const SCREEN_DIMENSIONS = {

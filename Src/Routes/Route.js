@@ -1,40 +1,17 @@
-import { View, Text } from 'react-native'
 import React from 'react'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import { NavigationContainer } from '@react-navigation/native'
-import Splash from '../screens/Splash/Splash'
-import OtpValidation from '../screens/OtpValidation'
-import Signup from '../screens/Signup/Signup'
-import ChooseServices from '../screens/ChooseServices/ChooseServices'
 import { createDrawerNavigator } from '@react-navigation/drawer'
-import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent'
-import ScheduleService from '../screens/ScheduleService'
-import ServicesList from '../screens/ServicesList'
-import ProductPage from '../screens/ProductPage'
-import BookingSummary from '../screens/BookingSummary'
-import MyActivities from '../screens/MyActivities'
-import BookedTicket from '../screens/BookedTicket'
-import ChooseLocation from '../screens/ChooseLocation'
-import CabanSizeDetail from '../screens/CabanSizeDetail'
-import ServicesPage from '../screens/ServicesPage'
-import BuildLocations from '../screens/BuildLocations'
-import SelectCabanas from '../screens/SelectCabanas'
-import MyBuilds from '../screens/MyBuilds'
-import CustomBuild from '../screens/CustomBuild'
-import CabanaView from '../screens/CabanaView'
-import RequestConfirmation from '../screens/RequestConfirmation'
 import CustomDrawer from '../components/CustomDrawer'
 import Constants from '../Constants'
-import Myprofile from '../screens/Myprofile'
-import EditProfile from '../screens/EditProfile'
-import Membership from '../screens/Membership'
-import { Home, Login } from '../screens'
+import { BookedTicket, BookingSummary, BuildLocations, CabanaView, CabanSizeDetail, ChooseLocation, ChooseServices, CustomBuild, EditProfile, Home, Login, Membership, MembershipDesc, MyActivities, MyBuilds, Myprofile, OtpValidation, ProductPage, RequestConfirmation, ScheduleService, SelectCabanas, ServicesList, ServicesPage, Signup, Splash } from '../screens'
 
 const {SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
+
+const stack=createNativeStackNavigator()
 const drawer=createDrawerNavigator()
 
 const Route = () => {
-    const stack=createNativeStackNavigator()
     return(
   <NavigationContainer>
     <stack.Navigator screenOptions={{headerShown:false}}>
@@ -71,24 +48,7 @@ const DrawerNavigation=()=>{
     <drawer.Screen name='MyProfile' component={Myprofile}/>
     <drawer.Screen name='EditProfile' component={EditProfile}/>
     <drawer.Screen name='Membership' component={Membership}/>
-
-
-
-    
-
-
-    
-
-    
-
-
-    
-
-
-
-
-
-
+    <drawer.Screen name='MembershipDesc' component={MembershipDesc}/>
   </drawer.Navigator>
   )
 }

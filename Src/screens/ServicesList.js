@@ -5,42 +5,30 @@ import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHea
 import { calendar, Location_White, YamahaJetski1 } from '../assets/Images'
 import StarComponent from '../components/StarComponent'
 import { useNavigation } from '@react-navigation/native'
+import DataConstants from '../assets/DataConstants'
 
-const ServicesList = () => {
+const ServicesList = (props) => {
+    const params=props.route.params
+    const type=params.subtype
     const{Colors}=Constants
     const {SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
-    const data=[
-        {name:'2021 FX SVHO',price:50,rating:5,brand:'Yamaha',location:'Abu Hamour, Doha',image:YamahaJetski1,model:'2021 Cruising, 2021 Yamaha Waverunners',detail:' Feel the adrenaline rush and conquer the waves, or explore FX SVHO’s calm personality, when it becomes the smoothest ride you could wish for. Supercharge your adventures in the Yamaha way',detailSub:'From our unique, revolutionary RiDE system and lightweight NanoXcel2® hulls – to our exclusive electronic control systems – to the top range supercharged',addOn:[{name:'Drinks Box'},{name:'Home Businesses'}]},
-        {name:'2022 FX SVHO',price:50,rating:5,brand:'Yamaha',location:'Abu Hamour, Doha',image:YamahaJetski1},
-        {name:'2023 FX SVHO',price:50,rating:5,brand:'Yamaha',location:'Abu Hamour, Doha',image:YamahaJetski1},
-        {name:'2024 FX SVHO',price:50,rating:5,brand:'Yamaha',location:'Abu Hamour, Doha',image:YamahaJetski1},
-        {name:'2025 FX SVHO',price:50,rating:5,brand:'Yamaha',location:'Abu Hamour, Doha',image:YamahaJetski1},
-        {name:'2026 FX SVHO',price:50,rating:5,brand:'Yamaha',location:'Abu Hamour, Doha',image:YamahaJetski1},
-        {name:'2027 FX SVHO',price:50,rating:5,brand:'Yamaha',location:'Abu Hamour, Doha',image:YamahaJetski1},
-        {name:'2028 FX SVHO',price:50,rating:5,brand:'Yamaha',location:'Abu Hamour, Doha',image:YamahaJetski1},
-        {name:'2029 FX SVHO',price:50,rating:5,brand:'Yamaha',location:'Abu Hamour, Doha',image:YamahaJetski1},
-        {name:'2030 FX SVHO',price:50,rating:5,brand:'Yamaha',location:'Abu Hamour, Doha',image:YamahaJetski1},
-        {name:'2031 FX SVHO',price:50,rating:5,brand:'Yamaha',location:'Abu Hamour, Doha',image:YamahaJetski1},
-        {name:'2032 FX SVHO',price:50,rating:5,brand:'Yamaha',location:'Abu Hamour, Doha',image:YamahaJetski1},
-
-    ]
+   
     const navigation=useNavigation()
     const HandleNavigation=(item)=>{
-        navigation.navigate('ProductPage',item)
+        navigation.navigate('ProductPage',{...item,...params})
     }
   return (
     <View style={{height:SCREEN_HEIGHT,width:SCREEN_WIDTH,backgroundColor:Colors.Black}}>
      <View style={{height:SCREEN_WIDTH*.5,backgroundColor:Colors.Black_Bg,borderBottomRightRadius:15,borderBottomLeftRadius:15,paddingHorizontal:SCREEN_WIDTH*.08,paddingTop:SCREEN_WIDTH*.17}}>
 <SafeAreaView>
-    <DrawerHeaderComponent name="Beach" type='filter'/>
+    <DrawerHeaderComponent name={params.subtype} type='filter'/>
     <View style={{flexDirection:'row',alignItems:'center',marginTop:55}}>
        <View style={{padding:7,backgroundColor:Colors.Black}}>
        <Image source={calendar} style={{height:SCREEN_WIDTH*.05,width:SCREEN_WIDTH*.05, resizeMode:'contain'}} />
         </View> 
         <View>
-
-        <Text style={{fontFamily:'Gibson',fontSize:12,color:Colors.Green1,marginLeft:8,marginVertical:3}}>23,December,2020</Text>
-        <Text style={{fontFamily:'Gibson-Regular',fontSize:12,color:Colors.White,marginLeft:5,marginVertical:3}}>09:00 am | 10:00 am | 11:00 am</Text>
+        <Text style={{fontFamily:'Gibson',fontSize:12,color:Colors.Green1,marginLeft:8,marginVertical:3}}>{params.selectedDate}</Text>
+        <Text style={{fontFamily:'Gibson-Regular',fontSize:12,color:Colors.White,marginLeft:5,marginVertical:3}}> {params.selectedTime}</Text>
         </View>
 
 
@@ -48,7 +36,7 @@ const ServicesList = () => {
 </SafeAreaView>
      </View>
      <SafeAreaView>
-   <FlatList ListFooterComponent={<Text style={{color:Colors.White,alignSelf:'center'}}>--------End---------</Text>} keyExtractor={item=>item.name} data={data} contentContainerStyle={{marginTop:10,paddingBottom:200}}renderItem={({item,index})=>{
+   <FlatList ListFooterComponent={<Text style={{color:Colors.White,alignSelf:'center',fontFamily:'Gibson'}}>--------End---------</Text>} keyExtractor={item=>item.name} data={type=='Beach'?DataConstants.BeachServiceData:DataConstants.DesertServiceData} contentContainerStyle={{marginTop:10,paddingBottom:200}}renderItem={({item,index})=>{
 return(
     <Pressable style={{width:SCREEN_WIDTH*.95,marginVertical:8,alignSelf:'center',height:SCREEN_WIDTH*.28,backgroundColor:Colors.Black_Bg,borderRadius:12,flexDirection:'row',alignItems:'center',paddingHorizontal:15,justifyContent:'space-between'}} onPress={()=>HandleNavigation(item)}>
 <View style={{flexDirection:'row'}}>

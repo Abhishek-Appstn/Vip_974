@@ -9,7 +9,7 @@ const{Colors}=Constants
 const{SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
  const LowerSvg = () => {
     return (
-      <View style={{position: 'absolute', left: -SCREEN_WIDTH*.34, bottom: -SCREEN_HEIGHT*.33,zIndex:-5}}>
+      <View style={{position: 'absolute', left: -SCREEN_WIDTH*.28, bottom: -SCREEN_HEIGHT*.3,zIndex:-5}}>
         <Svg
           id="Group_12530"
           data-name="Group 12530"

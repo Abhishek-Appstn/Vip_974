@@ -8,7 +8,7 @@ useEffect
   return (
     <View
       style={{
-        borderColor: error?'#fa5a5a':IsFocussed?Colors.Green1:Colors.Black,
+        borderColor:IsFocussed?Colors.Green1: error?'#fa5a5a':Colors.Black,
         borderWidth: 0.7,
         borderRadius: 5,
         height: 60,

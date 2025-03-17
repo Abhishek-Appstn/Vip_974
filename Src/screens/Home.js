@@ -6,23 +6,18 @@ import {
   FlatList,
   Pressable,
 } from 'react-native';
-import React, { useEffect } from 'react';
-import Layout from '../components/Layout/Layout';
+import React from 'react';
 import Constants from '../Constants';
 import {
   Background_Icon,
-  Build_Icon,
-  Drawer,
   Logo_White,
-  Rent_Icon,
-  Search,
-  Service_Icon,
 } from '../assets/Images';
 import Svg, {G, Path} from 'react-native-svg';
 import {useNavigation} from '@react-navigation/native';
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent';
 import { useDrawerProgress } from '@react-navigation/drawer';
 import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated';
+import DataConstants from '../assets/DataConstants';
 const {Colors}=Constants
 const {SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
 const FlatlistSvg = () => {
@@ -59,6 +54,7 @@ const FlatlistSvg = () => {
     </View>
   );
 };
+
   const UpperSvg = () => {
     return (
       <View style={{position: 'absolute', left: 20, top: -210}}>
@@ -148,33 +144,6 @@ const FlatlistSvg = () => {
       </View>
     );
   };
-
-const Home = () => {
-  const navigation = useNavigation();
-  const HandleNavigation = (name, params) => {
-    navigation.navigate(name, params);
-  };
- 
-  const ServiceData = [
-    {
-      header: 'Rent',
-      Description: 'the best water and desert bikes',
-      icon: Rent_Icon,
-      params: 'rent',
-    },
-    {
-      header: 'Services',
-      Description: 'towing and cleaning service for containers',
-      icon: Service_Icon,
-      params: 'services',
-    },
-    {
-      header: 'Build',
-      Description: 'Easily create your own Cabana',
-      icon: Build_Icon,
-      params: 'build',
-    },
-  ];
   const HeaderComponent = () => {
     return (
       <View
@@ -196,13 +165,13 @@ const Home = () => {
           source={Background_Icon}
         />
 
-        <SafeAreaView style={{marginHorizontal: 25}}>
-          <DrawerHeaderComponent name="Vip-974" />
+        <SafeAreaView style={{marginHorizontal: SCREEN_WIDTH*.06}}>
+          <DrawerHeaderComponent name="Vip-974"/>
           <View
             style={{
               alignItems: 'center',
               justifyContent: 'center',
-              height: SCREEN_WIDTH * 0.7,
+              height: SCREEN_HEIGHT * 0.35,
             }}>
             <Image source={Logo_White} />
             <Text
@@ -215,7 +184,7 @@ const Home = () => {
                 lineHeight: 30,
                 marginTop: 50,
               }}>
-              Welcome to Vip-974
+              {DataConstants.HomeHeader}
             </Text>
           </View>
         </SafeAreaView>
@@ -223,20 +192,20 @@ const Home = () => {
       </View>
     );
   };
-
-
-const DrawerProgress=useDrawerProgress()
-const animatedStyle = useAnimatedStyle(() => {
+const Home = () => {
+  const navigation = useNavigation();
+  const DrawerProgress=useDrawerProgress()
+  const animatedStyle = useAnimatedStyle(() => {
   const scale = interpolate(DrawerProgress.value, [0, 1], [1, 0.7]);
   const borderRadius = interpolate(DrawerProgress.value, [0, 1], [0, SCREEN_HEIGHT*.03]);
-
   return {
     transform: [{ scale },{perspective:100}],
     borderRadius, backfaceVisibility:'hidden'
   };
 });
-
-
+  const HandleNavigation = (name, params) => {
+    navigation.navigate(name, params);
+  };
 
   return (
     <View style={{backgroundColor:Colors.Black_Bg}}>
@@ -245,13 +214,14 @@ const animatedStyle = useAnimatedStyle(() => {
       <HeaderComponent />
       <View style={{backgroundColor: Colors.Black}}>
         <FlatList
+        keyExtractor={item=>item.header}
           scrollEnabled={false}
-          data={ServiceData}
+          data={DataConstants.HomeData}
           contentContainerStyle={{
             height: SCREEN_WIDTH * 1.21,
             backgroundColor: Colors.Black,
-            paddingHorizontal: 25,
-            paddingTop: 19,
+            paddingHorizontal: SCREEN_WIDTH*.05,
+            paddingTop: SCREEN_HEIGHT*.014,
           }}
           renderItem={({item, index}) => {
             return (
@@ -261,21 +231,21 @@ const animatedStyle = useAnimatedStyle(() => {
                   alignItems: 'center',
                   flexDirection: 'row',
                   backgroundColor: Colors.Black_Bg,
-                  borderRadius: 7,
-                  marginVertical: 10,
-                  paddingHorizontal: 25,
+                  borderRadius: SCREEN_WIDTH*.02,
+                  marginVertical: SCREEN_HEIGHT*.015,
+                  paddingHorizontal: SCREEN_WIDTH*.05,
                 }}
                 onPress={() => HandleNavigation('ChooseServices', item.params)}>
                 <Pressable onPress={() => {}}>
                   <Image
                     source={item.icon}
-                    style={{height: 75, width: 75}}
+                    style={{height: SCREEN_HEIGHT*.08, width:SCREEN_WIDTH*.2}}
                     resizeMode="contain"
                   />
                 </Pressable>
                 <View
                   style={{
-                    marginLeft: 20,
+                    marginLeft: SCREEN_WIDTH*.04,
                     width: SCREEN_WIDTH * 0.5,
                   }}>
                   <Text
@@ -306,7 +276,6 @@ const animatedStyle = useAnimatedStyle(() => {
       </View>
     </Animated.View>
     </View>
-
   );
 };
 

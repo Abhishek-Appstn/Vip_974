@@ -85,6 +85,17 @@ import AboutUS from './AboutUS/AboutUS.png';
 import Profile_Damu from './Profile_Damu/Profile_Damu.png';
 import Clipboard from './Clipboard/Clipboard.png';
 import Gift0 from './Gift0/Gift0.png';
+import BackgroundIconMembership from './BackgroundIconMembership/BackgroundIconMembership.png';
+import king from './king/king.png';
+import Rent_White from './Rent_White/Rent_White.png';
+import Build_White from './Build_White/Build_White.png';
+import Towing_White from './Towing_White/Towing_White.png';
+import OfferPercentage from './OfferPercentage/OfferPercentage.png';
+import Coin_Stacks from './Coin_Stacks/Coin_Stacks.png';
+import DesertBike from './DesertBike/DesertBike.png';
+
+
+
 
 export {
   Home,
@@ -172,5 +183,7 @@ export {
   Kitchen,
   Call,
   email,
-  Clipboard,Gift0
+  Clipboard,
+  Gift0,
+  BackgroundIconMembership,king,Towing_White,Rent_White,Build_White,OfferPercentage,Coin_Stacks,DesertBike
 };
