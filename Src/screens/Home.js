@@ -7,8 +7,8 @@ import {
   Pressable,
 } from 'react-native';
 import React, { useEffect } from 'react';
-import Layout from '../../components/Layout/Layout';
-import Constants from '../../Constants';
+import Layout from '../components/Layout/Layout';
+import Constants from '../Constants';
 import {
   Background_Icon,
   Build_Icon,
@@ -17,13 +17,48 @@ import {
   Rent_Icon,
   Search,
   Service_Icon,
-} from '../../assets/Images';
+} from '../assets/Images';
 import Svg, {G, Path} from 'react-native-svg';
 import {useNavigation} from '@react-navigation/native';
-import DrawerHeaderComponent from '../../components/DrawerHeaderComponent/DrawerHeaderComponent';
+import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent';
 import { useDrawerProgress } from '@react-navigation/drawer';
 import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated';
-// const {Colors}=Constants.SCREEN_DIMENSIONS
+const {Colors}=Constants
+const {SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
+const FlatlistSvg = () => {
+  return (
+    <View style={{position: 'absolute', bottom: 0, right: 0}}>
+      <Svg width={26.578} height={58.781} viewBox="0 0 26.578 58.781">
+        <G
+          id="Group_12679"
+          data-name="Group 12679"
+          transform="translate(0 0)">
+          <Path
+            id="Intersection_3"
+            data-name="Intersection 3"
+            d="M7.28,13.613,0,0H15.36l7.116,13.307a5.994,5.994,0,0,1-1.9.307Z"
+            transform="translate(0 45.167)"
+            fill="#0fc1a1"
+          />
+          <Path
+            id="Intersection_2"
+            data-name="Intersection 2"
+            d="M0,0H15.359l5.134,9.6V24.632a6,6,0,0,1-4.252,5.741Z"
+            transform="translate(6.085 28.149)"
+            fill="#ff5f00"
+          />
+          <Path
+            id="Intersection_6"
+            data-name="Intersection 6"
+            d="M0,0H15.359l4.827,9.027V37.751Z"
+            transform="translate(6.391 0)"
+            fill="#e50c58"
+          />
+        </G>
+      </Svg>
+    </View>
+  );
+};
   const UpperSvg = () => {
     return (
       <View style={{position: 'absolute', left: 20, top: -210}}>
@@ -79,11 +114,6 @@ import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated
       </View>
     );
   };
-const Home = () => {
-  const navigation = useNavigation();
-  const HandleNavigation = (name, params) => {
-    navigation.navigate(name, params);
-  };
   const LowerSvg = ({style}) => {
     return (
       <View style={{position: 'absolute', bottom: 0,...style}}>
@@ -119,6 +149,12 @@ const Home = () => {
     );
   };
 
+const Home = () => {
+  const navigation = useNavigation();
+  const HandleNavigation = (name, params) => {
+    navigation.navigate(name, params);
+  };
+ 
   const ServiceData = [
     {
       header: 'Rent',
@@ -143,9 +179,9 @@ const Home = () => {
     return (
       <View
         style={{
-          backgroundColor: Constants.Colors.Black_Bg,
-          height: Constants.SCREEN_DIMENSIONS.SCREEN_HEIGHT / 2.25,
-          width: Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH,
+          backgroundColor: Colors.Black_Bg,
+          height: SCREEN_HEIGHT / 2.25,
+          width: SCREEN_WIDTH,
           overflow: 'hidden',
         }}>
         <Image
@@ -154,7 +190,7 @@ const Home = () => {
             top: 0,
             right: -110,
             opacity: 0.45,
-            height: Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH * 0.7,
+            height: SCREEN_WIDTH * 0.7,
             resizeMode: 'contain',
           }}
           source={Background_Icon}
@@ -166,13 +202,13 @@ const Home = () => {
             style={{
               alignItems: 'center',
               justifyContent: 'center',
-              height: Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH * 0.7,
+              height: SCREEN_WIDTH * 0.7,
             }}>
             <Image source={Logo_White} />
             <Text
               style={{
-                width: Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH * 0.4,
-                color: Constants.Colors.White_Text,
+                width: SCREEN_WIDTH * 0.4,
+                color: Colors.White_Text,
                 fontSize: 24,
                 fontFamily: 'Gibson-SemiBold',
                 textAlign: 'center',
@@ -188,65 +224,32 @@ const Home = () => {
     );
   };
 
-  const FlatlistSvg = () => {
-    return (
-      <View style={{position: 'absolute', bottom: 0, right: 0}}>
-        <Svg width={26.578} height={58.781} viewBox="0 0 26.578 58.781">
-          <G
-            id="Group_12679"
-            data-name="Group 12679"
-            transform="translate(0 0)">
-            <Path
-              id="Intersection_3"
-              data-name="Intersection 3"
-              d="M7.28,13.613,0,0H15.36l7.116,13.307a5.994,5.994,0,0,1-1.9.307Z"
-              transform="translate(0 45.167)"
-              fill="#0fc1a1"
-            />
-            <Path
-              id="Intersection_2"
-              data-name="Intersection 2"
-              d="M0,0H15.359l5.134,9.6V24.632a6,6,0,0,1-4.252,5.741Z"
-              transform="translate(6.085 28.149)"
-              fill="#ff5f00"
-            />
-            <Path
-              id="Intersection_6"
-              data-name="Intersection 6"
-              d="M0,0H15.359l4.827,9.027V37.751Z"
-              transform="translate(6.391 0)"
-              fill="#e50c58"
-            />
-          </G>
-        </Svg>
-      </View>
-    );
-  };
+
 const DrawerProgress=useDrawerProgress()
 const animatedStyle = useAnimatedStyle(() => {
   const scale = interpolate(DrawerProgress.value, [0, 1], [1, 0.7]);
-  const borderRadius = interpolate(DrawerProgress.value, [0, 1], [0, Constants.SCREEN_DIMENSIONS.SCREEN_HEIGHT*.03]);
+  const borderRadius = interpolate(DrawerProgress.value, [0, 1], [0, SCREEN_HEIGHT*.03]);
 
   return {
-    transform: [{ scale }],
-    borderRadius, 
+    transform: [{ scale },{perspective:100}],
+    borderRadius, backfaceVisibility:'hidden'
   };
 });
 
 
 
   return (
-    <View style={{backgroundColor:Constants.Colors.Black_Bg}}>
+    <View style={{backgroundColor:Colors.Black_Bg}}>
 <UpperSvg/>
-    <Animated.View style={[animatedStyle,{overflow:'hidden'}]}>
+    <Animated.View style={[animatedStyle,{elevation:10,shadowColor:Colors.Black}]}>
       <HeaderComponent />
-      <View style={{backgroundColor: Constants.Colors.Black}}>
+      <View style={{backgroundColor: Colors.Black}}>
         <FlatList
           scrollEnabled={false}
           data={ServiceData}
           contentContainerStyle={{
-            height: Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH * 1.21,
-            backgroundColor: Constants.Colors.Black,
+            height: SCREEN_WIDTH * 1.21,
+            backgroundColor: Colors.Black,
             paddingHorizontal: 25,
             paddingTop: 19,
           }}
@@ -254,10 +257,10 @@ const animatedStyle = useAnimatedStyle(() => {
             return (
               <Pressable
                 style={{
-                  height: Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH / 3.3,
+                  height: SCREEN_WIDTH / 3.3,
                   alignItems: 'center',
                   flexDirection: 'row',
-                  backgroundColor: Constants.Colors.Black_Bg,
+                  backgroundColor: Colors.Black_Bg,
                   borderRadius: 7,
                   marginVertical: 10,
                   paddingHorizontal: 25,
@@ -273,13 +276,13 @@ const animatedStyle = useAnimatedStyle(() => {
                 <View
                   style={{
                     marginLeft: 20,
-                    width: Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH * 0.5,
+                    width: SCREEN_WIDTH * 0.5,
                   }}>
                   <Text
                     style={{
                       fontSize: 24,
                       fontFamily: 'Gibson',
-                      color: Constants.Colors.White_Text,
+                      color: Colors.White_Text,
                       textTransform: 'uppercase',
                       fontWeight: '600',
                     }}>
@@ -289,7 +292,7 @@ const animatedStyle = useAnimatedStyle(() => {
                     style={{
                       fontSize: 16,
                       fontFamily: 'Gibson-Regular',
-                      color: Constants.Colors.Gray_Text,
+                      color: Colors.Gray_Text,
                       textTransform: 'capitalize',
                     }}>
                     {item.Description}

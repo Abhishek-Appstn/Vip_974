@@ -9,7 +9,7 @@ const{Colors}=Constants
 const{SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
  const LowerSvg = () => {
     return (
-      <View style={{position: 'absolute', left: -130, bottom: -175}}>
+      <View style={{position: 'absolute', left: -SCREEN_WIDTH*.34, bottom: -SCREEN_HEIGHT*.33,zIndex:-5}}>
         <Svg
           id="Group_12530"
           data-name="Group 12530"
@@ -104,7 +104,7 @@ const CustomDrawer = (props) => {
 <FlatList contentContainerStyle={{marginTop:SCREEN_HEIGHT*.025}} data={DrawerData} scrollEnabled={false} renderItem={({item,index})=>{
     return(
 
-        <Pressable style={{justifyContent:SelectedLanguage==='Arabic'?'flex-end':null, flexDirection:'row',alignItems:'center',padding:SCREEN_WIDTH*.03,marginTop:item.title==='Logout'?SCREEN_HEIGHT*.1:0}} onPress={()=>navigation.navigate(item.navigate)}>
+        <Pressable style={{justifyContent:SelectedLanguage==='Arabic'?'flex-end':null, flexDirection:'row',alignItems:'center',padding:SCREEN_WIDTH*.03,marginTop:item.title==='Logout'?SCREEN_HEIGHT*.07:0}} onPress={()=>navigation.navigate(item.navigate)}>
           {SelectedLanguage!=='Arabic'?  <Image source={item.icon} style={{height:SCREEN_HEIGHT*.04,resizeMode:'contain',marginRight:SCREEN_WIDTH*.04,}}/>:null}
             <Text style={{color:Colors.White,fontWeight:'500',fontSize:16,marginRight:SCREEN_WIDTH*.04,}}>{item.title}</Text>
           {SelectedLanguage=='Arabic'?  <Image source={item.icon} style={{height:SCREEN_HEIGHT*.04,resizeMode:'contain',}}/>:null}
@@ -113,11 +113,12 @@ const CustomDrawer = (props) => {
     )
 }}/>
 
-<LowerSvg/>           
 
 
             </View>
         </View>
+<LowerSvg/>           
+
     </SafeAreaView>
   )
 }
