@@ -8,16 +8,13 @@ import {
 } from 'react-native';
 import React from 'react';
 import Constants from '../Constants';
-import {
-  Background_Icon,
-  Logo_White,
-} from '../assets/Images';
 import Svg, {G, Path} from 'react-native-svg';
 import {useNavigation} from '@react-navigation/native';
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent';
 import { useDrawerProgress } from '@react-navigation/drawer';
 import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated';
 import DataConstants from '../assets/DataConstants';
+import HomeHeaderComponent from '../components/HomeHeaderComponent';
 const {Colors}=Constants
 const {SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
 const FlatlistSvg = () => {
@@ -110,97 +107,16 @@ const FlatlistSvg = () => {
       </View>
     );
   };
-  const LowerSvg = ({style}) => {
-    return (
-      <View style={{position: 'absolute', bottom: 0,...style}}>
-        <Svg width={40.186} height={88.879} viewBox="0 0 40.186 88.879">
-          <G
-            id="Group_13630"
-            data-name="Group 13630"
-            transform="translate(0 0)">
-            <Path
-              id="Intersection_3"
-              data-name="Intersection 3"
-              d="M0,20.585,11.007,0H34.232L23.225,20.585Z"
-              transform="translate(40.186 88.879) rotate(180)"
-              fill="#0fc1a1"
-            />
-            <Path
-              id="Intersection_2"
-              data-name="Intersection 2"
-              d="M0,46.317,24.767,0h.22a6,6,0,0,1,6,6V31.8L23.225,46.317Z"
-              transform="translate(30.986 88.879) rotate(180)"
-              fill="#ff5f00"
-            />
-            <Path
-              id="Intersection_6"
-              data-name="Intersection 6"
-              d="M0,57.082,30.523,0V43.433l-7.3,13.648Z"
-              transform="translate(30.523 57.081) rotate(180)"
-              fill="#e50c58"
-            />
-          </G>
-        </Svg>
-      </View>
-    );
-  };
-  const HeaderComponent = () => {
-    return (
-      <View
-        style={{
-          backgroundColor: Colors.Black_Bg,
-          height: SCREEN_HEIGHT / 2.25,
-          width: SCREEN_WIDTH,
-          overflow: 'hidden',
-        }}>
-        <Image
-          style={{
-            position: 'absolute',
-            top: 0,
-            right: -110,
-            opacity: 0.45,
-            height: SCREEN_WIDTH * 0.7,
-            resizeMode: 'contain',
-          }}
-          source={Background_Icon}
-        />
 
-        <SafeAreaView style={{marginHorizontal: SCREEN_WIDTH*.06}}>
-          <DrawerHeaderComponent name="Vip-974"/>
-          <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: SCREEN_HEIGHT * 0.35,
-            }}>
-            <Image source={Logo_White} />
-            <Text
-              style={{
-                width: SCREEN_WIDTH * 0.4,
-                color: Colors.White_Text,
-                fontSize: 24,
-                fontFamily: 'Gibson-SemiBold',
-                textAlign: 'center',
-                lineHeight: 30,
-                marginTop: 50,
-              }}>
-              {DataConstants.HomeHeader}
-            </Text>
-          </View>
-        </SafeAreaView>
-        <LowerSvg />
-      </View>
-    );
-  };
 const Home = () => {
   const navigation = useNavigation();
   const DrawerProgress=useDrawerProgress()
   const animatedStyle = useAnimatedStyle(() => {
-  const scale = interpolate(DrawerProgress.value, [0, 1], [1, 0.7]);
+  const scale = interpolate(DrawerProgress.value, [0, 1], [1, 0.73]);
   const borderRadius = interpolate(DrawerProgress.value, [0, 1], [0, SCREEN_HEIGHT*.03]);
   return {
-    transform: [{ scale },{perspective:100}],
-    borderRadius, backfaceVisibility:'hidden'
+    transform: [{ scale }],
+    borderRadius, backfaceVisibility:'hidden',overflow:'hidden'
   };
 });
   const HandleNavigation = (name, params) => {
@@ -208,10 +124,10 @@ const Home = () => {
   };
 
   return (
-    <View style={{backgroundColor:Colors.Black_Bg}}>
+    <Animated.View style={{backgroundColor:Colors.Black_Bg,flex:1,overflow:'hidden',zIndex:1,}}>
 <UpperSvg/>
-    <Animated.View style={[animatedStyle,{elevation:10,shadowColor:Colors.Black}]}>
-      <HeaderComponent />
+    <Animated.View style={[animatedStyle,{flex:1,elevation:10,shadowColor:Colors.Black,backgroundColor:Colors.Black_Bg,overflow:'hidden',zIndex:1,}]}>
+      <HomeHeaderComponent header={DataConstants.HomeHeader} headerText={"Vip-974"} />
       <View style={{backgroundColor: Colors.Black}}>
         <FlatList
         keyExtractor={item=>item.header}
@@ -275,7 +191,7 @@ const Home = () => {
         />
       </View>
     </Animated.View>
-    </View>
+    </Animated.View>
   );
 };
 

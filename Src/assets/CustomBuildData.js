@@ -1,10 +1,11 @@
-import { BathroomSize, BathroomType, CabanSize, carpet, Condition, CornerWardrobe, Fiber, GalvanisedIron, HingeDoor, Lifters, Maps, Nothing, OuterCover, Paint, parquet, RoomFloor, SlidingDoor, tile, TowHook, WalkinWardrobe, Wall, Wallpaper, Wardrobe, WaterTank, WindowShutter, WindowSize } from './Images';
+import { BathroomSize, BathroomType, CabanSize, carpet, CompassNorthEast, Condition, CornerWardrobe, Fiber, GalvanisedIron, HingeDoor, Lifters, LocationPin, Maps, Nothing, OuterCover, Paint, parquet, RoomFloor, SlidingDoor, tile, TowHook, WalkinWardrobe, Wall, Wallpaper, Wardrobe, WaterTank, WindowShutter, WindowSize } from './Images';
 
 const CustomBuildData = () => {
   const data = {
     cabanSize: {
       id: 1,
       title: "Caban Size",
+      key: "cabanSize",
       image: CabanSize,
       description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
       flatlistData: [
@@ -14,6 +15,8 @@ const CustomBuildData = () => {
     bathroomSize: {
       id: 2,
       title: "Bathroom Size",
+      key: "bathroomSize",
+
       image: BathroomSize,
       description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
       flatlistData: [
@@ -29,6 +32,7 @@ const CustomBuildData = () => {
     roomFloor: {
       id: 3,
       title: "Room Floor",
+      key: "roomFloor",
       image: RoomFloor,
       description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
       flatlistData: [
@@ -46,6 +50,7 @@ const CustomBuildData = () => {
     wardrobe: {
       id: 4,
       title: "Wardrobe",
+      key: "wardrobe",
       image: Wardrobe,
       description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
       flatlistData: [
@@ -63,6 +68,7 @@ const CustomBuildData = () => {
     theWall: {
       id: 5,
       title: "The Wall",
+      key: "theWall",
       image: Wall,
       description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
       flatlistData: [
@@ -79,6 +85,7 @@ const CustomBuildData = () => {
     windowSize: {
       id: 6,
       title: "Windows Size",
+      key: "windowSize",
       image: WindowSize,
       description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
       flatlistData: [
@@ -94,6 +101,7 @@ const CustomBuildData = () => {
     },
     windowShutter: {
       id: 7,
+      key: "windowShutter",
       title: "Windows Shutters",
       image: WindowShutter,
       description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
@@ -109,7 +117,8 @@ const CustomBuildData = () => {
     },
     lifters: {
       id: 8,
-      title: "Lifters",
+      title: "lifters",
+      key: "lifters",
       image: Lifters,
       description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
       flatlistData: [
@@ -125,6 +134,7 @@ const CustomBuildData = () => {
     bathroomType: {
       id: 9,
       title: "Bathroom Type",
+      key: "bathroomType",
       image: BathroomType,
       description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
       flatlistData: [
@@ -140,6 +150,7 @@ const CustomBuildData = () => {
     condition: {
       id: 10,
       title: "Condition",
+      key: "condition",
       image: Condition,
       description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
       flatlistData: [
@@ -160,6 +171,7 @@ const CustomBuildData = () => {
     outerCover: {
       id: 11,
       title: "Outer Cover",
+      key: "outerCover",
       image: OuterCover,
       description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
       flatlistData: [
@@ -175,6 +187,7 @@ const CustomBuildData = () => {
     waterTank: {
       id: 12,
       title: "Water Tank",
+      key: "waterTank",
       image: WaterTank,
       description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
       flatlistData: [
@@ -192,22 +205,24 @@ const CustomBuildData = () => {
     towHook: {
       id: 13,
       title: "Tow Hook",
+      key: "towHook",
       image: TowHook,
       description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
       flatlistData: [
         { inputType: "TextInput", data: ["height", "width"] }
       ],
     },
-    maps: {
+    NameOfCustomization: {
       id: 14,
       title: "Name Of Customization",
+      key: "NameOfCustomization",
       image: Maps,
       buildingName: "Mirqab Mall",
       address: "Al Mirqab Al Jadeed St, Doha, Qatar",
-      icons: ["LocationPin", "CompassNorthEast"],
+      icons: [LocationPin, CompassNorthEast],
       description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna",
       flatlistData: [
-        { inputType: "TextInput", data: ["height", "width"] }
+        { inputType: "TextInput", data: ["Add Name"] }
       ],
     },
   };

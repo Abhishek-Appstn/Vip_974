@@ -60,8 +60,8 @@ setPercentage(Calc)
             </AnimatedCircularProgress>
     )
 }
-const MembershipDesc = ({type,points}) => {
-    const Currentpoints=1038
+const MembershipDesc = ({type}) => {
+    const {points}=DataConstants.UserData
     let memname="VIP-Gold"
     let memdesc=" Conduct more rentals, services and builds to get more exclusive points & Benefits "
 
@@ -70,7 +70,7 @@ const MembershipDesc = ({type,points}) => {
 <View style={{marginHorizontal:SCREEN_WIDTH*.05}}>
 <DrawerHeaderComponent name="VIP-Gold" type={"login"} search={true}/>
 <View style={{marginTop:SCREEN_HEIGHT*.02,paddingBottom:SCREEN_HEIGHT*.06}}>
-      <Progress points={Currentpoints}/>
+      <Progress points={points}/>
       <View style={{alignItems:'center',marginTop:SCREEN_HEIGHT*.02}}>
       <Text style={{color:Colors.Gold,fontWeight:'600',fontSize:18,marginBottom:SCREEN_HEIGHT*.008}}>{memname}</Text>
         <Text style={{color:Colors.White_Text,fontSize:12,textAlign:'center',fontWeight:'500',maxWidth:SCREEN_WIDTH*.7}}>{memdesc}</Text>

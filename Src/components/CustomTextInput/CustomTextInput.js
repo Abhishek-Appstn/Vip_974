@@ -2,7 +2,9 @@ import {View, Text, TextInput} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Constants from '../../Constants';
 const {Colors}=Constants
-const CustomTextInput = ({name, type, onChangeText,value,width,error}) => {
+const {SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
+
+const CustomTextInput = ({name, type, onChangeText,value,width,error,multiline}) => {
   const [IsFocussed, setIsFocussed] = useState(false)
 useEffect
   return (
@@ -11,8 +13,8 @@ useEffect
         borderColor:IsFocussed?Colors.Green1: error?'#fa5a5a':Colors.Black,
         borderWidth: 0.7,
         borderRadius: 5,
-        height: 60,
-        padding: 10,
+        height: multiline?SCREEN_HEIGHT*.16:SCREEN_HEIGHT*.06,
+        padding: SCREEN_HEIGHT*.007,
         paddingHorizontal: 20,
         width:width?width:null,
         backgroundColor:Colors.Black_2
@@ -43,7 +45,7 @@ useEffect
         value={value}
         inputMode= { type == 'PhoneNumber'||type=='size'?'numeric':'default'}
           style={{
-            height: 25,
+            height: multiline?SCREEN_HEIGHT*.13:SCREEN_HEIGHT*.032,
             fontSize: 16,
             fontFamily: 'Gibson',
             width:
@@ -54,6 +56,7 @@ useEffect
            
           }}
           onChangeText={onChangeText}
+          multiline={multiline}
           placeholder={name}
           placeholderTextColor={Colors.White_Text}
         />

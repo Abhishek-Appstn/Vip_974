@@ -4,9 +4,11 @@ import Constants from '../Constants'
 import { AboutUS, ChevronRight, ChevronRightWhite, Gift, Home, Logout, PrivacyPolicy, Profile, Profile_Damu, ProfileDP, Support } from '../assets/Images'
 import Svg, { Path } from 'react-native-svg'
 import { useNavigation } from '@react-navigation/native'
+import DataConstants from '../assets/DataConstants'
 
 const{Colors}=Constants
 const{SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
+const{firstname,lastname,membershipType,points,profileImage}=DataConstants.UserData
  const LowerSvg = () => {
     return (
       <View style={{position: 'absolute', left: -SCREEN_WIDTH*.28, bottom: -SCREEN_HEIGHT*.3,zIndex:-5}}>
@@ -67,28 +69,19 @@ const CustomDrawer = (props) => {
     const { navigation } = props;
 
     const Languages=['Arabic',"English"]
-    const DrawerData=[
-        {id:1,title:'Home',icon:Home,navigate:'Home'},
-        {id:2,title:'My Profile',icon:Profile,navigate:'MyProfile'},
-        {id:3,title:'About Us',icon:AboutUS},
-        {id:4,title:'Support',icon:Support},
-        {id:5,title:'Privacy Policy',icon:PrivacyPolicy},
-        {id:6,title:'Logout',icon:Logout},
-
-
-    ]
+    
   return (
     <SafeAreaView style={{backgroundColor:Colors.Black_Bg,flex:1,overflow:'hidden'}}>
         <View style={{marginVertical:SCREEN_HEIGHT*.1,marginHorizontal:SCREEN_WIDTH*.05,alignSelf:SelectedLanguage==='Arabic'?'flex-end':'flex-start'}}>
         <View style={{height:SCREEN_WIDTH*.2,width:SCREEN_WIDTH*.2,borderRadius:SCREEN_HEIGHT,overflow:'hidden',alignSelf:SelectedLanguage==='Arabic'?'flex-end':'flex-start'}}>
-<Image style={{height:SCREEN_WIDTH*.2,width:SCREEN_WIDTH*.2,}} source={Profile_Damu} resizeMode='cover'/>
+<Image style={{height:SCREEN_WIDTH*.2,width:SCREEN_WIDTH*.2,}} source={profileImage} resizeMode='cover'/>
             </View>
             <View style={{marginTop:SCREEN_HEIGHT*.01,justifyContent:SelectedLanguage==='Arabic'?'flex-end':'flex-start'}}>
-            <Text style={{fontSize:18,fontWeight:'600',color:Colors.White,marginVertical:SCREEN_HEIGHT*.007}}>Hisham Tourbag </Text>
+            <Text style={{fontSize:18,fontWeight:'600',color:Colors.White,marginVertical:SCREEN_HEIGHT*.007}}>{firstname} {lastname}</Text>
             <View style={{flexDirection:'row',alignItems:'center',}}>
                 <Image source={Gift}/> 
-                <Text style={{fontFamily:"Gibson",color:Colors.Green1,fontWeight:"900",marginHorizontal:SCREEN_WIDTH*.01}}>GOLD</Text>
-                <Text style={{fontFamily:"Gibson",color:Colors.White,}}>(1038) Point</Text>
+                <Text style={{fontFamily:"Gibson",color:Colors.Green1,fontWeight:"900",marginHorizontal:SCREEN_WIDTH*.01}}>{membershipType}</Text>
+                <Text style={{fontFamily:"Gibson",color:Colors.White,}}>({points}) Point</Text>
                 <Image source={ChevronRightWhite}/>
             </View>
             <View style={{flexDirection:'row'}}>
@@ -101,7 +94,7 @@ const CustomDrawer = (props) => {
 }
 </View>
 
-<FlatList contentContainerStyle={{marginTop:SCREEN_HEIGHT*.025}} data={DrawerData} keyExtractor={item=>item.id} scrollEnabled={false} renderItem={({item,index})=>{
+<FlatList contentContainerStyle={{marginTop:SCREEN_HEIGHT*.025}} data={DataConstants.CustomDrawerData} keyExtractor={item=>item.id} scrollEnabled={false} renderItem={({item,index})=>{
     return(
 
         <Pressable style={{justifyContent:SelectedLanguage==='Arabic'?'flex-end':null, flexDirection:'row',alignItems:'center',padding:SCREEN_WIDTH*.03,marginTop:item.title==='Logout'?SCREEN_HEIGHT*.07:0}} onPress={()=>navigation.navigate(item.navigate)}>

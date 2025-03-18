@@ -6,7 +6,8 @@ import MembershipSvg from './MembershipSvg'
 import Svg, { Defs, LinearGradient, Path, Stop } from 'react-native-svg'
 import { Background_Icon, BackgroundIconMembership, ChevronRight, ChevronRightWhite, king } from '../assets/Images'
 import { useNavigation } from '@react-navigation/native'
-const points=1049
+import DataConstants from '../assets/DataConstants'
+const {points}=DataConstants.UserData
 const expiryDate='30 Jun 2021'
 const SubText="Conduct More Leasing, Services And Construction To Get More..."
 const MembershipType='Vip-Gold'

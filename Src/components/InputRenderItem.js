@@ -6,8 +6,8 @@ import CustomTextInput from './CustomTextInput/CustomTextInput';
 const { Colors } = Constants;
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS;
 
-const InputRenderItem = ({ Item, name,JsonData,setJsonData }) => {
-
+const InputRenderItem = ({ Item,key, name,JsonData,setJsonData }) => {
+console.log(key)
   
     const HandlePress = (item) => {
         setJsonData((prevFormData) => ({
@@ -109,18 +109,12 @@ const InputRenderItem = ({ Item, name,JsonData,setJsonData }) => {
                   <Text style={{fontFamily:'Gibson',color:Colors.White,fontSize:18,textTransform:"uppercase",marginVertical:SCREEN_WIDTH*.01}}>{item.Dataname}</Text>
                     </Pressable>
                 )
-
-
-
-
-
-
-
-
-
-
-
-
+                case 'NameCustomisation':
+                    return(
+                        <View>
+                            
+                        </View>
+                    )
                     default:
                         return <Text style={{ color: Colors.Razzmatazz }}>Undefined</Text>;
                 }

@@ -5,8 +5,13 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import CustomDrawer from '../components/CustomDrawer'
 import Constants from '../Constants'
 import { BookedTicket, BookingSummary, BuildLocations, CabanaView, CabanSizeDetail, ChooseLocation, ChooseServices, CustomBuild, EditProfile, Home, Login, Membership, MembershipDesc, MyActivities, MyBuilds, Myprofile, OtpValidation, ProductPage, RequestConfirmation, ScheduleService, SelectCabanas, ServicesList, ServicesPage, Signup, Splash } from '../screens'
+import AboutUs from '../screens/AboutUs'
+import Support from '../screens/Support'
+import PrivacyPolicy from '../screens/PrivacyPolicy'
 
 const {SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
+const {Colors}=Constants
+
 
 const stack=createNativeStackNavigator()
 const drawer=createDrawerNavigator()
@@ -27,7 +32,7 @@ const Route = () => {
 
 const DrawerNavigation=()=>{
   return(
-  <drawer.Navigator screenOptions={{headerShown:false,drawerType:'slide',drawerStatusBarAnimation:'fade' ,overlayColor:'transparent',drawerStyle:{width:SCREEN_WIDTH*.6}}}  drawerContent={(props) => <CustomDrawer {...props} />}  >
+  <drawer.Navigator screenOptions={{headerShown:false,drawerType:'slide',overlayColor:'transparent',drawerStyle:{width:SCREEN_WIDTH*.62}}}  drawerContent={(props) => <CustomDrawer {...props} />}  >
     <drawer.Screen name='Home' component={Home}/>
     <drawer.Screen name='ChooseServices' component={ChooseServices}/>
     <drawer.Screen name='ScheduleServices' component={ScheduleService}/>
@@ -49,6 +54,12 @@ const DrawerNavigation=()=>{
     <drawer.Screen name='EditProfile' component={EditProfile}/>
     <drawer.Screen name='Membership' component={Membership}/>
     <drawer.Screen name='MembershipDesc' component={MembershipDesc}/>
+    <drawer.Screen name='AboutUs' component={AboutUs}/>
+    <drawer.Screen name='Support' component={Support}/>
+    <drawer.Screen name='PrivacyPolicy' component={PrivacyPolicy}/>
+
+  
+
   </drawer.Navigator>
   )
 }

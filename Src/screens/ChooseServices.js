@@ -193,7 +193,6 @@ const SelectionBox = (image, name, index,Active,setActive,setSelectedItem) => {
   );
 };
 const ChooseServices = props => {
-console.log("ChooseServices@props",props)
   const [Active, setActive] = useState(null);
   const [SelectedItem, setSelectedItem] = useState();
   const navigation = useNavigation();

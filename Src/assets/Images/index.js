@@ -93,9 +93,7 @@ import Towing_White from './Towing_White/Towing_White.png';
 import OfferPercentage from './OfferPercentage/OfferPercentage.png';
 import Coin_Stacks from './Coin_Stacks/Coin_Stacks.png';
 import DesertBike from './DesertBike/DesertBike.png';
-
-
-
+import Cameraicon from './Cameraicon/Cameraicon.png';
 
 export {
   Home,
@@ -185,5 +183,13 @@ export {
   email,
   Clipboard,
   Gift0,
-  BackgroundIconMembership,king,Towing_White,Rent_White,Build_White,OfferPercentage,Coin_Stacks,DesertBike
+  BackgroundIconMembership,
+  king,
+  Towing_White,
+  Rent_White,
+  Build_White,
+  OfferPercentage,
+  Coin_Stacks,
+  DesertBike,
+  Cameraicon
 };

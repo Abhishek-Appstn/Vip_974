@@ -1,23 +1,65 @@
-import React, { useState } from 'react'
-import { FlatList, Image, Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native'
 import CustomTextInput from '../components/CustomTextInput/CustomTextInput'
 import CustomButton from '../components/CustomButton/CustomButton'
 import Constants from '../Constants'
-import { Logo_White, Profile_Damu } from '../assets/Images'
+import { Cameraicon, Logo_White, Profile_Damu } from '../assets/Images'
 import { useNavigation } from '@react-navigation/native'
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent'
+import Animated from 'react-native-reanimated'
+import ImageCropPicker from 'react-native-image-crop-picker'
+import DataConstants from '../assets/DataConstants'
 const{SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
 const{Colors}=Constants
 const profileImage=Profile_Damu
+
+const handleImageSelection=()=>{
+  return(
+    ImageCropPicker.openPicker({
+      cropping:true
+    }) .then(image=>console.log("Image received",image))
+  )
+}
+
+const ProfileImage=()=>{
+const [visible, setvisible] = useState(false)
+useEffect(() => {
+  setTimeout(() => {
+    setvisible(false)
+  }, 3000);
+}, [visible])
+
+  return(
+    <View style={{borderColor:Colors.Green1,borderWidth:1 ,height:SCREEN_WIDTH*.3,width:SCREEN_WIDTH*.3,borderRadius:SCREEN_HEIGHT,overflow:'hidden',alignItems:"center",justifyContent:'center',alignSelf:'center',marginVertical:SCREEN_HEIGHT*.04}}>
+     <Pressable onPress={()=>setvisible(true)}>
+     <Image style={{height:SCREEN_WIDTH*.28,width:SCREEN_WIDTH*.28,overflow:'hidden',resizeMode:'cover',borderRadius:SCREEN_HEIGHT}} source={profileImage}/>
+   {visible?  <View
+            style={{
+              position: "absolute",
+              height: SCREEN_WIDTH * 0.3,
+              width: SCREEN_WIDTH * 0.3,
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              borderRadius: SCREEN_HEIGHT,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Pressable style={{padding:SCREEN_WIDTH*.01,backgroundColor:Colors.Black_Bg,borderRadius:SCREEN_WIDTH,width:SCREEN_WIDTH*.12,height:SCREEN_WIDTH*.12,alignItems:'center',justifyContent:'center'}}onPress={handleImageSelection} ><Image source={Cameraicon} style={{height:SCREEN_HEIGHT*.05,width:SCREEN_WIDTH*.07}} resizeMode='contain' /></Pressable>
+            </View>:null}
+      </Pressable> 
+</View>
+  )
+}
 const EditProfile = (props) => {
+const navigation=useNavigation()
+const{firstname,lastname,email,mobileNumber,qid}=DataConstants.UserData
   const [FormData, setFormData] = useState({
-    FirstName:'',
-    LastName:'',
-    Email:'',
-    Phone:'',
-    Qid:''
+    FirstName:firstname,
+    LastName:lastname,
+    Email:email,
+    Phone:mobileNumber,
+    Qid:qid
   })
-const navigation=props
   
    const data=[
         {name:'First Name',key:'FirstName'},
@@ -27,8 +69,7 @@ const navigation=props
         {name:'Qid',key:'Qid'},
     ]
     const HandleNavigation=(name)=>{
-    const FIlled =Object.values(FormData).every(value=>value!=='')
-navigation.navigate(name)
+      navigation.navigate(name)
     }
     const handleTextChange=(text,key)=>{
       setFormData({
@@ -47,10 +88,7 @@ navigation.navigate(name)
       }}>
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{padding:SCREEN_WIDTH*.05}}>
 <DrawerHeaderComponent type={'login'} name="Edit Profile" search={true}/>
- 
- <View style={{borderColor:Colors.Green1,borderWidth:1 ,height:SCREEN_WIDTH*.3,width:SCREEN_WIDTH*.3,borderRadius:SCREEN_HEIGHT,overflow:'hidden',alignItems:"center",justifyContent:'center',alignSelf:'center',marginVertical:SCREEN_HEIGHT*.04}}>
-                    <Image style={{height:SCREEN_WIDTH*.28,width:SCREEN_WIDTH*.28,overflow:'hidden',resizeMode:'cover',borderRadius:SCREEN_HEIGHT}} source={profileImage}/>
-                </View>
+<ProfileImage/>
       <FlatList showsVerticalScrollIndicator={false} scrollEnabled={false} data={data} renderItem={({item,index})=>{
         return(
           <View style={{marginTop: 20, marginBottom: 10}}>
@@ -60,7 +98,7 @@ navigation.navigate(name)
 
       }}/>
       <View style={{marginTop: 30}}>
-        <CustomButton title={'Save'} onPress={()=>navigation.goBack()} />
+        <CustomButton title={'Save'} onPress={()=>HandleNavigation('Home')} />
       </View>  
         </ScrollView>
        
