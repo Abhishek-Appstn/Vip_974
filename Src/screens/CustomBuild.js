@@ -14,7 +14,6 @@ const CustomData = CustomBuildData()
 const {SCREEN_HEIGHT, SCREEN_WIDTH} = Constants.SCREEN_DIMENSIONS;
 const {Colors} = Constants;
 const PageHeader = ({item,ActiveStep,Percentage}) => {
-  console.log("Item@Pheader is",item)
   return (
     <View
       style={{
@@ -75,11 +74,11 @@ const Steplength = Object.keys(CustomData).length;
 const handlePress = ({ActiveStep, setActiveStep}) => {
   ActiveStep < Steplength ? setActiveStep(ActiveStep + 1) : Alert.alert('End');
 };
-console.log('DAAAATA',Steplength)
 const CustomBuild = () => {
   const navigation = useNavigation();
   const [ActiveStep, setActiveStep] = useState(1);
  const keys=Object.keys(CustomData)
+ console.log('steps',keys)
   const [Percentage, setPercentage] = useState(0);
   const [Data, setData] = useState({});
   const handlebackpress = () => {

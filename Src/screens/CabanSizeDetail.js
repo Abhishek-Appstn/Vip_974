@@ -1,17 +1,20 @@
 import { View, Text, Image, SafeAreaView } from 'react-native'
 import React, { useState } from 'react'
-import Layout from '../components/Layout/Layout'
 import { Background_Icon, CabanSize } from '../assets/Images'
 import Constants from '../Constants'
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent'
 import CustomTextInput from '../components/CustomTextInput/CustomTextInput'
 import CustomButton from '../components/CustomButton/CustomButton'
 import { useNavigation, useRoute } from '@react-navigation/native'
+import Snackbar from 'react-native-snackbar'
 
-const HandleNavigation=({navigation,params,SizeDimensions})=>{
+const HandleNavigation=({navigation,params,SizeDimensions,Size})=>{
+  SizeDimensions!==''&&Size!==''?
   params?.type=='services'?
-  navigation.navigate('ServicesPage',{...params,...SizeDimensions}):
-  navigation.navigate('BuildLocations',{...params,...SizeDimensions})
+  navigation.navigate('ServicesPage',{...params,Size}):
+  navigation.navigate('BuildLocations',{...params,...SizeDimensions}):Snackbar.show({
+    text:'Enter size to continue',backgroundColor:'red'
+  })
 
 }
 const CabanSizeDetail = (props) => {
@@ -50,7 +53,7 @@ const [SizeDimensions, setSizeDimensions] = useState({
   }
 </View>
 <View style={{marginVertical:SCREEN_WIDTH*.2}}>
-<CustomButton title="NExt" width={SCREEN_WIDTH*.8} onPress={()=>HandleNavigation({ navigation:navigation,params:params,SizeDimensions:SizeDimensions})}/>
+<CustomButton title="NExt" width={SCREEN_WIDTH*.8} onPress={()=>HandleNavigation({ navigation:navigation,params:params,SizeDimensions:SizeDimensions,Size:Size})}/>
 
 </View>
 </View>

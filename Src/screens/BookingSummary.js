@@ -460,18 +460,18 @@ const HeaderComponent = ({params}) => {
     </View>
   );
 };
-const BookingSummary = () => {
-  const route = useRoute();
+const BookingSummary = (props) => {
   const [Choosen, setChoosen] = useState('')
   const [Visible, setVisible] = useState(false)
 const navigation=useNavigation()
-  const params = route.params;
+  const params = props.route.params;
   const ActionsheetRef=useRef()
+console.log("params@booking",params)
   
   return (
     <View>
           <View>
-       <View style={{backgroundColor:Colors.Black_Bg,height:params.type!=='services'? SCREEN_HEIGHT*.44:SCREEN_HEIGHT*.3,width:SCREEN_WIDTH,borderRadius:15,zIndex:9}}>
+       <View style={{backgroundColor:Colors.Black_Bg,height:params.type!=='services'? SCREEN_HEIGHT*.44:SCREEN_HEIGHT*.3,width:SCREEN_WIDTH,borderRadius:15,borderTopRightRadius:0,borderTopLeftRadius:0,zIndex:9}}>
        <SafeAreaView style={{width:SCREEN_WIDTH,alignSelf:'center',marginTop:SCREEN_WIDTH*.2,overflow:'hidden'}}>
      <View style={{marginHorizontal:SCREEN_WIDTH*.07}}>
      <DrawerHeaderComponent name={params.type=='services'?"Summary":"Rent"} search={true} type='login'/>

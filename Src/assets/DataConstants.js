@@ -18,7 +18,9 @@ import {
   Support,
   Towing,
   YamahaJetski1,
+  BathroomSide, CoffeeCabana, Condition, Family_Cabana, Kitchen, Rooms, XlCabana,
 } from './Images';
+
 
 const MembershipData = [
   {
@@ -325,6 +327,92 @@ const DesertServiceData=[
     {name: 'Beijing'},
     {name: 'Rio de Janeiro'}
   ];
+  const ServicesList = [
+    { 
+      name: 'Badri Cleanups', 
+      location: 'Abu Hamour, Doha', 
+      image: Jetski, 
+      model: '2021 Cruising, 2021 Yamaha Waverunners', 
+      status: 'completed', 
+      date: '23, December, 2020', 
+      time: 'Morning', 
+      total: 200, 
+      servicename: 'Cleaning', 
+      size: '4 x 6' ,
+      rating:4,
+      desc:'Lorem ipsum dolor sit amet, consetetur sadipscing '
+    },
+    { 
+      name: 'Luxury Auto Detailing', 
+      location: 'Al Sadd, Doha', 
+      image: Jetski, 
+      model: '2022 Tesla Model X', 
+      status: 'pending', 
+      date: '15, March, 2021', 
+      time: 'Afternoon', 
+      rating:2,
+      total: 350, 
+      servicename: 'Detailing', 
+      size: 'Full Size' , desc:'Lorem ipsum dolor sit amet, consetetur sadipscing '
+    },
+    { 
+      name: 'Yacht Polishing', 
+      location: 'The Pearl, Doha', 
+      image: Jetski, 
+      model: '2020 Azimut Grande', 
+      status: 'in-progress', 
+      date: '12, January, 2023', 
+      time: 'Morning', 
+      rating:3,
+      total: 500, 
+      servicename: 'Polishing', 
+      size: '75 ft' , desc:'Lorem ipsum dolor sit amet, consetetur sadipscing '
+    },
+    { 
+      name: 'Speedboat Maintenance', 
+      location: 'Lusail Marina, Doha', 
+      image: Jetski,  
+      model: '2023 Bayliner VR6', 
+      status: 'completed', 
+      date: '5,November, 2022', 
+      rating:5,
+      time: 'Evening', 
+      total: 250, 
+      servicename: 'Maintenance', 
+      size: '20 ft' , desc:'Lorem ipsum dolor sit amet, consetetur sadipscing '
+    },
+    { 
+      name: 'Home Pool Cleaning', 
+      location: 'West Bay, Doha', 
+      image: Jetski, 
+      rating:0,
+      model: 'N/A', 
+      status: 'completed', 
+      date: '30, April, 2021', 
+      time: 'Morning', 
+      total: 150, 
+      servicename: 'Cleaning', 
+      size: '10 x 20' , desc:'Lorem ipsum dolor sit amet, consetetur sadipscing '
+    },
+    { 
+      name: 'Garden Landscaping', 
+      location: 'Al Waab, Doha', 
+      image: Jetski, 
+      model: '2022 Modern Designs', 
+      rating:4,
+      status: 'pending', 
+      date: '20, February, 2024', 
+      time: 'Afternoon', 
+      total: 400, 
+      servicename: 'Landscaping', 
+      size: '30 x 40' , desc:'Lorem ipsum dolor sit amet, consetetur sadipscing '
+    }
+  ];
+const CabanaList=[
+    {name:'Family Cabana',builder:'Al-Rayyan Co.',size:'6X4',price:250,image:Family_Cabana,address:'Mirqab Mall Al Mirqab Al Jadeed St, Doha, Qatar',features:[{featureName:'Kitchen',qty:1,image:Kitchen},{featureName:'Rooms',qty:1,image:Rooms},{featureName:'AC',qty:1,image:Condition},{featureName:'Bathroom',qty:1,image:BathroomSide},]},
+    {name:'Coffee Shop Cabana',builder:'Al-Sad Co.',size:'6X4',price:250,image:CoffeeCabana},
+    {name:'XL Family Cabana',builder:'Amaar Co.',size:'6X4',price:250,image:XlCabana},
+]
 export default {
   MembershipData,
   RentData,
@@ -336,5 +424,5 @@ export default {
   ServiceSelectionData,
   ServiceSelectionHeaders,
   BeachServiceData,
-  WashTimes,DesertServiceData,ServicePay,Services,softDrinks,paymentData,places
+  WashTimes,DesertServiceData,ServicePay,Services,softDrinks,paymentData,places,ServicesList,CabanaList
 };

@@ -4,13 +4,13 @@ import Constants from '../Constants'
 import { useNavigation } from '@react-navigation/native'
 const {Colors}=Constants
 const {SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
-const CabanaListRenderItem = ({item,index}) => {
+const CabanaListRenderItem = ({item,index,list}) => {
 const navigation=useNavigation()
 
   return (
-    <Pressable style={{backgroundColor:Colors.Black_Bg,marginVertical:SCREEN_WIDTH*.06,overflow:'hidden',borderRadius:SCREEN_WIDTH*.02,paddingBottom:SCREEN_WIDTH*.02,width:SCREEN_WIDTH*.9}} onPress={()=>navigation.navigate('CabanaView',item)}>
+    <Pressable style={{backgroundColor:Colors.Black_Bg,marginVertical:SCREEN_WIDTH*.06,overflow:'hidden',borderRadius:SCREEN_WIDTH*.02,paddingVertical:SCREEN_WIDTH*.02,width:SCREEN_WIDTH*.9,}} onPress={()=>navigation.navigate('CabanaView',item)}>
     <View >
-    <Image source={item.image} style={{height:SCREEN_WIDTH*.4,width:SCREEN_WIDTH*.85,alignSelf:'center',overflow:'hidden',resizeMode:'cover',borderRadius:10}}/>
+    <Image source={item.image} style={{height:SCREEN_HEIGHT*.2,width:SCREEN_WIDTH*.85,alignSelf:'center',overflow:'hidden',resizeMode:'cover',borderRadius:10}}/>
 
     </View>
     <View style={{}}>

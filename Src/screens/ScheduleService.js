@@ -8,6 +8,7 @@ import { ChevronLeftGreen, ChevronRight, ChevronRightGreen } from '../assets/Ima
 import { useNavigation, useRoute } from '@react-navigation/native';
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent';
 import CustomCalenderStrip from './CustomCalenderStrip';
+import Snackbar from 'react-native-snackbar';
 const { Colors } = Constants;
 const { SCREEN_HEIGHT,SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 
@@ -18,10 +19,11 @@ const params=props.route.params
   const [selectedTime, setselectedTime] = useState();
 console.log('Daaata',selectedDate,selectedTime)
 const HandleNavigation=()=>{
+  selectedDate?selectedTime?
   params?.type=='services'|| params?.type=='build'?
-  navigation.navigate('CabanSize',{...params,selectedDate:selectedDate,selectedTime:selectedTime})
+  navigation.navigate('CabanSize',{...params,selectedDate:selectedDate.format("DD MMMM YYYY"),selectedTime:selectedTime})
   :
-  navigation.navigate('ServicesList',{...params,selectedDate:selectedDate.format("DD MMMM YYYY"),selectedTime:selectedTime})
+  navigation.navigate('ServicesList',{...params,selectedDate:selectedDate.format("DD MMMM YYYY"),selectedTime:selectedTime}):Snackbar.show({text:"Select a time to continue",backgroundColor:'red'}):Snackbar.show({text:"Select a Date to continue",backgroundColor:'red'})
 }
   return (
     <ItemLayout name='Submit' colors={Colors.Black_Bg} onPress={HandleNavigation}>
