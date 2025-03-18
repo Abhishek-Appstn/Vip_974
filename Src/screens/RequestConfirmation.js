@@ -1,7 +1,6 @@
-import { View, Text } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import React from 'react'
 import Constants from '../Constants'
-import { Image } from 'react-native-svg'
 import CustomButton from '../components/CustomButton/CustomButton'
 import { useNavigation } from '@react-navigation/native'
 import { Tick } from '../assets/Images'
@@ -17,7 +16,7 @@ const navigation=useNavigation()
     <Image source={Tick} style={{resizeMode:'contain'}}/>
     
     </View>
-    <Text style={{fontFamily:'Gibson',fontWeight:'semibold',fontSize:18,marginHorizontal:SCREEN_WIDTH*.045,textTransform:'uppercase',color:Colors.White,marginTop:SCREEN_WIDTH*.08}}>Request Done Successfully</Text>
+    <Text style={{fontFamily:'Gibson',fontWeight:'semibold',fontSize:18,maxWidth:SCREEN_WIDTH*.4,textTransform:'uppercase',color:Colors.White,marginTop:SCREEN_WIDTH*.08,alignSelf:'center'}}>Request Done Successfully</Text>
     <Text style={{fontFamily:'Gibson',fontWeight:'light',fontSize:14,alignSelf:'center',width:SCREEN_WIDTH*.6,color:Colors.White,textAlign:'center',marginVertical:SCREEN_WIDTH*.04}}>Thank you. The lease has been successful. You can follow the order from the My Rentals  page</Text>
     <CustomButton width={SCREEN_WIDTH*.55} title="My Builds" onPress={()=>{navigation.navigate("MyBuilds")}}/>
     </View>

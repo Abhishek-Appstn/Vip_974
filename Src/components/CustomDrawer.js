@@ -101,7 +101,7 @@ const CustomDrawer = (props) => {
 }
 </View>
 
-<FlatList contentContainerStyle={{marginTop:SCREEN_HEIGHT*.025}} data={DrawerData} scrollEnabled={false} renderItem={({item,index})=>{
+<FlatList contentContainerStyle={{marginTop:SCREEN_HEIGHT*.025}} data={DrawerData} keyExtractor={item=>item.id} scrollEnabled={false} renderItem={({item,index})=>{
     return(
 
         <Pressable style={{justifyContent:SelectedLanguage==='Arabic'?'flex-end':null, flexDirection:'row',alignItems:'center',padding:SCREEN_WIDTH*.03,marginTop:item.title==='Logout'?SCREEN_HEIGHT*.07:0}} onPress={()=>navigation.navigate(item.navigate)}>
