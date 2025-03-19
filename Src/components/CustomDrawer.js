@@ -1,10 +1,13 @@
 import { View, Text, SafeAreaView, Image, Pressable, FlatList } from 'react-native'
 import React, { useState } from 'react'
 import Constants from '../Constants'
-import { AboutUS, ChevronRight, ChevronRightWhite, Gift, Home, Logout, PrivacyPolicy, Profile, Profile_Damu, ProfileDP, Support } from '../assets/Images'
+import { AboutUS, ChevronLeftWhite, ChevronRight, ChevronRightWhite, Gift, Home, Logout, PrivacyPolicy, Profile, Profile_Damu, ProfileDP, Support } from '../assets/Images'
 import Svg, { Path } from 'react-native-svg'
 import { useNavigation } from '@react-navigation/native'
 import DataConstants from '../assets/DataConstants'
+import { useDispatch, useSelector } from 'react-redux'
+import { setLanguage } from '../redux/slice/languageSlice'
+import LanguageHandler from '../LanguageHandler'
 
 const{Colors}=Constants
 const{SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
@@ -65,29 +68,30 @@ const{firstname,lastname,membershipType,points,profileImage}=DataConstants.UserD
     );
   };
 const CustomDrawer = (props) => {
-    const [SelectedLanguage, setSelectedLanguage] = useState('English')
-    const { navigation } = props;
-
+  const language=useSelector(state=>state.language.value)
+  const isArabic=LanguageHandler()
+    const [SelectedLanguage, setSelectedLanguage] = useState(language)
+    const navigation = useNavigation();
     const Languages=['Arabic',"English"]
-    
+    const dispatch=useDispatch()
   return (
     <SafeAreaView style={{backgroundColor:Colors.Black_Bg,flex:1,overflow:'hidden'}}>
-        <View style={{marginVertical:SCREEN_HEIGHT*.1,marginHorizontal:SCREEN_WIDTH*.05,alignSelf:SelectedLanguage==='Arabic'?'flex-end':'flex-start'}}>
-        <View style={{height:SCREEN_WIDTH*.2,width:SCREEN_WIDTH*.2,borderRadius:SCREEN_HEIGHT,overflow:'hidden',alignSelf:SelectedLanguage==='Arabic'?'flex-end':'flex-start'}}>
+        <View style={{marginVertical:SCREEN_HEIGHT*.1,marginHorizontal:SCREEN_WIDTH*.05,alignSelf:isArabic?'flex-end':'flex-start'}}>
+        <View style={{height:SCREEN_WIDTH*.2,width:SCREEN_WIDTH*.2,borderRadius:SCREEN_HEIGHT,overflow:'hidden',alignSelf:isArabic?'flex-end':'flex-start'}}>
 <Image style={{height:SCREEN_WIDTH*.2,width:SCREEN_WIDTH*.2,}} source={profileImage} resizeMode='cover'/>
             </View>
-            <View style={{marginTop:SCREEN_HEIGHT*.01,justifyContent:SelectedLanguage==='Arabic'?'flex-end':'flex-start'}}>
-            <Text style={{fontSize:18,fontWeight:'600',color:Colors.White,marginVertical:SCREEN_HEIGHT*.007}}>{firstname} {lastname}</Text>
-            <View style={{flexDirection:'row',alignItems:'center',}}>
+            <View style={{marginTop:SCREEN_HEIGHT*.01,justifyContent:isArabic?'flex-end':'flex-start'}}>
+            <Text style={{fontSize:18,fontWeight:'600',color:Colors.White,marginVertical:SCREEN_HEIGHT*.007,textAlign:isArabic?'right':'left'}}>{firstname} {lastname}</Text>
+            <View style={{flexDirection:isArabic?'row-reverse':'row',alignItems:'center',}}>
                 <Image source={Gift}/> 
                 <Text style={{fontFamily:"Gibson",color:Colors.Green1,fontWeight:"900",marginHorizontal:SCREEN_WIDTH*.01}}>{membershipType}</Text>
                 <Text style={{fontFamily:"Gibson",color:Colors.White,}}>({points}) Point</Text>
-                <Image source={ChevronRightWhite}/>
+                {isArabic?<Image source={ChevronLeftWhite} style={{height:SCREEN_HEIGHT*.013,marginRight:SCREEN_WIDTH*.01}} resizeMode='contain' />:<Image source={ChevronRightWhite}style={{height:SCREEN_HEIGHT*.013,marginLeft:SCREEN_WIDTH*.01}} resizeMode='contain'/>}
             </View>
-            <View style={{flexDirection:'row'}}>
+            <View style={{flexDirection:isArabic?'row-reverse':'row'}}>
 
        {     Languages.map((language,index)=>(
-        <Pressable style={{backgroundColor:language===SelectedLanguage?Colors.Green1:Colors.Black,marginVertical:SCREEN_HEIGHT*.01,width:SCREEN_HEIGHT*.1,borderRadius:SCREEN_WIDTH*.02,alignItems:"center",justifyContent:'center',height:SCREEN_HEIGHT*.04}}onPress={()=>{setSelectedLanguage(language)}}>
+        <Pressable key={language} style={{backgroundColor:language===SelectedLanguage?Colors.Green1:Colors.Black,marginVertical:SCREEN_HEIGHT*.01,width:SCREEN_HEIGHT*.1,borderRadius:SCREEN_WIDTH*.02,alignItems:"center",justifyContent:'center',height:SCREEN_HEIGHT*.04,alignSelf:'flex-end'}}onPress={()=>{setSelectedLanguage(language),dispatch(setLanguage(language))}}>
                 <Text style={{color:language===SelectedLanguage?Colors.Black :Colors.White,fontSize:14,fontWeight:'600'}}>{language}</Text>
         </Pressable>
        ))    
@@ -95,12 +99,12 @@ const CustomDrawer = (props) => {
 </View>
 
 <FlatList contentContainerStyle={{marginTop:SCREEN_HEIGHT*.025}} data={DataConstants.CustomDrawerData} keyExtractor={item=>item.id} scrollEnabled={false} renderItem={({item,index})=>{
-    return(
+  
+  return(
 
-        <Pressable style={{justifyContent:SelectedLanguage==='Arabic'?'flex-end':null, flexDirection:'row',alignItems:'center',padding:SCREEN_WIDTH*.03,marginTop:item.title==='Logout'?SCREEN_HEIGHT*.07:0}} onPress={()=>navigation.navigate(item.navigate)}>
-          {SelectedLanguage!=='Arabic'?  <Image source={item.icon} style={{height:SCREEN_HEIGHT*.04,resizeMode:'contain',marginRight:SCREEN_WIDTH*.04,}}/>:null}
+        <Pressable style={{justifyContent:isArabic?'flex-end':null, flexDirection:isArabic?'row-reverse':'row',alignItems:'center',padding:SCREEN_WIDTH*.03,marginTop:item.title==='Logout'?SCREEN_HEIGHT*.07:0,alignSelf:isArabic?'flex-end':'flex-start'}} onPress={()=>navigation.navigate(item.navigate)}>
+         <Image source={item.icon} style={{height:SCREEN_HEIGHT*.04,resizeMode:'contain',marginRight:SCREEN_WIDTH*.04,}}/>
             <Text style={{color:Colors.White,fontWeight:'500',fontSize:16,marginRight:SCREEN_WIDTH*.04,}}>{item.title}</Text>
-          {SelectedLanguage=='Arabic'?  <Image source={item.icon} style={{height:SCREEN_HEIGHT*.04,resizeMode:'contain',}}/>:null}
 
             </Pressable>
     )

@@ -8,9 +8,11 @@ import CustomButton from '../components/CustomButton/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import Helpers from '../Helpers';
 import Snackbar from 'react-native-snackbar';
+import LanguageHandler from '../LanguageHandler';
 const {Colors} = Constants;
 const {SCREEN_HEIGHT, SCREEN_WIDTH} = Constants.SCREEN_DIMENSIONS;
 const Login = () => {
+const isArabic=LanguageHandler()
   const [MobileNumber, setMobileNumber] = useState('');
   const [Error, setError] = useState(false);
   useEffect(() => {
@@ -40,15 +42,17 @@ const Login = () => {
         style={{
           justifyContent: 'center',
           height: SCREEN_HEIGHT,
-          marginHorizontal: 25,
+          marginHorizontal: SCREEN_WIDTH*.05,
+          
         }}>
-        <Image source={Logo_White} style={{width: 60}} resizeMode="contain" />
+        <Image source={Logo_White} style={{width: 60,alignSelf:isArabic?'flex-end':'flex-start'}} resizeMode="contain" />
         <Text
           style={{
             fontFamily: 'Gibson',
             color: Colors.Green1,
             fontSize: 48,
             marginTop: 20,
+            alignSelf:isArabic?'flex-end':'flex-start',
           }}>
           LOGIN
         </Text>
@@ -60,6 +64,9 @@ const Login = () => {
             marginTop: 20,
             lineHeight: 20,
             width: SCREEN_WIDTH * 0.7,
+            textAlign:isArabic?'right':'left',
+            alignSelf:isArabic?'flex-end':'flex-start',
+
           }}>
           We Will Send You A Verification Code On This Mobile Number
         </Text>
@@ -72,13 +79,13 @@ const Login = () => {
             error={Error}
           />
         </View>
-        <View style={{alignItems: 'center', flexDirection: 'row'}}>
+        <View style={{alignItems: 'center', flexDirection: isArabic?'row-reverse':'row'}}>
           <Text style={{color: Colors.White_Text}}>Don't Have An Account?</Text>
           <Pressable onPress={() => HandleNavigation('Signup')}>
-            <Text style={{color: Colors.AccentColor5}}>SIGN UP</Text>
+            <Text style={{color: Colors.AccentColor5}}>SIGN UP </Text>
           </Pressable>
         </View>
-        <View style={{marginVertical: 30}}>
+        <View style={{marginVertical: SCREEN_HEIGHT*.04}}>
           <CustomButton
             title={'Send'}
             onPress={() => HandleNavigation('OtpValidation')}

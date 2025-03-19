@@ -64,7 +64,7 @@ const StepContent = ({JsonData,setJsonData,Data}) => {
             scrollEnabled={false}
             key={Data.id}
             data={Data.flatlistData}
-            renderItem={({ item }) => <InputRenderItem Item={item} key={Data.key} name={Data.key} JsonData={JsonData} setJsonData={setJsonData} />}
+            renderItem={({ item }) => <InputRenderItem Item={item} name={Data.key} JsonData={JsonData} setJsonData={setJsonData} />}
           />
           </ScrollView>
           </View>:
@@ -101,61 +101,43 @@ const StepContent = ({JsonData,setJsonData,Data}) => {
     };
 
 const Steplength = Object.keys(CustomData).length;
-console.log("STEPLE",Steplength);
 
 
 const handlePress = ({ ActiveStep, setActiveStep, JsonData, keys,navigation}) => {
-  console.log("Keys Array:", keys);
-  console.log("Active Step:", ActiveStep);
-
-  const ActiveKey = keys[ActiveStep - 1]; // Get the current step's key
-  console.log("Active Key Resolved:", ActiveKey);
-
-  // Ensure ActiveKey is valid
+  const ActiveKey = keys[ActiveStep - 1]; 
   if (!ActiveKey) {
     console.error("Error: ActiveKey is undefined or invalid.");
     Snackbar.show({
       text: "Error: Unable to resolve the current step's key. Please check the data.",
-      duration: Snackbar.LENGTH_SHORT,
+      backgroundColor:'red',duration: Snackbar.LENGTH_SHORT,
     });
     return;
   }
 
-  // Get the data for the current key
   const activeData = JsonData[ActiveKey];
-  console.log("JsonData Structure:", JsonData);
-  console.log("Active Data Resolved:", activeData);
-
-  // Check if activeData exists and is valid
   if (!activeData) {
     Snackbar.show({
       text: `No data found for ${ActiveKey}. Please fill in the required fields.`,
-      duration: Snackbar.LENGTH_SHORT,
+      backgroundColor:'red',duration: Snackbar.LENGTH_SHORT,
     });
     return;
   }
-
-  // Validate the data
   const isDataValid = !Object.values(activeData).some(
     value => value === null || value === undefined || value === ''
   );
-  console.log("Is Data Valid:", isDataValid);
-
   if (!isDataValid) {
     Snackbar.show({
       text: `Enter the required fields for ${ActiveKey} to continue.`,
-      duration: Snackbar.LENGTH_SHORT,
+      backgroundColor:'red',duration: Snackbar.LENGTH_SHORT,
     });
     return;
   }
-
-console.log("STEEEEEEEEEE",ActiveStep,Steplength)
   if (ActiveStep < Steplength) {
     setActiveStep(ActiveStep + 1);
   } else {
     Alert.alert(
-      'Confirmation', // Title of the alert
-      'Are you sure you want to proceed?', // Message in the alert
+      'Confirmation', 
+      'Are you sure you want to proceed?', 
       [
         {
           text: 'Yes',

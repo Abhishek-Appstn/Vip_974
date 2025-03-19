@@ -589,11 +589,169 @@ const MyProfileDataItems = [
   {icon: Clipboard, title: 'My Activities', navigate: 'MyActivities'},
   {icon: Gift0, title: 'Membership', navigate: 'Membership'},
 ];
+const HistoryData=[
+        {name:'2021 FX SVHO',price:50,rating:5,brand:'Yamaha',location:'Abu Hamour, Doha',image:YamahaJetski1,model:'2021 Cruising, 2021 Yamaha Waverunners',detail:' Feel the adrenaline rush and conquer the waves, or explore FX SVHO’s calm personality, when it becomes the smoothest ride you could wish for. Supercharge your adventures in the Yamaha way',detailSub:'From our unique, revolutionary RiDE system and lightweight NanoXcel2® hulls – to our exclusive electronic control systems – to the top range supercharged',addOn:[{name:'Drinks Box'},{name:'Home Businesses'}],status:'completed',date:'23,December,2020',time:'09:00 am | 10:00 am | 11:00 am'},
+        {name:'2021 FX SVHO',price:50,rating:5,brand:'Yamaha',location:'Abu Hamour, Doha',image:YamahaJetski1,model:'2021 Cruising, 2021 Yamaha Waverunners',detail:' Feel the adrenaline rush and conquer the waves, or explore FX SVHO’s calm personality, when it becomes the smoothest ride you could wish for. Supercharge your adventures in the Yamaha way',detailSub:'From our unique, revolutionary RiDE system and lightweight NanoXcel2® hulls – to our exclusive electronic control systems – to the top range supercharged',addOn:[{name:'Drinks Box'},{name:'Home Businesses'}],status:'pending',date:'24,December,2020',time:'09:00 am | 10:00 am | 11:00 am'},
+        {name:'2021 FX SVHO',price:50,rating:5,brand:'Yamaha',location:'Abu Hamour, Doha',image:YamahaJetski1,model:'2021 Cruising, 2021 Yamaha Waverunners',detail:' Feel the adrenaline rush and conquer the waves, or explore FX SVHO’s calm personality, when it becomes the smoothest ride you could wish for. Supercharge your adventures in the Yamaha way',detailSub:'From our unique, revolutionary RiDE system and lightweight NanoXcel2® hulls – to our exclusive electronic control systems – to the top range supercharged',addOn:[{name:'Drinks Box'},{name:'Home Businesses'}],status:'completed',date:'26,December,2020',time:'09:00 am | 10:00 am | 11:00 am'},
+        {name:'2021 FX SVHO',price:50,rating:5,brand:'Yamaha',location:'Abu Hamour, Doha',image:YamahaJetski1,model:'2021 Cruising, 2021 Yamaha Waverunners',detail:' Feel the adrenaline rush and conquer the waves, or explore FX SVHO’s calm personality, when it becomes the smoothest ride you could wish for. Supercharge your adventures in the Yamaha way',detailSub:'From our unique, revolutionary RiDE system and lightweight NanoXcel2® hulls – to our exclusive electronic control systems – to the top range supercharged',addOn:[{name:'Drinks Box'},{name:'Home Businesses'}],status:'pending',date:'29,December,2020',time:'09:00 am | 10:00 am | 11:00 am'},
+        {name:'2021 FX SVHO',price:50,rating:5,brand:'Yamaha',location:'Abu Hamour, Doha',image:YamahaJetski1,model:'2021 Cruising, 2021 Yamaha Waverunners',detail:' Feel the adrenaline rush and conquer the waves, or explore FX SVHO’s calm personality, when it becomes the smoothest ride you could wish for. Supercharge your adventures in the Yamaha way',detailSub:'From our unique, revolutionary RiDE system and lightweight NanoXcel2® hulls – to our exclusive electronic control systems – to the top range supercharged',addOn:[{name:'Drinks Box'},{name:'Home Businesses'}],status:'completed',date:'31,December,2020',time:'09:00 am | 10:00 am | 11:00 am'},
+
+]
+const HistoryServicesData = [
+  { 
+    name: 'Badri Cleanups', 
+    location: 'Abu Hamour, Doha', 
+    image: YamahaJetski1, 
+    model: '2021 Cruising, 2021 Yamaha Waverunners', 
+    status: 'completed', 
+    date: '23, December, 2020', 
+    time: 'Morning', 
+    total: 200, 
+    servicename: 'Cleaning', 
+    size: '4 x 6' 
+  },
+  { 
+    name: 'Luxury Auto Detailing', 
+    location: 'Al Sadd, Doha', 
+    image: YamahaJetski1, 
+    model: '2022 Tesla Model X', 
+    status: 'pending', 
+    date: '15, March, 2021', 
+    time: 'Afternoon', 
+    total: 350, 
+    servicename: 'Detailing', 
+    size: 'Full Size' 
+  },
+  { 
+    name: 'Yacht Polishing', 
+    location: 'The Pearl, Doha', 
+    image: YamahaJetski1, 
+    model: '2020 Azimut Grande', 
+    status: 'in-progress', 
+    date: '12, January, 2023', 
+    time: 'Morning', 
+    total: 500, 
+    servicename: 'Polishing', 
+    size: '75 ft' 
+  },
+  { 
+    name: 'Speedboat Maintenance', 
+    location: 'Lusail Marina, Doha', 
+    image: YamahaJetski1,  
+    model: '2023 Bayliner VR6', 
+    status: 'completed', 
+    date: '5,November, 2022', 
+    time: 'Evening', 
+    total: 250, 
+    servicename: 'Maintenance', 
+    size: '20 ft' 
+  },
+  { 
+    name: 'Home Pool Cleaning', 
+    location: 'West Bay, Doha', 
+    image: YamahaJetski1, 
+    model: 'N/A', 
+    status: 'completed', 
+    date: '30, April, 2021', 
+    time: 'Morning', 
+    total: 150, 
+    servicename: 'Cleaning', 
+    size: '10 x 20' 
+  },
+  { 
+    name: 'Garden Landscaping', 
+    location: 'Al Waab, Doha', 
+    image: YamahaJetski1, 
+    model: '2022 Modern Designs', 
+    status: 'pending', 
+    date: '20, February, 2024', 
+    time: 'Afternoon', 
+    total: 400, 
+    servicename: 'Landscaping', 
+    size: '30 x 40' 
+  }
+];
+const HistoryBuildData = [
+  { 
+    name: 'Badri Cleanups', 
+    location: 'Abu Hamour, Doha', 
+    image: YamahaJetski1, 
+    model: '2021 Cruising, 2021 Yamaha Waverunners', 
+    status: 'completed', 
+    buildtype: 'standard',
+    date: '23, December, 2020', 
+    time: 'Morning', 
+    total: 200, 
+    servicename: 'Cleaning', 
+  },
+  { 
+    name: 'Luxury Auto Detailing', 
+    location: 'Al Sadd, Doha', 
+    image: YamahaJetski1, 
+    model: '2022 Tesla Model X', 
+    status: 'pending', 
+    buildtype: 'Custom',
+    date: '15, March, 2021', 
+    time: 'Afternoon', 
+    total: 350, 
+    servicename: 'Detailing', 
+  },
+  { 
+    name: 'Yacht Polishing', 
+    location: 'The Pearl, Doha', 
+    image: YamahaJetski1, 
+    model: '2020 Azimut Grande', 
+    status: 'in-progress', 
+    buildtype: 'Custom',
+    date: '12, January, 2023', 
+    time: 'Morning', 
+    total: 500, 
+    servicename: 'Polishing', 
+  },
+  { 
+    name: 'Speedboat Maintenance', 
+    location: 'Lusail Marina, Doha', 
+    image: YamahaJetski1, 
+    model: '2023 Bayliner VR6', 
+    status: 'completed', 
+    buildtype: 'standard',
+    date: '5, November, 2022', 
+    time: 'Evening', 
+    total: 250, 
+    servicename: 'Maintenance', 
+  },
+  { 
+    name: 'Home Pool Cleaning', 
+    location: 'West Bay, Doha', 
+    image: YamahaJetski1,  
+    model: 'N/A', 
+    status: 'completed', 
+    buildtype: 'standard',
+    date: '30, April, 2021', 
+    time: 'Morning', 
+    total: 150, 
+    servicename: 'Cleaning', 
+  },
+  { 
+    name: 'Garden Landscaping', 
+    location: 'Al Waab, Doha', 
+    image: YamahaJetski1, 
+    model: '2022 Modern Designs', 
+    status: 'pending', 
+    buildtype: 'Custom',
+    date: '20, February, 2024', 
+    time: 'Afternoon', 
+    total: 400, 
+    servicename: 'Landscaping', 
+  }
+];
+const HistoryHeaders=[{name:'Rent'},{name:'Services'},{name:'Build'}]
 const AboutCompanyData =
   'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren';
 export default {
   MembershipData,
   RentData,
+  HistoryServicesData,
   ServicesData,
   BuildData,
   HomeData,
@@ -617,5 +775,5 @@ export default {
   PrivacyPolicyData,
   CustomDrawerData,
   UserData,
-  MyProfileDataItems,
+  MyProfileDataItems,HistoryData,HistoryBuildData,HistoryHeaders
 };

@@ -94,6 +94,8 @@ import OfferPercentage from './OfferPercentage/OfferPercentage.png';
 import Coin_Stacks from './Coin_Stacks/Coin_Stacks.png';
 import DesertBike from './DesertBike/DesertBike.png';
 import Cameraicon from './Cameraicon/Cameraicon.png';
+import ChevronLeftWhite from './ChevronLeftWhite/ChevronLeftWhite.png';
+
 
 export {
   Home,
@@ -191,5 +193,6 @@ export {
   OfferPercentage,
   Coin_Stacks,
   DesertBike,
-  Cameraicon
+  Cameraicon,
+  ChevronLeftWhite
 };

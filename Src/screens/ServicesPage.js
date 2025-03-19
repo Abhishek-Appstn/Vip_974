@@ -8,6 +8,7 @@ import Svg, { G, Path } from 'react-native-svg'
 import StarComponent from '../components/StarComponent'
 import DataConstants from '../assets/DataConstants'
 import Snackbar from 'react-native-snackbar'
+import LanguageHandler from '../LanguageHandler'
 
 const HandleNavigation=({navigation,item,params})=>{
   item?
@@ -52,6 +53,7 @@ viewBox="0 0 26.578 58.781"
 const ServicesPage = (props) => {
 const navigation=useNavigation()
     const params=props.route.params
+    const isArabic=LanguageHandler()
     const{SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
     const{Colors}=Constants
     const [SelectedService, setSelectedService] = useState(null)
@@ -63,20 +65,20 @@ const navigation=useNavigation()
         <DrawerHeaderComponent type='filter' name={params?.type}/>
         <FlatList contentContainerStyle={{paddingBottom:SCREEN_WIDTH*.2,marginTop:SCREEN_WIDTH*.04}} showsVerticalScrollIndicator={false} data={DataConstants.ServicesList} renderItem={({item,index})=>{
             return(
-                <Pressable style={{minHeight:SCREEN_HEIGHT*.22,maxHeight:SCREEN_HEIGHT*.3,flexDirection:'row',backgroundColor:Colors.Black_Bg,borderRadius:7,marginVertical:10,paddingHorizontal:SCREEN_WIDTH*.03,paddingVertical:SCREEN_WIDTH*.05}} onPress={()=>{setSelectedService(item.name),setSelectedItem(item)}}>
-                   <View style={{position:'absolute',right:10,top:10, height:SCREEN_WIDTH*.05,width:SCREEN_WIDTH*.05,borderColor:Colors.Green1,borderWidth:0.5,borderRadius:SCREEN_WIDTH,alignItems:'center',justifyContent:'center'}}>
+                <Pressable style={{minHeight:SCREEN_HEIGHT*.22,maxHeight:SCREEN_HEIGHT*.3,flexDirection:isArabic?'row-reverse':'row',backgroundColor:Colors.Black_Bg,borderRadius:7,marginVertical:10,paddingHorizontal:SCREEN_WIDTH*.03,paddingVertical:SCREEN_WIDTH*.05,}} onPress={()=>{setSelectedService(item.name),setSelectedItem(item)}}>
+                   <View style={{position:'absolute',right:isArabic?0:10,top:SCREEN_HEIGHT*.01,left:isArabic?SCREEN_WIDTH*.02:null, height:SCREEN_WIDTH*.05,width:SCREEN_WIDTH*.05,borderColor:Colors.Green1,borderWidth:0.5,borderRadius:SCREEN_WIDTH,alignItems:'center',justifyContent:'center'}}>
                    <View style={{ height:SCREEN_WIDTH*.03,width:SCREEN_WIDTH*.03,backgroundColor:SelectedService===item.name?Colors.Green1:null,borderRadius:SCREEN_WIDTH}}/>
 
                     </View>
                     <View style={{borderColor:Colors.Black,borderWidth:2,padding:SCREEN_WIDTH*.03,borderRadius:SCREEN_WIDTH,backgroundColor:'rgba(0,30,20,0.5)',height:SCREEN_WIDTH*.15,width:SCREEN_WIDTH*.15,alignItems:'center',justifyContent:'center'}} ><Image source={item.image} style={{height:SCREEN_WIDTH*.08,width:SCREEN_WIDTH*.08}}resizeMode='contain' /></View>
                    
                    <View style={{marginLeft:20,width:SCREEN_WIDTH*.6}}>
-                    <View style={{borderBottomColor:Colors.Gray_Border,borderBottomWidth:.5,paddingBottom:SCREEN_WIDTH*.035}}>
-                <Text style={{fontSize:18,fontFamily:"Gibson",color:Colors.White,textTransform:'uppercase',fontWeight:'400',marginBottom:SCREEN_WIDTH*.01}}>{item.name}</Text>
+                    <View style={{borderBottomColor:Colors.Gray_Border,borderBottomWidth:.5,paddingBottom:SCREEN_WIDTH*.035,alignItems:isArabic?'flex-end':'flex-start'}}>
+                <Text style={{fontSize:18,fontFamily:"Gibson",color:Colors.White,textTransform:'uppercase',fontWeight:'400',marginBottom:SCREEN_WIDTH*.01,textAlign:isArabic?'right':'left'}}>{item.name}</Text>
                 <StarComponent maxStars={5} rating={item.rating}/>
-                <Text style={{fontSize:16,fontFamily:"Gibson-Regular",color:Colors.White_Text,textTransform:'capitalize',marginTop:SCREEN_WIDTH*.03}}>{item.desc}</Text>
+                <Text style={{fontSize:16,fontFamily:"Gibson-Regular",color:Colors.White_Text,textTransform:'capitalize',marginTop:SCREEN_WIDTH*.03,textAlign:isArabic?'right':'left'}}>{item.desc}</Text>
                     </View>
-                    <Text style={{color:Colors.Green1,fontSize:28}}>{item.total}<Text style={{fontSize:10}}> QAR</Text></Text>
+                    <Text style={{color:Colors.Green1,fontSize:28,textAlign:isArabic?'right':'left'}}>{item.total}<Text style={{fontSize:10}}> QAR</Text></Text>
                     </View>
                     <FlatlistSvg/>
                 </Pressable>

@@ -9,14 +9,16 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent';
 import CustomCalenderStrip from './CustomCalenderStrip';
 import Snackbar from 'react-native-snackbar';
+import LanguageHandler from '../LanguageHandler';
 const { Colors } = Constants;
 const { SCREEN_HEIGHT,SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 
 const ScheduleService = (props) => {
 const params=props.route.params
   const navigation=useNavigation()
+  const isArabic=LanguageHandler()
   const [selectedDate, setselectedDate] = useState(moment());
-  const [selectedTime, setselectedTime] = useState();
+  const [selectedTime, setselectedTime] = useState([]);
 console.log('Daaata',selectedDate,selectedTime)
 const HandleNavigation=()=>{
   selectedDate?selectedTime?

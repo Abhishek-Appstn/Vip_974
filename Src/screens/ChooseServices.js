@@ -10,10 +10,11 @@ import React, {useState} from 'react';
 import Constants from '../Constants';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent';
-import {Background_Icon,} from '../assets/Images';
+import {Background_Icon, Tick,} from '../assets/Images';
 import Svg, {G, Path} from 'react-native-svg';
 import CustomButton from '../components/CustomButton/CustomButton';
 import DataConstants from '../assets/DataConstants';
+import Snackbar from 'react-native-snackbar';
 const {SCREEN_HEIGHT, SCREEN_WIDTH} = Constants.SCREEN_DIMENSIONS;
 const {Colors} = Constants;
 
@@ -125,6 +126,8 @@ const SelectionBox = (image, name, index,Active,setActive,setSelectedItem) => {
         width: SCREEN_WIDTH * 0.42,
         borderRadius: 10,
         overflow: 'hidden',
+        borderWidth:1,
+        borderColor:Active===index? Colors.Green1:null
       }}
       onPress={() => {
         Active === index ? setActive(null) : setActive(index),setSelectedItem(name);
@@ -142,14 +145,11 @@ const SelectionBox = (image, name, index,Active,setActive,setSelectedItem) => {
           borderWidth: 0.5,
           alignItems: 'center',
           justifyContent: 'center',
+          backgroundColor:Active===index?Colors.Green1:null
         }}>
-        <View
-          style={{
-            height: SCREEN_WIDTH * 0.04,
-            width: SCREEN_WIDTH * 0.04,
-            borderRadius: SCREEN_WIDTH * 0.075,
-            backgroundColor: Active == index ? Colors.Green1 : null,
-          }}></View>
+        
+        {Active===index? <Image source={Tick} style={{ height: SCREEN_WIDTH * 0.03,
+            width: SCREEN_WIDTH * 0.03,}} resizeMode='contain'/>:null}
       </View>
 
       <Image
@@ -197,17 +197,16 @@ const ChooseServices = props => {
   const [SelectedItem, setSelectedItem] = useState();
   const navigation = useNavigation();
   const params = props.route.params;
-  console.log("ChooseServices@params",params)
 
   const HandleNavigation = () => {
     Active !== null
       ? params == 'rent'
-        ? navigation.navigate('ScheduleServices', {type:params,subtype:SelectedItem})
-        :params == 'services'? navigation.navigate('ChooseLocation', {type:params,subtype:SelectedItem}):SelectedItem==='Custom'? navigation.navigate('CustomBuild', {type:params,subtype:SelectedItem}) :navigation.navigate('SelectCabanas', {type:params,subtype:SelectedItem})
-      : null;
+        ? (navigation.navigate('ScheduleServices', {type:params,subtype:SelectedItem}),setActive(null))
+        :params == 'services'? (navigation.navigate('ChooseLocation', {type:params,subtype:SelectedItem}),setActive(null)):SelectedItem==='Custom'? (navigation.navigate('CustomBuild', {type:params,subtype:SelectedItem}),setActive(null)) :(navigation.navigate('SelectCabanas', {type:params,subtype:SelectedItem}),setActive(null))
+      : Snackbar.show({
+        text:"Select a service to Continue",backgroundColor:'red'
+      });
   };
-
-
   return (
     <View style={{backgroundColor: Colors.Black, height: SCREEN_HEIGHT}}>
       <HeaderComponent params={params} />
