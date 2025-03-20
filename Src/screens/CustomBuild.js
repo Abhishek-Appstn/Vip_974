@@ -1,5 +1,5 @@
-import {View, Text, FlatList, Alert, Image, ScrollView} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import { View, Text, FlatList, Alert, Image, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import ItemLayout from '../components/ItemLayout';
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent';
 import Constants from '../Constants';
@@ -7,22 +7,24 @@ import {
   AnimatedCircularProgress,
 } from 'react-native-circular-progress';
 import InputRenderItem from '../components/InputRenderItem';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import CustomBuildData from '../assets/CustomBuildData';
 import Snackbar from 'react-native-snackbar';
+import { useSelector } from 'react-redux';
+import Utils from '../Utils';
 const CustomData = CustomBuildData()
 
-const {SCREEN_HEIGHT, SCREEN_WIDTH} = Constants.SCREEN_DIMENSIONS;
-const {Colors} = Constants;
-const PageHeader = ({item,ActiveStep,Percentage}) => {
+const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS;
+const { Colors } = Constants;
+const PageHeader = ({ item, ActiveStep, Percentage, CustomFlexDirection, CustomAlignItems }) => {
   return (
     <View
-      style={{
+      style={[{
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingVertical: SCREEN_HEIGHT * 0.02,
-      }}>
-      <View>
+      }, CustomFlexDirection]}>
+      <View style={[CustomAlignItems]}>
         <Text
           style={{
             color: Colors.White,
@@ -32,7 +34,7 @@ const PageHeader = ({item,ActiveStep,Percentage}) => {
           }}>
           {item.title}
         </Text>
-        <Text style={{color: Colors.Green1, fontSize: 16, fontWeight: '500'}}>
+        <Text style={{ color: Colors.Green1, fontSize: 16, fontWeight: '500' }}>
           Step {ActiveStep}/{Steplength}
         </Text>
       </View>
@@ -44,7 +46,7 @@ const PageHeader = ({item,ActiveStep,Percentage}) => {
         rotation={0}
         tintColor={Colors.Star_Yellow}>
         {() => (
-          <Text style={{color: Colors.White, fontWeight: '800'}}>
+          <Text style={{ color: Colors.White, fontWeight: '800' }}>
             {Percentage} %
           </Text>
         )}
@@ -52,64 +54,64 @@ const PageHeader = ({item,ActiveStep,Percentage}) => {
     </View>
   );
 };
-const StepContent = ({JsonData,setJsonData,Data}) => {
-      return (
-        Data.key!=='NameOfCustomization'?
-          <View style={{alignItems:'center',justifyContent:'center',height:SCREEN_HEIGHT*.7,width:SCREEN_WIDTH,backgroundColor:Colors.Black_Bg}}>
-    <ScrollView contentContainerStyle={{alignItems:'center',justifyContent:'center',marginTop:SCREEN_HEIGHT*.05}}>
-      <Image source={Data.image}/>
-     <Text style={{fontFamily:'Gibson',color:Colors.White,fontSize:24,marginVertical:SCREEN_HEIGHT*.02,textTransform:'uppercase'}}>{Data.title}</Text>
-     <Text style={{fontFamily:'Gibson',color:Colors.White,fontSize:16,maxWidth:SCREEN_WIDTH*.75,textAlign:'center',marginBottom:SCREEN_HEIGHT*.02}}>{Data.description}</Text>
+const StepContent = ({ JsonData, setJsonData, Data ,CustomAlignItems}) => {
+  return (
+    Data.key !== 'NameOfCustomization' ?
+      <View style={{ alignItems: 'center', justifyContent: 'center', height: SCREEN_HEIGHT * .7, width: SCREEN_WIDTH, backgroundColor: Colors.Black_Bg }}>
+        <ScrollView contentContainerStyle={{ alignItems: 'center', justifyContent: 'center', marginTop: SCREEN_HEIGHT * .05 }}>
+          <Image source={Data.image} />
+          <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 24, marginVertical: SCREEN_HEIGHT * .02, textTransform: 'uppercase' }}>{Data.title}</Text>
+          <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 16, maxWidth: SCREEN_WIDTH * .75, textAlign: 'center', marginBottom: SCREEN_HEIGHT * .02 }}>{Data.description}</Text>
+          <FlatList
+            scrollEnabled={false}
+            key={item=>item.id}
+            data={Data.flatlistData}
+            renderItem={({ item }) => <InputRenderItem Item={item} name={Data.key} JsonData={JsonData} setJsonData={setJsonData} />}
+          />
+        </ScrollView>
+      </View> :
+      <View style={[{ justifyContent: 'center', height: SCREEN_HEIGHT * .7, width: SCREEN_WIDTH, backgroundColor: Colors.Black_Bg, paddingHorizontal: SCREEN_WIDTH * .05 },]}>
+        <ScrollView contentContainerStyle={[{ justifyContent: 'center', marginTop: SCREEN_HEIGHT * .05 },CustomAlignItems]}>
+          <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 24, marginVertical: SCREEN_HEIGHT * .02, textTransform: 'uppercase' }}>{Data.title}</Text>
+
           <FlatList
             scrollEnabled={false}
             key={Data.id}
             data={Data.flatlistData}
-            renderItem={({ item }) => <InputRenderItem Item={item} name={Data.key} JsonData={JsonData} setJsonData={setJsonData} />}
+            renderItem={({ item }) => <InputRenderItem Item={item} key={Data.key} name={Data.key} JsonData={JsonData} setJsonData={setJsonData} />}
           />
-          </ScrollView>
-          </View>:
-          <View style={{justifyContent:'center',height:SCREEN_HEIGHT*.7,width:SCREEN_WIDTH,backgroundColor:Colors.Black_Bg,paddingHorizontal:SCREEN_WIDTH*.05}}>
-          <ScrollView contentContainerStyle={{justifyContent:'center',marginTop:SCREEN_HEIGHT*.05}}>
-          <Text style={{fontFamily:'Gibson',color:Colors.White,fontSize:24,marginVertical:SCREEN_HEIGHT*.02,textTransform:'uppercase'}}>{Data.title}</Text>
-          
-          <FlatList
-                  scrollEnabled={false}
-                  key={Data.id}
-                  data={Data.flatlistData}
-                  renderItem={({ item }) => <InputRenderItem Item={item} key={Data.key} name={Data.key} JsonData={JsonData} setJsonData={setJsonData} />}
-                />
-           <Text style={{fontFamily:'Gibson',color:Colors.White,fontSize:16,textAlign:'justify',marginBottom:SCREEN_HEIGHT*.02}}>{Data.description}</Text>
-        <View style={{backgroundColor:Colors.Black,padding:SCREEN_WIDTH*.02}}>
-        <Image source={Data.image} style={{width:SCREEN_WIDTH*.9,height:SCREEN_HEIGHT*.25}} resizeMode= 'contain'/>
-<View style={{marginTop:SCREEN_HEIGHT*.02,padding:SCREEN_WIDTH*.02,flexDirection:'row',justifyContent:'space-between'}}>
-  <View style={{flexDirection:'row'}}>
+          <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 16, textAlign: 'justify', marginBottom: SCREEN_HEIGHT * .02 }}>{Data.description}</Text>
+          <View style={{ backgroundColor: Colors.Black, padding: SCREEN_WIDTH * .02 }}>
+            <Image source={Data.image} style={{ width: SCREEN_WIDTH * .9, height: SCREEN_HEIGHT * .25 }} resizeMode='contain' />
+            <View style={{ marginTop: SCREEN_HEIGHT * .02, padding: SCREEN_WIDTH * .02, flexDirection: 'row', justifyContent: 'space-between' }}>
+              <View style={{ flexDirection: 'row' }}>
 
-  <Image source={Data.icons[0]}/>
-  <View style={{marginLeft:SCREEN_WIDTH*.03}}>
-  <Text style={{color:Colors.Gray_Text,fontSize:14,fontFamily:'Gibson',fontWeight:'light'}}>{Data.buildingName}</Text>
-  <Text style={{color:Colors.Gray_Text,fontSize:14,fontFamily:'Gibson',fontWeight:'light',maxWidth:SCREEN_WIDTH*.5}}>{Data.address}</Text>
-  </View>
-  </View>
-  <Image source={Data.icons[1]} style={{height:SCREEN_HEIGHT*.034,width:SCREEN_WIDTH*.073, resizeMode:'contain' ,borderColor:Colors.Green1,borderWidth:0.5,borderRadius:SCREEN_WIDTH*.02,padding:SCREEN_WIDTH*.016}}/>
-
-</View>
-        </View>
-          
-                </ScrollView>
+                <Image source={Data.icons[0]} />
+                <View style={{ marginLeft: SCREEN_WIDTH * .03 }}>
+                  <Text style={{ color: Colors.Gray_Text, fontSize: 14, fontFamily: 'Gibson', fontWeight: 'light' }}>{Data.buildingName}</Text>
+                  <Text style={{ color: Colors.Gray_Text, fontSize: 14, fontFamily: 'Gibson', fontWeight: 'light', maxWidth: SCREEN_WIDTH * .5 }}>{Data.address}</Text>
                 </View>
-      );
-    };
+              </View>
+              <Image source={Data.icons[1]} style={{ height: SCREEN_HEIGHT * .034, width: SCREEN_WIDTH * .073, resizeMode: 'contain', borderColor: Colors.Green1, borderWidth: 0.5, borderRadius: SCREEN_WIDTH * .02, padding: SCREEN_WIDTH * .016 }} />
+
+            </View>
+          </View>
+
+        </ScrollView>
+      </View>
+  );
+};
 
 const Steplength = Object.keys(CustomData).length;
 
 
-const handlePress = ({ ActiveStep, setActiveStep, JsonData, keys,navigation}) => {
-  const ActiveKey = keys[ActiveStep - 1]; 
+const handlePress = ({ ActiveStep, setActiveStep, JsonData, keys, navigation }) => {
+  const ActiveKey = keys[ActiveStep - 1];
   if (!ActiveKey) {
     console.error("Error: ActiveKey is undefined or invalid.");
     Snackbar.show({
       text: "Error: Unable to resolve the current step's key. Please check the data.",
-      backgroundColor:'red',duration: Snackbar.LENGTH_SHORT,
+      backgroundColor: 'red', duration: Snackbar.LENGTH_SHORT,
     });
     return;
   }
@@ -118,7 +120,7 @@ const handlePress = ({ ActiveStep, setActiveStep, JsonData, keys,navigation}) =>
   if (!activeData) {
     Snackbar.show({
       text: `No data found for ${ActiveKey}. Please fill in the required fields.`,
-      backgroundColor:'red',duration: Snackbar.LENGTH_SHORT,
+      backgroundColor: 'red', duration: Snackbar.LENGTH_SHORT,
     });
     return;
   }
@@ -128,7 +130,7 @@ const handlePress = ({ ActiveStep, setActiveStep, JsonData, keys,navigation}) =>
   if (!isDataValid) {
     Snackbar.show({
       text: `Enter the required fields for ${ActiveKey} to continue.`,
-      backgroundColor:'red',duration: Snackbar.LENGTH_SHORT,
+      backgroundColor: 'red', duration: Snackbar.LENGTH_SHORT,
     });
     return;
   }
@@ -136,28 +138,29 @@ const handlePress = ({ ActiveStep, setActiveStep, JsonData, keys,navigation}) =>
     setActiveStep(ActiveStep + 1);
   } else {
     Alert.alert(
-      'Confirmation', 
-      'Are you sure you want to proceed?', 
+      'Confirmation',
+      'Are you sure you want to proceed?',
       [
         {
           text: 'Yes',
-          onPress: () => {console.log('Yes Pressed'),navigation.navigate('Home')}
+          onPress: () => { console.log('Yes Pressed'), navigation.navigate('Home') }
         },
-        { 
-          text: 'No', 
-          onPress: () => console.log('NO Pressed') 
+        {
+          text: 'No',
+          onPress: () => console.log('NO Pressed')
         },
       ],
-    )}
+    )
   }
+}
 const CustomBuild = () => {
   const navigation = useNavigation();
   const [ActiveStep, setActiveStep] = useState(1);
- const keys=Object.keys(CustomData)
+  const keys = Object.keys(CustomData)
   const [Percentage, setPercentage] = useState(0);
   const [Data, setData] = useState({});
   const handlebackpress = () => {
-    ActiveStep<= 1 ?navigation.goBack():setActiveStep(ActiveStep - 1) 
+    ActiveStep <= 1 ? navigation.goBack() : setActiveStep(ActiveStep - 1)
   };
 
   useEffect(() => {
@@ -168,19 +171,21 @@ const CustomBuild = () => {
     setPercentage(length);
   }, [ActiveStep]);
 
-useEffect(() => {
-  setData(CustomData[keys[ActiveStep-1]])
-}, [ActiveStep])
-console.log("KEEEEYS",keys)
-const [JsonData, setJsonData] = useState({});
-
+  useEffect(() => {
+    setData(CustomData[keys[ActiveStep - 1]])
+  }, [ActiveStep])
+  const [JsonData, setJsonData] = useState({});
+  const language = useSelector(state => state.language.value)
+  const CustomFlexDirection = Utils.flexDirection(language)
+  const CustomAlignItems = Utils.alignItems(language)
+  
   return (
     <ItemLayout
-      name={ActiveStep===Steplength?"Submit":'Next'}
+      name={ActiveStep === Steplength ? "Submit" : 'Next'}
       onPress={() =>
-        handlePress({ActiveStep: ActiveStep, setActiveStep: setActiveStep,JsonData:JsonData,keys:keys,Steplength,navigation:navigation})
+        handlePress({ ActiveStep: ActiveStep, setActiveStep: setActiveStep, JsonData: JsonData, keys: keys, Steplength, navigation: navigation })
       }>
-      <View style={{marginHorizontal: SCREEN_WIDTH * 0.04}}>
+      <View style={{ marginHorizontal: SCREEN_WIDTH * 0.04 }}>
         <DrawerHeaderComponent
           back={handlebackpress}
           active={ActiveStep}
@@ -189,9 +194,9 @@ const [JsonData, setJsonData] = useState({});
           type={'login'}
           search={true}
         />
-      <PageHeader item={Data} ActiveStep={ActiveStep} Percentage={Percentage} />
+        <PageHeader CustomAlignItems={CustomAlignItems} CustomFlexDirection={CustomFlexDirection} item={Data} ActiveStep={ActiveStep} Percentage={Percentage} />
       </View>
-      <StepContent JsonData={JsonData} setJsonData={setJsonData} Data={Data}/>
+      <StepContent CustomAlignItems={CustomAlignItems} JsonData={JsonData} setJsonData={setJsonData} Data={Data} />
     </ItemLayout>
   );
 };

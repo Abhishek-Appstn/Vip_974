@@ -15,19 +15,20 @@ import { useDrawerProgress } from '@react-navigation/drawer';
 import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated';
 import DataConstants from '../assets/DataConstants';
 import HomeHeaderComponent from '../components/HomeHeaderComponent';
-import { useSelector } from 'react-redux';
 import LanguageHandler from '../LanguageHandler';
+import { useSelector } from 'react-redux';
+import Utils from '../Utils';
 const { Colors } = Constants
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 
-const HomeRenderItem = ({ item, index, isArabic }) => {
+const HomeRenderItem = ({ item, index,CustomFlexDirection,CustomTextAlign }) => {
   const navigation = useNavigation();
   const HandleNavigation = (name, params) => {
     navigation.navigate(name, params);
   };
   return (
     <Pressable
-      style={{
+      style={[{
         height: SCREEN_WIDTH / 3.3,
         alignItems: 'center',
         flexDirection: 'row',
@@ -35,46 +36,40 @@ const HomeRenderItem = ({ item, index, isArabic }) => {
         borderRadius: SCREEN_WIDTH * .02,
         marginVertical: SCREEN_HEIGHT * .015,
         paddingHorizontal: SCREEN_WIDTH * .05,
-      }}
+      },CustomFlexDirection]}
       onPress={() => HandleNavigation('ChooseServices', item.params)}>
-       {!isArabic? <Image
+      <Image
           source={item.icon}
-          style={{ height: SCREEN_HEIGHT * .08, width: SCREEN_WIDTH * .2 }}
+          style={{ height: SCREEN_HEIGHT * .08, width: SCREEN_WIDTH * .2, }}
           resizeMode="contain"
-        />:null}
+      />
       <View
         style={{
-         marginLeft:  !isArabic? SCREEN_WIDTH * .04:0,
-         marginRight:  isArabic? SCREEN_WIDTH * .04:0,
+         marginHorizontal:SCREEN_WIDTH * .04,
           width: SCREEN_WIDTH * 0.5,
         }}>
         <Text
-          style={{
+          style={[{
             fontSize: 24,
             fontFamily: 'Gibson',
             color: Colors.White_Text,
             textTransform: 'uppercase',
             fontWeight: '600',
-            textAlign:isArabic?'right':'left'
-          }}>
+          },CustomTextAlign]}>
           {item.header}
         </Text>
         <Text
-          style={{
+          style={[{
             fontSize: 16,
             fontFamily: 'Gibson-Regular',
             color: Colors.Gray_Text,
             textTransform: 'capitalize',
-            textAlign:isArabic?'right':'left'
-          }}>
+            
+          },CustomTextAlign]}>
           {item.Description}
         </Text>
       </View>
-      {isArabic? <Image
-          source={item.icon}
-          style={{ height: SCREEN_HEIGHT * .08, width: SCREEN_WIDTH * .2 }}
-          resizeMode="contain"
-        />:null}
+      
       <FlatlistSvg />
     </Pressable>
   );
@@ -116,7 +111,7 @@ const FlatlistSvg = () => {
 
 const UpperSvg = () => {
   return (
-    <View style={{ position: 'absolute', left: 20, top: -210 }}>
+    <View style={{ position: 'absolute', left: 20, top: -210,}}>
       <Svg
         id="Group_12531"
         data-name="Group 12531"
@@ -171,8 +166,10 @@ const UpperSvg = () => {
 };
 
 const Home = () => {
-  const isArabic=LanguageHandler()
   const DrawerProgress = useDrawerProgress()
+  const language=useSelector(state=>state.language.value)
+  const CustomFlexDirection=Utils.flexDirection(language)
+  const CustomTextAlign=Utils.textAlign(language)
   const animatedStyle = useAnimatedStyle(() => {
     const scale = interpolate(DrawerProgress.value, [0, 1], [1, 0.73]);
     const borderRadius = interpolate(DrawerProgress.value, [0, 1], [0, SCREEN_HEIGHT * .03]);
@@ -183,9 +180,9 @@ const Home = () => {
   });
 
   return (
-    <Animated.View style={{ backgroundColor: Colors.Black_Bg, flex: 1, overflow: 'hidden', zIndex: 1, }}>
+    <View style={{ backgroundColor: Colors.Black_Bg, flex: 1, overflow: 'hidden', zIndex: 1, }}>
       <UpperSvg />
-      <Animated.View style={[animatedStyle, { flex: 1, elevation: 10, shadowColor: Colors.Black, backgroundColor: Colors.Black_Bg, overflow: 'hidden', zIndex: 1, }]}>
+      <Animated.View style={[animatedStyle, { flex: 1, elevation: 10, shadowColor: Colors.Black, backgroundColor: Colors.Black_Bg, overflow: 'hidden', zIndex: 1,}]}>
         <HomeHeaderComponent header={DataConstants.HomeHeader} headerText={"Vip-974"} />
         <View style={{ backgroundColor: Colors.Black }}>
           <FlatList
@@ -198,11 +195,11 @@ const Home = () => {
               paddingHorizontal: SCREEN_WIDTH * .05,
               paddingTop: SCREEN_HEIGHT * .014,
             }}
-            renderItem={item => <HomeRenderItem item={item.item} index={item.index} isArabic={isArabic} />}
+            renderItem={item => <HomeRenderItem item={item.item} index={item.index} CustomFlexDirection={CustomFlexDirection} CustomTextAlign={CustomTextAlign} />}
           />
         </View>
       </Animated.View>
-    </Animated.View>
+    </View>
   );
 };
 

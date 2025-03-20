@@ -16,7 +16,8 @@ import {useNavigation} from '@react-navigation/native';
 import {OtpInput} from 'react-native-otp-entry';
 import Helpers from '../Helpers';
 import Snackbar from 'react-native-snackbar';
-import LanguageHandler from '../LanguageHandler';
+import Utils from '../Utils';
+import { useSelector } from 'react-redux';
 
 const {Colors} = Constants;
 const {SCREEN_HEIGHT, SCREEN_WIDTH} = Constants.SCREEN_DIMENSIONS;
@@ -24,7 +25,9 @@ const {SCREEN_HEIGHT, SCREEN_WIDTH} = Constants.SCREEN_DIMENSIONS;
 const OtpValidation = () => {
   const navigation = useNavigation();
   const [Otp, setOtp] = useState('');
-  const isArabic=LanguageHandler()
+  const language=useSelector(state=>state.language.value)
+  const CustomAlignSelf=Utils.alignSelf(language)
+  const CustomTextAlign=Utils.textAlign(language)
 
   const HandleNavigation = name => {
     name != 'Login'
@@ -44,23 +47,21 @@ const OtpValidation = () => {
         }}>
         <Image
           source={Logo_White}
-          style={{width: SCREEN_WIDTH * 0.15,alignSelf:isArabic?'flex-end':'flex-start'}}
+          style={[{width: SCREEN_WIDTH * 0.15},CustomAlignSelf]}
           resizeMode="contain"
         />
         <Text
-          style={{
+          style={[{
             fontFamily: 'Gibson',
             color: Colors.Green1,
             fontSize: 48,
             marginTop: SCREEN_HEIGHT*.02,
             textTransform: 'uppercase',
-            textAlign:isArabic?'right':'left',
-            alignSelf:isArabic?'flex-end':'flex-start'
-          }}>
+          },CustomTextAlign,CustomAlignSelf]}>
           ENTER OTP
         </Text>
         <Text
-          style={{
+          style={[{
             fontFamily: 'Gibson-Regular',
             color: Colors.White_Text,
             fontSize: 16,
@@ -68,9 +69,7 @@ const OtpValidation = () => {
             lineHeight: 20,
             width: SCREEN_WIDTH * 0.75,
             textTransform: 'capitalize',
-            textAlign:isArabic?'right':'left',
-            alignSelf:isArabic?'flex-end':'flex-start'
-          }}>
+          },CustomTextAlign,CustomAlignSelf]}>
           Enter 5 digit verification code sent to your number
         </Text>
         <View style={{marginTop: 20, marginBottom: 10}}>
@@ -93,7 +92,7 @@ const OtpValidation = () => {
           />
         </View>
 
-        <Pressable style={{alignSelf:isArabic?'flex-end':'flex-start'}} onPress={() => HandleNavigation('Login')}>
+        <Pressable style={CustomAlignSelf} onPress={() => HandleNavigation('Login')}>
           <Text
             style={{
               color: Colors.White_Text,

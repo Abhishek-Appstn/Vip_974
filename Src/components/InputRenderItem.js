@@ -2,26 +2,34 @@ import { View, Text, Image, FlatList, Pressable } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Constants from '../Constants';
 import CustomTextInput from './CustomTextInput/CustomTextInput';
+import { useSelector } from 'react-redux';
+import Utils from '../Utils';
+import { Tick } from '../assets/Images';
 
 const { Colors } = Constants;
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS;
 
-const InputRenderItem = ({ Item,key, name,JsonData,setJsonData }) => {
-console.log(key)
-  
+const InputRenderItem = ({ Item, key, name, JsonData, setJsonData }) => {
+    const language = useSelector(state => state.language.value)
+    const CustomFlexDirection = Utils.flexDirection(language)
+    const CustomAlignItems = Utils.alignItems(language)
+    const CustomAlignSelf = Utils.alignSelf(language)
+
+
     const HandlePress = (item) => {
         setJsonData((prevFormData) => ({
-            ...prevFormData, 
+            ...prevFormData,
             [name]: {
-                ...(prevFormData[name]), 
-                ...item, 
+                ...(prevFormData[name]),
+                ...item,
             },
         }));
     };
-    
+
     return (
         <FlatList
-        numColumns={Item.inputType=='Selection-Horizontal'||Item.inputType=='Selection-Horizontal2'?2:null}
+        key={Item.inputType}
+        numColumns={Item.inputType=='Selection-Horizontal'||Item.inputType=='Selection-Horizontal2'?2:1}
             data={Item.data}
             renderItem={({ item, index }) => {
                 switch (Item.inputType) {
@@ -45,18 +53,21 @@ console.log(key)
                     case 'Selection':
                         return (
                             <Pressable
-                                style={{
+                                style={[{
                                     marginVertical: SCREEN_HEIGHT * 0.012,
                                     width: SCREEN_WIDTH * 0.9,
                                     backgroundColor: Colors.Black,
+                                    borderWidth: 1,
+                                    borderRadius: SCREEN_WIDTH * .02,
+                                    borderColor: JSON.stringify(JsonData[name]) === JSON.stringify(item) ? Colors.Green1 : null,
                                     height: SCREEN_HEIGHT * 0.07,
                                     padding: SCREEN_WIDTH * 0.03,
                                     flexDirection: 'row',
                                     alignItems: 'center',
                                     justifyContent: 'space-between',
-                                }} onPress={()=>HandlePress(item)}
+                                }, CustomFlexDirection]} onPress={() => HandlePress(item)}
                             >
-                                <View>
+                                <View style={CustomAlignItems}>
                                     <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 18 }}>
                                         {item.Dataname}
                                     </Text>
@@ -66,55 +77,55 @@ console.log(key)
                                         </Text>
                                     )}
                                 </View>
-                                <View style={{height:SCREEN_WIDTH*.07,width:SCREEN_WIDTH*.07,borderRadius:SCREEN_HEIGHT,borderColor:Colors.Green1,borderWidth:0.5,alignItems:'center',justifyContent:'center'}}>
-                    <View style={{height:SCREEN_WIDTH*.05,width:SCREEN_WIDTH*.05,borderRadius:SCREEN_HEIGHT,backgroundColor:JSON.stringify(JsonData[name])===JSON.stringify(item)?Colors.Green1:null}}/>
-                        </View>
+                                <View style={{ height: SCREEN_WIDTH * .07, width: SCREEN_WIDTH * .07, borderRadius: SCREEN_HEIGHT, borderColor: Colors.Green1, borderWidth: 0.5, alignItems: 'center', justifyContent: 'center', backgroundColor: JSON.stringify(JsonData[name]) === JSON.stringify(item) ? Colors.Green1 : null }}>
+                                    {JSON.stringify(JsonData[name]) === JSON.stringify(item) ? <Image source={Tick} style={{ height: SCREEN_WIDTH * .04, width: SCREEN_WIDTH * .04, }} resizeMode='contain' /> : null}
+                                </View>
                             </Pressable>
                         );
 
 
-                        case 'Selection-Image':
-                        console.log("edaaa",JsonData)
-                return(
-                    <Pressable style={{marginVertical:SCREEN_HEIGHT*.012,width:SCREEN_WIDTH*.9,backgroundColor:Colors.Black,height:SCREEN_HEIGHT*.07,padding:SCREEN_WIDTH*.03,flexDirection:'row',alignItems:'center',justifyContent:'space-between',}}onPress={()=>HandlePress(item)}>
-               <View style={{flexDirection:'row',alignItems:'center'}}>
-                <Image source={item.image} style={{width:SCREEN_WIDTH*.07,resizeMode:"contain"}}/>
-                  <Text style={{fontFamily:'Gibson',color:Colors.White,fontSize:18,textTransform:"uppercase",marginLeft:SCREEN_WIDTH*.04}}>{item.Dataname}</Text>
-                  </View>
-                    <View style={{height:SCREEN_WIDTH*.07,width:SCREEN_WIDTH*.07,borderRadius:SCREEN_HEIGHT,borderColor:Colors.Green1,borderWidth:0.5,alignItems:'center',justifyContent:'center'}}>
-                    <View style={{height:SCREEN_WIDTH*.05,width:SCREEN_WIDTH*.05,borderRadius:SCREEN_HEIGHT,backgroundColor:JSON.stringify(JsonData[name])===JSON.stringify(item)?Colors.Green1:null}}/>
-                        </View>
-                    </Pressable>
-            )
-            case 'Selection-Horizontal':
-               
-                return(
-                    <Pressable style={{marginHorizontal:SCREEN_HEIGHT*.012,width:SCREEN_WIDTH*.43,backgroundColor:Colors.Black,height:SCREEN_HEIGHT*.17,padding:SCREEN_WIDTH*.03,paddingTop:SCREEN_HEIGHT*.02,borderRadius:10,overflow:'hidden',marginTop:SCREEN_HEIGHT*.05}}onPress={()=>HandlePress(item)}>
-               <View style={{height:SCREEN_WIDTH*.07,width:SCREEN_WIDTH*.07,borderRadius:SCREEN_HEIGHT,borderColor:Colors.Green1,borderWidth:0.5,alignItems:'center',justifyContent:'center'}}>
-                    <View style={{height:SCREEN_WIDTH*.05,width:SCREEN_WIDTH*.05,borderRadius:SCREEN_HEIGHT,backgroundColor:JSON.stringify(JsonData[name])===JSON.stringify(item)?Colors.Green1:null}}/>
-                        </View>
-                        <View style={{marginVertical:SCREEN_HEIGHT*.034}}>
+                    case 'Selection-Image':
 
-                  <Text style={{fontFamily:'Gibson',color:Colors.White,fontSize:18,textTransform:"uppercase",marginVertical:SCREEN_WIDTH*.01}}>{item.Dataname}</Text>
-                  <Text style={{fontFamily:'Gibson',color:Colors.Green1,fontSize:14,textTransform:"uppercase",marginVertical:SCREEN_WIDTH*.01}}>{item.subData}</Text>
-                  </View>
+                        return (
+                            <Pressable style={[{ marginVertical: SCREEN_HEIGHT * .012, width: SCREEN_WIDTH * .9, backgroundColor: Colors.Black, height: SCREEN_HEIGHT * .07, padding: SCREEN_WIDTH * .03, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderWidth: 1,borderRadius: SCREEN_WIDTH * .02,borderColor: JSON.stringify(JsonData[name]) === JSON.stringify(item) ? Colors.Green1 : null,}, CustomFlexDirection]} onPress={() => HandlePress(item)}>
+                                <View style={[{ flexDirection: 'row', alignItems: 'center' }, CustomFlexDirection]}>
+                                    <Image source={item.image} style={{ width: SCREEN_WIDTH * .07, resizeMode: "contain" }} />
+                                    <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 18, textTransform: "uppercase", marginHorizontal: SCREEN_WIDTH * .04 }}>{item.Dataname}</Text>
+                                </View>
+                                <View style={{ height: SCREEN_WIDTH * .07, width: SCREEN_WIDTH * .07, borderRadius: SCREEN_HEIGHT, borderColor: Colors.Green1, borderWidth: 0.5, alignItems: 'center', justifyContent: 'center', backgroundColor: JSON.stringify(JsonData[name]) === JSON.stringify(item) ? Colors.Green1 : null }}>
+                                    {JSON.stringify(JsonData[name]) === JSON.stringify(item) ? <Image source={Tick} style={{ height: SCREEN_WIDTH * .04, width: SCREEN_WIDTH * .04, }} resizeMode='contain' /> : null}
+                                </View>
+                            </Pressable>
+                        )
+                    case 'Selection-Horizontal':
 
-                   
-                    </Pressable>
-            )
-            case 'Selection-Horizontal2':
-               
-                return(
-                    <Pressable style={{margin:SCREEN_HEIGHT*.012,width:SCREEN_WIDTH*.43,backgroundColor:JSON.stringify(JsonData[name])===JSON.stringify(item)?Colors.Green1:Colors.Black,height:SCREEN_HEIGHT*.08,padding:SCREEN_WIDTH*.03,paddingTop:SCREEN_HEIGHT*.02,borderRadius:5,overflow:'hidden',alignItems:'center',justifyContent:'center'}}onPress={()=>HandlePress(item)}>
-                  <Text style={{fontFamily:'Gibson',color:Colors.White,fontSize:18,textTransform:"uppercase",marginVertical:SCREEN_WIDTH*.01}}>{item.Dataname}</Text>
-                    </Pressable>
-                )
-                case 'NameCustomisation':
-                    return(
-                        <View>
-                            
-                        </View>
-                    )
+                        return (
+                            <Pressable style={[{ marginHorizontal: SCREEN_HEIGHT * .012, width: SCREEN_WIDTH * .43, backgroundColor: Colors.Black, height: SCREEN_HEIGHT * .17, padding: SCREEN_WIDTH * .03, paddingTop: SCREEN_HEIGHT * .02, borderRadius: 10, overflow: 'hidden', marginTop: SCREEN_HEIGHT * .05,borderWidth: 1,borderRadius: SCREEN_WIDTH * .02,borderColor: JSON.stringify(JsonData[name]) === JSON.stringify(item) ? Colors.Green1 : null, }, CustomAlignItems]} onPress={() => HandlePress(item)}>
+                         <View style={{ height: SCREEN_WIDTH * .07, width: SCREEN_WIDTH * .07, borderRadius: SCREEN_HEIGHT, borderColor: Colors.Green1, borderWidth: 0.5, alignItems: 'center', justifyContent: 'center', backgroundColor: JSON.stringify(JsonData[name]) === JSON.stringify(item) ? Colors.Green1 : null }}>
+                                    {JSON.stringify(JsonData[name]) === JSON.stringify(item) ? <Image source={Tick} style={{ height: SCREEN_WIDTH * .04, width: SCREEN_WIDTH * .04, }} resizeMode='contain' /> : null}
+                                </View>
+                                <View style={[{ marginVertical: SCREEN_HEIGHT * .034 }, CustomAlignItems]}>
+
+                                    <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 18, textTransform: "uppercase", marginVertical: SCREEN_WIDTH * .01 }}>{item.Dataname}</Text>
+                                    <Text style={{ fontFamily: 'Gibson', color: Colors.Green1, fontSize: 14, textTransform: "uppercase", marginVertical: SCREEN_WIDTH * .01 }}>{item.subData}</Text>
+                                </View>
+
+
+                            </Pressable>
+                        )
+                    case 'Selection-Horizontal2':
+
+                        return (
+                            <Pressable style={{ margin: SCREEN_HEIGHT * .012, width: SCREEN_WIDTH * .43, backgroundColor:Colors.Black,borderWidth: 1,borderRadius: SCREEN_WIDTH * .02,borderColor: JSON.stringify(JsonData[name]) === JSON.stringify(item) ? Colors.Green1 : null, height: SCREEN_HEIGHT * .08, padding: SCREEN_WIDTH * .03, paddingTop: SCREEN_HEIGHT * .02, borderRadius: 5, overflow: 'hidden', alignItems: 'center', justifyContent: 'center' }} onPress={() => HandlePress(item)}>
+                                <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 18, textTransform: "uppercase", marginVertical: SCREEN_WIDTH * .01 }}>{item.Dataname}</Text>
+                            </Pressable>
+                        )
+                    case 'NameCustomisation':
+                        return (
+                            <View>
+
+                            </View>
+                        )
                     default:
                         return <Text style={{ color: Colors.Razzmatazz }}>Undefined</Text>;
                 }

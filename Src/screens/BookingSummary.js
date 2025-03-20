@@ -8,32 +8,35 @@ import ActionSheet from 'react-native-actions-sheet';
 import CustomButton from '../components/CustomButton/CustomButton';
 import DataConstants from '../assets/DataConstants';
 import LanguageHandler from '../LanguageHandler';
+import { useSelector } from 'react-redux';
+import Utils from '../Utils';
 const { Colors } = Constants;
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS;
 const { ServicePay, Services, paymentData, softDrinks } = DataConstants
 
 const LocationComponent = ({ params }) => {
-  const isArabic=LanguageHandler()
+  const language = useSelector(state => state.language.value)
+  const CustomFlexDirection = Utils.flexDirection(language)
+  const CustomTextAlign = Utils.textAlign(language)
   return (
     <View style={{ marginHorizontal: SCREEN_WIDTH * .03 }}>
 
-      <Text style={{ textTransform: 'uppercase', color: Colors.White, fontFamily: 'Gibson', fontSize: 18, fontWeight: '400',textAlign:isArabic?'right':'left' }}>Enter Location</Text>
+      <Text style={[{ textTransform: 'uppercase', color: Colors.White, fontFamily: 'Gibson', fontSize: 18, fontWeight: '400'},CustomTextAlign]}>Enter Location</Text>
       <Image source={Maps} style={{ alignSelf: 'center', marginVertical: SCREEN_WIDTH * .026 }} />
       <View
-        style={{
+        style={[{
           justifyContent: 'space-between',
-          flexDirection: isArabic?'row-reverse':'row',
+          flexDirection: 'row',
           alignItems: 'center',
           backgroundColor: Colors.Black_Bg, padding: 10
-        }}>
+        },CustomFlexDirection]}>
         <View
-          style={{
-            flexDirection: isArabic?'row-reverse':'row',
+          style={[{
+            flexDirection: 'row',
             alignItems: 'center',
             marginTop: SCREEN_WIDTH * 0.02,
             justifyContent: 'center',
-           
-          }}>
+          },CustomFlexDirection]}>
           <Image
             source={LocationPin}
             style={{
@@ -169,7 +172,8 @@ const ModalComponent = ({ Visible, setVisible, navigation }) => {
   )
 }
 const Timeslot = ({ params }) => {
-  const isArabic=LanguageHandler()
+  const language = useSelector(state => state.language.value)
+  const CustomFlexDirection = Utils.flexDirection(language)
   return (
     <View style={{ marginTop: SCREEN_WIDTH * .04 }}>
       {params.type !== 'services' ? <Text
@@ -181,7 +185,7 @@ const Timeslot = ({ params }) => {
         }}>
         TIME SLOT
       </Text> : null}
-      <View style={{ flexDirection: isArabic?'row-reverse':'row', alignItems: 'center' }}>
+      <View style={[{ flexDirection:'row', alignItems: 'center' },CustomFlexDirection]}>
         <View style={{ padding: 7, backgroundColor: Colors.Black }}>
           <Image source={calendar} style={{ height: SCREEN_WIDTH * .05, width: SCREEN_WIDTH * .05, resizeMode: 'contain' }} />
         </View>
@@ -258,7 +262,10 @@ const MiddleComponent = ({ params, ActionsheetRef, setChoosen, SelectedAddon }) 
 }
 
 const PaymentComponent = ({ params }) => {
-  const isArabic=LanguageHandler()
+  const language = useSelector(state => state.language.value)
+  const CustomFlexDirection = Utils.flexDirection(language)
+  const CustomAlignSelf = Utils.alignSelf(language)
+
 
   return (
     <View
@@ -266,19 +273,18 @@ const PaymentComponent = ({ params }) => {
         backgroundColor: Colors.Black_Bg, top: -SCREEN_WIDTH * .075, borderRadius: 15, paddingHorizontal: SCREEN_WIDTH * .07, paddingVertical: SCREEN_WIDTH * .05,
       }}>
       <Text
-        style={{
+        style={[{
           color: Colors.White,
           fontSize: 18,
           fontFamily: 'Gibson',
           textTransform: 'uppercase',
           fontWeight: '400',
-          alignSelf:isArabic?'flex-end':'flex-start',
           marginVertical: SCREEN_WIDTH * 0.01,
-        }}>Payments</Text>
+        },CustomAlignSelf]}>Payments</Text>
 
       <FlatList scrollEnabled={false} data={params.type == 'services' ? ServicePay : paymentData} renderItem={({ item, index }) => {
         return (
-          <View style={{ flexDirection: isArabic?'row-reverse':'row', justifyContent: 'space-between', marginVertical: SCREEN_WIDTH * .014 }}>
+          <View style={[{ flexDirection:'row', justifyContent: 'space-between', marginVertical: SCREEN_WIDTH * .014 },CustomFlexDirection]}>
             <Text
               style={{
                 color: Colors.White,
@@ -301,7 +307,7 @@ const PaymentComponent = ({ params }) => {
           </View>
         )
       }} />
-      <View style={{ flexDirection: isArabic?'row-reverse':'row', justifyContent: 'space-between', marginVertical: SCREEN_WIDTH * .014 }}>
+      <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: SCREEN_WIDTH * .014 },CustomFlexDirection]}>
 
         <Text
           style={{
@@ -320,7 +326,9 @@ const PaymentComponent = ({ params }) => {
 }
 
 const HeaderComponent = ({ params }) => {
-  const isArabic=LanguageHandler()
+  const language = useSelector(state => state.language.value)
+  const CustomFlexDirection = Utils.flexDirection(language)
+
 
   return (
     <View
@@ -330,12 +338,12 @@ const HeaderComponent = ({ params }) => {
         backgroundColor: Colors.Black_Bg
       }}>
       <View
-        style={{
-          flexDirection:isArabic?'row-reverse': 'row',
+        style={[{
+          flexDirection:'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-        }}>
-        <View style={{ flexDirection: isArabic?'row-reverse':'row', alignItems: 'center' }}>
+        },CustomFlexDirection]}>
+        <View style={[{ flexDirection:'row', alignItems: 'center' },CustomFlexDirection]}>
           {params.type !== 'services' ? <Image
             source={params.image}
             style={{

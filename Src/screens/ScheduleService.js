@@ -21,7 +21,7 @@ const params=props.route.params
   const [selectedTime, setselectedTime] = useState([]);
 console.log('Daaata',selectedDate,selectedTime)
 const HandleNavigation=()=>{
-  selectedDate?selectedTime?
+  selectedDate?selectedTime.length>0?
   params?.type=='services'|| params?.type=='build'?
   navigation.navigate('CabanSize',{...params,selectedDate:selectedDate.format("DD MMMM YYYY"),selectedTime:selectedTime})
   :

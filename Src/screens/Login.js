@@ -8,11 +8,11 @@ import CustomButton from '../components/CustomButton/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import Helpers from '../Helpers';
 import Snackbar from 'react-native-snackbar';
-import LanguageHandler from '../LanguageHandler';
+import Utils from '../Utils';
+import { useSelector } from 'react-redux';
 const {Colors} = Constants;
 const {SCREEN_HEIGHT, SCREEN_WIDTH} = Constants.SCREEN_DIMENSIONS;
 const Login = () => {
-const isArabic=LanguageHandler()
   const [MobileNumber, setMobileNumber] = useState('');
   const [Error, setError] = useState(false);
   useEffect(() => {
@@ -24,7 +24,12 @@ const isArabic=LanguageHandler()
   const handleTextChange = value => {
     setMobileNumber(value);
   };
+  const language=useSelector(state=>state.language.value)
   const navigation = useNavigation();
+  const CustomFlexDirection=Utils.flexDirection(language)
+  const CustomAlignSelf=Utils.alignSelf(language)
+  const CustomTextAlign=Utils.textAlign(language)
+
   const HandleNavigation = name => {
     name !== 'Signup' && name !== 'Drawer'
       ? Helpers({data: MobileNumber, type: 'mobilenumber'})
@@ -45,29 +50,26 @@ const isArabic=LanguageHandler()
           marginHorizontal: SCREEN_WIDTH*.05,
           
         }}>
-        <Image source={Logo_White} style={{width: 60,alignSelf:isArabic?'flex-end':'flex-start'}} resizeMode="contain" />
+        <Image source={Logo_White} style={[{width: 60},CustomAlignSelf]} resizeMode="contain" />
         <Text
-          style={{
+          style={[{
             fontFamily: 'Gibson',
             color: Colors.Green1,
             fontSize: 48,
             marginTop: 20,
-            alignSelf:isArabic?'flex-end':'flex-start',
-          }}>
+          },CustomAlignSelf]}>
           LOGIN
         </Text>
         <Text
-          style={{
+          style={[{
             fontFamily: 'Gibson-Regular',
             color: Colors.White_Text,
             fontSize: 16,
             marginTop: 20,
             lineHeight: 20,
             width: SCREEN_WIDTH * 0.7,
-            textAlign:isArabic?'right':'left',
-            alignSelf:isArabic?'flex-end':'flex-start',
 
-          }}>
+          },CustomAlignSelf,CustomTextAlign]}>
           We Will Send You A Verification Code On This Mobile Number
         </Text>
         <View style={{marginTop: 20, marginBottom: 10}}>
@@ -79,7 +81,7 @@ const isArabic=LanguageHandler()
             error={Error}
           />
         </View>
-        <View style={{alignItems: 'center', flexDirection: isArabic?'row-reverse':'row'}}>
+        <View style={[{flexDirection:'row', alignItems: 'center'},CustomFlexDirection]}>
           <Text style={{color: Colors.White_Text}}>Don't Have An Account?</Text>
           <Pressable onPress={() => HandleNavigation('Signup')}>
             <Text style={{color: Colors.AccentColor5}}>SIGN UP </Text>
