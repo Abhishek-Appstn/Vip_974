@@ -1,15 +1,12 @@
 import { View, Text, SafeAreaView, Image, Pressable, FlatList } from 'react-native'
 import React, { useState } from 'react'
 import Constants from '../Constants'
-import { AboutUS, ChevronLeftWhite, ChevronRight, ChevronRightWhite, Gift, Home, Logout, PrivacyPolicy, Profile, Profile_Damu, ProfileDP, Support } from '../assets/Images'
+import { ChevronRightWhite, Gift, Home, Logout, PrivacyPolicy, Profile, Profile_Damu, ProfileDP, Support } from '../assets/Images'
 import Svg, { Path } from 'react-native-svg'
-import { useNavigation } from '@react-navigation/native'
 import DataConstants from '../assets/DataConstants'
 import { useDispatch, useSelector } from 'react-redux'
 import { setLanguage } from '../redux/slice/languageSlice'
-import LanguageHandler from '../LanguageHandler'
 import Utils from '../Utils'
-
 const { Colors } = Constants
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 const { firstname, lastname, membershipType, points, profileImage } = DataConstants.UserData
@@ -78,6 +75,7 @@ const CustomDrawer = (props) => {
   const [SelectedLanguage, setSelectedLanguage] = useState(language)
   const { navigation } = props;
   const Languages = ['Arabic', "English"]
+  console.log('Drawer', props);
   const dispatch = useDispatch()
   return (
     <SafeAreaView style={{ backgroundColor: Colors.Black_Bg, flex: 1, overflow: 'hidden' }}>
@@ -107,7 +105,7 @@ const CustomDrawer = (props) => {
 
             return (
 
-              <Pressable style={[{ flexDirection: 'row', alignItems: 'center', padding: SCREEN_WIDTH * .03, marginTop: item.title === 'Logout' ? SCREEN_HEIGHT * .07 : 0, }, CustomAlignSelf, CustomFlexDirection]} onPress={() => navigation.navigate(item.navigate)}>
+              <Pressable style={[{ flexDirection: 'row', alignItems: 'center', padding: SCREEN_WIDTH * .03, marginTop: item.title === 'Logout' ? SCREEN_HEIGHT * .07 : 0, }, CustomAlignSelf, CustomFlexDirection]} onPress={() => navigation.navigate('HomeStack',{screen:item.navigate})}>
                 <Image source={item.icon} style={{ height: SCREEN_HEIGHT * .04, resizeMode: 'contain', marginRight: SCREEN_WIDTH * .04, }} />
                 <Text style={{ color: Colors.White, fontWeight: '500', fontSize: 16, marginRight: SCREEN_WIDTH * .04, }}>{item.title}</Text>
 

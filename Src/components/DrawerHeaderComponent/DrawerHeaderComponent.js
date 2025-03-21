@@ -7,7 +7,7 @@ import LanguageHandler from '../../LanguageHandler'
 import Utils from '../../Utils'
 import { useSelector } from 'react-redux'
 
-const DrawerHeaderComponent = ({name,leftimage,rightimage,type,search,back,active,setactive}) => {
+const DrawerHeaderComponent = ({name,leftimage,rightimage,type,search,back,active,setactive,setVisible}) => {
     const{Colors} =Constants
     const{SCREEN_HEIGHT,SCREEN_WIDTH} =Constants.SCREEN_DIMENSIONS
     const navigation=useNavigation()
@@ -23,7 +23,7 @@ const DrawerHeaderComponent = ({name,leftimage,rightimage,type,search,back,activ
                    <Text style={[{color:Colors.White_Text,fontSize:17,fontFamily:'Gibson-SemiBold',textTransform:'uppercase'},!type?CustomImageTransform:null]}>{name}</Text>
               <View style={{flexDirection:'row'}}>
                 {type=='filter'?<Image source={Filter} style={{marginRight:SCREEN_WIDTH*.04}}/>:null}
-                {type=='expand'?<Image source={Expand} style={{marginRight:SCREEN_WIDTH*.04}}/>:null}
+                {type=='expand'?<Pressable onPress={()=>setVisible(true)}><Image source={Expand} style={{marginRight:SCREEN_WIDTH*.04}}/></Pressable>:null}
                 <Pressable onPress={()=>{back?back():type=='login'||type=='filter'||type=="expand"?navigation.goBack():navigation.toggleDrawer()}}>
 
 

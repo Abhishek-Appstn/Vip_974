@@ -7,84 +7,51 @@ import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHea
 import ActionSheet from 'react-native-actions-sheet';
 import CustomButton from '../components/CustomButton/CustomButton';
 import DataConstants from '../assets/DataConstants';
-import LanguageHandler from '../LanguageHandler';
 import { useSelector } from 'react-redux';
 import Utils from '../Utils';
+import LocationComponent from '../components/LocationComponent';
+import CartIncrementButtons from '../components/CartIncrementButtons';
+import TimeSlot from '../components/TimeSlot';
 const { Colors } = Constants;
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS;
 const { ServicePay, Services, paymentData, softDrinks } = DataConstants
 
-const LocationComponent = ({ params }) => {
+const FlatListRenderItem = ({ item, index, SelectedAddon, setSelectedAddon,Choosen }) => {
   const language = useSelector(state => state.language.value)
   const CustomFlexDirection = Utils.flexDirection(language)
   const CustomTextAlign = Utils.textAlign(language)
+  
+  return (
+    <Pressable style={[{ marginVertical: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }, CustomFlexDirection]}>
+      <View style={[{ flexDirection: 'row', alignItems: 'center' }, CustomFlexDirection]}>
+        <Image source={item.image} style={{ height: SCREEN_WIDTH * .15, width: SCREEN_WIDTH * .15, borderRadius: SCREEN_WIDTH * .04 / 4, borderColor: Colors.White_Text, borderWidth: 2 }} />
+        <View style={[{ marginHorizontal: SCREEN_WIDTH * .02, }]}>
+          <Text style={[{ color: Colors.White, fontFamily: 'Gibson', fontSize: 16, textTransform: 'uppercase', maxWidth: SCREEN_WIDTH * .45 }, CustomTextAlign]}>{item.name}</Text>
+          <Text style={[{ color: Colors.Green1, fontFamily: 'Gibson', fontSize: 16 }, CustomTextAlign]}>{item.price} QAR</Text>
+        </View>
+      </View>
+      <CartIncrementButtons item={item} setSelectedAddon={setSelectedAddon} SelectedAddon={SelectedAddon} Choosen={Choosen} />
+    </Pressable>
+  )
+}
+
+const LocationView = ({ params }) => {
+  const language = useSelector(state => state.language.value)
+  const CustomTextAlign = Utils.textAlign(language)
   return (
     <View style={{ marginHorizontal: SCREEN_WIDTH * .03 }}>
-
-      <Text style={[{ textTransform: 'uppercase', color: Colors.White, fontFamily: 'Gibson', fontSize: 18, fontWeight: '400'},CustomTextAlign]}>Enter Location</Text>
-      <Image source={Maps} style={{ alignSelf: 'center', marginVertical: SCREEN_WIDTH * .026 }} />
-      <View
-        style={[{
-          justifyContent: 'space-between',
-          flexDirection: 'row',
-          alignItems: 'center',
-          backgroundColor: Colors.Black_Bg, padding: 10
-        },CustomFlexDirection]}>
-        <View
-          style={[{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginTop: SCREEN_WIDTH * 0.02,
-            justifyContent: 'center',
-          },CustomFlexDirection]}>
-          <Image
-            source={LocationPin}
-            style={{
-              height: SCREEN_WIDTH * 0.1,
-              width: SCREEN_WIDTH * 0.1,
-              backgroundColor: Colors.Black,
-              padding: SCREEN_WIDTH * 0.015,
-              resizeMode: 'contain',
-              borderRadius: 4,
-            }}
-          />
-          <Text
-            style={{
-              lineHeight: 19,
-              fontWeight: '400',
-              color: Colors.White_Text,
-              fontSize: 14,
-              fontFamily: 'Gibson',
-              textTransform: 'capitalize',
-              marginHorizontal: SCREEN_WIDTH * 0.01,
-              maxWidth: SCREEN_WIDTH * 0.4,
-            }}>
-            {params.location}
-          </Text>
-        </View>
-        <Image
-          source={CompassNorthEast}
-          style={{
-            height: SCREEN_WIDTH * 0.08,
-            width: SCREEN_WIDTH * 0.08,
-            backgroundColor: Colors.Black,
-            padding: SCREEN_WIDTH * 0.015,
-            resizeMode: 'contain',
-            borderRadius: 4,
-            borderColor: Colors.Green1,
-            borderWidth: 0.5,
-          }}
-        />
-      </View>
+      <Text style={[{ textTransform: 'uppercase', color: Colors.White, fontFamily: 'Gibson', fontSize: 18, fontWeight: '400' }, CustomTextAlign]}>Enter Location</Text>
+      <Image source={Maps} style={{ alignSelf: 'center', marginVertical: SCREEN_WIDTH * .026, }} />
+      <LocationComponent address={params.location} backgroundColor={Colors.Black_Bg} />
     </View>
 
   )
 }
-const ActionsheetComponent = ({ ActionsheetRef, Choosen }) => {
+const ActionsheetComponent = ({ ActionsheetRef, Choosen, CustomFlexDirection, SelectedAddon, setSelectedAddon }) => {
+  
   return (
     <ActionSheet closable={true} containerStyle={{ backgroundColor: Colors.Black_Bg, height: SCREEN_HEIGHT * .9 }} ref={ActionsheetRef}>
       <View style={{ marginTop: 10, marginHorizontal: SCREEN_WIDTH * .07, }}>
-
         <View
           style={{
             width: 40,
@@ -100,55 +67,12 @@ const ActionsheetComponent = ({ ActionsheetRef, Choosen }) => {
 
         </Pressable>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <View style={[{ flexDirection: 'row', justifyContent: 'space-between' }, CustomFlexDirection]}>
           <Text style={{ textTransform: 'uppercase', color: Colors.White, fontFamily: 'Gibson', fontSize: 18, fontWeight: '400' }}>{Choosen == 'Drinks Box' ? 'Drinks Box' : 'Home Businesses'}</Text>
           <Text style={{ color: Colors.Green1, fontFamily: 'Gibson', fontSize: 12 }}>(3) Items</Text>
         </View>
 
-        <FlatList contentContainerStyle={{ marginTop: 10, paddingBottom: 50 }} data={Choosen == 'Drinks Box' ? softDrinks : Services} renderItem={({ item, index }) => {
-          return (
-            <Pressable style={{ marginVertical: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-
-                <Image source={item.image} style={{ height: SCREEN_WIDTH * .15, width: SCREEN_WIDTH * .15, borderRadius: SCREEN_WIDTH * .04 / 4, borderColor: Colors.White_Text, borderWidth: 2 }} />
-                <View style={{ marginLeft: SCREEN_WIDTH * .02 }}>
-                  <Text style={{ color: Colors.White, fontFamily: 'Gibson', fontSize: 16, textTransform: 'uppercase', width: SCREEN_WIDTH * .45 }}>{item.name}</Text>
-                  <Text style={{ color: Colors.Green1, fontFamily: 'Gibson', fontSize: 16 }}>{item.price} QAR</Text>
-                </View>
-              </View>
-              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', width: SCREEN_WIDTH * .25 }}>
-                <Image
-                  source={Minus}
-                  style={{
-                    height: SCREEN_WIDTH * 0.06,
-                    width: SCREEN_WIDTH * 0.06,
-                    backgroundColor: Colors.Black,
-                    padding: SCREEN_WIDTH * 0.015,
-                    resizeMode: 'contain',
-                    borderRadius: 4,
-                    borderColor: Colors.Green1,
-                    borderWidth: 0.5,
-                  }}
-                />
-                <Text style={{ color: Colors.Green1, fontFamily: 'Gibson', fontSize: 12, fontWeight: '500', }}>0</Text>
-
-                <Image
-                  source={Plus}
-                  style={{
-                    height: SCREEN_WIDTH * 0.06,
-                    width: SCREEN_WIDTH * 0.06,
-                    backgroundColor: Colors.Black,
-                    padding: SCREEN_WIDTH * 0.015,
-                    resizeMode: 'contain',
-                    borderRadius: 4,
-                    borderColor: Colors.Green1,
-                    borderWidth: 0.5,
-                  }}
-                />
-              </View>
-            </Pressable>
-          )
-        }} />
+        <FlatList contentContainerStyle={{ marginTop: 10, paddingBottom: 50 }} data={Choosen == 'Drinks Box' ? softDrinks : Services} renderItem={item => <FlatListRenderItem item={item.item} index={item.index} setSelectedAddon={setSelectedAddon} SelectedAddon={SelectedAddon} Choosen={Choosen} />} />
       </View>
 
     </ActionSheet>
@@ -161,7 +85,6 @@ const ModalComponent = ({ Visible, setVisible, navigation }) => {
         <View style={{ height: SCREEN_WIDTH * .9, backgroundColor: Colors.Black, width: SCREEN_WIDTH * .8, borderRadius: 15, alignItems: 'center', paddingTop: SCREEN_WIDTH * .078 }}>
           <View style={{ height: SCREEN_WIDTH * .2, width: SCREEN_WIDTH * .2, backgroundColor: Colors.Green1, alignItems: 'center', justifyContent: 'center', padding: SCREEN_WIDTH * .01, borderRadius: SCREEN_WIDTH }}>
             <Image source={Tick} style={{ resizeMode: 'contain' }} />
-
           </View>
           <Text style={{ fontFamily: 'Gibson', fontWeight: 'semibold', fontSize: 18, marginHorizontal: SCREEN_WIDTH * .045, textTransform: 'uppercase', color: Colors.White, marginTop: SCREEN_WIDTH * .08 }}>Rental Done Successfully</Text>
           <Text style={{ fontFamily: 'Gibson', fontWeight: 'light', fontSize: 14, alignSelf: 'center', width: SCREEN_WIDTH * .6, color: Colors.White, textAlign: 'center', marginVertical: SCREEN_WIDTH * .04 }}>Thank you. The lease has been successful. You can follow the order from the My Rentals  page</Text>
@@ -171,33 +94,7 @@ const ModalComponent = ({ Visible, setVisible, navigation }) => {
     </Modal>
   )
 }
-const Timeslot = ({ params }) => {
-  const language = useSelector(state => state.language.value)
-  const CustomFlexDirection = Utils.flexDirection(language)
-  return (
-    <View style={{ marginTop: SCREEN_WIDTH * .04 }}>
-      {params.type !== 'services' ? <Text
-        style={{
-          fontFamily: 'Gibson',
-          color: Colors.White,
-          fontSize: 18,
-          fontWeight: '400', marginBottom: SCREEN_WIDTH * .03
-        }}>
-        TIME SLOT
-      </Text> : null}
-      <View style={[{ flexDirection:'row', alignItems: 'center' },CustomFlexDirection]}>
-        <View style={{ padding: 7, backgroundColor: Colors.Black }}>
-          <Image source={calendar} style={{ height: SCREEN_WIDTH * .05, width: SCREEN_WIDTH * .05, resizeMode: 'contain' }} />
-        </View>
-        <View>
 
-          <Text style={{ fontFamily: 'Gibson', fontSize: 12, color: Colors.Green1, marginLeft: 8, marginVertical: 3 }}>{params.selectedDate}</Text>
-          <Text style={{ fontFamily: 'Gibson-Regular', fontSize: 12, color: Colors.White, marginLeft: 5, marginVertical: 3 }}> {params.type=='rent'?params.selectedTime.join(' | '):params.selectedTime}</Text>
-        </View>
-      </View>
-    </View>
-  )
-}
 const ButtonComponent = ({ name, setVisible }) => {
   return (
     <Pressable style={{ backgroundColor: Colors.Green1, height: SCREEN_WIDTH * .244, top: -SCREEN_WIDTH * .11, zIndex: -1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }} onPress={() => { setVisible(true) }}>
@@ -211,14 +108,14 @@ const ButtonComponent = ({ name, setVisible }) => {
     </Pressable>
   )
 }
-const MiddleComponent = ({ params, ActionsheetRef, setChoosen, SelectedAddon }) => {
+const  MiddleComponent = ({ params, ActionsheetRef, setChoosen, SelectedAddon, CustomFlexDirection, CustomAlignItems }) => {
   return (
     <View style={{ height: params.type == 'services' ? SCREEN_WIDTH * .9 : SCREEN_WIDTH * .4, padding: SCREEN_WIDTH * .04 }}>{
-      params.type == 'services' ? <LocationComponent params={params} /> :
+      params.type == 'services' ? <LocationView params={params} /> :
         <FlatList data={params.addOn} contentContainerStyle={{ marginHorizontal: SCREEN_WIDTH * 0.07, paddingVertical: params.type === 'rent' ? 0 : SCREEN_WIDTH * .025, }} scrollEnabled={false} renderItem={({ item, index }) => {
           return (
-            <Pressable style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingBottom: SCREEN_WIDTH * .05, marginTop: SCREEN_WIDTH * .02, }} onPress={() => { setChoosen(item.name), ActionsheetRef.current?.show() }}>
-              <View>
+            <Pressable style={[{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingBottom: SCREEN_WIDTH * .05, }, CustomFlexDirection]} onPress={() => { setChoosen(item.name), ActionsheetRef.current?.show() }}>
+              <View style={[CustomAlignItems]}>
                 <Text
                   style={{
                     color: Colors.White,
@@ -230,15 +127,21 @@ const MiddleComponent = ({ params, ActionsheetRef, setChoosen, SelectedAddon }) 
                   {item.name}
                 </Text>
                 <Text
-                  style={{
-                    color: Colors.Green1,
-                    fontSize: 12,
-                    fontFamily: 'Gibson',
-                    fontWeight: '450',
-                    marginTop: SCREEN_WIDTH * .01
-                  }}>
-                  {SelectedAddon ? SelectedAddon : 'No Items Selected'}
-                </Text>
+    style={{
+        color: Colors.Green1,
+        fontSize: 12,
+        fontFamily: 'Gibson',
+        fontWeight: '450',
+        marginTop: SCREEN_WIDTH * 0.01,
+    }}
+>
+    {SelectedAddon && SelectedAddon[item.name] 
+        ? Object.keys(SelectedAddon[item.name]).length > 0 
+            ? `(${Object.keys(SelectedAddon[item.name]).length}) Items Selected` 
+            : 'No Items Selected' 
+        : 'No Items Selected'}
+</Text>
+
               </View>
               <Image
                 source={Plus}
@@ -267,6 +170,7 @@ const PaymentComponent = ({ params }) => {
   const CustomAlignSelf = Utils.alignSelf(language)
 
 
+
   return (
     <View
       style={{
@@ -280,11 +184,11 @@ const PaymentComponent = ({ params }) => {
           textTransform: 'uppercase',
           fontWeight: '400',
           marginVertical: SCREEN_WIDTH * 0.01,
-        },CustomAlignSelf]}>Payments</Text>
+        }, CustomAlignSelf]}>Payments</Text>
 
       <FlatList scrollEnabled={false} data={params.type == 'services' ? ServicePay : paymentData} renderItem={({ item, index }) => {
         return (
-          <View style={[{ flexDirection:'row', justifyContent: 'space-between', marginVertical: SCREEN_WIDTH * .014 },CustomFlexDirection]}>
+          <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: SCREEN_WIDTH * .014 }, CustomFlexDirection]}>
             <Text
               style={{
                 color: Colors.White,
@@ -307,7 +211,7 @@ const PaymentComponent = ({ params }) => {
           </View>
         )
       }} />
-      <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: SCREEN_WIDTH * .014 },CustomFlexDirection]}>
+      <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: SCREEN_WIDTH * .014 }, CustomFlexDirection]}>
 
         <Text
           style={{
@@ -339,11 +243,11 @@ const HeaderComponent = ({ params }) => {
       }}>
       <View
         style={[{
-          flexDirection:'row',
+          flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-        },CustomFlexDirection]}>
-        <View style={[{ flexDirection:'row', alignItems: 'center' },CustomFlexDirection]}>
+        }, CustomFlexDirection]}>
+        <View style={[{ flexDirection: 'row', alignItems: 'center' }, CustomFlexDirection]}>
           {params.type !== 'services' ? <Image
             source={params.image}
             style={{
@@ -409,81 +313,27 @@ const HeaderComponent = ({ params }) => {
           </Text>
         </View>
       </View>
-      {params.type !== 'services' ? <View style={{ marginTop: SCREEN_WIDTH * 0.05 }}>
-        <Text
-          style={{
-            fontFamily: 'Gibson',
-            color: Colors.White,
-            fontSize: 18,
-            fontWeight: '400',
-          }}>
-          PICK UP LOCATION
-        </Text>
-        <View
-          style={{
-            justifyContent: 'space-between',
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginTop: SCREEN_WIDTH * 0.02,
-              justifyContent: 'center',
-            }}>
-            <Image
-              source={LocationPin}
-              style={{
-                height: SCREEN_WIDTH * 0.1,
-                width: SCREEN_WIDTH * 0.1,
-                backgroundColor: Colors.Black,
-                padding: SCREEN_WIDTH * 0.015,
-                resizeMode: 'contain',
-                borderRadius: 4,
-              }}
-            />
-            <Text
-              style={{
-                lineHeight: 19,
-                fontWeight: '400',
-                color: Colors.White_Text,
-                fontSize: 14,
-                fontFamily: 'Gibson',
-                textTransform: 'capitalize',
-                marginLeft: SCREEN_WIDTH * 0.01,
-                maxWidth: SCREEN_WIDTH * 0.4,
-              }}>
-              {params.location}
-            </Text>
-          </View>
-          <Image
-            source={CompassNorthEast}
-            style={{
-              height: SCREEN_WIDTH * 0.08,
-              width: SCREEN_WIDTH * 0.08,
-              backgroundColor: Colors.Black,
-              padding: SCREEN_WIDTH * 0.015,
-              resizeMode: 'contain',
-              borderRadius: 4,
-              borderColor: Colors.Green1,
-              borderWidth: 0.5,
-            }}
-          />
-        </View>
+      {params.type !== 'services' ? <View style={{ marginTop: SCREEN_WIDTH * 0.05, }}>
+        <LocationComponent address={params.location} header={'Pick up Location'} width={SCREEN_WIDTH*.85} />
       </View> : null}
-
-      <Timeslot params={params} />
+      
+      <TimeSlot params={params} header={'Timeslot'} style={{marginHorizontal:SCREEN_WIDTH*.04}} />
     </View>
   );
 };
 const BookingSummary = (props) => {
   const [Choosen, setChoosen] = useState('')
   const [Visible, setVisible] = useState(false)
+  const [SelectedAddon, setSelectedAddon] = useState({})
+  console.log("Selected Addon",JSON.stringify(SelectedAddon));
+  
   const navigation = useNavigation()
   const params = props.route.params;
   const ActionsheetRef = useRef()
-  console.log("params@booking", params)
+  const language = useSelector(state => state.language.value)
+  const CustomFlexDirection = Utils.flexDirection(language)
+  const CustomAlignItems = Utils.alignItems(language)
+  const CustomTextAlign = Utils.textAlign(language)
 
   return (
     <View>
@@ -497,15 +347,12 @@ const BookingSummary = (props) => {
           </SafeAreaView>
         </View>
         <View style={{ backgroundColor: Colors.Black, top: -SCREEN_WIDTH * .03, paddingTop: SCREEN_WIDTH * .04 }}>
-          <MiddleComponent params={params} ActionsheetRef={ActionsheetRef} setChoosen={setChoosen} />
-
+          <MiddleComponent SelectedAddon={SelectedAddon} params={params} ActionsheetRef={ActionsheetRef} setChoosen={setChoosen} CustomFlexDirection={CustomFlexDirection} CustomAlignItems={CustomAlignItems} />
         </View>
         <PaymentComponent params={params} />
-
       </View>
-
       <ButtonComponent name="Proceed to payment" setVisible={setVisible} />
-      <ActionsheetComponent ActionsheetRef={ActionsheetRef} Choosen={Choosen} />
+      <ActionsheetComponent Choosen={Choosen} SelectedAddon={SelectedAddon} setSelectedAddon={setSelectedAddon} CustomFlexDirection={CustomFlexDirection} ActionsheetRef={ActionsheetRef}  CustomTextAlign={CustomTextAlign} CustomAlignItems={CustomAlignItems} />
       <ModalComponent Visible={Visible} navigation={navigation} setVisible={setVisible} />
     </View>
   );

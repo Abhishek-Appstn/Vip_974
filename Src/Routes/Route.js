@@ -36,12 +36,8 @@ const loginStack = () => {
 const DrawerNavigation=()=>{
 const isArabic=LanguageHandler()
   return(
-  <drawer.Navigator screenOptions={{headerShown:false,drawerType:'slide',drawerPosition:isArabic?'right':'left',overlayColor:'transparent',drawerStyle:{width:SCREEN_WIDTH*.62}}} drawerContent={(props) => <CustomDrawer {...props} />}  >
+  <drawer.Navigator screenOptions={{headerShown:false,drawerType:'slide',drawerPosition:isArabic?'right':'left',drawerStyle:{width:SCREEN_WIDTH*.62}}} drawerContent={(props) => <CustomDrawer {...props} />}  >
       <drawer.Screen name='HomeStack' component={HomeNavigation}/>
-    
-
-  
-
   </drawer.Navigator>
   )
 }
