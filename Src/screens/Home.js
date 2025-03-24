@@ -15,12 +15,13 @@ import { useDrawerProgress } from '@react-navigation/drawer';
 import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated';
 import DataConstants from '../assets/DataConstants';
 import HomeHeaderComponent from '../components/HomeHeaderComponent';
-import LanguageHandler from '../LanguageHandler';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Utils from '../Utils';
+import { setMembership } from '../redux/slice/MembershipSlice';
+import { setUserData } from '../redux/slice/UserSlice';
+import { Profile_Damu } from '../assets/Images';
 const { Colors } = Constants
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
-
 const HomeRenderItem = ({ item, index,CustomFlexDirection,CustomTextAlign }) => {
   const navigation = useNavigation();
   const HandleNavigation = (name, params) => {
@@ -167,7 +168,8 @@ const UpperSvg = () => {
 
 const Home = () => {
   const DrawerProgress = useDrawerProgress()
-  const language=useSelector(state=>state.language.value)
+  const dispatch=useDispatch()
+  const language=useSelector(state=>state.Language.value)
   const CustomFlexDirection=Utils.flexDirection(language)
   const CustomTextAlign=Utils.textAlign(language)
   const animatedStyle = useAnimatedStyle(() => {
@@ -178,6 +180,13 @@ const Home = () => {
       borderRadius, backfaceVisibility: 'hidden', overflow: 'hidden'
     };
   });
+useEffect(() => {
+  dispatch(setUserData({firstname:'Reese',lastname:'Carpenter',profileImage:Profile_Damu,    membershipType: 'Gold',mobileNumber: '+9742217718',
+    email: 'Carpenter.Steve@yoohoo.com',
+    qid: '100CBA20241001',}))
+ dispatch(setMembership({points:1060,membershipType:'Gold',membershipName:'Vip-Gold',pointexpirydate:'30 Dec 2025'}))
+
+}, [])
 
   return (
     <View style={{ backgroundColor: Colors.Black_Bg, flex: 1, overflow: 'hidden', zIndex: 1, }}>

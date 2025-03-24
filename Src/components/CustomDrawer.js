@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, Image, Pressable, FlatList } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Constants from '../Constants'
 import { ChevronRightWhite, Gift, Home, Logout, PrivacyPolicy, Profile, Profile_Damu, ProfileDP, Support } from '../assets/Images'
 import Svg, { Path } from 'react-native-svg'
@@ -7,9 +7,10 @@ import DataConstants from '../assets/DataConstants'
 import { useDispatch, useSelector } from 'react-redux'
 import { setLanguage } from '../redux/slice/languageSlice'
 import Utils from '../Utils'
+import { setUserData, Signout } from '../redux/slice/UserSlice'
+import Snackbar from 'react-native-snackbar'
 const { Colors } = Constants
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
-const { firstname, lastname, membershipType, points, profileImage } = DataConstants.UserData
 const LowerSvg = () => {
   return (
     <View style={{ position: 'absolute', left: -SCREEN_WIDTH * .28, bottom: -SCREEN_HEIGHT * .3, zIndex: -5 }}>
@@ -66,16 +67,25 @@ const LowerSvg = () => {
   );
 };
 const CustomDrawer = (props) => {
-  const language = useSelector(state => state.language.value)
+  const memebershipData = useSelector(state => state.Membership)
+  console.log("Memebership", memebershipData)
+  const language = useSelector(state => state.Language.value)
+  const { firstname, lastname, profileImage } = useSelector(state => state.User)
+  const { membershipType, points, } = useSelector(state => state.Membership)
+
+
   const CustomAlignSelf = Utils.alignSelf(language)
   const CustomFlexDirection = Utils.flexDirection(language)
   const CustomTextAlign = Utils.textAlign(language)
   const CustomJustifyContent = Utils.justifyContent(language)
   const CustomImageTransform = Utils.ImageTransform(language)
-  const [SelectedLanguage, setSelectedLanguage] = useState(language)
+  const [SelectedLanguage, setSelectedLanguage] = useState('')
   const { navigation } = props;
   const Languages = ['Arabic', "English"]
-  console.log('Drawer', props);
+  useEffect(() => {
+    setSelectedLanguage(language)
+  }, [language])
+
   const dispatch = useDispatch()
   return (
     <SafeAreaView style={{ backgroundColor: Colors.Black_Bg, flex: 1, overflow: 'hidden' }}>
@@ -87,7 +97,7 @@ const CustomDrawer = (props) => {
           <Text style={[{ fontSize: 18, fontWeight: '600', color: Colors.White, marginVertical: SCREEN_HEIGHT * .007 }, CustomTextAlign]}>{firstname} {lastname}</Text>
           <View style={[{ flexDirection: 'row', alignItems: 'center' }, CustomFlexDirection]}>
             <Image source={Gift} />
-            <Text style={{ fontFamily: "Gibson", color: Colors.Green1, fontWeight: "900", marginHorizontal: SCREEN_WIDTH * .01 }}>{membershipType}</Text>
+            <Text style={{ fontFamily: "Gibson", color: Colors.Green1, fontWeight: "900", marginHorizontal: SCREEN_WIDTH * .01 }}>{membershipType ? membershipType : 'Vip'}</Text>
             <Text style={{ fontFamily: "Gibson", color: Colors.White, }}>({points}) Point</Text>
             <Image source={ChevronRightWhite} style={[{ height: SCREEN_HEIGHT * .013, marginHorizontal: SCREEN_WIDTH * .01 }, CustomImageTransform]} resizeMode='contain' />
           </View>
@@ -105,7 +115,11 @@ const CustomDrawer = (props) => {
 
             return (
 
-              <Pressable style={[{ flexDirection: 'row', alignItems: 'center', padding: SCREEN_WIDTH * .03, marginTop: item.title === 'Logout' ? SCREEN_HEIGHT * .07 : 0, }, CustomAlignSelf, CustomFlexDirection]} onPress={() => navigation.navigate('HomeStack',{screen:item.navigate})}>
+              <Pressable style={[{ flexDirection: 'row', alignItems: 'center', padding: SCREEN_WIDTH * .03, marginTop: item.title === 'Logout' ? SCREEN_HEIGHT * .07 : 0, }, CustomAlignSelf, CustomFlexDirection]} onPress={() =>
+                item.title === 'Logout'
+                  ? (dispatch(Signout()), Snackbar.show({ text: "Logged Out Successfully" }))
+                  : navigation.navigate('HomeStack', { screen: item.navigate })
+              }>
                 <Image source={item.icon} style={{ height: SCREEN_HEIGHT * .04, resizeMode: 'contain', marginRight: SCREEN_WIDTH * .04, }} />
                 <Text style={{ color: Colors.White, fontWeight: '500', fontSize: 16, marginRight: SCREEN_WIDTH * .04, }}>{item.title}</Text>
 

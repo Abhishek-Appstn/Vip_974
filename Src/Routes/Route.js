@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import { NavigationContainer } from '@react-navigation/native'
 import { createDrawerNavigator } from '@react-navigation/drawer'
@@ -8,9 +8,9 @@ import { BookedTicket, BookingSummary, BuildLocations, CabanaView, CabanSizeDeta
 import AboutUs from '../screens/AboutUs'
 import Support from '../screens/Support'
 import PrivacyPolicy from '../screens/PrivacyPolicy'
-import {Provider} from 'react-redux'
+import {Provider, useSelector} from 'react-redux'
 import store from '../redux/store'
-import LanguageHandler from '../LanguageHandler'
+import ErrorBoundary from 'react-native-error-boundary'
 
 const {SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
 const {Colors}=Constants
@@ -18,25 +18,38 @@ const {Colors}=Constants
 const stack=createNativeStackNavigator()
 const drawer=createDrawerNavigator()
 const homestack=createNativeStackNavigator()
-
-const loginStack = () => {
+const LoginStack = () => {
+  const [loading, setloading] = useState(true)
+  const isloggedin=useSelector(state=>state.User.isloggedin)
+  useEffect(() => {
+    setTimeout(() => {
+      setloading(false)
+    }, 1500);
+  }, [isloggedin])
+  
     return(
   <NavigationContainer>
     <stack.Navigator screenOptions={{headerShown:false}}>
-        <stack.Screen name='Splash' component={Splash}/>
+        {loading?<stack.Screen name='Splash' component={Splash}/>:null}
+        {isloggedin ? 
+    <stack.Screen name='Drawer' component={DrawerNavigation}/> 
+    :
+    <>
         <stack.Screen name='Login' component={Login}/>
         <stack.Screen name='OtpValidation' component={OtpValidation}/>
         <stack.Screen name='Signup' component={Signup}/>
-        <stack.Screen name='Drawer' component={DrawerNavigation}/>
+    </>
+ }
+
     </stack.Navigator>
     </NavigationContainer>
     )
 }
 
 const DrawerNavigation=()=>{
-const isArabic=LanguageHandler()
+const language=useSelector(state=>state.Language.value)
   return(
-  <drawer.Navigator screenOptions={{headerShown:false,drawerType:'slide',drawerPosition:isArabic?'right':'left',drawerStyle:{width:SCREEN_WIDTH*.62}}} drawerContent={(props) => <CustomDrawer {...props} />}  >
+  <drawer.Navigator screenOptions={{headerShown:false,drawerType:'slide',overlayColor:'transparent',drawerPosition:language==='Arabic'?'right':'left',drawerStyle:{width:SCREEN_WIDTH*.62}}} drawerContent={(props) => <CustomDrawer {...props} />}  >
       <drawer.Screen name='HomeStack' component={HomeNavigation}/>
   </drawer.Navigator>
   )
@@ -72,9 +85,13 @@ const HomeNavigation=()=>{
   )
 }
 const Route=()=>{
+
 return(
   <Provider store={store}>
-    {loginStack()}
+    <ErrorBoundary>
+    <LoginStack/>
+
+    </ErrorBoundary>
   </Provider>
 )
 

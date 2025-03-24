@@ -8,7 +8,7 @@ const {Colors}=Constants
 const {SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
 const CabanaListRenderItem = ({item,index,list}) => {
 const navigation=useNavigation()
-const language = useSelector(state => state.language.value)
+const language = useSelector(state => state.Language.value)
 const CustomFlexDirection = Utils.flexDirection(language)
 const CustomTextAlign = Utils.textAlign(language)
 console.log("PARAMS",item);

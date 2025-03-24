@@ -17,7 +17,7 @@ const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS;
 const { ServicePay, Services, paymentData, softDrinks } = DataConstants
 
 const FlatListRenderItem = ({ item, index, SelectedAddon, setSelectedAddon,Choosen }) => {
-  const language = useSelector(state => state.language.value)
+  const language = useSelector(state => state.Language.value)
   const CustomFlexDirection = Utils.flexDirection(language)
   const CustomTextAlign = Utils.textAlign(language)
   
@@ -36,7 +36,7 @@ const FlatListRenderItem = ({ item, index, SelectedAddon, setSelectedAddon,Choos
 }
 
 const LocationView = ({ params }) => {
-  const language = useSelector(state => state.language.value)
+  const language = useSelector(state => state.Language.value)
   const CustomTextAlign = Utils.textAlign(language)
   return (
     <View style={{ marginHorizontal: SCREEN_WIDTH * .03 }}>
@@ -165,7 +165,7 @@ const  MiddleComponent = ({ params, ActionsheetRef, setChoosen, SelectedAddon, C
 }
 
 const PaymentComponent = ({ params }) => {
-  const language = useSelector(state => state.language.value)
+  const language = useSelector(state => state.Language.value)
   const CustomFlexDirection = Utils.flexDirection(language)
   const CustomAlignSelf = Utils.alignSelf(language)
 
@@ -230,7 +230,7 @@ const PaymentComponent = ({ params }) => {
 }
 
 const HeaderComponent = ({ params }) => {
-  const language = useSelector(state => state.language.value)
+  const language = useSelector(state => state.Language.value)
   const CustomFlexDirection = Utils.flexDirection(language)
 
 
@@ -317,7 +317,7 @@ const HeaderComponent = ({ params }) => {
         <LocationComponent address={params.location} header={'Pick up Location'} width={SCREEN_WIDTH*.85} />
       </View> : null}
       
-      <TimeSlot params={params} header={'Timeslot'} style={{marginHorizontal:SCREEN_WIDTH*.04}} />
+      <TimeSlot params={params} header={'Timeslot'} selectedDate={params.selectedDate} selectedTime={params.selectedTime} style={{marginHorizontal:SCREEN_WIDTH*.04}} />
     </View>
   );
 };
@@ -330,7 +330,7 @@ const BookingSummary = (props) => {
   const navigation = useNavigation()
   const params = props.route.params;
   const ActionsheetRef = useRef()
-  const language = useSelector(state => state.language.value)
+  const language = useSelector(state => state.Language.value)
   const CustomFlexDirection = Utils.flexDirection(language)
   const CustomAlignItems = Utils.alignItems(language)
   const CustomTextAlign = Utils.textAlign(language)

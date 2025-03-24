@@ -17,7 +17,8 @@ import {OtpInput} from 'react-native-otp-entry';
 import Helpers from '../Helpers';
 import Snackbar from 'react-native-snackbar';
 import Utils from '../Utils';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserData } from '../redux/slice/UserSlice';
 
 const {Colors} = Constants;
 const {SCREEN_HEIGHT, SCREEN_WIDTH} = Constants.SCREEN_DIMENSIONS;
@@ -25,16 +26,19 @@ const {SCREEN_HEIGHT, SCREEN_WIDTH} = Constants.SCREEN_DIMENSIONS;
 const OtpValidation = () => {
   const navigation = useNavigation();
   const [Otp, setOtp] = useState('');
-  const language=useSelector(state=>state.language.value)
+  const language=useSelector(state=>state.Language.value)
   const CustomAlignSelf=Utils.alignSelf(language)
   const CustomTextAlign=Utils.textAlign(language)
-
+const dispatch=useDispatch()
   const HandleNavigation = name => {
-    name != 'Login'
-      ? Helpers({data: Otp, type: 'otp'})
-        ? navigation.navigate(name)
+      Helpers({data: Otp, type: 'otp'})
+        ? dispatch(setUserData({isloggedin:true}))
         : Snackbar.show({text: 'Invalid Otp entered', backgroundColor: 'red'})
-      : navigation.navigate(name)
+      
+  };
+
+  const HandleNumberChange = () => {
+    navigation.navigate('Login')
   };
 
   return (
@@ -92,7 +96,7 @@ const OtpValidation = () => {
           />
         </View>
 
-        <Pressable style={CustomAlignSelf} onPress={() => HandleNavigation('Login')}>
+        <Pressable style={CustomAlignSelf} onPress={HandleNumberChange}>
           <Text
             style={{
               color: Colors.White_Text,

@@ -34,6 +34,13 @@ import {
   Clipboard,
   Gift0,
   email,
+  PickupDot,
+  LocationPin_green,
+  Rent_White,
+  Towing_White,
+  Build_White,
+  Yamahawave1,
+  Yamahawave2,
 } from './Images';
 
 const CompanyName = 'Vip_974';
@@ -145,6 +152,7 @@ const BeachServiceData = [
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
     image: YamahaJetski1,
+    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
     model: '2021 Cruising, 2021 Yamaha Waverunners',
     detail:
       ' Feel the adrenaline rush and conquer the waves, or explore FX SVHO’s calm personality, when it becomes the smoothest ride you could wish for. Supercharge your adventures in the Yamaha way',
@@ -159,6 +167,8 @@ const BeachServiceData = [
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
     image: YamahaJetski1,
+    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
+
   },
   {
     name: '2023 FX SVHO',
@@ -167,6 +177,8 @@ const BeachServiceData = [
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
     image: YamahaJetski1,
+    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
+
   },
   {
     name: '2024 FX SVHO',
@@ -174,6 +186,7 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
+    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
     image: YamahaJetski1,
   },
   {
@@ -182,6 +195,7 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
+    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
     image: YamahaJetski1,
   },
   {
@@ -190,6 +204,7 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
+    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
     image: YamahaJetski1,
   },
   {
@@ -198,6 +213,7 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
+    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
     image: YamahaJetski1,
   },
   {
@@ -206,6 +222,7 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
+    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
     image: YamahaJetski1,
   },
   {
@@ -214,6 +231,7 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
+    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
     image: YamahaJetski1,
   },
   {
@@ -222,6 +240,7 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
+    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
     image: YamahaJetski1,
   },
   {
@@ -230,6 +249,7 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
+    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
     image: YamahaJetski1,
   },
   {
@@ -238,6 +258,7 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
+    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
     image: YamahaJetski1,
   },
 ];
@@ -431,6 +452,11 @@ const places = [
   {name: 'Beijing'},
   {name: 'Rio de Janeiro'},
 ];
+const PickupData = [
+  { name: 'Pickup', pickupaddress: 'Mirqab Mall Al Mirqab Al Jadeed St, Doha, Qatar', icon: PickupDot },
+  { name: 'DropOff', pickupaddress: 'Mirqab Mall Al Mirqab Al Jadeed St, Doha, Qatar', icon: LocationPin_green },
+
+]
 const ServicesList = [
   {
     name: 'Badri Cleanups',
@@ -602,10 +628,12 @@ const HistoryData = [
       ' Feel the adrenaline rush and conquer the waves, or explore FX SVHO’s calm personality, when it becomes the smoothest ride you could wish for. Supercharge your adventures in the Yamaha way',
     detailSub:
       'From our unique, revolutionary RiDE system and lightweight NanoXcel2® hulls – to our exclusive electronic control systems – to the top range supercharged',
-    addOn: [{name: 'Drinks Box'}, {name: 'Home Businesses'}],
+      addOn: [{name: 'Drinks Box',qty:12}, {name: 'Home Businesses',qty:11}],
+
     status: 'completed',
     date: '23,December,2020',
-    time: '09:00 am | 10:00 am | 11:00 am',
+    time: ['09:00 am','10:00 am','11:00 am'],
+    type:'rent'
   },
   {
     name: '2021 FX SVHO',
@@ -619,10 +647,14 @@ const HistoryData = [
       ' Feel the adrenaline rush and conquer the waves, or explore FX SVHO’s calm personality, when it becomes the smoothest ride you could wish for. Supercharge your adventures in the Yamaha way',
     detailSub:
       'From our unique, revolutionary RiDE system and lightweight NanoXcel2® hulls – to our exclusive electronic control systems – to the top range supercharged',
-    addOn: [{name: 'Drinks Box'}, {name: 'Home Businesses'}],
+      addOn: [{name: 'Drinks Box',qty:8}, {name: 'Home Businesses',qty:4}],
+
     status: 'pending',
     date: '24,December,2020',
-    time: '09:00 am | 10:00 am | 11:00 am',
+        time: ['09:00 am','10:00 am','11:00 am'],
+    type:'rent'
+
+
   },
   {
     name: '2021 FX SVHO',
@@ -636,10 +668,14 @@ const HistoryData = [
       ' Feel the adrenaline rush and conquer the waves, or explore FX SVHO’s calm personality, when it becomes the smoothest ride you could wish for. Supercharge your adventures in the Yamaha way',
     detailSub:
       'From our unique, revolutionary RiDE system and lightweight NanoXcel2® hulls – to our exclusive electronic control systems – to the top range supercharged',
-    addOn: [{name: 'Drinks Box'}, {name: 'Home Businesses'}],
+      addOn: [{name: 'Drinks Box',qty:4}, {name: 'Home Businesses',qty:3}],
+
     status: 'completed',
     date: '26,December,2020',
-    time: '09:00 am | 10:00 am | 11:00 am',
+        time: ['09:00 am','10:00 am','11:00 am'],
+    type:'rent'
+
+
   },
   {
     name: '2021 FX SVHO',
@@ -653,10 +689,14 @@ const HistoryData = [
       ' Feel the adrenaline rush and conquer the waves, or explore FX SVHO’s calm personality, when it becomes the smoothest ride you could wish for. Supercharge your adventures in the Yamaha way',
     detailSub:
       'From our unique, revolutionary RiDE system and lightweight NanoXcel2® hulls – to our exclusive electronic control systems – to the top range supercharged',
-    addOn: [{name: 'Drinks Box'}, {name: 'Home Businesses'}],
+      addOn: [{name: 'Drinks Box',qty:5}, {name: 'Home Businesses',qty:0}],
+
     status: 'pending',
     date: '29,December,2020',
-    time: '09:00 am | 10:00 am | 11:00 am',
+        time: ['09:00 am','10:00 am','11:00 am'],
+    type:'rent'
+
+
   },
   {
     name: '2021 FX SVHO',
@@ -670,10 +710,13 @@ const HistoryData = [
       ' Feel the adrenaline rush and conquer the waves, or explore FX SVHO’s calm personality, when it becomes the smoothest ride you could wish for. Supercharge your adventures in the Yamaha way',
     detailSub:
       'From our unique, revolutionary RiDE system and lightweight NanoXcel2® hulls – to our exclusive electronic control systems – to the top range supercharged',
-    addOn: [{name: 'Drinks Box'}, {name: 'Home Businesses'}],
+    addOn: [{name: 'Drinks Box',qty:2}, {name: 'Home Businesses',qty:1}],
     status: 'completed',
     date: '31,December,2020',
-    time: '09:00 am | 10:00 am | 11:00 am',
+        time: ['09:00 am','10:00 am','11:00 am'],
+    type:'rent'
+
+
   },
 ];
 const HistoryServicesData = [
@@ -882,7 +925,18 @@ const MybuildCustomData = [
     image: Family_Cabana,
     type: 'booked',
   },
-];
+]
+const PointHistoryData=[
+    { name: 'Rentals', date: '03 Jun 2021', image: Rent_White, point: 120, type: 'inc' },
+    { name: 'Services', date: '02 Jun 2021', image: Towing_White, point: 120, type: 'inc' },
+    { name: 'Builds', date: '01 Jun 2021', image: Build_White, point: 120, type: 'dec' },
+    { name: 'Rentals', date: '03 Jun 2021', image: Rent_White, point: 120, type: 'inc' },
+    { name: 'Services', date: '02 Jun 2021', image: Towing_White, point: 120, type: 'inc' },
+    { name: 'Builds', date: '01 Jun 2021', image: Build_White, point: 120, type: 'dec' },
+    { name: 'Rentals', date: '03 Jun 2021', image: Rent_White, point: 120, type: 'inc' },
+    { name: 'Services', date: '02 Jun 2021', image: Towing_White, point: 120, type: 'inc' },
+    { name: 'Builds', date: '01 Jun 2021', image: Build_White, point: 120, type: 'dec' },
+]
 
 export default {
   MembershipData,
@@ -919,4 +973,5 @@ export default {
   HistoryBuildData,
   HistoryHeaders,
   LanguagetoCheck,
+  PickupData,PointHistoryData
 };

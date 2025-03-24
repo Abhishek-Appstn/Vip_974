@@ -10,6 +10,7 @@ import Helpers from '../Helpers';
 import Snackbar from 'react-native-snackbar';
 import Utils from '../Utils';
 import { useSelector } from 'react-redux';
+import LoginHandler from './LoginHandler';
 const {Colors} = Constants;
 const {SCREEN_HEIGHT, SCREEN_WIDTH} = Constants.SCREEN_DIMENSIONS;
 const Login = () => {
@@ -24,7 +25,7 @@ const Login = () => {
   const handleTextChange = value => {
     setMobileNumber(value);
   };
-  const language=useSelector(state=>state.language.value)
+  const language=useSelector(state=>state.Language.value)
   const navigation = useNavigation();
   const CustomFlexDirection=Utils.flexDirection(language)
   const CustomAlignSelf=Utils.alignSelf(language)

@@ -9,6 +9,9 @@ import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHea
 import Animated from 'react-native-reanimated'
 import ImageCropPicker from 'react-native-image-crop-picker'
 import DataConstants from '../assets/DataConstants'
+import { useDispatch, useSelector } from 'react-redux'
+import { setUserData } from '../redux/slice/UserSlice'
+import Snackbar from 'react-native-snackbar'
 const{SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
 const{Colors}=Constants
 const profileImage=Profile_Damu
@@ -52,7 +55,8 @@ useEffect(() => {
 }
 const EditProfile = (props) => {
 const navigation=useNavigation()
-const{firstname,lastname,email,mobileNumber,qid}=DataConstants.UserData
+const dispatch=useDispatch()
+const{firstname,lastname,email,mobileNumber,qid}=useSelector(state=>state.User)
   const [FormData, setFormData] = useState({
     FirstName:firstname,
     LastName:lastname,
@@ -68,8 +72,21 @@ const{firstname,lastname,email,mobileNumber,qid}=DataConstants.UserData
         {name:'Phone',key:'Phone'},
         {name:'Qid',key:'Qid'},
     ]
-    const HandleNavigation=(name)=>{
-      navigation.navigate(name)
+    const HandleNavigation=({screen,dispatch})=>{
+     try {
+      dispatch(setUserData({
+        firstname:FormData?.FirstName,
+        lastname:FormData?.LastName,
+        email:FormData?.Email,
+        mobileNumber:FormData?.Phone,
+        qid:FormData?.Qid
+      }))
+      Snackbar.show({text:"Details Updated Successfully",backgroundColor:"green"})
+      navigation.navigate(screen)
+     } catch (error) {
+      Snackbar.show({text:error,backgroundColor:'red'})
+      throw error
+     } 
     }
     const handleTextChange=(text,key)=>{
       setFormData({
@@ -98,7 +115,7 @@ const{firstname,lastname,email,mobileNumber,qid}=DataConstants.UserData
 
       }}/>
       <View style={{marginTop: 30}}>
-        <CustomButton title={'Save'} onPress={()=>HandleNavigation('Home')} />
+        <CustomButton title={'Save'} onPress={()=>HandleNavigation({screen:'Home',dispatch:dispatch})} />
       </View>  
         </ScrollView>
        

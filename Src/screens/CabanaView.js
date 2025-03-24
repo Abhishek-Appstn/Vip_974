@@ -80,7 +80,7 @@ const LowerComponent = ({ params, ActionsheetRef, props, CustomFlexDirection, Cu
 
     return (
         <View>
-            <ScrollView contentContainerStyle={{ paddingBottom: 50 }} style={{ top: -SCREEN_WIDTH * .04, backgroundColor: Colors.Black_Bg, height: SCREEN_HEIGHT * .51, width: SCREEN_WIDTH, borderRadius: 15, zIndex: 9 }}>
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 50 }} style={{ top: -SCREEN_WIDTH * .04, backgroundColor: Colors.Black_Bg, height: SCREEN_HEIGHT * .51, width: SCREEN_WIDTH, borderRadius: 15, zIndex: 9 }}>
                 <View style={{ width: SCREEN_WIDTH, alignSelf: 'center', overflow: 'hidden' }}>
 
                     <View style={[{ width: SCREEN_WIDTH, alignSelf: 'center', height: SCREEN_WIDTH * .3, backgroundColor: Colors.Black, borderRadius: 15, flexDirection: 'row', alignItems: 'center', paddingHorizontal: SCREEN_WIDTH * .055, justifyContent: 'space-between', paddingTop: SCREEN_WIDTH * .05 }, CustomFlexDirection]} >
@@ -103,7 +103,7 @@ const LowerComponent = ({ params, ActionsheetRef, props, CustomFlexDirection, Cu
 
                         </View>
                         <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 18, fontWeight: '400', marginTop: SCREEN_HEIGHT * .02 }}>LOCATION</Text>
-                        <LocationComponent address={params.address} />
+                        <LocationComponent address={params.address} width={SCREEN_WIDTH*.87} />
                     </View>
 
                     <View style={{ marginHorizontal: SCREEN_WIDTH * .05 }}>
@@ -133,19 +133,19 @@ const LowerComponent = ({ params, ActionsheetRef, props, CustomFlexDirection, Cu
             <Pressable style={{ backgroundColor: Colors.Green1, height: SCREEN_WIDTH * .26, top: -SCREEN_WIDTH * .07, zIndex: -1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }} onPress={() => { params.type === 'booked' ? ActionsheetRef.current.show() : navigation.navigate('RequestConfirmation') }}>
                 {params.type == "booked" ? (
                     <>
-                    <Image
-                                     source={Barcode}
-                                     style={{
-                                       height: SCREEN_WIDTH * 0.08,
-                                       width: SCREEN_WIDTH * 0.08,
-                                       backgroundColor: Colors.Black,
-                                       padding: SCREEN_WIDTH * 0.011,
-                                       resizeMode: 'contain',
-                                       borderRadius: 4,
-                                       borderColor: Colors.Green1,
-                                       borderWidth: 0.5,
-                                     }}
-                                   />
+                        <Image
+                            source={Barcode}
+                            style={{
+                                height: SCREEN_WIDTH * 0.08,
+                                width: SCREEN_WIDTH * 0.08,
+                                backgroundColor: Colors.Black,
+                                padding: SCREEN_WIDTH * 0.011,
+                                resizeMode: 'contain',
+                                borderRadius: 4,
+                                borderColor: Colors.Green1,
+                                borderWidth: 0.5,
+                            }}
+                        />
 
                         <Text style={{ fontFamily: 'Gibson', fontWeight: 'semibold', fontSize: 18, marginHorizontal: SCREEN_WIDTH * .045, textTransform: 'uppercase' }}>SCan Barcode</Text>
 
@@ -163,7 +163,7 @@ const LowerComponent = ({ params, ActionsheetRef, props, CustomFlexDirection, Cu
     )
 }
 const CabanaView = (props) => {
-    const language = useSelector(state => state.language.value)
+    const language = useSelector(state => state.Language.value)
     const CustomFlexDirection = Utils.flexDirection(language)
     const CustomTextAlign = Utils.textAlign(language)
     const CustomAlignItems = Utils.alignItems(language)

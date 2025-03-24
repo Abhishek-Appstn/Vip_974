@@ -5,13 +5,13 @@ import { ChevronLeft, ChevronLeftGreen, ChevronRight, ChevronRightGreen, Tick } 
 import moment, { max } from 'moment';
 import DataConstants from '../assets/DataConstants';
 import Snackbar from 'react-native-snackbar';
-import LanguageHandler from '../LanguageHandler';
+import { useSelector } from 'react-redux';
+import Utils from '../Utils';
 
 const CustomCalenderStrip = ({ params, selectedDate, setselectedDate, selectedTime, setselectedTime }) => {
   const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS;
   const { Colors } = Constants;
   const flatlistRef = useRef(null);
-  const isArabic=LanguageHandler()
   const [SelectedMonth, setSelectedMonth] = useState(moment());
   const [Dates, setDates] = useState([]);
   const BookedSlots = ['5:00 AM', '5:00 PM',]
@@ -113,6 +113,9 @@ const CustomCalenderStrip = ({ params, selectedDate, setselectedDate, selectedTi
   const TimeDisplay = () => {
     const SelectedLength=selectedTime.length
 const maxLength=3
+const language=useSelector(state=>state.Language.value)
+const CustomFlexDirection=Utils.flexDirection(language)
+const CustomTextAlign=Utils.flexDirection(language)
     return (
       <View style={{
         width: SCREEN_WIDTH, backgroundColor: Colors.Black, height: SCREEN_HEIGHT * .64, zIndex: -1, paddingHorizontal: SCREEN_WIDTH * .02, paddingTop: 20
@@ -132,10 +135,10 @@ const maxLength=3
           )
         }} /> : <FlatList contentContainerStyle={{ marginTop: SCREEN_WIDTH * .02 }} scrollEnabled={false} data={DataConstants.WashTimes} renderItem={({ item, index }) => {
           return (
-            <Pressable style={{ width: SCREEN_WIDTH * .9, height: SCREEN_WIDTH * .25, marginHorizontal: 10, marginVertical: 10, borderRadius: 4, alignItems: 'center', justifyContent: 'space-between', padding: 3, backgroundColor: Colors.Black_Bg, paddingHorizontal: SCREEN_WIDTH * .05, flexDirection:isArabic?'row-reverse':'row' }} onPress={() => { item.name === selectedTime ? setselectedTime(null) : setselectedTime(item.slot) }}>
+            <Pressable style={[{ width: SCREEN_WIDTH * .9, height: SCREEN_WIDTH * .25, marginHorizontal: 10, marginVertical: 10, borderRadius: 4, alignItems: 'center', justifyContent: 'space-between', padding: 3, backgroundColor: Colors.Black_Bg, paddingHorizontal: SCREEN_WIDTH * .05, flexDirection:'row' },CustomFlexDirection]} onPress={() => { item.name === selectedTime ? setselectedTime(null) : setselectedTime(item.slot) }}>
               <View>
-                <Text style={{ color: Colors.White, fontFamily: 'Gibson-Regular', fontSize: 18, marginVertical: SCREEN_WIDTH * .012, textTransform: 'uppercase', fontWeight: '600',textAlign:isArabic?'right':'left' }}>{item.name}</Text>
-                <Text style={{ color: Colors.Green1, fontFamily: 'Gibson-Regular', fontSize: 12, marginVertical: SCREEN_WIDTH * .012,textAlign:isArabic?'right':'left'}}>{item.slot}</Text>
+                <Text style={[{ color: Colors.White, fontFamily: 'Gibson-Regular', fontSize: 18, marginVertical: SCREEN_WIDTH * .012, textTransform: 'uppercase', fontWeight: '600'},CustomTextAlign]}>{item.name}</Text>
+                <Text style={[{ color: Colors.Green1, fontFamily: 'Gibson-Regular', fontSize: 12, marginVertical: SCREEN_WIDTH * .012},CustomTextAlign]}>{item.slot}</Text>
               </View>
               <View style={{ height: SCREEN_WIDTH * .05, width: SCREEN_WIDTH * .05, borderRadius: SCREEN_WIDTH, borderColor: Colors.Green1, borderWidth: 0.5, alignItems: 'center', justifyContent: 'center',backgroundColor:selectedTime === item.slot ? Colors.Green1 : null,overflow:'hidden' }}>
               {selectedTime === item.slot?<Image style={{height: SCREEN_WIDTH * .02, width: SCREEN_WIDTH * .02}} source={Tick}/>:null}

@@ -6,9 +6,9 @@ import { calendar, Location_White, YamahaJetski1 } from '../assets/Images'
 import StarComponent from '../components/StarComponent'
 import { useNavigation } from '@react-navigation/native'
 import DataConstants from '../assets/DataConstants'
-import LanguageHandler from '../LanguageHandler'
 import Utils from '../Utils'
 import { useSelector } from 'react-redux'
+import TimeSlot from '../components/TimeSlot'
 const { Colors } = Constants
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 
@@ -23,8 +23,6 @@ const ServicesRenderItem = ({ item, index, params, CustomFlexDirection, CustomAl
                 <View style={{ height: SCREEN_WIDTH * .2, width: SCREEN_WIDTH * .2, borderRadius: 10, overflow: 'hidden' }}>
                     <Image source={item.image} resizeMode='cover' style={{ height: SCREEN_WIDTH * .2, width: SCREEN_WIDTH * .2 }} />
                 </View>
-
-
                 <View style={[{ marginHorizontal: SCREEN_WIDTH * .03 }, CustomAlignItems]}>
                     <Text style={{ color: Colors.White, fontSize: 18, fontFamily: 'Gibson', textTransform: 'uppercase', marginVertical: SCREEN_WIDTH * .011 }}>{item.name}</Text>
                     <StarComponent maxStars={5} rating={item.rating} />
@@ -50,7 +48,7 @@ const ServicesRenderItem = ({ item, index, params, CustomFlexDirection, CustomAl
 const ServicesList = (props) => {
     const params = props.route.params
     const type = params.subtype
-    const language = useSelector(state => state.language.value)
+    const language = useSelector(state => state.Language.value)
     const CustomFlexDirection = Utils.flexDirection(language)
     const CustomAlignItems = Utils.alignItems(language)
     return (
@@ -58,21 +56,11 @@ const ServicesList = (props) => {
             <View style={{ height: SCREEN_WIDTH * .5, backgroundColor: Colors.Black_Bg, borderBottomRightRadius: 15, borderBottomLeftRadius: 15, paddingHorizontal: SCREEN_WIDTH * .08, paddingTop: SCREEN_WIDTH * .17 }}>
                 <SafeAreaView>
                     <DrawerHeaderComponent name={params.subtype} type='filter' />
-                    <View style={[{ flexDirection: 'row', alignItems: 'center', marginTop: 55, }, CustomFlexDirection]}>
-                        <View style={{ padding: 7, backgroundColor: Colors.Black }}>
-                            <Image source={calendar} style={{ height: SCREEN_WIDTH * .05, width: SCREEN_WIDTH * .05, resizeMode: 'contain' }} />
-                        </View>
-                        <View style={CustomAlignItems}>
-                            <Text style={{ fontFamily: 'Gibson', fontSize: 12, color: Colors.Green1, marginHorizontal: SCREEN_WIDTH * .02, marginVertical: 3, textAlign: 'right' }}>{params.selectedDate}</Text>
-                            <Text style={{ fontFamily: 'Gibson-Regular', fontSize: 12, color: Colors.White, marginHorizontal: SCREEN_WIDTH * .02, marginVertical: 3 }}> {params.selectedTime.join(' | ')}</Text>
-                        </View>
-
-
-                    </View>
+                    <TimeSlot params={params} selectedDate={params.selectedDate} selectedTime={params.selectedTime} style={{ marginTop: SCREEN_HEIGHT * .05 }} />
                 </SafeAreaView>
             </View>
             <SafeAreaView>
-                <FlatList ListFooterComponent={<Text style={{ color: Colors.White, alignSelf: 'center', fontFamily: 'Gibson' }}>--------End---------</Text>} keyExtractor={item => item.name} data={type == 'Beach' ? DataConstants.BeachServiceData : DataConstants.DesertServiceData} contentContainerStyle={{ marginTop: 10, paddingBottom: 200 }} renderItem={item => <ServicesRenderItem item={item.item} index={item.index} params={params} CustomFlexDirection={CustomFlexDirection} CustomAlignItems={CustomAlignItems} />} />
+                <FlatList showsVerticalScrollIndicator={false} ListFooterComponent={<Text style={{ color: Colors.White, alignSelf: 'center', fontFamily: 'Gibson' }}>--------End---------</Text>} keyExtractor={item => item.name} data={type == 'Beach' ? DataConstants.BeachServiceData : DataConstants.DesertServiceData} contentContainerStyle={{ marginTop: SCREEN_HEIGHT*.015, paddingBottom: SCREEN_HEIGHT*.3 }} renderItem={item => <ServicesRenderItem item={item.item} index={item.index} params={params} CustomFlexDirection={CustomFlexDirection} CustomAlignItems={CustomAlignItems} />} />
             </SafeAreaView>
         </View>
     )

@@ -8,11 +8,11 @@ import { useNavigation } from '@react-navigation/native';
 
 const Splash = () => {
   const navigation=useNavigation()
-  useEffect(() => {
-    setTimeout(() => {
-      navigation.navigate("Login")
-    }, 3000);
-  }, [])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     navigation.navigate("Login")
+  //   }, 3000);
+  // }, [])
   
   const UpperSvg = () => {
     return (

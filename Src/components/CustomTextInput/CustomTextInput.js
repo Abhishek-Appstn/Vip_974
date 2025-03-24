@@ -8,7 +8,7 @@ const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 
 const CustomTextInput = ({ name, type, onChangeText, value, width, error, multiline }) => {
   const [IsFocussed, setIsFocussed] = useState(false)
-  const language = useSelector(state => state.language.value)
+  const language = useSelector(state => state.Language.value)
   const CustomAlignSelf = Utils.alignSelf(language)
   const CustomFlexDirection = Utils.alignSelf(language)
 

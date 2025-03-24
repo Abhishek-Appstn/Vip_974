@@ -10,7 +10,7 @@ const { Colors } = Constants;
 const { SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS;
 
 const CartIncrementButtons = ({ item, SelectedAddon, setSelectedAddon, Choosen }) => {
-    const language = useSelector((state) => state.language.value);
+    const language = useSelector((state) => state.Language.value);
     const CustomFlexDirection = Utils.flexDirection(language);
 
     const handleNavigation = ({ type }) => {

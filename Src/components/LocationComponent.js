@@ -8,7 +8,7 @@ const { Colors } = Constants
 const { SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 
 const LocationComponent = ({ address, backgroundColor, header, width }) => {
-  const language = useSelector(state => state.language.value)
+  const language = useSelector(state => state.Language.value)
   const CustomFlexDirection = Utils.flexDirection(language)
   const CustomImageTransform = Utils.ImageTransform(language)
   const CustomAlignItems = Utils.alignItems(language)

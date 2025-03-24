@@ -13,7 +13,7 @@ const Onpress=()=>{
     return (
         <Modal visible={visible} transparent={true}>
             <SafeAreaView style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.7)' }}>
-                <IconComponent image={CrossMark} style={{alignSelf:'flex-end',marginHorizontal:SCREEN_WIDTH*.05,backgroundColor:'#fff',borderColor:null}} onPress={Onpress}/>
+                <IconComponent image={CrossMark} style={{alignSelf:'flex-end',marginHorizontal:SCREEN_WIDTH*.05,backgroundColor:Colors.White,borderColor:null}} onPress={Onpress}/>
                 <View style={{ justifyContent: 'center', flex: 1 }}>
                     <Image source={image} style={{ width: SCREEN_WIDTH }} resizeMode='cover' />
                 </View>

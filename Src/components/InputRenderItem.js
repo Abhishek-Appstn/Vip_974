@@ -10,7 +10,7 @@ const { Colors } = Constants;
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS;
 
 const InputRenderItem = ({ Item, key, name, JsonData, setJsonData }) => {
-    const language = useSelector(state => state.language.value)
+    const language = useSelector(state => state.Language.value)
     const CustomFlexDirection = Utils.flexDirection(language)
     const CustomAlignItems = Utils.alignItems(language)
     const CustomAlignSelf = Utils.alignSelf(language)

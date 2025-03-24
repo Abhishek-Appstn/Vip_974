@@ -175,7 +175,7 @@ const CustomBuild = () => {
     setData(CustomData[keys[ActiveStep - 1]])
   }, [ActiveStep])
   const [JsonData, setJsonData] = useState({});
-  const language = useSelector(state => state.language.value)
+  const language = useSelector(state => state.Language.value)
   const CustomFlexDirection = Utils.flexDirection(language)
   const CustomAlignItems = Utils.alignItems(language)
   
