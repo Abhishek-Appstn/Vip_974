@@ -1,8 +1,8 @@
 import {View, Text, Image, SafeAreaView, Pressable, FlatList, Modal} from 'react-native';
-import React, { useRef, useState } from 'react';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import React, { useRef,} from 'react';
+import { useRoute} from '@react-navigation/native';
 import Constants from '../Constants';
-import {Barcode, calendar, ChevronLeft, ChevronRight, CompassNorthEast, CrossMark, Dew, Fanta, GoPro, LifeJacket, LocationPin, Minus, Pepsi, Plus, Tick, YamahaJetski1} from '../assets/Images';
+import {Barcode, calendar,CompassNorthEast, CrossMark,LocationPin,} from '../assets/Images';
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent';
 import ActionSheet from 'react-native-actions-sheet'; 
 import QRCode from 'react-native-qrcode-svg';

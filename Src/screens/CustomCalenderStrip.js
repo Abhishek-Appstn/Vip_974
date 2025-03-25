@@ -7,6 +7,7 @@ import DataConstants from '../assets/DataConstants';
 import Snackbar from 'react-native-snackbar';
 import { useSelector } from 'react-redux';
 import Utils from '../Utils';
+import SelectionComponent from '../components/SelectionComponent';
 
 const CustomCalenderStrip = ({ params, selectedDate, setselectedDate, selectedTime, setselectedTime }) => {
   const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS;
@@ -41,13 +42,19 @@ const CustomCalenderStrip = ({ params, selectedDate, setselectedDate, selectedTi
 
           } catch (error) {
             console.error("Error scrolling to today's index:", error.message);
+            throw error
           }
         }
       }, 500);
     } else {
-      if (flatlistRef.current && TempDate.length > 0) {
-        flatlistRef.current.scrollToIndex({ index: 0, animated: true });
+      try {
+        if (flatlistRef.current && TempDate.length > 0) {
+          flatlistRef.current.scrollToIndex({ index: 0, animated: true });
+        }
+      } catch (error) {
+        throw error
       }
+      
     }
   }, [SelectedMonth]);
 
@@ -115,7 +122,7 @@ const CustomCalenderStrip = ({ params, selectedDate, setselectedDate, selectedTi
 const maxLength=3
 const language=useSelector(state=>state.Language.value)
 const CustomFlexDirection=Utils.flexDirection(language)
-const CustomTextAlign=Utils.flexDirection(language)
+const CustomTextAlign=Utils.textAlign(language)
     return (
       <View style={{
         width: SCREEN_WIDTH, backgroundColor: Colors.Black, height: SCREEN_HEIGHT * .64, zIndex: -1, paddingHorizontal: SCREEN_WIDTH * .02, paddingTop: 20
@@ -140,9 +147,7 @@ const CustomTextAlign=Utils.flexDirection(language)
                 <Text style={[{ color: Colors.White, fontFamily: 'Gibson-Regular', fontSize: 18, marginVertical: SCREEN_WIDTH * .012, textTransform: 'uppercase', fontWeight: '600'},CustomTextAlign]}>{item.name}</Text>
                 <Text style={[{ color: Colors.Green1, fontFamily: 'Gibson-Regular', fontSize: 12, marginVertical: SCREEN_WIDTH * .012},CustomTextAlign]}>{item.slot}</Text>
               </View>
-              <View style={{ height: SCREEN_WIDTH * .05, width: SCREEN_WIDTH * .05, borderRadius: SCREEN_WIDTH, borderColor: Colors.Green1, borderWidth: 0.5, alignItems: 'center', justifyContent: 'center',backgroundColor:selectedTime === item.slot ? Colors.Green1 : null,overflow:'hidden' }}>
-              {selectedTime === item.slot?<Image style={{height: SCREEN_WIDTH * .02, width: SCREEN_WIDTH * .02}} source={Tick}/>:null}
-              </View>
+           <SelectionComponent ActiveItem={selectedTime} Item={item.slot}/>
             </Pressable>
           )
         }} />

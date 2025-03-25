@@ -7,7 +7,7 @@ import Utils from '../Utils'
 const { Colors } = Constants
 const { SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 
-const LocationComponent = ({ address, backgroundColor, header, width }) => {
+const LocationComponent = ({ address, backgroundColor, header, width,style,map }) => {
   const language = useSelector(state => state.Language.value)
   const CustomFlexDirection = Utils.flexDirection(language)
   const CustomImageTransform = Utils.ImageTransform(language)
@@ -15,12 +15,12 @@ const LocationComponent = ({ address, backgroundColor, header, width }) => {
 
 
   return (
-    <View style={[{ padding: SCREEN_WIDTH * .02 }, CustomAlignItems]}>
+    <View style={[{style}, CustomAlignItems]}>
 
     {header?  <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 18, fontWeight: '400', textTransform: 'uppercase' }}>{header}</Text>:null}
-
+{map?<Image source={map}/>:null}
       <View style={[{ justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', backgroundColor: backgroundColor, width: width?width:SCREEN_WIDTH * .95 }, CustomFlexDirection]}>
-        <View style={[{ flexDirection: 'row', alignItems: 'center', marginTop: SCREEN_WIDTH * .02 }, CustomFlexDirection]}>
+        <View style={[{ flexDirection: 'row', alignItems: 'center'}, CustomFlexDirection]}>
           <Image source={LocationPin} style={[{ height: SCREEN_WIDTH * .12, width: SCREEN_WIDTH * .12, backgroundColor: Colors.Black, padding: SCREEN_WIDTH * .015, resizeMode: 'contain', borderRadius: 4 }]} />
           <Text style={{ lineHeight: 19, fontWeight: '400', color: Colors.White_Text, fontSize: 14, fontFamily: 'Gibson', textTransform: 'capitalize', marginLeft: SCREEN_WIDTH * .01, maxWidth: SCREEN_WIDTH * .4 }}>{address}</Text>
         </View>

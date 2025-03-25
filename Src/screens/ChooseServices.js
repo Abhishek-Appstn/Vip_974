@@ -15,6 +15,9 @@ import Svg, {G, Path} from 'react-native-svg';
 import CustomButton from '../components/CustomButton/CustomButton';
 import DataConstants from '../assets/DataConstants';
 import Snackbar from 'react-native-snackbar';
+import SelectionComponent from '../components/SelectionComponent';
+import { useSelector } from 'react-redux';
+import Utils from '../Utils';
 const {SCREEN_HEIGHT, SCREEN_WIDTH} = Constants.SCREEN_DIMENSIONS;
 const {Colors} = Constants;
 
@@ -117,7 +120,8 @@ const LowerSvg = () => {
     </View>
   );
 };
-const SelectionBox = (image, name, index,Active,setActive,setSelectedItem) => {
+const SelectionBox = (image, name, index,Active,setActive,setSelectedItem,language) => {
+  const CustomAlignSelf=Utils.alignSelf(language)
   return (
     <Pressable
       style={{
@@ -133,25 +137,7 @@ const SelectionBox = (image, name, index,Active,setActive,setSelectedItem) => {
         Active === index ? setActive(null) : setActive(index),setSelectedItem(name);
       }}>
       <LowerSvg />
-      <View
-        style={{
-          position: 'absolute',
-          left: 5,
-          top: 5,
-          height: SCREEN_WIDTH * 0.065,
-          width: SCREEN_WIDTH * 0.065,
-          borderRadius: SCREEN_WIDTH * 0.075,
-          borderColor: Colors.Green1,
-          borderWidth: 0.5,
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor:Active===index?Colors.Green1:null
-        }}>
-        
-        {Active===index? <Image source={Tick} style={{ height: SCREEN_WIDTH * 0.03,
-            width: SCREEN_WIDTH * 0.03,}} resizeMode='contain'/>:null}
-      </View>
-
+  <SelectionComponent ActiveItem={Active} Item={index} style={[{marginTop:SCREEN_HEIGHT*.016,marginHorizontal:SCREEN_WIDTH*.03,zindex:10},CustomAlignSelf]}/>
       <Image
         source={Background_Icon}
         style={{
@@ -159,13 +145,14 @@ const SelectionBox = (image, name, index,Active,setActive,setSelectedItem) => {
           left: -20,
           height: SCREEN_WIDTH * 0.35,
           resizeMode: 'contain',
+          zIndex:-1
         }}
       />
       <View
         style={{
           alignSelf: 'center',
           justifyContent: 'center',
-          height: SCREEN_WIDTH * 0.54,
+          height: SCREEN_WIDTH * 0.45,
           paddingTop: 10,
         }}>
         <Image
@@ -197,6 +184,8 @@ const ChooseServices = props => {
   const [SelectedItem, setSelectedItem] = useState();
   const navigation = useNavigation();
   const params = props.route.params;
+  const language=useSelector(state=>state.Language.value)
+
 
   const HandleNavigation = () => {
     Active !== null
@@ -232,7 +221,7 @@ const ChooseServices = props => {
           renderItem={({item, index}) => {
             return (
               <View style={{marginLeft: index !== 0 ? 17 : 0}}>
-                {SelectionBox(item.image, item.name, index,Active,setActive,setSelectedItem)}
+                {SelectionBox(item.image, item.name, index,Active,setActive,setSelectedItem,language)}
               </View>
             );
           }}

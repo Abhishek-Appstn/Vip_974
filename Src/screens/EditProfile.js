@@ -72,6 +72,8 @@ const{firstname,lastname,email,mobileNumber,qid}=useSelector(state=>state.User)
         {name:'Phone',key:'Phone'},
         {name:'Qid',key:'Qid'},
     ]
+    console.log("FOrm",FormData)
+    console.log("USer",firstname,lastname,email,mobileNumber,qid)
     const HandleNavigation=({screen,dispatch})=>{
      try {
       dispatch(setUserData({

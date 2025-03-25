@@ -5,6 +5,7 @@ import CustomTextInput from './CustomTextInput/CustomTextInput';
 import { useSelector } from 'react-redux';
 import Utils from '../Utils';
 import { Tick } from '../assets/Images';
+import SelectionComponent from './SelectionComponent';
 
 const { Colors } = Constants;
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS;
@@ -77,9 +78,7 @@ const InputRenderItem = ({ Item, key, name, JsonData, setJsonData }) => {
                                         </Text>
                                     )}
                                 </View>
-                                <View style={{ height: SCREEN_WIDTH * .07, width: SCREEN_WIDTH * .07, borderRadius: SCREEN_HEIGHT, borderColor: Colors.Green1, borderWidth: 0.5, alignItems: 'center', justifyContent: 'center', backgroundColor: JSON.stringify(JsonData[name]) === JSON.stringify(item) ? Colors.Green1 : null }}>
-                                    {JSON.stringify(JsonData[name]) === JSON.stringify(item) ? <Image source={Tick} style={{ height: SCREEN_WIDTH * .04, width: SCREEN_WIDTH * .04, }} resizeMode='contain' /> : null}
-                                </View>
+                                <SelectionComponent ActiveItem={JSON.stringify(JsonData[name])} Item={JSON.stringify(item)} />
                             </Pressable>
                         );
 
@@ -92,18 +91,14 @@ const InputRenderItem = ({ Item, key, name, JsonData, setJsonData }) => {
                                     <Image source={item.image} style={{ width: SCREEN_WIDTH * .07, resizeMode: "contain" }} />
                                     <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 18, textTransform: "uppercase", marginHorizontal: SCREEN_WIDTH * .04 }}>{item.Dataname}</Text>
                                 </View>
-                                <View style={{ height: SCREEN_WIDTH * .07, width: SCREEN_WIDTH * .07, borderRadius: SCREEN_HEIGHT, borderColor: Colors.Green1, borderWidth: 0.5, alignItems: 'center', justifyContent: 'center', backgroundColor: JSON.stringify(JsonData[name]) === JSON.stringify(item) ? Colors.Green1 : null }}>
-                                    {JSON.stringify(JsonData[name]) === JSON.stringify(item) ? <Image source={Tick} style={{ height: SCREEN_WIDTH * .04, width: SCREEN_WIDTH * .04, }} resizeMode='contain' /> : null}
-                                </View>
+                                <SelectionComponent ActiveItem={JSON.stringify(JsonData[name])} Item={JSON.stringify(item)} />
                             </Pressable>
                         )
                     case 'Selection-Horizontal':
 
                         return (
                             <Pressable style={[{ marginHorizontal: SCREEN_HEIGHT * .012, width: SCREEN_WIDTH * .43, backgroundColor: Colors.Black, height: SCREEN_HEIGHT * .17, padding: SCREEN_WIDTH * .03, paddingTop: SCREEN_HEIGHT * .02, borderRadius: 10, overflow: 'hidden', marginTop: SCREEN_HEIGHT * .05,borderWidth: 1,borderRadius: SCREEN_WIDTH * .02,borderColor: JSON.stringify(JsonData[name]) === JSON.stringify(item) ? Colors.Green1 : null, }, CustomAlignItems]} onPress={() => HandlePress(item)}>
-                         <View style={{ height: SCREEN_WIDTH * .07, width: SCREEN_WIDTH * .07, borderRadius: SCREEN_HEIGHT, borderColor: Colors.Green1, borderWidth: 0.5, alignItems: 'center', justifyContent: 'center', backgroundColor: JSON.stringify(JsonData[name]) === JSON.stringify(item) ? Colors.Green1 : null }}>
-                                    {JSON.stringify(JsonData[name]) === JSON.stringify(item) ? <Image source={Tick} style={{ height: SCREEN_WIDTH * .04, width: SCREEN_WIDTH * .04, }} resizeMode='contain' /> : null}
-                                </View>
+                                <SelectionComponent ActiveItem={JSON.stringify(JsonData[name])} Item={JSON.stringify(item)} />
                                 <View style={[{ marginVertical: SCREEN_HEIGHT * .034 }, CustomAlignItems]}>
 
                                     <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 18, textTransform: "uppercase", marginVertical: SCREEN_WIDTH * .01 }}>{item.Dataname}</Text>
@@ -119,12 +114,6 @@ const InputRenderItem = ({ Item, key, name, JsonData, setJsonData }) => {
                             <Pressable style={{ margin: SCREEN_HEIGHT * .012, width: SCREEN_WIDTH * .43, backgroundColor:Colors.Black,borderWidth: 1,borderRadius: SCREEN_WIDTH * .02,borderColor: JSON.stringify(JsonData[name]) === JSON.stringify(item) ? Colors.Green1 : null, height: SCREEN_HEIGHT * .08, padding: SCREEN_WIDTH * .03, paddingTop: SCREEN_HEIGHT * .02, borderRadius: 5, overflow: 'hidden', alignItems: 'center', justifyContent: 'center' }} onPress={() => HandlePress(item)}>
                                 <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 18, textTransform: "uppercase", marginVertical: SCREEN_WIDTH * .01 }}>{item.Dataname}</Text>
                             </Pressable>
-                        )
-                    case 'NameCustomisation':
-                        return (
-                            <View>
-
-                            </View>
                         )
                     default:
                         return <Text style={{ color: Colors.Razzmatazz }}>Undefined</Text>;

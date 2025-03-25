@@ -12,6 +12,7 @@ import Utils from '../Utils';
 import LocationComponent from '../components/LocationComponent';
 import CartIncrementButtons from '../components/CartIncrementButtons';
 import TimeSlot from '../components/TimeSlot';
+import MapViewComponent from '../components/MapViewComponent';
 const { Colors } = Constants;
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS;
 const { ServicePay, Services, paymentData, softDrinks } = DataConstants
@@ -109,9 +110,10 @@ const ButtonComponent = ({ name, setVisible }) => {
   )
 }
 const  MiddleComponent = ({ params, ActionsheetRef, setChoosen, SelectedAddon, CustomFlexDirection, CustomAlignItems }) => {
+ console.log("Data here",params)
   return (
     <View style={{ height: params.type == 'services' ? SCREEN_WIDTH * .9 : SCREEN_WIDTH * .4, padding: SCREEN_WIDTH * .04 }}>{
-      params.type == 'services' ? <LocationView params={params} /> :
+      params.type == 'services' ? <MapViewComponent data={params} header={"Enter Location"} style={{paddingVertical:0}} /> :
         <FlatList data={params.addOn} contentContainerStyle={{ marginHorizontal: SCREEN_WIDTH * 0.07, paddingVertical: params.type === 'rent' ? 0 : SCREEN_WIDTH * .025, }} scrollEnabled={false} renderItem={({ item, index }) => {
           return (
             <Pressable style={[{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingBottom: SCREEN_WIDTH * .05, }, CustomFlexDirection]} onPress={() => { setChoosen(item.name), ActionsheetRef.current?.show() }}>
@@ -232,6 +234,8 @@ const PaymentComponent = ({ params }) => {
 const HeaderComponent = ({ params }) => {
   const language = useSelector(state => state.Language.value)
   const CustomFlexDirection = Utils.flexDirection(language)
+  const CustomTextAlign = Utils.textAlign(language)
+
 
 
   return (
@@ -271,22 +275,22 @@ const HeaderComponent = ({ params }) => {
 
           <View style={{ marginHorizontal: SCREEN_WIDTH * 0.03 }}>
             <Text
-              style={{
+              style={[{
                 color: Colors.White,
                 fontSize: 18,
                 fontFamily: 'Gibson',
                 textTransform: 'uppercase',
                 marginVertical: SCREEN_WIDTH * 0.01,
-              }}>
+              },CustomTextAlign]}>
               {params.name}
             </Text>
             <Text
-              style={{
+              style={[{
                 color: Colors.Orange1,
                 fontSize: 12,
                 fontFamily: 'Gibson',
                 textTransform: 'capitalize',
-              }}>
+              },CustomTextAlign]}>
               {params.type == 'services' ? `${params.size}  M² CABANA` : params.brand}
             </Text>
           </View>

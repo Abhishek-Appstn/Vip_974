@@ -617,7 +617,7 @@ const MyProfileDataItems = [
 ];
 const HistoryData = [
   {
-    name: '2021 FX SVHO',
+    name: '2030 FX SVHO',
     price: 50,
     rating: 5,
     brand: 'Yamaha',
@@ -628,7 +628,7 @@ const HistoryData = [
       ' Feel the adrenaline rush and conquer the waves, or explore FX SVHO’s calm personality, when it becomes the smoothest ride you could wish for. Supercharge your adventures in the Yamaha way',
     detailSub:
       'From our unique, revolutionary RiDE system and lightweight NanoXcel2® hulls – to our exclusive electronic control systems – to the top range supercharged',
-      addOn: [{name: 'Drinks Box',qty:12}, {name: 'Home Businesses',qty:11}],
+      addOn: {DrinksBox:[{name: 'Pepsi',qty:2},{name: 'ThumbsUp',qty:1}],HomeBusinesses: [{name: 'HomeMade Sweet',qty:2},{name: 'Pottery',qty:1}]},
 
     status: 'completed',
     date: '23,December,2020',
@@ -636,7 +636,7 @@ const HistoryData = [
     type:'rent'
   },
   {
-    name: '2021 FX SVHO',
+    name: '2020 FX SVHO',
     price: 50,
     rating: 5,
     brand: 'Yamaha',
@@ -647,7 +647,6 @@ const HistoryData = [
       ' Feel the adrenaline rush and conquer the waves, or explore FX SVHO’s calm personality, when it becomes the smoothest ride you could wish for. Supercharge your adventures in the Yamaha way',
     detailSub:
       'From our unique, revolutionary RiDE system and lightweight NanoXcel2® hulls – to our exclusive electronic control systems – to the top range supercharged',
-      addOn: [{name: 'Drinks Box',qty:8}, {name: 'Home Businesses',qty:4}],
 
     status: 'pending',
     date: '24,December,2020',
@@ -668,7 +667,6 @@ const HistoryData = [
       ' Feel the adrenaline rush and conquer the waves, or explore FX SVHO’s calm personality, when it becomes the smoothest ride you could wish for. Supercharge your adventures in the Yamaha way',
     detailSub:
       'From our unique, revolutionary RiDE system and lightweight NanoXcel2® hulls – to our exclusive electronic control systems – to the top range supercharged',
-      addOn: [{name: 'Drinks Box',qty:4}, {name: 'Home Businesses',qty:3}],
 
     status: 'completed',
     date: '26,December,2020',
@@ -731,6 +729,7 @@ const HistoryServicesData = [
     total: 200,
     servicename: 'Cleaning',
     size: '4 x 6',
+    subtype:'towing'
   },
   {
     name: 'Luxury Auto Detailing',
@@ -743,6 +742,8 @@ const HistoryServicesData = [
     total: 350,
     servicename: 'Detailing',
     size: 'Full Size',
+    subtype:'towing'
+
   },
   {
     name: 'Yacht Polishing',
@@ -755,6 +756,8 @@ const HistoryServicesData = [
     total: 500,
     servicename: 'Polishing',
     size: '75 ft',
+    subtype:'towing'
+
   },
   {
     name: 'Speedboat Maintenance',
@@ -767,6 +770,8 @@ const HistoryServicesData = [
     total: 250,
     servicename: 'Maintenance',
     size: '20 ft',
+    subtype:'towing'
+
   },
   {
     name: 'Home Pool Cleaning',
@@ -779,6 +784,8 @@ const HistoryServicesData = [
     total: 150,
     servicename: 'Cleaning',
     size: '10 x 20',
+    subtype:'washing'
+
   },
   {
     name: 'Garden Landscaping',
@@ -791,6 +798,8 @@ const HistoryServicesData = [
     total: 400,
     servicename: 'Landscaping',
     size: '30 x 40',
+    subtype:'towing'
+
   },
 ];
 const HistoryBuildData = [

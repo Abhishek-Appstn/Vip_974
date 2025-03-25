@@ -2,12 +2,13 @@ import { View, Text, FlatList, Pressable, ScrollView, Image, TextInput, Alert } 
 import React, { useState } from 'react'
 import ItemLayout from '../components/ItemLayout'
 import Constants from '../Constants'
-import { Search, Tick } from '../assets/Images'
+import { Search,  } from '../assets/Images'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import DataConstants from '../assets/DataConstants'
 import Snackbar from 'react-native-snackbar'
 import { useSelector } from 'react-redux'
 import Utils from '../Utils'
+import SelectionComponent from '../components/SelectionComponent'
 const {places}=DataConstants
 const{SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
 const{Colors}=Constants
@@ -17,21 +18,18 @@ const HandleNavigation=({Active,navigation,params})=>{
     navigation.navigate('ScheduleServices',{location:Active,...params}):Snackbar.show({text:"Please select an item to continue",backgroundColor:'red'})
           }
 const RenderFlatlistItem=({item,index,Active,setActive})=>{
-    const language=useSelector(state=>state.language.value)
+    const language=useSelector(state=>state.Language.value)
 const CustomFlexDirection=Utils.flexDirection(language)
-const CustomTextAlign=Utils.flexDirection(language)
     return(
         <Pressable style={[{flexDirection:'row',justifyContent:'space-between',padding:10,marginVertical:10,alignItems:'center'},CustomFlexDirection]} onPress={()=>{Active==item.name?setActive(null):setActive(item.name)}}>
             <Text style={{fontSize:16,fontFamily:'Gibson',color:Colors.White,fontWeight:'400'}}>{item.name}</Text>
-            <View style={{height:SCREEN_WIDTH*.05,width:SCREEN_WIDTH*.05,borderRadius:SCREEN_HEIGHT,borderColor:Colors.Green1,borderWidth:0.5,alignItems:'center',justifyContent:'center',overflow:'hidden',backgroundColor:item.name===Active?Colors.Green1:null}}>
-               {Active===item.name?<Image style={{height:SCREEN_WIDTH*.03,width:SCREEN_WIDTH*.03}} resizeMode='contain' source={Tick}/>:null}
-                </View>
+           <SelectionComponent ActiveItem={Active} Item={item.name}/>
             </Pressable>
     )
 }
 const ChooseLocation = (props) => {
 const navigation=useNavigation()
-const language=useSelector(state=>state.language.value)
+const language=useSelector(state=>state.Language.value)
 const CustomFlexDirection=Utils.flexDirection(language)
 const CustomTextAlign=Utils.flexDirection(language)
 
