@@ -183,6 +183,18 @@ const Home = () => {
       borderRadius, backfaceVisibility: 'hidden', overflow: 'hidden'
     };
   });
+  const Loaddata=async ()=>{
+    const{ data, error } = await supabase.storage
+    .from('my-bucket')
+    .list('example-folder');
+  
+  if (error) {
+    console.error('Error listing files:', error);
+  } else {
+    console.log('Files:', data);
+  }
+  }
+  
 useEffect(() => {
   dispatch(setUserData({firstname:'Reese',lastname:'Carpenter',profileImage:Profile_Damu,    membershipType: 'Gold',mobileNumber: '+9742217718',
     email: 'Carpenter.Steve@yoohoo.com',
@@ -190,17 +202,9 @@ useEffect(() => {
  dispatch(setMembership({points:1060,membershipType:'Gold',membershipName:'Vip-Gold',pointexpirydate:'30 Dec 2025'}))
 
 }, [])
-useEffect(async () => {
+useEffect(() => {
+Loaddata()
 
-  const { data, error } = await supabase.storage
-  .from('my-bucket')
-  .list('example-folder');
-
-if (error) {
-  console.error('Error listing files:', error);
-} else {
-  console.log('Files:', data);
-}
 
 }, [])
 
