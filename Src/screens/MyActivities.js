@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, FlatList, Pressable, Image } from 'react-native'
+import { View, Text, SafeAreaView, FlatList, Pressable, Image, Platform } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Constants from '../Constants'
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent'
@@ -8,6 +8,8 @@ import DataConstants from '../assets/DataConstants'
 import { useSelector } from 'react-redux'
 import Utils from '../Utils'
 import TimeSlot from '../components/TimeSlot'
+import IconComponent from '../components/IconComponent'
+import AnimatedListView  from '../components/AnimatedListView'
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 const { Colors } = Constants
 
@@ -95,25 +97,15 @@ const BuildRenderItem = ({ item, index, CustomFlexDirection, CustomTextAlign }) 
           </Text>
 
         </View>
-        <Image
-          source={ChevronDown}
-          style={{
-            height: SCREEN_WIDTH * 0.06,
-            width: SCREEN_WIDTH * 0.06,
-            backgroundColor: Colors.Black,
-            padding: SCREEN_WIDTH * 0.015,
-            resizeMode: 'contain',
-            borderRadius: 4,
-            borderColor: Colors.Green1,
-            borderWidth: 0.5,
-          }}
-        />
+       
+        <IconComponent image={ChevronDown} imageStyle={{height: SCREEN_WIDTH * 0.045, width: SCREEN_WIDTH * 0.045,}} />
       </View>
       <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginTop: SCREEN_WIDTH * .02, alignItems: 'flex-end', paddingHorizontal: SCREEN_WIDTH * .017 }, CustomFlexDirection]}>
-        <Text style={{ fontFamily: 'Gibson', fontSize: 12, color: item.status == 'completed' ? Colors.Green1 : Colors.Gray_Text, marginVertical: 3, padding: SCREEN_WIDTH * .015, borderRadius: 10 }}>{item.date}</Text>
-        <Text style={{ fontFamily: 'Gibson', fontSize: 8, color: Colors.Green1, marginVertical: 3, }}><Text style={{ fontFamily: 'Gibson', fontWeight: '600', fontSize: 20, color: Colors.Green1, }}>{item.total} </Text>QAR</Text>
+        <Text style={{ fontFamily: 'Gibson', fontSize: 12, color: item.status == 'completed' ? Colors.Green1 : Colors.Gray_Text, marginVertical: SCREEN_HEIGHT*.003, padding: SCREEN_WIDTH * .015, borderRadius: 10 }}>{item.date}</Text>
+        <Text style={{ fontFamily: 'Gibson', fontSize: 8, color: Colors.Green1, marginVertical: SCREEN_HEIGHT*.003, }}><Text style={{ fontFamily: 'Gibson', fontWeight: '600', fontSize: 20, color: Colors.Green1, }}>{item.total} </Text>QAR</Text>
       </View>
     </Pressable>
+
 
   )
 }
@@ -123,15 +115,22 @@ const ListRenderItem = ({ item, selectedType, CustomAlignSelf, CustomFlexDirecti
   switch (selectedType) {
     case 'Rent':
       return (
-        <RentRenderItem item={item} CustomAlignSelf={CustomAlignSelf} CustomFlexDirection={CustomFlexDirection} CustomTextAlign={CustomTextAlign} />
+    <AnimatedListView >
+        <RentRenderItem item={item} CustomAlignSelf={CustomAlignSelf} CustomFlexDirection={CustomFlexDirection} CustomTextAlign={CustomTextAlign} /></AnimatedListView>
       )
     case 'Services':
       return (
+        <AnimatedListView >
         <ServicesRenderItem item={item} CustomAlignSelf={CustomAlignSelf} CustomFlexDirection={CustomFlexDirection} CustomTextAlign={CustomTextAlign} />
+
+        </AnimatedListView>
       )
     case 'Build':
       return (
+        <AnimatedListView>
         <BuildRenderItem item={item} CustomAlignSelf={CustomAlignSelf} CustomFlexDirection={CustomFlexDirection} CustomTextAlign={CustomTextAlign} />
+
+        </AnimatedListView>
       )
   }
 
@@ -157,7 +156,7 @@ const MyActivities = () => {
 
 
   return (
-    <View style={{ backgroundColor: Colors.Black_Bg, height: SCREEN_WIDTH * .5 }}>
+    <View style={{ backgroundColor: Colors.Black_Bg, height: SCREEN_WIDTH * .5,paddingTop:Platform.OS==='android'?SCREEN_HEIGHT*.05:0 }}>
       <SafeAreaView>
         <View style={{ marginHorizontal: SCREEN_WIDTH * .07, marginTop: SCREEN_HEIGHT * .02 }}>
           <DrawerHeaderComponent name='MY Activities' type='login' />

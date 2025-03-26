@@ -35,9 +35,9 @@ const CustomCalenderStrip = ({ params, selectedDate, setselectedDate, selectedTi
     if (IsInitialLoad.current) {
       const TodaysIndex = TempDate.findIndex(date => date.isSame(moment(), 'day'));
       setTimeout(() => {
-        if (TodaysIndex !== -1 && flatlistRef.current) {
+        if (TodaysIndex !== -1 && flatlistRef?.current) {
           try {
-            flatlistRef.current.scrollToIndex({ index: TodaysIndex - 2.25, animated: true });
+            flatlistRef?.current?.scrollToIndex({ index: TodaysIndex - 2.25, animated: true });
             IsInitialLoad.current = false;
 
           } catch (error) {
@@ -45,7 +45,7 @@ const CustomCalenderStrip = ({ params, selectedDate, setselectedDate, selectedTi
             throw error
           }
         }
-      }, 500);
+      }, 700);
     } else {
       try {
         if (flatlistRef.current && TempDate.length > 0) {

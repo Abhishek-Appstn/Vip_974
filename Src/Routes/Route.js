@@ -50,7 +50,7 @@ const LoginStack = () => {
 const DrawerNavigation=()=>{
 const language=useSelector(state=>state.Language.value)
   return(
-  <drawer.Navigator  screenOptions={{headerShown:false,drawerType:'slide',overlayColor:'transparent',drawerPosition:language==='Arabic'?'right':'left', drawerStyle:{width:SCREEN_WIDTH*.62,backgroundColor:Colors.Black_Bg,borderColor:Colors.Black_Bg,borderWidth:1}}} drawerContent={(props) => <CustomDrawer {...props} />}  >
+  <drawer.Navigator  screenOptions={{headerShown:false,drawerType:'slide',overlayColor:'transparent',drawerPosition:language==='Arabic'?'right':'left', drawerStyle:{width:SCREEN_WIDTH*.62,backgroundColor:Colors.Black_Bg,borderColor:Colors.Black_Bg,borderWidth:1,}}} drawerContent={(props) => <CustomDrawer {...props} />}  >
       <drawer.Screen name='HomeStack' component={HomeNavigation}/>
   </drawer.Navigator>
   )

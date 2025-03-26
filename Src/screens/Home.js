@@ -196,7 +196,7 @@ useEffect(() => {
 }, [])
 
   return (
-    <View style={{ backgroundColor: Colors.Black_Bg, flex: 1, overflow: 'hidden', zIndex: 1, paddingTop:Platform.OS==='android'?SCREEN_HEIGHT*.02:0 }}>
+    <View style={{ backgroundColor: Colors.Black_Bg, flex: 1, overflow: 'hidden', zIndex: 1,  }}>
       <UpperSvg />
       <Animated.View style={[animatedStyle, { flex: 1, elevation: 10, shadowColor: Colors.Black, backgroundColor: Colors.Black_Bg, overflow: 'hidden', zIndex: 1,}]}>
         <HomeHeaderComponent header={DataConstants.HomeHeader} headerText={"Vip-974"} />

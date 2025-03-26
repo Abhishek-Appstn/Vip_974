@@ -43,10 +43,10 @@ const CustomActionSheet=()=>{
       {map ? <Image source={map} /> : null}
       <View style={[{ justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', backgroundColor: backgroundColor, width: width ? width : SCREEN_WIDTH * .95 }, CustomFlexDirection]}>
         <View style={[{ flexDirection: 'row', alignItems: 'center' }, CustomFlexDirection]}>
-          <Image source={LocationPin} style={[{ height: SCREEN_WIDTH * .12, width: SCREEN_WIDTH * .12, backgroundColor: Colors.Black, padding: SCREEN_WIDTH * .015, resizeMode: 'contain', borderRadius: 4 }]} />
+         <IconComponent image={LocationPin} style={{height: SCREEN_WIDTH * .12, width: SCREEN_WIDTH * .12,borderWidth:0}} imageStyle={{height:SCREEN_WIDTH*.09,width:SCREEN_WIDTH*.09,resizeMode:'contain'}}/>
           <Text style={{ lineHeight: 19, fontWeight: '400', color: Colors.White_Text, fontSize: 14, fontFamily: 'Gibson', textTransform: 'capitalize', marginLeft: SCREEN_WIDTH * .01, maxWidth: SCREEN_WIDTH * .4 }}>{address}</Text>
         </View>
-       <IconComponent image={CompassNorthEast} style={{height: SCREEN_WIDTH * .08, width: SCREEN_WIDTH * .08,}} onPress={()=>MapRef.current?.show()}/>
+       <IconComponent image={CompassNorthEast} style={{height: SCREEN_WIDTH * .08, width: SCREEN_WIDTH * .08,padding:SCREEN_HEIGHT*.02}} onPress={()=>MapRef.current?.show()}/>
       </View>
     <CustomActionSheet/>
     </View>

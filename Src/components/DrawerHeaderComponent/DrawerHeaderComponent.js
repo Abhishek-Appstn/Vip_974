@@ -1,4 +1,4 @@
-import { View, Text, Image, Pressable } from 'react-native'
+import { View, Text, Image, Pressable, Platform } from 'react-native'
 import React from 'react'
 import Constants from '../../Constants'
 import { ArrowLeft, Drawer, Expand, Filter, Search } from '../../assets/Images'
@@ -15,7 +15,7 @@ const DrawerHeaderComponent = ({name,leftimage,rightimage,type,search,back,activ
     const CustomFlexDirection=Utils.flexDirection(language)
 
     return (
-    <View style={[{flexDirection:'row',justifyContent:'space-between',alignItems:'flex-end'},CustomFlexDirection]}>
+    <View style={[{flexDirection:'row',justifyContent:'space-between',alignItems:'flex-end',},CustomFlexDirection]}>
                 <Pressable onPress={()=>{back?back():type=='login'||type=='filter'||type=="expand"?navigation.goBack():navigation.toggleDrawer()}}>
 
               <Image style={[CustomImageTransform]} source={type=='login'||type=='filter'||type=='expand'?ArrowLeft:leftimage?leftimage:Drawer}/>
