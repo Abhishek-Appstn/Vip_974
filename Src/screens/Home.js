@@ -13,7 +13,7 @@ import Svg, { G, Path } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native';
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent';
 import { useDrawerProgress } from '@react-navigation/drawer';
-import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated';
+import Animated, { Easing, interpolate, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import DataConstants from '../assets/DataConstants';
 import HomeHeaderComponent from '../components/HomeHeaderComponent';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,7 +21,6 @@ import Utils from '../Utils';
 import { setMembership } from '../redux/slice/MembershipSlice';
 import { setUserData } from '../redux/slice/UserSlice';
 import { Profile_Damu } from '../assets/Images';
-import supabase from '../Helpers/supabaseClient';
 
 const { Colors } = Constants
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
@@ -177,34 +176,22 @@ const Home = () => {
   const CustomTextAlign=Utils.textAlign(language)
   const animatedStyle = useAnimatedStyle(() => {
     const scale = interpolate(DrawerProgress.value, [0, 1], [1, 0.73]);
-    const borderRadius = interpolate(DrawerProgress.value, [0, 1], [0, SCREEN_HEIGHT * .03]);
+    const borderRadius = interpolate(DrawerProgress.value, [0, 1], [0, SCREEN_HEIGHT * 0.03]);
+  
     return {
       transform: [{ scale }],
-      borderRadius, backfaceVisibility: 'hidden', overflow: 'hidden'
+      borderRadius,
+      backfaceVisibility: 'hidden',
+      overflow: 'hidden',
     };
   });
-  const Loaddata=async ()=>{
-    const{ data, error } = await supabase.storage
-    .from('my-bucket')
-    .list('example-folder');
   
-  if (error) {
-    console.error('Error listing files:', error);
-  } else {
-    console.log('Files:', data);
-  }
-  }
   
 useEffect(() => {
   dispatch(setUserData({firstname:'Reese',lastname:'Carpenter',profileImage:Profile_Damu,    membershipType: 'Gold',mobileNumber: '+9742217718',
     email: 'Carpenter.Steve@yoohoo.com',
     qid: '100CBA20241001',}))
  dispatch(setMembership({points:1060,membershipType:'Gold',membershipName:'Vip-Gold',pointexpirydate:'30 Dec 2025'}))
-
-}, [])
-useEffect(() => {
-Loaddata()
-
 
 }, [])
 
