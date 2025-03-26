@@ -21,6 +21,8 @@ import Utils from '../Utils';
 import { setMembership } from '../redux/slice/MembershipSlice';
 import { setUserData } from '../redux/slice/UserSlice';
 import { Profile_Damu } from '../assets/Images';
+import supabase from '../Helpers/supabaseClient';
+
 const { Colors } = Constants
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 const HomeRenderItem = ({ item, index,CustomFlexDirection,CustomTextAlign }) => {
@@ -186,6 +188,19 @@ useEffect(() => {
     email: 'Carpenter.Steve@yoohoo.com',
     qid: '100CBA20241001',}))
  dispatch(setMembership({points:1060,membershipType:'Gold',membershipName:'Vip-Gold',pointexpirydate:'30 Dec 2025'}))
+
+}, [])
+useEffect(async () => {
+
+  const { data, error } = await supabase.storage
+  .from('my-bucket')
+  .list('example-folder');
+
+if (error) {
+  console.error('Error listing files:', error);
+} else {
+  console.log('Files:', data);
+}
 
 }, [])
 

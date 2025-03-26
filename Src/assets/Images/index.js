@@ -98,6 +98,9 @@ import ChevronLeftWhite from './ChevronLeftWhite/ChevronLeftWhite.png';
 import Yamahawave1 from './Yamahawave1/Yamahawave1.png';
 import Yamahawave2 from './Yamahawave2/Yamahawave2.png';
 import calendar_White from './calendar_White/calendar_White.png';
+import DesertBike3 from './DesertBike3/DesertBike3.png';
+import DesertBike2 from './DesertBike2/DesertBike2.png';
+
 
 
 
@@ -200,5 +203,5 @@ export {
   Coin_Stacks,
   DesertBike,
   Cameraicon,
-  ChevronLeftWhite,Yamahawave1,Yamahawave2,calendar_White
+  ChevronLeftWhite, Yamahawave1, Yamahawave2, calendar_White, DesertBike2, DesertBike3
 };

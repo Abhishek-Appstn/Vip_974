@@ -11,7 +11,7 @@ const MembershipSlice=createSlice({
     },
     reducers:{
         setMembership: (state, action) => {
-            return { ...state, ...action.payload };
+            return { state, ...action.payload };
         }
        
     }

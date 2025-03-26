@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, Image, FlatList, Pressable } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Constants from '../Constants'
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent'
 import { calendar, Location_White, YamahaJetski1 } from '../assets/Images'
@@ -9,6 +9,7 @@ import DataConstants from '../assets/DataConstants'
 import Utils from '../Utils'
 import { useSelector } from 'react-redux'
 import TimeSlot from '../components/TimeSlot'
+import Animated, { useAnimatedStyle, useSharedValue, withDelay, withTiming } from 'react-native-reanimated'
 const { Colors } = Constants
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 
@@ -17,11 +18,27 @@ const ServicesRenderItem = ({ item, index, params, CustomFlexDirection, CustomAl
     const HandleNavigation = (item) => {
         navigation.navigate('ProductPage', { ...item, ...params })
     }
+    const animationProgress=useSharedValue(0)
+    useEffect(() => {
+     animationProgress.value=withDelay(index*300,withTiming(1,{duration:500}))
+    }, [])
+    const animatedStyle=useAnimatedStyle(()=>{
+        return{
+opacity:animationProgress.value,
+transform:[
+    {translateY:animationProgress.value*20-20
+
+    }
+]
+        }
+    }
+    )
     return (
-        <Pressable style={[{ width: SCREEN_WIDTH * .95, marginVertical: 8, alignSelf: 'center', height: SCREEN_WIDTH * .28, backgroundColor: Colors.Black_Bg, borderRadius: 12, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 15, justifyContent: 'space-between' }, CustomFlexDirection]} onPress={() => HandleNavigation(item)}>
+       <Animated.View style={[animatedStyle]}>
+       <Pressable style={[{ width: SCREEN_WIDTH * .95, marginVertical: 8, alignSelf: 'center', height: SCREEN_WIDTH * .28, backgroundColor: Colors.Black_Bg, borderRadius: 12, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 15, justifyContent: 'space-between' }, CustomFlexDirection]} onPress={() => HandleNavigation(item)}>
             <View style={[{ flexDirection: 'row' }, CustomFlexDirection]}>
                 <View style={{ height: SCREEN_WIDTH * .2, width: SCREEN_WIDTH * .2, borderRadius: 10, overflow: 'hidden' }}>
-                    <Image source={item.image} resizeMode='cover' style={{ height: SCREEN_WIDTH * .2, width: SCREEN_WIDTH * .2 }} />
+                    <Image source={item?.images[0]} resizeMode='cover' style={{ height: SCREEN_WIDTH * .2, width: SCREEN_WIDTH * .2 }} />
                 </View>
                 <View style={[{ marginHorizontal: SCREEN_WIDTH * .03 }, CustomAlignItems]}>
                     <Text style={{ color: Colors.White, fontSize: 18, fontFamily: 'Gibson', textTransform: 'uppercase', marginVertical: SCREEN_WIDTH * .011 }}>{item.name}</Text>
@@ -42,6 +59,7 @@ const ServicesRenderItem = ({ item, index, params, CustomFlexDirection, CustomAl
 
             </View>
         </Pressable>
+        </Animated.View>
     )
 }
 

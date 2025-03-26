@@ -41,6 +41,8 @@ import {
   Build_White,
   Yamahawave1,
   Yamahawave2,
+  DesertBike2,
+  DesertBike3,
 } from './Images';
 
 const CompanyName = 'Vip_974';
@@ -151,7 +153,6 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
-    image: YamahaJetski1,
     images:[YamahaJetski1,Yamahawave1,Yamahawave2],
     model: '2021 Cruising, 2021 Yamaha Waverunners',
     detail:
@@ -166,7 +167,6 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
-    image: YamahaJetski1,
     images:[YamahaJetski1,Yamahawave1,Yamahawave2],
 
   },
@@ -176,7 +176,6 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
-    image: YamahaJetski1,
     images:[YamahaJetski1,Yamahawave1,Yamahawave2],
 
   },
@@ -187,7 +186,6 @@ const BeachServiceData = [
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
     images:[YamahaJetski1,Yamahawave1,Yamahawave2],
-    image: YamahaJetski1,
   },
   {
     name: '2025 FX SVHO',
@@ -196,7 +194,6 @@ const BeachServiceData = [
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
     images:[YamahaJetski1,Yamahawave1,Yamahawave2],
-    image: YamahaJetski1,
   },
   {
     name: '2026 FX SVHO',
@@ -205,7 +202,6 @@ const BeachServiceData = [
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
     images:[YamahaJetski1,Yamahawave1,Yamahawave2],
-    image: YamahaJetski1,
   },
   {
     name: '2027 FX SVHO',
@@ -214,7 +210,6 @@ const BeachServiceData = [
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
     images:[YamahaJetski1,Yamahawave1,Yamahawave2],
-    image: YamahaJetski1,
   },
   {
     name: '2028 FX SVHO',
@@ -223,7 +218,6 @@ const BeachServiceData = [
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
     images:[YamahaJetski1,Yamahawave1,Yamahawave2],
-    image: YamahaJetski1,
   },
   {
     name: '2029 FX SVHO',
@@ -232,7 +226,6 @@ const BeachServiceData = [
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
     images:[YamahaJetski1,Yamahawave1,Yamahawave2],
-    image: YamahaJetski1,
   },
   {
     name: '2030 FX SVHO',
@@ -241,7 +234,6 @@ const BeachServiceData = [
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
     images:[YamahaJetski1,Yamahawave1,Yamahawave2],
-    image: YamahaJetski1,
   },
   {
     name: '2031 FX SVHO',
@@ -250,7 +242,6 @@ const BeachServiceData = [
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
     images:[YamahaJetski1,Yamahawave1,Yamahawave2],
-    image: YamahaJetski1,
   },
   {
     name: '2032 FX SVHO',
@@ -259,7 +250,6 @@ const BeachServiceData = [
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
     images:[YamahaJetski1,Yamahawave1,Yamahawave2],
-    image: YamahaJetski1,
   },
 ];
 
@@ -270,7 +260,7 @@ const DesertServiceData = [
     rating: 4.8,
     brand: 'DesertRunner',
     location: 'Al Wakrah, Qatar',
-    image: DesertBike,
+    images:[DesertBike,DesertBike2,DesertBike3],
     model: '2023 All-Terrain Quadbike',
     detail:
       'Conquer the sand dunes with unmatched power and precision. The Desert Thunder is built for adventure seekers ready to tackle the toughest terrains.',
@@ -284,7 +274,7 @@ const DesertServiceData = [
     rating: 4.9,
     brand: 'SandRider',
     location: 'Mesaieed, Qatar',
-    image: DesertBike,
+    images:[DesertBike,DesertBike2,DesertBike3],
     model: '2023 Extreme Desert Quad',
     detail:
       'Feel the thrill of the desert with the Nomad 450 AT. Designed for those who crave an adrenaline rush and absolute reliability on shifting sands.',
@@ -298,7 +288,7 @@ const DesertServiceData = [
     rating: 4.7,
     brand: 'SandMaster',
     location: 'Doha, Qatar',
-    image: DesertBike,
+    images:[DesertBike,DesertBike2,DesertBike3],
     model: '2023 Rugged Quadbike',
     detail:
       'Take control of the dunes with the Dune Dominator 600. Engineered for high-speed adventure on challenging terrains.',
@@ -312,7 +302,7 @@ const DesertServiceData = [
     rating: 4.6,
     brand: 'TrailBlazer',
     location: 'Al Khor, Qatar',
-    image: DesertBike,
+    images:[DesertBike,DesertBike2,DesertBike3],
     model: '2023 Off-Road Quad',
     detail:
       'Feel the power and agility with the Sand Storm Xtreme. Perfectly crafted for thrilling desert rides.',
@@ -326,7 +316,7 @@ const DesertServiceData = [
     rating: 4.9,
     brand: 'QuadXperts',
     location: 'Abu Samra, Qatar',
-    image: DesertBike,
+    images:[DesertBike,DesertBike2,DesertBike3],
     model: '2023 Premium All-Terrain Quad',
     detail:
       'Unleash the beast on the sands with the Raptor 800X. Built for ultimate performance and endurance.',
@@ -340,7 +330,7 @@ const DesertServiceData = [
     rating: 4.5,
     brand: 'DesertPro',
     location: 'Dukhan, Qatar',
-    image: DesertBike,
+    images:[DesertBike,DesertBike2,DesertBike3],
     model: '2023 Mid-Range Quadbike',
     detail:
       'The Sand Viper 400 offers excellent performance for riders of all levels. Ideal for desert exploration.',
@@ -353,7 +343,7 @@ const DesertServiceData = [
     rating: 4.7,
     brand: 'QuadMaverick',
     location: 'Umm Bab, Qatar',
-    image: DesertBike,
+    images:[DesertBike,DesertBike2,DesertBike3],
     model: '2023 Desert Explorer',
     detail:
       'Challenge the trails with the Trail Conqueror 500. Designed for enthusiasts seeking new adventures.',
@@ -366,7 +356,7 @@ const DesertServiceData = [
     rating: 4.6,
     brand: 'SandXtreme',
     location: 'Simaisma, Qatar',
-    image: DesertBike,
+    images:[DesertBike,DesertBike2,DesertBike3],
     model: '2023 Sleek Desert Quad',
     detail:
       'Experience agility and speed with the Falcon X500. Built for smooth rides across any desert.',
@@ -379,7 +369,7 @@ const DesertServiceData = [
     rating: 4.8,
     brand: 'GhostRider',
     location: 'Al Shamal, Qatar',
-    image: DesertBike,
+    images:[DesertBike,DesertBike2,DesertBike3],
     model: '2023 Elite Quadbike',
     detail:
       'Dominate the sands with the Desert Phantom 700. Designed for top-tier riders who demand the best.',
@@ -392,7 +382,7 @@ const DesertServiceData = [
     rating: 4.7,
     brand: 'TerrainTamer',
     location: 'Lusail, Qatar',
-    image: DesertBike,
+    images:[DesertBike,DesertBike2,DesertBike3],
     model: '2023 Ultimate Quadbike',
     detail:
       'The SandBlazer XL combines power and elegance for an unparalleled desert adventure.',

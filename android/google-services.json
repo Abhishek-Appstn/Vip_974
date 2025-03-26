@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "381756139123",
+    "project_id": "vip-974",
+    "storage_bucket": "vip-974.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:381756139123:android:7428ea218a5d6d42a72c06",
+        "android_client_info": {
+          "package_name": "com.vip_974"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRf9oRzET5_3sk_bfmzt5T05csjADa6FA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

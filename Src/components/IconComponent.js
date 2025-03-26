@@ -1,11 +1,15 @@
 import { Image, Pressable } from 'react-native'
 import React from 'react'
 import Constants from '../Constants'
+import { useSelector } from 'react-redux'
+import Utils from '../Utils'
 const {Colors}=Constants
 const {SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
 const IconComponent = ({image,style,onPress}) => {
+  const language=useSelector(state=>state.Language.value)
+  const CustomImageTransform=Utils.ImageTransform(language)
   return (
-    <Pressable onPress={onPress}>
+    <Pressable style={{zIndex:10}} onPress={onPress}>
 <Image
           source={image}
           style={[{
@@ -17,7 +21,7 @@ const IconComponent = ({image,style,onPress}) => {
             borderRadius: 4,
             borderColor: Colors.Green1,
             borderWidth: 0.5,
-          },style]}
+          },style,CustomImageTransform]}
         />
     </Pressable>
     

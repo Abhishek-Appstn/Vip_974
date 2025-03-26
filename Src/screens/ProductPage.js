@@ -17,47 +17,49 @@ const HandleNavigation = (name, item, navigation) => {
     navigation.navigate(name, item)
 }
 
-const ImageSelector=({length,ActiveImage,setActiveImage})=>{
-    return(
-        <View style={{flexDirection:'row',alignSelf:'center',backgroundColor:Colors.Black}}>
-            {Array.from({length:length}).map((_, index) => (
-                <Pressable key={index} style={{width:SCREEN_WIDTH*.04,height:SCREEN_HEIGHT*.003,backgroundColor:ActiveImage===index?Colors.Green1:Colors.White,marginHorizontal:SCREEN_WIDTH*.02}} onPress={()=>setActiveImage(index)}/>
+const ImageSelector = ({ length, ActiveImage, setActiveImage }) => {
+    return (
+        <View style={{ flexDirection: 'row', alignSelf: 'center', backgroundColor: Colors.Black }}>
+            {Array.from({ length: length }).map((_, index) => (
+                <Pressable key={index} style={{ width: SCREEN_WIDTH * .04, height: SCREEN_HEIGHT * .003, backgroundColor: ActiveImage === index ? Colors.Green1 : Colors.White, marginHorizontal: SCREEN_WIDTH * .02 }} onPress={() => setActiveImage(index)} />
             ))}
-            </View>
+        </View>
     )
 }
-const Imagecarousal = ({images,ActiveImage,setActiveImage }) => {
-    const imageRef=useRef()
+const Imagecarousal = ({ images, ActiveImage, setActiveImage, setActive }) => {
+    const imageRef = useRef()
     useEffect(() => {
-        imageRef.current?
-       imageRef.current.scrollToIndex({index:ActiveImage,animated:true}):null
-      
+        imageRef.current ?
+            imageRef.current.scrollToIndex({ index: ActiveImage, animated: true }) : null
+
     }, [ActiveImage])
-      
-    const viewabilityConfig=useRef({
+
+    const viewabilityConfig = useRef({
         viewAreaCoveragePercentThreshold: 30,
     })
     const onViewableItemsChanged = useRef(({ viewableItems }) => {
-        viewableItems.length>0?
-            setActiveImage(viewableItems[0].index)
-        :null
+        viewableItems.length > 0 ?
+            (setActiveImage(viewableItems[0].index),
+                setActive(viewableItems[0].item))
+            : null
     })
     return (
-        <FlatList ref={imageRef} bounces={false} onViewableItemsChanged={onViewableItemsChanged.current} viewabilityConfig={viewabilityConfig.current} pagingEnabled={true} horizontal data={images} renderItem={({ item, index }) => {
+        <FlatList scrollEventThrottle={16} ref={imageRef} bounces={false} onViewableItemsChanged={onViewableItemsChanged.current} viewabilityConfig={viewabilityConfig.current} pagingEnabled={true} horizontal data={images} renderItem={({ item, index }) => {
             return (
-                <Image source={item} style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT * .41,overflow:'hidden' }}/>
+                <Image source={item} style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT * .41, overflow: 'hidden' }} />
             )
         }} />
     )
 }
-const HeaderComponent = ({ params, setVisible,ActiveImage,setActiveImage }) => {
+const HeaderComponent = ({ params, Visible, setVisible, ActiveImage, setActiveImage }) => {
+    const [Active, setActive] = useState('')
     return (
         <>
-            <Imagecarousal images={params.images} setVisible={setVisible} ActiveImage={ActiveImage} setActiveImage={setActiveImage} />
+            <Imagecarousal setActive={setActive} images={params.images} setVisible={setVisible} ActiveImage={ActiveImage} setActiveImage={setActiveImage} />
             <SafeAreaView style={{ position: 'absolute', width: SCREEN_WIDTH * .88, alignSelf: 'center' }}>
                 <DrawerHeaderComponent name={'rent'} type='expand' search={true} setVisible={setVisible} />
+                <ImageModal visible={Visible} image={params.images} setVisible={setVisible} index={ActiveImage} />
             </SafeAreaView>
-
         </>
 
 
@@ -65,7 +67,7 @@ const HeaderComponent = ({ params, setVisible,ActiveImage,setActiveImage }) => {
     )
 }
 
-const LowerComponent = ({ params,ActiveImage,setActiveImage }) => {
+const LowerComponent = ({ params, ActiveImage, setActiveImage }) => {
     const navigation = useNavigation()
     const language = useSelector(state => state.Language.value)
     const CustomFlexDirection = Utils.flexDirection(language)
@@ -76,25 +78,25 @@ const LowerComponent = ({ params,ActiveImage,setActiveImage }) => {
         <View>
             <ScrollView contentContainerStyle={{ paddingBottom: 50 }} style={{ top: -SCREEN_WIDTH * .04, backgroundColor: Colors.Black_Bg, height: SCREEN_HEIGHT * .51, width: SCREEN_WIDTH, borderRadius: 15 }}>
                 <View style={{ width: SCREEN_WIDTH, alignSelf: 'center', overflow: 'hidden' }}>
-<View style={{backgroundColor:Colors.Black,paddingTop:SCREEN_HEIGHT*.02}}>
-<ImageSelector length={params?.images?.length} ActiveImage={ActiveImage} setActiveImage={setActiveImage}/>
-                    <View style={[{ width: SCREEN_WIDTH, alignSelf: 'center', height: SCREEN_WIDTH * .3, backgroundColor: Colors.Black, borderRadius: 15, alignItems: 'center', paddingHorizontal: SCREEN_WIDTH * .055, justifyContent: 'space-between', paddingTop: SCREEN_WIDTH * .05, marginBottom: SCREEN_HEIGHT * .015,flexDirection:'row' }, CustomFlexDirection]} >
-                        <View style={CustomAlignItems}>
-                            <Text style={{ color: Colors.Green1, fontSize: 18, fontFamily: 'Gibson', textTransform: 'uppercase', marginVertical: SCREEN_WIDTH * .011 }}>{params.name}</Text>
-                            <StarComponent maxStars={5} rating={params.rating} />
-                            <Text style={{ color: Colors.Orange1, fontSize: 12, fontFamily: 'Gibson', textTransform: 'capitalize', marginVertical: SCREEN_WIDTH * .013 }}>{params.brand}</Text>
-                            <Text style={{ maxWidth: SCREEN_WIDTH * .6, color: Colors.Gray_Text, fontSize: 12, fontFamily: 'Gibson', textTransform: 'capitalize', marginVertical: SCREEN_WIDTH * .011 }}>{params.model}</Text>
-                        </View>
+                    <View style={{ backgroundColor: Colors.Black, paddingTop: SCREEN_HEIGHT * .02 }}>
+                        <ImageSelector length={params?.images?.length} ActiveImage={ActiveImage} setActiveImage={setActiveImage} />
+                        <View style={[{ width: SCREEN_WIDTH, alignSelf: 'center', height: SCREEN_WIDTH * .3, backgroundColor: Colors.Black, borderRadius: 15, alignItems: 'center', paddingHorizontal: SCREEN_WIDTH * .055, justifyContent: 'space-between', paddingTop: SCREEN_WIDTH * .05, marginBottom: SCREEN_HEIGHT * .015, flexDirection: 'row' }, CustomFlexDirection]} >
+                            <View style={CustomAlignItems}>
+                                <Text style={{ color: Colors.Green1, fontSize: 18, fontFamily: 'Gibson', textTransform: 'uppercase', marginVertical: SCREEN_WIDTH * .011 }}>{params.name}</Text>
+                                <StarComponent maxStars={5} rating={params.rating} />
+                                <Text style={{ color: Colors.Orange1, fontSize: 12, fontFamily: 'Gibson', textTransform: 'capitalize', marginVertical: SCREEN_WIDTH * .013 }}>{params.brand}</Text>
+                                <Text style={{ maxWidth: SCREEN_WIDTH * .6, color: Colors.Gray_Text, fontSize: 12, fontFamily: 'Gibson', textTransform: 'capitalize', marginVertical: SCREEN_WIDTH * .011 }}>{params.model}</Text>
+                            </View>
 
-                        <View>
-                            <Text style={{ color: Colors.Green1, fontSize: 31, fontFamily: 'Gibson', fontWeight: '600', textAlign: 'center' }}>{params.price}</Text>
-                            <Text style={{ color: Colors.Green1, fontSize: 12, fontFamily: 'Gibson', fontWeight: '600' }}>QAR/hour</Text>
+                            <View>
+                                <Text style={{ color: Colors.Green1, fontSize: 31, fontFamily: 'Gibson', fontWeight: '600', textAlign: 'center' }}>{params.price}</Text>
+                                <Text style={{ color: Colors.Green1, fontSize: 12, fontFamily: 'Gibson', fontWeight: '600' }}>QAR/hour</Text>
 
+                            </View>
                         </View>
                     </View>
-                    </View>
 
-                    <LocationComponent address={params.location} header={"Pickup Location"} />
+                    <LocationComponent style={{ marginVertical: SCREEN_HEIGHT * .02, marginHorizontal: SCREEN_WIDTH * .05 }} width={SCREEN_WIDTH * .89} address={params.location} header={"Pickup Location"} />
 
                     <View style={[{ marginHorizontal: SCREEN_WIDTH * .05, marginTop: SCREEN_HEIGHT * .015 }, CustomAlignItems,]}>
                         <Text style={[{ fontFamily: 'Gibson', color: Colors.White, fontSize: 18, fontWeight: '400', textTransform: 'uppercase' }, CustomTextAlign]}>Details</Text>
@@ -121,12 +123,11 @@ const ProductPage = (props) => {
     const [Visible, setVisible] = useState(false)
     const params = props.route.params
     const [ActiveImage, setActiveImage] = useState('')
-    console.log("INNINDIN",ActiveImage)
+    console.log("INNINDIN", ActiveImage)
     return (
         <View>
             <HeaderComponent Visible={Visible} setVisible={setVisible} params={params} ActiveImage={ActiveImage} setActiveImage={setActiveImage} />
-            <LowerComponent params={params} ActiveImage={ActiveImage} setActiveImage={setActiveImage}/>
-            <ImageModal visible={Visible} image={params.image} setVisible={setVisible} />
+            <LowerComponent params={params} ActiveImage={ActiveImage} setActiveImage={setActiveImage} />
 
         </View>
     )
