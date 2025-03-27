@@ -1,4 +1,4 @@
-import {View, Text, SafeAreaView, Image, Pressable, Alert} from 'react-native';
+import {View, Text, SafeAreaView, Image, Pressable, Alert, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Layout from '../components/Layout/Layout';
 import {Logo_White} from '../assets/Images';
@@ -10,19 +10,13 @@ import Helpers from '../Helpers';
 import Snackbar from 'react-native-snackbar';
 import Utils from '../Utils';
 import { useSelector } from 'react-redux';
-import auth from '@react-native-firebase/auth'
-
+import {getAuth,RecaptchaVerifier, signInWithPhoneNumber} from '@react-native-firebase/auth'
 const {Colors} = Constants;
 const {SCREEN_HEIGHT, SCREEN_WIDTH} = Constants.SCREEN_DIMENSIONS;
 
-const LoginAuth=async({MobileNumber,Confirmation,setConfirmation})=>{
-const confirmation=auth().signInWithPhoneNumber(MobileNumber)
-setConfirmation(confirmation)
-}
 const Login = () => {
   const [MobileNumber, setMobileNumber] = useState('');
   const [Confirmation, setConfirmation] = useState('');
-console.log('Login',Confirmation)
   const [Error, setError] = useState(false);
   useEffect(() => {
     setTimeout(() => {
@@ -30,6 +24,8 @@ console.log('Login',Confirmation)
     }, 4000);
   }, [Error]);
 
+
+  
   const handleTextChange = value => {
     setMobileNumber(value);
   };
@@ -43,7 +39,6 @@ console.log('Login',Confirmation)
     name !== 'Signup' && name !== 'Drawer'
       ? Helpers({data: MobileNumber, type: 'mobilenumber'})
         ?   navigation.navigate(name)
-        // LoginAuth({MobileNumber:MobileNumber,Confirmation:Confirmation,setConfirmation:setConfirmation})
         : (Snackbar.show({
             text: 'Invalid Mobile Number',
             backgroundColor: 'red',
@@ -54,12 +49,16 @@ console.log('Login',Confirmation)
   };
   return (
     <Layout>
+      {/* <ScrollView contentContainerStyle={{paddingBottom:SCREEN_HEIGHT*.15}}> */}
+      {/* <TouchableWithoutFeedback onPress={Keyboard.dismiss}> */}
+<KeyboardAvoidingView>
+
       <SafeAreaView
         style={{
           justifyContent: 'center',
           height: SCREEN_HEIGHT,
           marginHorizontal: SCREEN_WIDTH*.05,
-          
+
         }}>
         <Image source={Logo_White} style={[{width: 60},CustomAlignSelf]} resizeMode="contain" />
         <Text
@@ -121,6 +120,9 @@ console.log('Login',Confirmation)
           </Text>
         </Pressable>
       </SafeAreaView>
+      {/* </ScrollView> */}
+</KeyboardAvoidingView>
+{/* </TouchableWithoutFeedback> */}
     </Layout>
   );
 };

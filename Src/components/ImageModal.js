@@ -40,9 +40,9 @@ const ImageModal = ({ visible, image = [], setVisible, index }) => {
                 <View style={{ justifyContent: 'center', flex: 1 }}>
                     <FlatList ref={flatlistRef} 
                     horizontal 
-                    //scrollEventThrottle={16} 
-                    //snapToInterval={SCREEN_WIDTH * 1.01} 
-                    //decelerationRate={"fast"} 
+                    scrollEventThrottle={16} 
+                    snapToInterval={SCREEN_WIDTH * 1.01} 
+                    decelerationRate={"fast"} 
                     data={image} 
                     renderItem={item => <ImageRenderItem item={item.item} index={item.index} />} />
                 </View>

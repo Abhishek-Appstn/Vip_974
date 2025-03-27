@@ -45,7 +45,7 @@ const CustomCalenderStrip = ({ params, selectedDate, setselectedDate, selectedTi
             throw error
           }
         }
-      }, 700);
+      }, 1000);
     } else {
       try {
         if (flatlistRef.current && TempDate.length > 0) {
@@ -125,7 +125,7 @@ const CustomFlexDirection=Utils.flexDirection(language)
 const CustomTextAlign=Utils.textAlign(language)
     return (
       <View style={{
-        width: SCREEN_WIDTH, backgroundColor: Colors.Black, height: SCREEN_HEIGHT * .64, zIndex: -1, paddingHorizontal: SCREEN_WIDTH * .02, paddingTop: 20
+        width: SCREEN_WIDTH, backgroundColor: Colors.Black, height: SCREEN_HEIGHT * .7, zIndex: -1, paddingHorizontal: SCREEN_WIDTH * .02, paddingTop: 20
       }}>
         <Text style={{ color: Colors.White, fontSize: 18, fontFamily: "Gibson-BoldItalic", fontWeight: '500' }}>Select Time</Text>
         {params.type === 'rent' ? <FlatList contentContainerStyle={{ marginTop: SCREEN_WIDTH * .02 }} scrollEnabled={false} numColumns={4} data={AvailableSlots} renderItem={({ item, index }) => {

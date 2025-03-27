@@ -11,7 +11,9 @@ import PrivacyPolicy from '../screens/PrivacyPolicy'
 import {Provider, useSelector} from 'react-redux'
 import store from '../redux/store'
 import ErrorBoundary from 'react-native-error-boundary'
-import { duration } from 'moment'
+import AdminHome from '../screens/AdminHome'
+import AdminAddProduct from '../screens/AdminAddProduct'
+import { StatusBar } from 'react-native'
 
 const {SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
 const {Colors}=Constants
@@ -29,7 +31,9 @@ const LoginStack = () => {
   }, [isloggedin])
   
     return(
+      
   <NavigationContainer>
+        <StatusBar translucent backgroundColor={"transparent"} />
     <stack.Navigator screenOptions={{headerShown:false}}>
         {loading?<stack.Screen name='Splash' component={Splash}/>:null}
         {isloggedin ? 
@@ -82,12 +86,19 @@ const HomeNavigation=()=>{
     <homestack.Screen name='AboutUs' component={AboutUs}/>
     <homestack.Screen name='Support' component={Support}/>
     <homestack.Screen name='PrivacyPolicy' component={PrivacyPolicy}/>
+    <homestack.Screen name='AdminHome' component={AdminHome}/>
+    <homestack.Screen name='AdminAddProduct' component={AdminAddProduct}/>
+
+    
+
     </homestack.Navigator>
   )
 }
+
 const Route=()=>{
 
 return(
+  
   <Provider store={store}>
     <ErrorBoundary>
     <LoginStack/>

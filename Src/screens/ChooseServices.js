@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   Pressable,
   FlatList,
+  Platform,
 } from 'react-native';
 import React, {useState} from 'react';
 import Constants from '../Constants';
@@ -58,12 +59,12 @@ const HeaderComponent = ({params}) => {
             style={{
               color: Colors.White,
               fontSize: 24,
-              fontFamily: 'Gibson-BoldItalic',
+              fontFamily: 'Gibson',
               textAlign: 'center',
               lineHeight: 30,
               marginTop: 29,
               textTransform: 'uppercase',
-              fontWeight: '400',
+              fontWeight: Platform.OS=='android'?'bold':'400',
             }}>
            {DataConstants.ServiceSelectionHeaders({type:params})}
           </Text>

@@ -15,7 +15,7 @@ const DrawerHeaderComponent = ({name,leftimage,rightimage,type,search,back,activ
     const CustomFlexDirection=Utils.flexDirection(language)
 
     return (
-    <View style={[{flexDirection:'row',justifyContent:'space-between',alignItems:'flex-end',},CustomFlexDirection]}>
+    <View style={[{flexDirection:'row',justifyContent:'space-between',alignItems:'flex-end',marginTop:SCREEN_HEIGHT*.02},CustomFlexDirection]}>
                 <Pressable onPress={()=>{back?back():type=='login'||type=='filter'||type=="expand"?navigation.goBack():navigation.toggleDrawer()}}>
 
               <Image style={[CustomImageTransform]} source={type=='login'||type=='filter'||type=='expand'?ArrowLeft:leftimage?leftimage:Drawer}/>
@@ -25,7 +25,8 @@ const DrawerHeaderComponent = ({name,leftimage,rightimage,type,search,back,activ
               <View style={{flexDirection:'row'}}>
                 {type=='filter'?<Image source={Filter} style={{marginRight:SCREEN_WIDTH*.04}}/>:null}
                 {type=='expand'?<Pressable onPress={()=>setVisible(true)}><Image source={Expand} style={{marginRight:SCREEN_WIDTH*.04}}/></Pressable>:null}
-                <Pressable onPress={()=>{back?back():type=='login'||type=='filter'||type=="expand"?navigation.goBack():navigation.toggleDrawer()}}>
+
+  <Pressable onPress={()=>{back?back():type=='login'||type=='filter'||type=="expand"?navigation.goBack({  animationEnabled: false}):navigation.toggleDrawer()}}>
 
 
                     </Pressable>  

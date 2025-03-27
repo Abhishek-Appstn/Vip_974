@@ -1,4 +1,4 @@
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, Platform, KeyboardAvoidingView, TouchableNativeFeedback, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Constants from '../../Constants';
 import { useSelector } from 'react-redux';
@@ -15,7 +15,8 @@ const CustomTextInput = ({ name, type, onChangeText, value, width, error, multil
   const CustomTextAlign = Utils.textAlign(language)
   useEffect
   return (
-    <View
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <KeyboardAvoidingView
       style={[{
         borderColor: IsFocussed ? Colors.Green1 : error ? '#fa5a5a' : Colors.Black,
         borderWidth: 0.7,
@@ -52,7 +53,7 @@ const CustomTextInput = ({ name, type, onChangeText, value, width, error, multil
           value={value}
           inputMode={type == 'PhoneNumber' || type == 'size' ? 'numeric' : 'default'}
           style={[{
-            height: multiline ? SCREEN_HEIGHT * .13 : SCREEN_HEIGHT * .032,
+            height: multiline ? SCREEN_HEIGHT * .13 : Platform.OS==='ios'?SCREEN_HEIGHT * .032:SCREEN_HEIGHT*.04,
             fontSize: 16,
             fontFamily: 'Gibson',
             alignSelf:'flex-start',
@@ -63,7 +64,7 @@ const CustomTextInput = ({ name, type, onChangeText, value, width, error, multil
             color: Colors.White,
 
           }, CustomTextAlign]}
-          onChangeText={onChangeText}
+          onChangeText={onChangeText} 
           multiline={multiline}
           placeholder={name}
           placeholderTextColor={Colors.White_Text}
@@ -80,7 +81,8 @@ const CustomTextInput = ({ name, type, onChangeText, value, width, error, multil
           </Text>
         ) : null}
       </View>
-    </View>
+    </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 

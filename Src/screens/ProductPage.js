@@ -55,7 +55,6 @@ const HeaderComponent = ({ params, Visible, setVisible, ActiveImage, setActiveIm
     const [Active, setActive] = useState('')
     return (
         <View style={{}}>
-        <StatusBar translucent backgroundColor={"transparent"} />
             <Imagecarousal setActive={setActive} images={params.images} setVisible={setVisible} ActiveImage={ActiveImage} setActiveImage={setActiveImage} />
             <SafeAreaView style={{ position: 'absolute', width: SCREEN_WIDTH * .88, alignSelf: 'center',marginTop:Platform.OS==='android'? SCREEN_HEIGHT*.05:0 }}>
                 <DrawerHeaderComponent name={'rent'} type='expand' search={true} setVisible={setVisible} />

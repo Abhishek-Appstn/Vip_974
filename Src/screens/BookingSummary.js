@@ -13,6 +13,7 @@ import LocationComponent from '../components/LocationComponent';
 import CartIncrementButtons from '../components/CartIncrementButtons';
 import TimeSlot from '../components/TimeSlot';
 import MapViewComponent from '../components/MapViewComponent';
+import IconComponent from '../components/IconComponent';
 const { Colors } = Constants;
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS;
 const { ServicePay, Services, paymentData, softDrinks } = DataConstants
@@ -145,7 +146,7 @@ const  MiddleComponent = ({ params, ActionsheetRef, setChoosen, SelectedAddon, C
 </Text>
 
               </View>
-              <Image
+              {/* <Image
                 source={Plus}
                 style={{
                   height: SCREEN_WIDTH * 0.08,
@@ -157,7 +158,8 @@ const  MiddleComponent = ({ params, ActionsheetRef, setChoosen, SelectedAddon, C
                   borderColor: Colors.Green1,
                   borderWidth: 0.5,
                 }}
-              />
+              /> */}
+              <IconComponent image={Plus}/>
             </Pressable>
           )
         }} />
@@ -343,7 +345,7 @@ const BookingSummary = (props) => {
     <View>
       <View>
         <View style={{ backgroundColor: Colors.Black_Bg, height: params.type !== 'services' ? SCREEN_HEIGHT * .44 : SCREEN_HEIGHT * .3, width: SCREEN_WIDTH, borderRadius: 15, borderTopRightRadius: 0, borderTopLeftRadius: 0, zIndex: 9 }}>
-          <SafeAreaView style={{ width: SCREEN_WIDTH, alignSelf: 'center', marginTop: SCREEN_WIDTH * .2, overflow: 'hidden' }}>
+          <SafeAreaView style={{ width: SCREEN_WIDTH, alignSelf: 'center', marginTop: SCREEN_HEIGHT * .02, overflow: 'hidden' }}>
             <View style={{ marginHorizontal: SCREEN_WIDTH * .07 }}>
               <DrawerHeaderComponent name={params.type == 'services' ? "Summary" : "Rent"} search={true} type='login' />
             </View>

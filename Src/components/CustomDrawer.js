@@ -5,7 +5,7 @@ import { ChevronRightWhite, Gift, Home, Logout, PrivacyPolicy, Profile, Profile_
 import Svg, { Path } from 'react-native-svg'
 import DataConstants from '../assets/DataConstants'
 import { useDispatch, useSelector } from 'react-redux'
-import { setLanguage } from '../redux/slice/languageSlice'
+import { languageSignout, setLanguage } from '../redux/slice/languageSlice'
 import Utils from '../Utils'
 import { setUserData, Signout } from '../redux/slice/UserSlice'
 import Snackbar from 'react-native-snackbar'
@@ -67,13 +67,9 @@ const LowerSvg = () => {
   );
 };
 const CustomDrawer = (props) => {
-  const memebershipData = useSelector(state => state.Membership)
-  console.log("Memebership", memebershipData)
   const language = useSelector(state => state.Language.value)
   const { firstname, lastname, profileImage } = useSelector(state => state.User)
   const { membershipType, points, } = useSelector(state => state.Membership)
-
-
   const CustomAlignSelf = Utils.alignSelf(language)
   const CustomFlexDirection = Utils.flexDirection(language)
   const CustomTextAlign = Utils.textAlign(language)
@@ -117,7 +113,7 @@ const CustomDrawer = (props) => {
 
               <Pressable style={[{ flexDirection: 'row', alignItems: 'center', padding: SCREEN_WIDTH * .03, marginTop: item.title === 'Logout' ? SCREEN_HEIGHT * .07 : 0, }, CustomAlignSelf, CustomFlexDirection]} onPress={() =>
                 item.title === 'Logout'
-                  ? (dispatch(Signout()), Snackbar.show({ text: "Logged Out Successfully" }))
+                  ? (dispatch(Signout()),dispatch(languageSignout()), Snackbar.show({ text: "Logged Out Successfully" }))
                   : navigation.navigate('HomeStack', { screen: item.navigate })
               }>
                 <Image source={item.icon} style={{ height: SCREEN_HEIGHT * .04, resizeMode: 'contain', marginRight: SCREEN_WIDTH * .04, }} />

@@ -158,7 +158,7 @@ const MyActivities = () => {
   return (
     <View style={{ backgroundColor: Colors.Black_Bg, height: SCREEN_WIDTH * .5,paddingTop:Platform.OS==='android'?SCREEN_HEIGHT*.05:0 }}>
       <SafeAreaView>
-        <View style={{ marginHorizontal: SCREEN_WIDTH * .07, marginTop: SCREEN_HEIGHT * .02 }}>
+        <View style={{ marginHorizontal: SCREEN_WIDTH * .07 }}>
           <DrawerHeaderComponent name='MY Activities' type='login' />
           <FlatList scrollEnabled={false} contentContainerStyle={[{ flexDirection: 'row', justifyContent: 'space-between', marginTop: SCREEN_WIDTH * .129, overflow: 'hidden' }, CustomFlexDirection]} data={HistoryHeaders} renderItem={({ item, index }) => {
             return (

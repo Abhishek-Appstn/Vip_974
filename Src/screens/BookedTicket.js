@@ -16,7 +16,6 @@ const { Colors } = Constants;
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS;
 
 const ActionsheetComponent = ({params,ActionsheetRef}) => {
-  console.log('AC',ActionsheetRef)
   return (
     <ActionSheet closable={true} containerStyle={{ backgroundColor: Colors.Black_Bg, height: SCREEN_HEIGHT * .9 }} ref={ActionsheetRef}>
       <View style={{ top: 10, marginHorizontal: SCREEN_WIDTH * .07, }}>

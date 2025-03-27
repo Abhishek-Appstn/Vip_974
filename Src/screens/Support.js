@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, FlatList, ScrollView } from 'react-native'
+import { View, Text, SafeAreaView, FlatList, ScrollView, Keyboard } from 'react-native'
 import React, { useState } from 'react'
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent'
 import Layout from '../components/Layout/Layout'
@@ -57,12 +57,15 @@ const Support = () => {
     })
   return (
     <Layout>
+              <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        
         <SafeAreaView>
 <View style={{margin:SCREEN_WIDTH*.05}}>
         <DrawerHeaderComponent name={"Support"} type={"login"} search={true}/>
 <SupportFields Data={FormData} setData={setFormData}/>
         </View>
         </SafeAreaView>
+        </TouchableWithoutFeedback>
     </Layout>
   )
 }
