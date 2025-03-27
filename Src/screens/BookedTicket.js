@@ -1,4 +1,4 @@
-import { View, SafeAreaView, ScrollView, Pressable, Text ,Image} from 'react-native';
+import { View, SafeAreaView, ScrollView, Pressable, Text ,Image, Platform} from 'react-native';
 import React, { useRef } from 'react';
 import Constants from '../Constants';
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent';
@@ -16,6 +16,7 @@ const { Colors } = Constants;
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS;
 
 const ActionsheetComponent = ({params,ActionsheetRef}) => {
+  console.log('AC',ActionsheetRef)
   return (
     <ActionSheet closable={true} containerStyle={{ backgroundColor: Colors.Black_Bg, height: SCREEN_HEIGHT * .9 }} ref={ActionsheetRef}>
       <View style={{ top: 10, marginHorizontal: SCREEN_WIDTH * .07, }}>
@@ -55,7 +56,7 @@ const BookedTicket = (props) => {
   console.log('Params', params);
 
   return (
-    <View style={{ backgroundColor: Colors.Black_Bg, height: SCREEN_HEIGHT }}>
+    <View style={{ backgroundColor: Colors.Black_Bg, height: SCREEN_HEIGHT,paddingTop:Platform.OS==='android'? SCREEN_HEIGHT*.05:0 }}>
       <SafeAreaView>
         <ScrollView
           contentContainerStyle={{ paddingBottom: SCREEN_HEIGHT * 0.81 }}
@@ -111,7 +112,7 @@ const BookedTicket = (props) => {
         </ScrollView>
       </SafeAreaView>
       <ActionsheetComponent params={params} ActionsheetRef={ActionsheetRef}/>
-      <ButtonComponent title="Scan Barcode" Onpress={()=>{ActionsheetRef.current?.show()}}/>
+      <ButtonComponent title="Scan Barcode" Onpress={()=>{console.log("pressed"),ActionsheetRef?.current?.show()}}/>
     </View>
   );
 };

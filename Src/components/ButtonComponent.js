@@ -10,7 +10,7 @@ const ButtonComponent = ({title,style,Onpress}) => {
     const language=useSelector(state=>state.Language.value)
     const CustomFlexDirection=Utils.flexDirection(language)
     return(
-        <Pressable style={[{backgroundColor:Colors.Green1,height:SCREEN_HEIGHT*.1,alignItems:'center',justifyContent:'center',flexDirection:'row',position:'absolute',bottom:0,width:SCREEN_WIDTH,zIndex:0},style,CustomFlexDirection]}onPress={Onpress}>
+        <Pressable style={[{backgroundColor:Colors.Green1,height:SCREEN_HEIGHT*.1,alignItems:'center',justifyContent:'center',flexDirection:'row',position:'absolute',bottom:0,width:SCREEN_WIDTH,zIndex:10},style,CustomFlexDirection]}onPress={Onpress}>
    <Image
                  source={Barcode}
                  style={{

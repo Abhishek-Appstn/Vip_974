@@ -10,11 +10,19 @@ import Helpers from '../Helpers';
 import Snackbar from 'react-native-snackbar';
 import Utils from '../Utils';
 import { useSelector } from 'react-redux';
-import LoginHandler from './LoginHandler';
+import auth from '@react-native-firebase/auth'
+
 const {Colors} = Constants;
 const {SCREEN_HEIGHT, SCREEN_WIDTH} = Constants.SCREEN_DIMENSIONS;
+
+const LoginAuth=async({MobileNumber,Confirmation,setConfirmation})=>{
+const confirmation=auth().signInWithPhoneNumber(MobileNumber)
+setConfirmation(confirmation)
+}
 const Login = () => {
   const [MobileNumber, setMobileNumber] = useState('');
+  const [Confirmation, setConfirmation] = useState('');
+console.log('Login',Confirmation)
   const [Error, setError] = useState(false);
   useEffect(() => {
     setTimeout(() => {
@@ -34,13 +42,15 @@ const Login = () => {
   const HandleNavigation = name => {
     name !== 'Signup' && name !== 'Drawer'
       ? Helpers({data: MobileNumber, type: 'mobilenumber'})
-        ? navigation.navigate(name)
+        ?   navigation.navigate(name)
+        // LoginAuth({MobileNumber:MobileNumber,Confirmation:Confirmation,setConfirmation:setConfirmation})
         : (Snackbar.show({
             text: 'Invalid Mobile Number',
             backgroundColor: 'red',
           }),
           setError(true))
-      : navigation.navigate(name);
+      : navigation.navigate(name)
+      
   };
   return (
     <Layout>
