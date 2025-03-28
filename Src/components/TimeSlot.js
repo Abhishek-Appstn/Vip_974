@@ -21,12 +21,12 @@ const TimeSlot = ({ params, header, style, selectedDate, selectedTime,icon }) =>
           fontFamily: 'Gibson',
           color: Colors.White,
           fontSize: 18,
-          fontWeight: '400', marginBottom: SCREEN_WIDTH * .03, textTransform: 'uppercase'
+          fontWeight: '400', marginBottom: SCREEN_HEIGHT * .02, textTransform: 'uppercase'
         }, CustomAlignSelf, CustomTextAlign]}>
         {header}
       </Text> : null : null}
       <View style={[{ flexDirection: 'row', }, CustomFlexDirection]}>
-        <View style={{ padding: 7, backgroundColor: Colors.Black }}>
+        <View style={{ padding: SCREEN_HEIGHT*.01, backgroundColor: Colors.Black }}>
           <Image source={icon?icon:calendar} style={{ height: SCREEN_WIDTH * .05, width: SCREEN_WIDTH * .05, resizeMode: 'contain' }} />
         </View>
         <View style={{ marginHorizontal: SCREEN_WIDTH * .016, justifyContent: "center" }}>

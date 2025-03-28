@@ -53,8 +53,11 @@ const BookedTicket = (props) => {
   const ActionsheetRef = useRef()
   const params = props.route.params;
   console.log('Params', params);
+    const CustomSafeAreaView=Platform.OS==='android'?SafeAreaView:View
 
   return (
+    <CustomSafeAreaView>
+
     <View style={{ backgroundColor: Colors.Black_Bg, height: SCREEN_HEIGHT,paddingTop:Platform.OS==='android'? SCREEN_HEIGHT*.05:0 }}>
       <SafeAreaView>
         <ScrollView
@@ -113,6 +116,8 @@ const BookedTicket = (props) => {
       <ActionsheetComponent params={params} ActionsheetRef={ActionsheetRef}/>
       <ButtonComponent title="Scan Barcode" Onpress={()=>{console.log("pressed"),ActionsheetRef?.current?.show()}}/>
     </View>
+    </CustomSafeAreaView>
+
   );
 };
 

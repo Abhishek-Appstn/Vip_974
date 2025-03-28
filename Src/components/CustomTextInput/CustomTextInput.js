@@ -15,8 +15,7 @@ const CustomTextInput = ({ name, type, onChangeText, value, width, error, multil
   const CustomTextAlign = Utils.textAlign(language)
   useEffect
   return (
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-    <KeyboardAvoidingView
+    <View
       style={[{
         borderColor: IsFocussed ? Colors.Green1 : error ? '#fa5a5a' : Colors.Black,
         borderWidth: 0.7,
@@ -27,7 +26,7 @@ const CustomTextInput = ({ name, type, onChangeText, value, width, error, multil
         width: width ? width : null,
         backgroundColor: Colors.Black_2,
       },]}>
-      {value ? <Text
+      {IsFocussed ? <Text
         style={[{
           color: Colors.Green1,
           fontSize: 12,
@@ -53,10 +52,10 @@ const CustomTextInput = ({ name, type, onChangeText, value, width, error, multil
           value={value}
           inputMode={type == 'PhoneNumber' || type == 'size' ? 'numeric' : 'default'}
           style={[{
-            height: multiline ? SCREEN_HEIGHT * .13 : Platform.OS==='ios'?SCREEN_HEIGHT * .032:SCREEN_HEIGHT*.04,
+            height: multiline ? SCREEN_HEIGHT * .13 : Platform.OS === 'ios' ? SCREEN_HEIGHT * .032 : SCREEN_HEIGHT * .04,
             fontSize: 16,
             fontFamily: 'Gibson',
-            alignSelf:'flex-start',
+            alignSelf: 'flex-start',
             width:
               type == 'PhoneNumber'
                 ? Constants.SCREEN_DIMENSIONS.SCREEN_WIDTH * 0.68
@@ -64,9 +63,9 @@ const CustomTextInput = ({ name, type, onChangeText, value, width, error, multil
             color: Colors.White,
 
           }, CustomTextAlign]}
-          onChangeText={onChangeText} 
+          onChangeText={onChangeText}
           multiline={multiline}
-          placeholder={name}
+          placeholder={!IsFocussed ? name : null}
           placeholderTextColor={Colors.White_Text}
 
         />
@@ -75,14 +74,13 @@ const CustomTextInput = ({ name, type, onChangeText, value, width, error, multil
             style={{
               color: Colors.White,
               fontSize: 16,
-              fontFamily: 'Gibson-Regular',marginHorizontal:SCREEN_WIDTH*.01
+              fontFamily: 'Gibson-Regular', marginHorizontal: SCREEN_WIDTH * .01
             }}>
             M²
           </Text>
         ) : null}
       </View>
-    </KeyboardAvoidingView>
-    </TouchableWithoutFeedback>
+    </View>
   );
 };
 

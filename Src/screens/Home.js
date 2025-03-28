@@ -6,6 +6,7 @@ import {
   FlatList,
   Pressable,
   Platform,
+  KeyboardAvoidingView,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Constants from '../Constants';
@@ -196,7 +197,7 @@ useEffect(() => {
 }, [])
 
   return (
-    <View style={{ backgroundColor: Colors.Black_Bg, flex: 1, overflow: 'hidden', zIndex: 1,}}>
+    <KeyboardAvoidingView style={{ backgroundColor: Colors.Black_Bg, flex: 1, overflow: 'hidden', zIndex: 1,}}>
       <UpperSvg />
       <Animated.View style={[animatedStyle, { flex: 1, elevation: 10, shadowColor: Colors.Black, backgroundColor: Colors.Black_Bg, paddingTop:Platform.OS==='android'?SCREEN_HEIGHT*.02:0  ,overflow: 'hidden', zIndex: 1,}]}>
         <HomeHeaderComponent header={DataConstants.HomeHeader} headerText={"Vip-974"} />
@@ -215,7 +216,7 @@ useEffect(() => {
           />
         </View>
       </Animated.View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

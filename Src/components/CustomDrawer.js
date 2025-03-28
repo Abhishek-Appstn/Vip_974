@@ -75,7 +75,8 @@ const CustomDrawer = (props) => {
   const CustomTextAlign = Utils.textAlign(language)
   const CustomJustifyContent = Utils.justifyContent(language)
   const CustomImageTransform = Utils.ImageTransform(language)
-  const [SelectedLanguage, setSelectedLanguage] = useState('')
+  const [SelectedLanguage, setSelectedLanguage] = useState(language)
+  console.log('selected lang',SelectedLanguage)
   const { navigation } = props;
   const Languages = ['Arabic', "English"]
   useEffect(() => {

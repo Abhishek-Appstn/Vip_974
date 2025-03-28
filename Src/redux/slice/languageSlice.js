@@ -7,9 +7,8 @@ const languageSlice=createSlice({
         setLanguage:(state,action)=>{
             state.value=action.payload
         },
-        languageSignout:(state)=>{
-            state.value=null
-        }
+        languageSignout:(state)=>{state.value='English'}
+    
     }
 })
 export const { setLanguage,languageSignout } = languageSlice.actions;

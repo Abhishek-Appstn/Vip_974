@@ -37,7 +37,7 @@ const CustomCalenderStrip = ({ params, selectedDate, setselectedDate, selectedTi
       setTimeout(() => {
         if (TodaysIndex !== -1 && flatlistRef?.current) {
           try {
-            flatlistRef?.current?.scrollToIndex({ index: TodaysIndex - 2.25, animated: true });
+            flatlistRef?.current?.scrollToIndex({ index:Math.max(TodaysIndex - 2.25, 0), animated: true });
             IsInitialLoad.current = false;
 
           } catch (error) {

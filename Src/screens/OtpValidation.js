@@ -6,6 +6,10 @@ import {
   Pressable,
   TextInput,
   Alert,
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import React, {useState} from 'react';
 import Layout from '../components/Layout/Layout';
@@ -43,6 +47,8 @@ const dispatch=useDispatch()
 
   return (
     <Layout>
+      <TouchableWithoutFeedback onPress={()=>Keyboard.dismiss()}>
+        <KeyboardAvoidingView behavior={Platform.OS==='ios'?'padding':'height'}>
       <SafeAreaView
         style={{
           justifyContent: 'center',
@@ -118,6 +124,8 @@ const dispatch=useDispatch()
           <Text style={{color: Colors.AccentColor5}}>Send Again ?</Text>
         </Pressable>
       </SafeAreaView>
+      </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
     </Layout>
   );
 };
