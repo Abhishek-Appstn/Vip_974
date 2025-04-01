@@ -50,7 +50,7 @@ const HeaderComponent = ({ params }) => {
           style={{
             alignItems: 'center',
             justifyContent: 'center',
-            height: SCREEN_WIDTH * 0.4,
+            height: SCREEN_WIDTH * 0.6,
           }}>
           <Text
             style={{
@@ -59,9 +59,8 @@ const HeaderComponent = ({ params }) => {
               fontFamily: 'Gibson',
               textAlign: 'center',
               lineHeight: 30,
-              marginTop: 29,
               textTransform: 'uppercase',
-              fontWeight: Platform.OS == 'android' ? 'bold' : '400',
+              fontWeight: Platform.OS == 'android' ? '600' : '400',
             }}>
             {DataConstants.ServiceSelectionHeaders({ type: params })}
           </Text>
@@ -73,7 +72,7 @@ const HeaderComponent = ({ params }) => {
               fontSize: 16,
               fontFamily: 'Gibson-Regular',
               textAlign: 'center',
-              marginTop: 19,
+              marginTop: SCREEN_HEIGHT * .015,
               textTransform: 'capitalize',
             }}>
             {DataConstants.ServiceSelectionData({ type: params })}
