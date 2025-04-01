@@ -38,14 +38,14 @@ const LoginStack = () => {
         {loading ?
           <stack.Screen name='Splash' component={Splash} />
           : null}
-        {isloggedin ?
-          <stack.Screen name='Drawer' component={DrawerNavigation} />
-          :
+        {!isloggedin ?
           <>
             <stack.Screen name='Login' component={Login} />
             <stack.Screen name='OtpValidation' component={OtpValidation} />
             <stack.Screen name='Signup' component={Signup} />
           </>
+          :
+          <stack.Screen name='Drawer' component={DrawerNavigation} />
         }
 
       </stack.Navigator>

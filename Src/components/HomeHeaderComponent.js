@@ -3,7 +3,7 @@ import React from 'react'
 import Constants from '../Constants'
 import HomeLowerSvg from './HomeLowerSvg'
 import DrawerHeaderComponent from './DrawerHeaderComponent/DrawerHeaderComponent'
-import { Background_Icon, Logo_White } from '../assets/Images'
+import { Background_Home_Icon, Background_Icon, Logo_White } from '../assets/Images'
 import AboutUsLowerSvg from './AboutUsLowerSvg'
 const { Colors } = Constants
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
@@ -13,36 +13,34 @@ const HomeHeaderComponent = ({ height, width, SvgHeight, SvgWidth, header, logoS
     <View
       style={{
         backgroundColor: Colors.Black_Bg,
-        height: height ? height : SCREEN_HEIGHT * .45,
+        height: height ? height : SCREEN_HEIGHT * .35,
         width: width ? width : SCREEN_WIDTH,
         overflow: 'hidden',
+        borderBottomLeftRadius: SCREEN_HEIGHT * .015,
+        borderBottomRightRadius: SCREEN_HEIGHT * .015
       }}>
       <Image
         style={{
-          position: 'absolute',
-          top: 0,
-          right: -110,
-          opacity: 0.45,
-          height: SCREEN_WIDTH * 0.7,
+          position: 'absolute', right: 0,
           resizeMode: 'contain',
         }}
-        source={Background_Icon}
+        source={Background_Home_Icon}
       />
 
       <SafeAreaView style={{}}>
-        <DrawerHeaderComponent name={headerText} type={headerText !== 'Vip-974' ? 'login' : null} search={true} />
+        <DrawerHeaderComponent name={headerText} type={"home"} search={true} />
         <View
           style={{
             alignItems: 'center',
             justifyContent: 'center',
-            height: SCREEN_HEIGHT * 0.3,
+            height: SCREEN_HEIGHT * 0.2,
           }}>
-          <Image source={Logo_White} style={{ width: SCREEN_WIDTH * .2 }} resizeMode='contain' />
+          <Image source={Logo_White} style={{ width: SCREEN_WIDTH * .16, height: SCREEN_HEIGHT * .1 }} resizeMode='contain' />
           <Text
             style={{
               width: SCREEN_WIDTH * 0.4,
               color: Colors.White,
-              fontSize: 24,
+              fontSize: 22,
               fontFamily: 'Gibson',
               textAlign: 'center',
               lineHeight: 30,
@@ -52,7 +50,7 @@ const HomeHeaderComponent = ({ height, width, SvgHeight, SvgWidth, header, logoS
           </Text>
         </View>
       </SafeAreaView>
-      <AboutUsLowerSvg />
+      <HomeLowerSvg />
     </View>
 
 

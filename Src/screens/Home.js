@@ -25,7 +25,7 @@ import { Profile_Damu } from '../assets/Images';
 
 const { Colors } = Constants
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
-const HomeRenderItem = ({ item, index,CustomFlexDirection,CustomTextAlign }) => {
+const HomeRenderItem = ({ item, index, CustomFlexDirection, CustomTextAlign }) => {
   const navigation = useNavigation();
   const HandleNavigation = (name, params) => {
     navigation.navigate(name, params);
@@ -33,33 +33,33 @@ const HomeRenderItem = ({ item, index,CustomFlexDirection,CustomTextAlign }) => 
   return (
     <Pressable
       style={[{
-        height: SCREEN_WIDTH / 3.3,
+        height: SCREEN_HEIGHT * .14,
         alignItems: 'center',
         flexDirection: 'row',
         backgroundColor: Colors.Black_Bg,
         borderRadius: SCREEN_WIDTH * .02,
         marginVertical: SCREEN_HEIGHT * .015,
         paddingHorizontal: SCREEN_WIDTH * .05,
-      },CustomFlexDirection]}
+      }, CustomFlexDirection]}
       onPress={() => HandleNavigation('ChooseServices', item.params)}>
       <Image
-          source={item.icon}
-          style={{ height: SCREEN_HEIGHT * .08, width: SCREEN_WIDTH * .2, }}
-          resizeMode="contain"
+        source={item.icon}
+        style={{ height: SCREEN_HEIGHT * .08, width: SCREEN_WIDTH * .2, }}
+        resizeMode="contain"
       />
       <View
         style={{
-         marginHorizontal:SCREEN_WIDTH * .04,
+          marginHorizontal: SCREEN_WIDTH * .04,
           width: SCREEN_WIDTH * 0.5,
         }}>
         <Text
           style={[{
             fontSize: 24,
             fontFamily: 'Gibson',
-            color: Colors.White_Text,
+            color: Colors.White,
             textTransform: 'uppercase',
-            fontWeight: '600',
-          },CustomTextAlign]}>
+            fontWeight: Platform.OS == 'ios' ? '600' : '800',
+          }, CustomTextAlign]}>
           {item.header}
         </Text>
         <Text
@@ -68,12 +68,12 @@ const HomeRenderItem = ({ item, index,CustomFlexDirection,CustomTextAlign }) => 
             fontFamily: 'Gibson-Regular',
             color: Colors.Gray_Text,
             textTransform: 'capitalize',
-            
-          },CustomTextAlign]}>
+
+          }, CustomTextAlign]}>
           {item.Description}
         </Text>
       </View>
-      
+
       <FlatlistSvg />
     </Pressable>
   );
@@ -115,7 +115,7 @@ const FlatlistSvg = () => {
 
 const UpperSvg = () => {
   return (
-    <View style={{ position: 'absolute', left: 20, top: -210,}}>
+    <View style={{ position: 'absolute', left: 20, top: -210, }}>
       <Svg
         id="Group_12531"
         data-name="Group 12531"
@@ -171,14 +171,14 @@ const UpperSvg = () => {
 
 const Home = () => {
   const DrawerProgress = useDrawerProgress()
-  const dispatch=useDispatch()
-  const language=useSelector(state=>state.Language.value)
-  const CustomFlexDirection=Utils.flexDirection(language)
-  const CustomTextAlign=Utils.textAlign(language)
+  const dispatch = useDispatch()
+  const language = useSelector(state => state.Language.value)
+  const CustomFlexDirection = Utils.flexDirection(language)
+  const CustomTextAlign = Utils.textAlign(language)
   const animatedStyle = useAnimatedStyle(() => {
     const scale = interpolate(DrawerProgress.value, [0, 1], [1, 0.73]);
     const borderRadius = interpolate(DrawerProgress.value, [0, 1], [0, SCREEN_HEIGHT * 0.03]);
-  
+
     return {
       transform: [{ scale }],
       borderRadius,
@@ -186,28 +186,30 @@ const Home = () => {
       overflow: 'hidden',
     };
   });
-  
-  
-useEffect(() => {
-  dispatch(setUserData({firstname:'Reese',lastname:'Carpenter',profileImage:Profile_Damu,    membershipType: 'Gold',mobileNumber: '+9742217718',
-    email: 'Carpenter.Steve@yoohoo.com',
-    qid: '100CBA20241001',}))
- dispatch(setMembership({points:1060,membershipType:'Gold',membershipName:'Vip-Gold',pointexpirydate:'30 Dec 2025'}))
 
-}, [])
+
+  useEffect(() => {
+    dispatch(setUserData({
+      firstname: 'Reese', lastname: 'Carpenter', profileImage: Profile_Damu, membershipType: 'Gold', mobileNumber: '+9742217718',
+      email: 'Carpenter.Steve@yoohoo.com',
+      qid: '100CBA20241001',
+    }))
+    dispatch(setMembership({ points: 1060, membershipType: 'Gold', membershipName: 'Vip-Gold', pointexpirydate: '30 Dec 2025' }))
+
+  }, [])
 
   return (
-    <KeyboardAvoidingView style={{ backgroundColor: Colors.Black_Bg, flex: 1, overflow: 'hidden', zIndex: 1,}}>
+    <KeyboardAvoidingView style={{ backgroundColor: Colors.Black_Bg, flex: 1, overflow: 'hidden', zIndex: 1, }}>
       <UpperSvg />
-      <Animated.View style={[animatedStyle, { flex: 1, elevation: 10, shadowColor: Colors.Black, backgroundColor: Colors.Black_Bg, paddingTop:Platform.OS==='android'?SCREEN_HEIGHT*.02:0  ,overflow: 'hidden', zIndex: 1,}]}>
+      <Animated.View style={[animatedStyle, { flex: 1, elevation: 10, shadowColor: Colors.Black, backgroundColor: Colors.Black_Bg, paddingTop: Platform.OS === 'android' ? SCREEN_HEIGHT * .02 : 0, overflow: 'hidden', zIndex: 1, }]}>
         <HomeHeaderComponent header={DataConstants.HomeHeader} headerText={"Vip-974"} />
-        <View style={{ backgroundColor: Colors.Black }}>
+        <View style={{ backgroundColor: Colors.Black, height: SCREEN_HEIGHT * .65 }}>
           <FlatList
             keyExtractor={item => item.header}
             scrollEnabled={false}
             data={DataConstants.HomeData}
             contentContainerStyle={{
-              height: SCREEN_WIDTH * 1.21,
+              height: SCREEN_HEIGHT * .65,
               backgroundColor: Colors.Black,
               paddingHorizontal: SCREEN_WIDTH * .05,
               paddingTop: SCREEN_HEIGHT * .014,

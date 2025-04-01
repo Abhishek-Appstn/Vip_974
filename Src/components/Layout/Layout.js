@@ -8,7 +8,7 @@ const { Colors } = Constants
 const Layout = ({ children, logoStyles }) => {
   return (
     <View style={{ flex: 1, backgroundColor: Colors.Black_Bg }}>
-      <Image style={[{ position: 'absolute', opacity: .45, resizeMode: "contain", alignSelf: 'flex-end' }, logoStyles]} source={Background_Icon} />
+      <Image style={[{ position: 'absolute', opacity: 1, resizeMode: "contain", alignSelf: 'flex-end' }, logoStyles]} source={Background_Icon} />
       {children}
     </View>
   )

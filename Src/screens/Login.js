@@ -16,15 +16,9 @@ const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS;
 
 const Login = () => {
   const [MobileNumber, setMobileNumber] = useState('');
-  const [Confirmation, setConfirmation] = useState('');
   const [Error, setError] = useState(false);
-  useEffect(() => {
-    setTimeout(() => {
-      setError(false);
-    }, 4000);
-  }, [Error]);
-
   const handleTextChange = value => {
+    setError(false)
     setMobileNumber(value);
   };
   const language = useSelector(state => state.Language.value)
@@ -43,14 +37,11 @@ const Login = () => {
         }),
           setError(true))
       : navigation.navigate(name)
-
   };
   return (
     <Layout>
-      {/* <ScrollView contentContainerStyle={{paddingBottom:SCREEN_HEIGHT*.15}}> */}
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} >
-
           <SafeAreaView
             style={{
               justifyContent: 'center',
@@ -106,6 +97,7 @@ const Login = () => {
                 alignSelf: 'center',
                 bottom: SCREEN_HEIGHT * 0.05,
                 position: 'absolute',
+                marginBottom: SCREEN_HEIGHT * .005
               }}
               onPress={() => HandleNavigation('Drawer')}>
               <Text
@@ -118,7 +110,6 @@ const Login = () => {
               </Text>
             </Pressable>
           </SafeAreaView>
-          {/* </ScrollView> */}
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     </Layout>
