@@ -7,21 +7,21 @@ const UserSlice = createSlice({
         firstname: 'Rteve',
         lastname: 'Carpenter',
         membershipType: 'Gold',
-        profileImage: Profile_Damu,
+        profileImage: '',
         mobileNumber: '+9742217718',
         email: 'Carpenter.Steve@yoohoo.com',
         qid: '100CBA20241001',
-        isloggedin:false
+        isloggedin: false
     },
     reducers: {
         setUserData: (state, action) => {
             return { ...state, ...action.payload };
         },
-        Signout:(state,action)=>{
-            return{}
+        Signout: (state, action) => {
+            return {}
         }
     }
 })
 
-export const { setUserData,Signout } = UserSlice.actions
+export const { setUserData, Signout } = UserSlice.actions
 export default UserSlice.reducer

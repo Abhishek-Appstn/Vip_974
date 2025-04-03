@@ -10,27 +10,29 @@ import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHea
 import CustomCalenderStrip from './CustomCalenderStrip';
 import Snackbar from 'react-native-snackbar';
 const { Colors } = Constants;
-const { SCREEN_HEIGHT,SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
+const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 
 const ScheduleService = (props) => {
-const params=props.route.params
-  const navigation=useNavigation()
+  const params = props.route.params
+  const navigation = useNavigation()
   const [selectedDate, setselectedDate] = useState(moment());
   const [selectedTime, setselectedTime] = useState([]);
-console.log('Daaata',selectedDate,selectedTime)
-const HandleNavigation=()=>{
-  selectedDate?selectedTime.length>0?
-  params?.type=='services'|| params?.type=='build'?
-  navigation.navigate('CabanSize',{...params,selectedDate:selectedDate.format("DD MMMM YYYY"),selectedTime:selectedTime})
-  :
-  navigation.navigate('ServicesList',{...params,selectedDate:selectedDate.format("DD MMMM YYYY"),selectedTime:selectedTime}):Snackbar.show({text:"Select a time to continue",backgroundColor:'red'}):Snackbar.show({text:"Select a Date to continue",backgroundColor:'red'})
-}
+  const HandleNavigation = () => {
+    selectedDate ? selectedTime.length > 0 ?
+      params?.type == 'services' || params?.type == 'build' ?
+        navigation.navigate('CabanSize', { ...params, selectedDate: selectedDate.format("DD MMMM YYYY"), selectedTime: selectedTime })
+        :
+        navigation.navigate('ServicesList', { ...params, selectedDate: selectedDate.format("DD MMMM YYYY"), selectedTime: selectedTime }) : Snackbar.show({ text: "Select a time to continue", backgroundColor: 'red' }) : Snackbar.show({ text: "Select a Date to continue", backgroundColor: 'red' })
+  }
   return (
-    <ItemLayout name='Submit' colors={Colors.Black_Bg} onPress={HandleNavigation}>
-      <View style={{marginHorizontal:SCREEN_WIDTH*.03}}>
-<DrawerHeaderComponent type='login'name={params?.type?params.type:"Rent"} search={true}/>
-</View>
-<CustomCalenderStrip params={params} selectedDate={selectedDate} selectedTime={selectedTime} setselectedDate={setselectedDate} setselectedTime={setselectedTime}/>
+    <ItemLayout buttonTitle='Submit' colors={Colors.Black_Bg} onPress={HandleNavigation}>
+      <View style={{ backgroundColor: Colors.Black_Bg }}>
+        <DrawerHeaderComponent type='login' name={params?.type ? params.type : "Rent"} search={true} />
+      </View>
+      <View style={{ backgroundColor: Colors.Black_Bg }}>
+        <CustomCalenderStrip params={params} selectedDate={selectedDate} selectedTime={selectedTime} setselectedDate={setselectedDate} setselectedTime={setselectedTime} />
+      </View>
+
     </ItemLayout>
   );
 };

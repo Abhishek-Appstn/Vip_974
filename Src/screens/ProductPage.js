@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux'
 import LocationComponent from '../components/LocationComponent'
 import ImageModal from '../components/ImageModal'
 import DataConstants from '../assets/DataConstants'
+import { LowerButtonComponent } from '../components/ItemLayout'
 
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 const { Colors } = Constants
@@ -21,7 +22,7 @@ const ImageSelector = ({ length, ActiveImage, setActiveImage }) => {
     return (
         <View style={{ flexDirection: 'row', alignSelf: 'center', backgroundColor: Colors.Black }}>
             {Array.from({ length: length }).map((_, index) => (
-                <Pressable key={index} style={{ width: SCREEN_WIDTH * .04, height: SCREEN_HEIGHT * .003, backgroundColor: ActiveImage === index ? Colors.Green1 : Colors.White, marginHorizontal: SCREEN_WIDTH * .02 }} onPress={() => setActiveImage(index)} />
+                <Pressable key={index} style={{ width: SCREEN_WIDTH * .023, height: SCREEN_HEIGHT * .003, backgroundColor: ActiveImage === index ? Colors.Green1 : Colors.White, marginHorizontal: SCREEN_WIDTH * .01 }} onPress={() => setActiveImage(index)} />
             ))}
         </View>
     )
@@ -31,7 +32,6 @@ const Imagecarousal = ({ images, ActiveImage, setActiveImage, setActive }) => {
     useEffect(() => {
         imageRef.current ?
             imageRef.current.scrollToIndex({ index: ActiveImage, animated: true }) : null
-
     }, [ActiveImage])
 
     const viewabilityConfig = useRef({
@@ -56,14 +56,14 @@ const HeaderComponent = ({ params, Visible, setVisible, ActiveImage, setActiveIm
     return (
         <View style={{}}>
             <Imagecarousal setActive={setActive} images={params.images} setVisible={setVisible} ActiveImage={ActiveImage} setActiveImage={setActiveImage} />
-            <SafeAreaView style={{ position: 'absolute', width: SCREEN_WIDTH * .88, alignSelf: 'center',marginTop:Platform.OS==='android'? SCREEN_HEIGHT*.05:0 }}>
-                <DrawerHeaderComponent name={'rent'} type='expand' search={true} setVisible={setVisible} />
-                <ImageModal visible={Visible} image={params.images} setVisible={setVisible} index={ActiveImage} />
-            </SafeAreaView>
+            <View style={{ position: 'absolute', width: SCREEN_WIDTH * .9, alignSelf: 'center', alignItems: 'center' }}>
+                <SafeAreaView style={{ alignItems: 'center' }}>
+                    <DrawerHeaderComponent name={'rent'} setVisible={setVisible} />
+                    <ImageModal visible={Visible} image={params.images} setVisible={setVisible} index={ActiveImage} />
+                </SafeAreaView>
+
+            </View>
         </View>
-
-
-
     )
 }
 
@@ -75,8 +75,8 @@ const LowerComponent = ({ params, ActiveImage, setActiveImage }) => {
     const CustomAlignItems = Utils.alignItems(language)
 
     return (
-        <View>
-            <ScrollView contentContainerStyle={{ paddingBottom: 50 }} style={{ top: -SCREEN_WIDTH * .04, backgroundColor: Colors.Black_Bg, height: SCREEN_HEIGHT * .51, width: SCREEN_WIDTH, borderRadius: 15 }}>
+        <SafeAreaView style={{ backgroundColor: Colors.Green1, }}>
+            <ScrollView bounces={false} contentContainerStyle={{}} style={{ top: -SCREEN_WIDTH * .04, backgroundColor: Colors.Black_Bg, height: SCREEN_HEIGHT * .51, width: SCREEN_WIDTH, borderRadius: 15 }}>
                 <View style={{ width: SCREEN_WIDTH, alignSelf: 'center', overflow: 'hidden' }}>
                     <View style={{ backgroundColor: Colors.Black, paddingTop: SCREEN_HEIGHT * .02 }}>
                         <ImageSelector length={params?.images?.length} ActiveImage={ActiveImage} setActiveImage={setActiveImage} />
@@ -95,7 +95,6 @@ const LowerComponent = ({ params, ActiveImage, setActiveImage }) => {
                             </View>
                         </View>
                     </View>
-
                     <LocationComponent style={{ marginVertical: SCREEN_HEIGHT * .02, marginHorizontal: SCREEN_WIDTH * .05 }} width={SCREEN_WIDTH * .89} address={params.location} header={"Pickup Location"} />
 
                     <View style={[{ marginHorizontal: SCREEN_WIDTH * .05, marginTop: SCREEN_HEIGHT * .015 }, CustomAlignItems,]}>
@@ -105,16 +104,9 @@ const LowerComponent = ({ params, ActiveImage, setActiveImage }) => {
                     </View>
                 </View>
             </ScrollView>
-            <Pressable style={{ backgroundColor: Colors.Green1, height: SCREEN_WIDTH * .26, top: -SCREEN_WIDTH * .07, zIndex: -1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }} onPress={() => { HandleNavigation('BookingSummary', params, navigation) }}>
-                <Image source={ChevronRight} style={{ opacity: .3, marginRight: SCREEN_WIDTH * .003 }} />
-                <Image source={ChevronRight} style={{ opacity: .5, marginRight: SCREEN_WIDTH * .003 }} />
-                <Image source={ChevronRight} style={{ opacity: 1, marginRight: SCREEN_WIDTH * .003 }} />
-                <Text style={{ fontFamily: 'Gibson', fontWeight: 'semibold', fontSize: 18, marginHorizontal: SCREEN_WIDTH * .045, textTransform: 'uppercase' }}>{params.type == 'rent' ? "RENT NOW" : null}</Text>
-                <Image source={ChevronLeft} style={{ opacity: 1, marginRight: SCREEN_WIDTH * .003 }} />
-                <Image source={ChevronLeft} style={{ opacity: .5, marginRight: SCREEN_WIDTH * .003 }} />
-                <Image source={ChevronLeft} style={{ opacity: .3, marginRight: SCREEN_WIDTH * .003 }} />
-            </Pressable>
-        </View>
+            <LowerButtonComponent buttonTitle={'Rent Now'} onPress={() => { HandleNavigation('BookingSummary', params, navigation) }} height={SCREEN_HEIGHT * .06} />
+
+        </SafeAreaView>
     )
 }
 
@@ -123,9 +115,8 @@ const ProductPage = (props) => {
     const [Visible, setVisible] = useState(false)
     const params = props.route.params
     const [ActiveImage, setActiveImage] = useState('')
-    console.log("INNINDIN", ActiveImage)
     return (
-        <View>
+        <View style={{ flex: 1, backgroundColor: Colors.Green1 }}>
             <HeaderComponent Visible={Visible} setVisible={setVisible} params={params} ActiveImage={ActiveImage} setActiveImage={setActiveImage} />
             <LowerComponent params={params} ActiveImage={ActiveImage} setActiveImage={setActiveImage} />
 

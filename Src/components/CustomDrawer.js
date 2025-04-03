@@ -1,8 +1,8 @@
-import { View, Text, SafeAreaView, Image, Pressable, FlatList } from 'react-native'
+import { View, Text, SafeAreaView, Image, Pressable, FlatList, Platform } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Constants from '../Constants'
-import { ChevronRightWhite, Gift, Home, Logout, PrivacyPolicy, Profile, Profile_Damu, ProfileDP, Support } from '../assets/Images'
-import Svg, { Path } from 'react-native-svg'
+import { ChevronRightWhite, DrawerLowerImage, Gift, Home, Logout, PrivacyPolicy, Profile, Profile_Damu, ProfileDP, Support } from '../assets/Images'
+import Svg, { ClipPath, Defs, G, Path, Rect } from 'react-native-svg'
 import DataConstants from '../assets/DataConstants'
 import { useDispatch, useSelector } from 'react-redux'
 import { languageSignout, setLanguage } from '../redux/slice/languageSlice'
@@ -13,56 +13,8 @@ const { Colors } = Constants
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 const LowerSvg = () => {
   return (
-    <View style={{ position: 'absolute', left: -SCREEN_WIDTH * .28, bottom: -SCREEN_HEIGHT * .3, zIndex: -5 }}>
-      <Svg
-        id="Group_12530"
-        data-name="Group 12530"
-        width={277.526}
-        height={365.168}
-        viewBox="0 0 277.526 365.168">
-        <Path
-          id="Path_8641"
-          data-name="Path 8641"
-          d="M126.471,133.71h30.861L30.861,356.756H0Z"
-          transform="translate(92.988 -51.685)"
-          fill="#0fc1a1"
-        />
-        <Path
-          id="Path_8642"
-          data-name="Path 8642"
-          d="M126.471,133.71h30.861L30.861,356.756H0Z"
-          transform="translate(120.195 8.412)"
-          fill="#8a50ee"
-        />
-        <Path
-          id="Path_8645"
-          data-name="Path 8645"
-          d="M126.471,133.71h30.861L30.861,356.756H0Z"
-          transform="translate(77.558 -133.71)"
-          fill="#ff5f00"
-        />
-        <Path
-          id="Path_8643"
-          data-name="Path 8643"
-          d="M126.471,133.71h30.861L30.861,356.756H0Z"
-          transform="translate(89.74 8.412)"
-          fill="#1e75d1"
-        />
-        <Path
-          id="Path_8646"
-          data-name="Path 8646"
-          d="M126.471,133.71h30.861L30.861,356.756H0Z"
-          transform="translate(0 -51.685)"
-          fill="#e91ccf"
-        />
-        <Path
-          id="Path_8644"
-          data-name="Path 8644"
-          d="M126.471,133.71h30.861L30.861,356.756H0Z"
-          transform="translate(108.825 -133.71)"
-          fill="#e50c58"
-        />
-      </Svg>
+    <View style={{ position: 'absolute', bottom: 0 }}>
+      <Image source={DrawerLowerImage} />
     </View>
   );
 };
@@ -76,7 +28,6 @@ const CustomDrawer = (props) => {
   const CustomJustifyContent = Utils.justifyContent(language)
   const CustomImageTransform = Utils.ImageTransform(language)
   const [SelectedLanguage, setSelectedLanguage] = useState(language)
-  console.log('selected lang',SelectedLanguage)
   const { navigation } = props;
   const Languages = ['Arabic', "English"]
   useEffect(() => {
@@ -98,10 +49,10 @@ const CustomDrawer = (props) => {
             <Text style={{ fontFamily: "Gibson", color: Colors.White, }}>({points}) Point</Text>
             <Image source={ChevronRightWhite} style={[{ height: SCREEN_HEIGHT * .013, marginHorizontal: SCREEN_WIDTH * .01 }, CustomImageTransform]} resizeMode='contain' />
           </View>
-          <View style={[{ flexDirection: 'row' }, Utils.flexDirection()]}>
 
+          <View style={[{ flexDirection: 'row' }, Utils.alignSelf(language)]}>
             {Languages.map((language, index) => (
-              <Pressable key={language} style={{ backgroundColor: language === SelectedLanguage ? Colors.Green1 : Colors.Black, marginVertical: SCREEN_HEIGHT * .01, width: SCREEN_HEIGHT * .1, borderRadius: SCREEN_WIDTH * .02, alignItems: "center", justifyContent: 'center', height: SCREEN_HEIGHT * .04, alignSelf: 'flex-end' }} onPress={() => { setSelectedLanguage(language), dispatch(setLanguage(language)) }}>
+              <Pressable key={language} style={{ backgroundColor: language === SelectedLanguage ? Colors.Green1 : Colors.Black, marginVertical: SCREEN_HEIGHT * .01, paddingHorizontal: SCREEN_WIDTH * .036, borderRadius: SCREEN_WIDTH * .02, borderTopLeftRadius: index !== 0 ? 0 : null, borderBottomLeftRadius: index !== 0 ? 0 : null, borderTopRightRadius: index == 0 ? 0 : null, borderBottomRightRadius: index == 0 ? 0 : null, alignItems: "center", justifyContent: 'center', paddingVertical: SCREEN_HEIGHT * .01, alignSelf: 'flex-end' }} onPress={() => { setSelectedLanguage(language), dispatch(setLanguage(language)) }}>
                 <Text style={{ color: language === SelectedLanguage ? Colors.Black : Colors.White, fontSize: 14, fontWeight: '600' }}>{language}</Text>
               </Pressable>
             ))
@@ -112,13 +63,13 @@ const CustomDrawer = (props) => {
 
             return (
 
-              <Pressable style={[{ flexDirection: 'row', alignItems: 'center', padding: SCREEN_WIDTH * .03, marginTop: item.title === 'Logout' ? SCREEN_HEIGHT * .07 : 0, }, CustomAlignSelf, CustomFlexDirection]} onPress={() =>
+              <Pressable style={[{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: SCREEN_WIDTH * .03, paddingVertical: SCREEN_HEIGHT * .012, marginTop: item.title === 'Logout' ? SCREEN_HEIGHT * .07 : 0, }, CustomAlignSelf, CustomFlexDirection]} onPress={() =>
                 item.title === 'Logout'
-                  ? (dispatch(Signout()),dispatch(languageSignout()), Snackbar.show({ text: "Logged Out Successfully" }))
+                  ? (dispatch(Signout()), dispatch(languageSignout()), Snackbar.show({ text: "Logged Out Successfully" }))
                   : navigation.navigate('HomeStack', { screen: item.navigate })
               }>
                 <Image source={item.icon} style={{ height: SCREEN_HEIGHT * .04, resizeMode: 'contain', marginRight: SCREEN_WIDTH * .04, }} />
-                <Text style={{ color: Colors.White, fontWeight: '500', fontSize: 16, marginRight: SCREEN_WIDTH * .04, }}>{item.title}</Text>
+                <Text style={{ color: Colors.White, fontWeight: Platform.OS === 'android' ? '400' : '500', fontSize: 16, marginRight: SCREEN_WIDTH * .04, }}>{item.title}</Text>
 
               </Pressable>
             )
@@ -130,7 +81,7 @@ const CustomDrawer = (props) => {
       </View>
       <LowerSvg />
 
-    </SafeAreaView>
+    </SafeAreaView >
   )
 }
 

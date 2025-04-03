@@ -9,15 +9,13 @@ import { useSelector } from 'react-redux'
 import Utils from '../Utils'
 import TimeSlot from '../components/TimeSlot'
 import IconComponent from '../components/IconComponent'
-import AnimatedListView  from '../components/AnimatedListView'
+import AnimatedListView from '../components/AnimatedListView'
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 const { Colors } = Constants
 
 const HandleNavigation = ({ item, type, navigation }) => {
-
   navigation.navigate('BookedTicket', { ...item, type: type })
 }
-
 
 const RentRenderItem = ({ item, CustomFlexDirection, CustomTextAlign }) => {
   const navigation = useNavigation()
@@ -38,7 +36,7 @@ const RentRenderItem = ({ item, CustomFlexDirection, CustomTextAlign }) => {
             }, CustomTextAlign]}>
             {item.brand}
           </Text>
-          <TimeSlot selectedDate={item.date} selectedTime={item.time} />
+          <TimeSlot selectedDate={item.date} selectedTime={item.time} params={item} />
         </View>
       </View>
       <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginTop: SCREEN_WIDTH * .02 }, CustomFlexDirection]}>
@@ -48,6 +46,7 @@ const RentRenderItem = ({ item, CustomFlexDirection, CustomTextAlign }) => {
     </Pressable>
   )
 }
+
 const ServicesRenderItem = ({ item, index, CustomAlignSelf, CustomFlexDirection, CustomTextAlign }) => {
   const navigation = useNavigation()
   return (
@@ -97,16 +96,14 @@ const BuildRenderItem = ({ item, index, CustomFlexDirection, CustomTextAlign }) 
           </Text>
 
         </View>
-       
-        <IconComponent image={ChevronDown} imageStyle={{height: SCREEN_WIDTH * 0.045, width: SCREEN_WIDTH * 0.045,}} />
+
+        <IconComponent image={ChevronDown} imageStyle={{ height: SCREEN_WIDTH * 0.045, width: SCREEN_WIDTH * 0.045, }} />
       </View>
       <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginTop: SCREEN_WIDTH * .02, alignItems: 'flex-end', paddingHorizontal: SCREEN_WIDTH * .017 }, CustomFlexDirection]}>
-        <Text style={{ fontFamily: 'Gibson', fontSize: 12, color: item.status == 'completed' ? Colors.Green1 : Colors.Gray_Text, marginVertical: SCREEN_HEIGHT*.003, padding: SCREEN_WIDTH * .015, borderRadius: 10 }}>{item.date}</Text>
-        <Text style={{ fontFamily: 'Gibson', fontSize: 8, color: Colors.Green1, marginVertical: SCREEN_HEIGHT*.003, }}><Text style={{ fontFamily: 'Gibson', fontWeight: '600', fontSize: 20, color: Colors.Green1, }}>{item.total} </Text>QAR</Text>
+        <Text style={{ fontFamily: 'Gibson', fontSize: 12, color: item.status == 'completed' ? Colors.Green1 : Colors.Gray_Text, marginVertical: SCREEN_HEIGHT * .003, padding: SCREEN_WIDTH * .015, borderRadius: 10 }}>{item.date}</Text>
+        <Text style={{ fontFamily: 'Gibson', fontSize: 8, color: Colors.Green1, marginVertical: SCREEN_HEIGHT * .003, }}><Text style={{ fontFamily: 'Gibson', fontWeight: '600', fontSize: 20, color: Colors.Green1, }}>{item.total} </Text>QAR</Text>
       </View>
     </Pressable>
-
-
   )
 }
 
@@ -115,21 +112,19 @@ const ListRenderItem = ({ item, selectedType, CustomAlignSelf, CustomFlexDirecti
   switch (selectedType) {
     case 'Rent':
       return (
-    <AnimatedListView >
-        <RentRenderItem item={item} CustomAlignSelf={CustomAlignSelf} CustomFlexDirection={CustomFlexDirection} CustomTextAlign={CustomTextAlign} /></AnimatedListView>
+        <AnimatedListView >
+          <RentRenderItem item={item} CustomAlignSelf={CustomAlignSelf} CustomFlexDirection={CustomFlexDirection} CustomTextAlign={CustomTextAlign} /></AnimatedListView>
       )
     case 'Services':
       return (
         <AnimatedListView >
-        <ServicesRenderItem item={item} CustomAlignSelf={CustomAlignSelf} CustomFlexDirection={CustomFlexDirection} CustomTextAlign={CustomTextAlign} />
-
+          <ServicesRenderItem item={item} CustomAlignSelf={CustomAlignSelf} CustomFlexDirection={CustomFlexDirection} CustomTextAlign={CustomTextAlign} />
         </AnimatedListView>
       )
     case 'Build':
       return (
         <AnimatedListView>
-        <BuildRenderItem item={item} CustomAlignSelf={CustomAlignSelf} CustomFlexDirection={CustomFlexDirection} CustomTextAlign={CustomTextAlign} />
-
+          <BuildRenderItem item={item} CustomAlignSelf={CustomAlignSelf} CustomFlexDirection={CustomFlexDirection} CustomTextAlign={CustomTextAlign} />
         </AnimatedListView>
       )
   }
@@ -156,7 +151,7 @@ const MyActivities = () => {
 
 
   return (
-    <View style={{ backgroundColor: Colors.Black_Bg, height: SCREEN_WIDTH * .5,paddingTop:Platform.OS==='android'?SCREEN_HEIGHT*.05:0 }}>
+    <View style={{ backgroundColor: Colors.Black_Bg, height: SCREEN_WIDTH * .6, }}>
       <SafeAreaView>
         <View style={{ marginHorizontal: SCREEN_WIDTH * .07 }}>
           <DrawerHeaderComponent name='MY Activities' type='login' />

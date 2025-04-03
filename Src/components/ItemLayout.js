@@ -1,33 +1,37 @@
-import { View, Text, Pressable, Image, SafeAreaView, Platform } from 'react-native'
+import { View, Text, Pressable, Image, SafeAreaView, Platform, StatusBar } from 'react-native'
 import React from 'react'
 import Constants from '../Constants'
 import { ChevronLeft, ChevronRight } from '../assets/Images'
+const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
+const { Colors } = Constants
 
-const ItemLayout = ({name,children,size,colors,onPress,screenname,padding}) => {
-    const{SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
-    const{Colors}=Constants
-
-    
-    const CustomSafeAreaView=Platform.OS==='android'?SafeAreaView:View
+export const LowerButtonComponent = ({ onPress, buttonTitle, height }) => {
   return (
-    <CustomSafeAreaView>
-       <View style={{backgroundColor:colors?colors:Colors.Black,height:SCREEN_HEIGHT*.92,width:SCREEN_WIDTH,borderRadius:15,zIndex:9,overflow:"hidden",borderTopRightRadius:0,borderTopLeftRadius:0}}>
-       <SafeAreaView style={{width:SCREEN_WIDTH,alignSelf:'center',marginTop:Platform.OS==='ios'?SCREEN_HEIGHT*.02:SCREEN_HEIGHT*.02,overflow:'hidden'}}>
-     <View style={{marginHorizontal:SCREEN_WIDTH*.07,}}>
-     </View> 
-        {children}
-        </SafeAreaView>
-   </View>
-   <Pressable style={{backgroundColor:Colors.Green1,height:SCREEN_HEIGHT*.12,top:-15,zIndex:-1,alignItems:'center',justifyContent:'center',flexDirection:'row'}}onPress={onPress}>
-   <Image source={ChevronRight} style={{opacity:.3,marginRight:SCREEN_WIDTH*.003}}/>
-   <Image source={ChevronRight} style={{opacity:.5,marginRight:SCREEN_WIDTH*.003}}/> 
-   <Image source={ChevronRight} style={{opacity:1,marginRight:SCREEN_WIDTH*.003}}/> 
-   <Text style={{fontFamily:'Gibson',fontWeight:'semibold',fontSize:18,marginHorizontal:SCREEN_WIDTH*.045,textTransform:'uppercase'}}>{name}</Text>
-   <Image source={ChevronLeft} style={{opacity:1,marginRight:SCREEN_WIDTH*.003}}/>
-   <Image source={ChevronLeft} style={{opacity:.5,marginRight:SCREEN_WIDTH*.003}}/> 
-   <Image source={ChevronLeft} style={{opacity:.3,marginRight:SCREEN_WIDTH*.003}}/> 
+    <Pressable style={{ height: height ? height : SCREEN_HEIGHT * .1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }} onPress={onPress}>
+      {Array.from({ length: 3 }).map((_, index) => (
+        <Image key={index} source={ChevronRight} style={{ opacity: index !== 0 ? index * .5 : .3, marginRight: SCREEN_WIDTH * .003 }} />
+      ))}
+
+      <Text style={{ fontFamily: 'Gibson', fontWeight: 'semibold', fontSize: 18, marginHorizontal: SCREEN_WIDTH * .045, textTransform: 'uppercase' }}>{buttonTitle}</Text>
+
+      {Array.from({ length: 3 }).map((_, index) => (
+        <Image key={index} source={ChevronLeft} style={{ opacity: index !== 0 ? index * .5 : .3, marginRight: SCREEN_WIDTH * .003 }} />
+      ))}
+
     </Pressable>
-    </CustomSafeAreaView>
+  )
+}
+const ItemLayout = ({ buttonTitle, children, size, colors, onPress, screenname, padding }) => {
+
+  return (
+    <View style={{ backgroundColor: Colors.Green1, flex: 1 }}>
+      <View style={{ backgroundColor: colors ? colors : Colors.Black, height: SCREEN_HEIGHT * .9, width: SCREEN_WIDTH, borderRadius: 15, overflow: "hidden", borderTopRightRadius: 0, borderTopLeftRadius: 0 }}>
+        <SafeAreaView style={{ width: SCREEN_WIDTH, alignSelf: 'center', marginTop: StatusBar.currentHeight }}>
+          {children}
+        </SafeAreaView>
+      </View>
+      <LowerButtonComponent onPress={onPress} buttonTitle={buttonTitle} />
+    </View>
   )
 }
 

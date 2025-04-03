@@ -75,18 +75,18 @@ const MembershipData = [
   },
 ];
 const RentData = [
-  {name: 'Beach', image: Jetski},
-  {name: 'Desert', image: QuadBike},
+  { name: 'Beach', image: Jetski },
+  { name: 'Desert', image: QuadBike },
 ];
 
 const ServicesData = [
-  {name: 'Washing', image: ShowerHead},
-  {name: 'Towing', image: Towing},
+  { name: 'Washing', image: ShowerHead },
+  { name: 'Towing', image: Towing },
 ];
 
 const BuildData = [
-  {name: 'Standard', image: CabanaStandard},
-  {name: 'Custom', image: CabanaCustom},
+  { name: 'Standard', image: CabanaStandard },
+  { name: 'Custom', image: CabanaCustom },
 ];
 const HomeData = [
   {
@@ -110,13 +110,13 @@ const HomeData = [
 ];
 const HomeHeader = 'Welcome to Vip-974';
 const SignupFields = [
-  {name: 'First Name', key: 'FirstName'},
-  {name: 'Last Name', key: 'LastName'},
-  {name: 'Email', key: 'Email'},
-  {name: 'Phone', key: 'Phone'},
-  {name: 'Qid', key: 'Qid'},
+  { name: 'First Name', key: 'FirstName' },
+  { name: 'Last Name', key: 'LastName' },
+  { name: 'Email', key: 'Email' },
+  { name: 'Phone', key: 'Phone' },
+  { name: 'Qid', key: 'Qid' },
 ];
-const ServiceSelectionData = ({type}) => {
+const ServiceSelectionData = ({ type }) => {
   switch (type) {
     case 'rent':
       return 'Please specify the type of vehicles you want, desert or beach';
@@ -128,7 +128,7 @@ const ServiceSelectionData = ({type}) => {
       return 'Please choose the build type, Standerd or Custom';
   }
 };
-const ServiceSelectionHeaders = ({type}) => {
+const ServiceSelectionHeaders = ({ type }) => {
   switch (type) {
     case 'rent':
       return 'Choose terrain';
@@ -141,10 +141,10 @@ const ServiceSelectionHeaders = ({type}) => {
   }
 };
 const WashTimes = [
-  {name: 'Morning', slot: '7:00 am to 12:00 pm'},
-  {name: 'Midday', slot: '12:00 pm to 3:00 pm'},
-  {name: 'Afternoon', slot: '3:00 pm to 7:00 pm'},
-  {name: 'Evening', slot: '7:00 am to 10:00 pm'},
+  { name: 'Morning', slot: '7:00 am to 12:00 pm' },
+  { name: 'Midday', slot: '12:00 pm to 3:00 pm' },
+  { name: 'Afternoon', slot: '3:00 pm to 7:00 pm' },
+  { name: 'Evening', slot: '7:00 am to 10:00 pm' },
 ];
 const BeachServiceData = [
   {
@@ -153,13 +153,13 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
-    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
+    images: [YamahaJetski1, Yamahawave1, Yamahawave2],
     model: '2021 Cruising, 2021 Yamaha Waverunners',
     detail:
       ' Feel the adrenaline rush and conquer the waves, or explore FX SVHO’s calm personality, when it becomes the smoothest ride you could wish for. Supercharge your adventures in the Yamaha way',
     detailSub:
       'From our unique, revolutionary RiDE system and lightweight NanoXcel2® hulls – to our exclusive electronic control systems – to the top range supercharged',
-    addOn: [{name: 'Drinks Box'}, {name: 'Home Businesses'}],
+    addOn: [{ name: 'Drinks Box' }, { name: 'Home Businesses' }],
   },
   {
     name: '2022 FX SVHO',
@@ -167,7 +167,7 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
-    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
+    images: [YamahaJetski1, Yamahawave1, Yamahawave2],
 
   },
   {
@@ -176,7 +176,7 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
-    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
+    images: [YamahaJetski1, Yamahawave1, Yamahawave2],
 
   },
   {
@@ -185,7 +185,7 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
-    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
+    images: [YamahaJetski1, Yamahawave1, Yamahawave2],
   },
   {
     name: '2025 FX SVHO',
@@ -193,7 +193,7 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
-    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
+    images: [YamahaJetski1, Yamahawave1, Yamahawave2],
   },
   {
     name: '2026 FX SVHO',
@@ -201,7 +201,7 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
-    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
+    images: [YamahaJetski1, Yamahawave1, Yamahawave2],
   },
   {
     name: '2027 FX SVHO',
@@ -209,7 +209,7 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
-    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
+    images: [YamahaJetski1, Yamahawave1, Yamahawave2],
   },
   {
     name: '2028 FX SVHO',
@@ -217,7 +217,7 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
-    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
+    images: [YamahaJetski1, Yamahawave1, Yamahawave2],
   },
   {
     name: '2029 FX SVHO',
@@ -225,7 +225,7 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
-    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
+    images: [YamahaJetski1, Yamahawave1, Yamahawave2],
   },
   {
     name: '2030 FX SVHO',
@@ -233,7 +233,7 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
-    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
+    images: [YamahaJetski1, Yamahawave1, Yamahawave2],
   },
   {
     name: '2031 FX SVHO',
@@ -241,7 +241,7 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
-    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
+    images: [YamahaJetski1, Yamahawave1, Yamahawave2],
   },
   {
     name: '2032 FX SVHO',
@@ -249,7 +249,7 @@ const BeachServiceData = [
     rating: 5,
     brand: 'Yamaha',
     location: 'Abu Hamour, Doha',
-    images:[YamahaJetski1,Yamahawave1,Yamahawave2],
+    images: [YamahaJetski1, Yamahawave1, Yamahawave2],
   },
 ];
 
@@ -260,13 +260,13 @@ const DesertServiceData = [
     rating: 4.8,
     brand: 'DesertRunner',
     location: 'Al Wakrah, Qatar',
-    images:[DesertBike,DesertBike2,DesertBike3],
+    images: [DesertBike, DesertBike2, DesertBike3],
     model: '2023 All-Terrain Quadbike',
     detail:
       'Conquer the sand dunes with unmatched power and precision. The Desert Thunder is built for adventure seekers ready to tackle the toughest terrains.',
     detailSub:
       'Equipped with advanced suspension systems and high-performance engines, this quadbike redefines all-terrain riding experiences.',
-    addOn: [{name: 'Drinks Box'}, {name: 'Home Businesses'}],
+    addOn: [{ name: 'Drinks Box' }, { name: 'Home Businesses' }],
   },
   {
     name: 'Nomad 450 AT',
@@ -274,13 +274,13 @@ const DesertServiceData = [
     rating: 4.9,
     brand: 'SandRider',
     location: 'Mesaieed, Qatar',
-    images:[DesertBike,DesertBike2,DesertBike3],
+    images: [DesertBike, DesertBike2, DesertBike3],
     model: '2023 Extreme Desert Quad',
     detail:
       'Feel the thrill of the desert with the Nomad 450 AT. Designed for those who crave an adrenaline rush and absolute reliability on shifting sands.',
     detailSub:
       'Featuring cutting-edge navigation systems and a lightweight alloy frame for ultimate maneuverability.',
-    addOn: [{name: 'Drinks Box'}, {name: 'Home Businesses'}],
+    addOn: [{ name: 'Drinks Box' }, { name: 'Home Businesses' }],
   },
   {
     name: 'Dune Dominator 600',
@@ -288,13 +288,13 @@ const DesertServiceData = [
     rating: 4.7,
     brand: 'SandMaster',
     location: 'Doha, Qatar',
-    images:[DesertBike,DesertBike2,DesertBike3],
+    images: [DesertBike, DesertBike2, DesertBike3],
     model: '2023 Rugged Quadbike',
     detail:
       'Take control of the dunes with the Dune Dominator 600. Engineered for high-speed adventure on challenging terrains.',
     detailSub:
       'Advanced shock absorbers and a turbocharged engine offer superior performance.',
-    addOn: [{name: 'Drinks Box'}, {name: 'Home Businesses'}],
+    addOn: [{ name: 'Drinks Box' }, { name: 'Home Businesses' }],
   },
   {
     name: 'Sand Storm Xtreme',
@@ -302,13 +302,13 @@ const DesertServiceData = [
     rating: 4.6,
     brand: 'TrailBlazer',
     location: 'Al Khor, Qatar',
-    images:[DesertBike,DesertBike2,DesertBike3],
+    images: [DesertBike, DesertBike2, DesertBike3],
     model: '2023 Off-Road Quad',
     detail:
       'Feel the power and agility with the Sand Storm Xtreme. Perfectly crafted for thrilling desert rides.',
     detailSub:
       'Comes with advanced safety features and ergonomic design for comfort.',
-    addOn: [{name: 'Drinks Box'}, {name: 'Home Businesses'}],
+    addOn: [{ name: 'Drinks Box' }, { name: 'Home Businesses' }],
   },
   {
     name: 'Raptor 800X',
@@ -316,13 +316,13 @@ const DesertServiceData = [
     rating: 4.9,
     brand: 'QuadXperts',
     location: 'Abu Samra, Qatar',
-    images:[DesertBike,DesertBike2,DesertBike3],
+    images: [DesertBike, DesertBike2, DesertBike3],
     model: '2023 Premium All-Terrain Quad',
     detail:
       'Unleash the beast on the sands with the Raptor 800X. Built for ultimate performance and endurance.',
     detailSub:
       'Includes an advanced cooling system and superior traction control.',
-    addOn: [{name: 'Drinks Box'}, {name: 'Home Businesses'}],
+    addOn: [{ name: 'Drinks Box' }, { name: 'Home Businesses' }],
   },
   {
     name: 'Sand Viper 400',
@@ -330,12 +330,12 @@ const DesertServiceData = [
     rating: 4.5,
     brand: 'DesertPro',
     location: 'Dukhan, Qatar',
-    images:[DesertBike,DesertBike2,DesertBike3],
+    images: [DesertBike, DesertBike2, DesertBike3],
     model: '2023 Mid-Range Quadbike',
     detail:
       'The Sand Viper 400 offers excellent performance for riders of all levels. Ideal for desert exploration.',
     detailSub: 'Features a lightweight design and user-friendly controls.',
-    addOn: [{name: 'Drinks Box'}, {name: 'Home Businesses'}],
+    addOn: [{ name: 'Drinks Box' }, { name: 'Home Businesses' }],
   },
   {
     name: 'Trail Conqueror 500',
@@ -343,12 +343,12 @@ const DesertServiceData = [
     rating: 4.7,
     brand: 'QuadMaverick',
     location: 'Umm Bab, Qatar',
-    images:[DesertBike,DesertBike2,DesertBike3],
+    images: [DesertBike, DesertBike2, DesertBike3],
     model: '2023 Desert Explorer',
     detail:
       'Challenge the trails with the Trail Conqueror 500. Designed for enthusiasts seeking new adventures.',
     detailSub: 'Comes with GPS tracking and durable tires for tough terrains.',
-    addOn: [{name: 'Drinks Box'}, {name: 'Home Businesses'}],
+    addOn: [{ name: 'Drinks Box' }, { name: 'Home Businesses' }],
   },
   {
     name: 'Falcon X500',
@@ -356,12 +356,12 @@ const DesertServiceData = [
     rating: 4.6,
     brand: 'SandXtreme',
     location: 'Simaisma, Qatar',
-    images:[DesertBike,DesertBike2,DesertBike3],
+    images: [DesertBike, DesertBike2, DesertBike3],
     model: '2023 Sleek Desert Quad',
     detail:
       'Experience agility and speed with the Falcon X500. Built for smooth rides across any desert.',
     detailSub: 'Boasts a high-torque engine and seamless gear transition.',
-    addOn: [{name: 'Drinks Box'}, {name: 'Home Businesses'}],
+    addOn: [{ name: 'Drinks Box' }, { name: 'Home Businesses' }],
   },
   {
     name: 'Desert Phantom 700',
@@ -369,12 +369,12 @@ const DesertServiceData = [
     rating: 4.8,
     brand: 'GhostRider',
     location: 'Al Shamal, Qatar',
-    images:[DesertBike,DesertBike2,DesertBike3],
+    images: [DesertBike, DesertBike2, DesertBike3],
     model: '2023 Elite Quadbike',
     detail:
       'Dominate the sands with the Desert Phantom 700. Designed for top-tier riders who demand the best.',
     detailSub: 'Integrated with luxury seating and premium handling features.',
-    addOn: [{name: 'Drinks Box'}, {name: 'Home Businesses'}],
+    addOn: [{ name: 'Drinks Box' }, { name: 'Home Businesses' }],
   },
   {
     name: 'SandBlazer XL',
@@ -382,65 +382,65 @@ const DesertServiceData = [
     rating: 4.7,
     brand: 'TerrainTamer',
     location: 'Lusail, Qatar',
-    images:[DesertBike,DesertBike2,DesertBike3],
+    images: [DesertBike, DesertBike2, DesertBike3],
     model: '2023 Ultimate Quadbike',
     detail:
       'The SandBlazer XL combines power and elegance for an unparalleled desert adventure.',
     detailSub:
       'Enhanced fuel efficiency and aerodynamic design for extended rides.',
-    addOn: [{name: 'Drinks Box'}, {name: 'Home Businesses'}],
+    addOn: [{ name: 'Drinks Box' }, { name: 'Home Businesses' }],
   },
 ];
 const paymentData = [
-  {name: 'Rent', amt: 150},
-  {name: 'Drinks Box', amt: 90},
-  {name: 'Home Businesses', amt: 80},
-  {name: 'Fee', amt: 30},
+  { name: 'Rent', amt: 150 },
+  { name: 'Drinks Box', amt: 90 },
+  { name: 'Home Businesses', amt: 80 },
+  { name: 'Fee', amt: 30 },
 ];
 const ServicePay = [
-  {name: 'Rent', amt: 150},
-  {name: 'Fee', amt: 30},
+  { name: 'Rent', amt: 150 },
+  { name: 'Fee', amt: 30 },
 ];
 
 const softDrinks = [
-  {name: 'Coca-Cola', price: 50, image: Dew},
-  {name: 'Pepsi', price: 45, image: Pepsi},
-  {name: 'Sprite', price: 40, image: Dew},
-  {name: 'Fanta', price: 42, image: Fanta},
-  {name: 'Mountain Dew', price: 48, image: Dew},
-  {name: '7-Up', price: 38, image: Pepsi},
-  {name: 'Thums Up', price: 47, image: Fanta},
-  {name: 'Dr Pepper', price: 55, image: Dew},
-  {name: 'Limca', price: 43, image: Fanta},
-  {name: 'Mirinda', price: 40, image: Pepsi},
+  { name: 'Coca-Cola', price: 50, image: Dew },
+  { name: 'Pepsi', price: 45, image: Pepsi },
+  { name: 'Sprite', price: 40, image: Dew },
+  { name: 'Fanta', price: 42, image: Fanta },
+  { name: 'Mountain Dew', price: 48, image: Dew },
+  { name: '7-Up', price: 38, image: Pepsi },
+  { name: 'Thums Up', price: 47, image: Fanta },
+  { name: 'Dr Pepper', price: 55, image: Dew },
+  { name: 'Limca', price: 43, image: Fanta },
+  { name: 'Mirinda', price: 40, image: Pepsi },
 ];
 const Services = [
-  {name: 'Waterproof Phone Case Rental', price: 300, image: LifeJacket},
+  { name: 'Waterproof Phone Case Rental', price: 300, image: LifeJacket },
   {
     name: 'Life Jacket Upgrade (Premium Comfort)',
     price: 500,
     image: LifeJacket,
   },
-  {name: 'GoPro Camera Rental', price: 1500, image: Gopro},
-  {name: 'Extra Fuel for Extended Rides', price: 800, image: LifeJacket},
-  {name: 'Professional Instructor Assistance', price: 1000, image: Gopro},
-  {name: 'Photo & Video Package', price: 2000, image: LifeJacket},
-  {name: 'Sun Protection Kit (Sunscreen & Hat)', price: 400, image: LifeJacket},
-  {name: 'Dry Bag for Belongings', price: 350, image: Gopro},
-  {name: 'Locker Rental', price: 200, image: LifeJacket},
+  { name: 'GoPro Camera Rental', price: 1500, image: Gopro },
+  { name: 'Extra Fuel for Extended Rides', price: 800, image: LifeJacket },
+  { name: 'Professional Instructor Assistance', price: 1000, image: Gopro },
+  { name: 'Photo & Video Package', price: 2000, image: LifeJacket },
+  { name: 'Sun Protection Kit (Sunscreen & Hat)', price: 400, image: LifeJacket },
+  { name: 'Dry Bag for Belongings', price: 350, image: Gopro },
+  { name: 'Locker Rental', price: 200, image: LifeJacket },
 ];
 
 const places = [
-  {name: 'New York'},
-  {name: 'Paris'},
-  {name: 'Tokyo'},
-  {name: 'Sydney'},
-  {name: 'Cairo'},
-  {name: 'Mumbai'},
-  {name: 'Rome'},
-  {name: 'London'},
-  {name: 'Beijing'},
-  {name: 'Rio de Janeiro'},
+  { name: 'New York' },
+  { name: 'Paris' },
+  { name: 'Tokyo' },
+  { name: 'Sydney' },
+  { name: 'Cairo' },
+  { name: 'Mumbai' },
+  { name: 'Rome' },
+  { name: 'London' },
+  { name: 'Beijing' },
+  { name: 'Rio de Janeiro' },
 ];
 const PickupData = [
   { name: 'Pickup', pickupaddress: 'Mirqab Mall Al Mirqab Al Jadeed St, Doha, Qatar', icon: PickupDot },
@@ -542,10 +542,10 @@ const CabanaList = [
     image: Family_Cabana,
     address: 'Mirqab Mall Al Mirqab Al Jadeed St, Doha, Qatar',
     features: [
-      {featureName: 'Kitchen', qty: 1, image: Kitchen},
-      {featureName: 'Rooms', qty: 1, image: Rooms},
-      {featureName: 'AC', qty: 1, image: Condition},
-      {featureName: 'Bathroom', qty: 1, image: BathroomSide},
+      { featureName: 'Kitchen', qty: 1, image: Kitchen },
+      { featureName: 'Rooms', qty: 1, image: Rooms },
+      { featureName: 'AC', qty: 1, image: Condition },
+      { featureName: 'Bathroom', qty: 1, image: BathroomSide },
     ],
   },
   {
@@ -564,11 +564,11 @@ const CabanaList = [
   },
 ];
 const SupportData = [
-  {title: 'Name', key: 'Name'},
-  {title: 'Email', key: 'Email'},
-  {title: 'Phone Number', key: 'PhoneNumber'},
-  {title: 'Purpose Of Contact', key: 'PurposeOfContact'},
-  {title: 'Message', key: 'Message'},
+  { title: 'Name', key: 'Name' },
+  { title: 'Email', key: 'Email' },
+  { title: 'Phone Number', key: 'PhoneNumber' },
+  { title: 'Purpose Of Contact', key: 'PurposeOfContact' },
+  { title: 'Message', key: 'Message' },
 ];
 const PrivacyPolicyData = [
   {
@@ -588,26 +588,26 @@ const PrivacyPolicyData = [
   },
 ];
 const CustomDrawerData = [
-  {id: 1, title: 'Home', icon: Home, navigate: 'Home'},
-  {id: 2, title: 'My Profile', icon: Profile, navigate: 'MyProfile'},
-  {id: 3, title: 'About Us', icon: AboutUS, navigate: 'AboutUs'},
-  {id: 4, title: 'Support', icon: Support, navigate: 'Support'},
+  { id: 1, title: 'Home', icon: Home, navigate: 'Home' },
+  { id: 2, title: 'My Profile', icon: Profile, navigate: 'MyProfile' },
+  { id: 3, title: 'About Us', icon: AboutUS, navigate: 'AboutUs' },
+  { id: 4, title: 'Support', icon: Support, navigate: 'Support' },
   {
     id: 5,
     title: 'Privacy Policy',
     icon: PrivacyPolicy,
     navigate: 'PrivacyPolicy',
   },
-  {id: 6, title: 'Logout', icon: Logout, navigate: 'Login'},
+  { id: 6, title: 'Logout', icon: Logout, navigate: 'Login' },
 ];
 const MyProfileDataItems = [
-  {icon: Profile, title: 'Edit Profile', navigate: 'EditProfile'},
-  {icon: Clipboard, title: 'My Activities', navigate: 'MyActivities'},
-  {icon: Gift0, title: 'Membership', navigate: 'Membership'},
+  { icon: Profile, title: 'Edit Profile', navigate: 'EditProfile' },
+  { icon: Clipboard, title: 'My Activities', navigate: 'MyActivities' },
+  { icon: Gift0, title: 'Membership', navigate: 'Membership' },
 ];
 const HistoryData = [
   {
-    name: '2030 FX SVHO',
+    name: '2031 FX SVHO',
     price: 50,
     rating: 5,
     brand: 'Yamaha',
@@ -618,12 +618,12 @@ const HistoryData = [
       ' Feel the adrenaline rush and conquer the waves, or explore FX SVHO’s calm personality, when it becomes the smoothest ride you could wish for. Supercharge your adventures in the Yamaha way',
     detailSub:
       'From our unique, revolutionary RiDE system and lightweight NanoXcel2® hulls – to our exclusive electronic control systems – to the top range supercharged',
-      addOn: {DrinksBox:[{name: 'Pepsi',qty:2},{name: 'ThumbsUp',qty:1}],HomeBusinesses: [{name: 'HomeMade Sweet',qty:2},{name: 'Pottery',qty:1}]},
+    addOn: { DrinksBox: [{ name: 'Pepsi', qty: 2 }, { name: 'ThumbsUp', qty: 1 }], HomeBusinesses: [{ name: 'HomeMade Sweet', qty: 2 }, { name: 'Pottery', qty: 1 }] },
 
     status: 'completed',
     date: '23,December,2020',
-    time: ['09:00 am','10:00 am','11:00 am'],
-    type:'rent'
+    time: ['09:00 am', '10:00 am', '11:00 am'],
+    type: 'rent'
   },
   {
     name: '2020 FX SVHO',
@@ -640,8 +640,8 @@ const HistoryData = [
 
     status: 'pending',
     date: '24,December,2020',
-        time: ['09:00 am','10:00 am','11:00 am'],
-    type:'rent'
+    time: ['09:00 am', '10:00 am', '11:00 am'],
+    type: 'rent'
 
 
   },
@@ -660,8 +660,8 @@ const HistoryData = [
 
     status: 'completed',
     date: '26,December,2020',
-        time: ['09:00 am','10:00 am','11:00 am'],
-    type:'rent'
+    time: ['09:00 am', '10:00 am', '11:00 am'],
+    type: 'rent'
 
 
   },
@@ -677,12 +677,12 @@ const HistoryData = [
       ' Feel the adrenaline rush and conquer the waves, or explore FX SVHO’s calm personality, when it becomes the smoothest ride you could wish for. Supercharge your adventures in the Yamaha way',
     detailSub:
       'From our unique, revolutionary RiDE system and lightweight NanoXcel2® hulls – to our exclusive electronic control systems – to the top range supercharged',
-      addOn: [{name: 'Drinks Box',qty:5}, {name: 'Home Businesses',qty:0}],
+    addOn: [{ name: 'Drinks Box', qty: 5 }, { name: 'Home Businesses', qty: 0 }],
 
     status: 'pending',
     date: '29,December,2020',
-        time: ['09:00 am','10:00 am','11:00 am'],
-    type:'rent'
+    time: ['09:00 am', '10:00 am', '11:00 am'],
+    type: 'rent'
 
 
   },
@@ -698,11 +698,11 @@ const HistoryData = [
       ' Feel the adrenaline rush and conquer the waves, or explore FX SVHO’s calm personality, when it becomes the smoothest ride you could wish for. Supercharge your adventures in the Yamaha way',
     detailSub:
       'From our unique, revolutionary RiDE system and lightweight NanoXcel2® hulls – to our exclusive electronic control systems – to the top range supercharged',
-    addOn: [{name: 'Drinks Box',qty:2}, {name: 'Home Businesses',qty:1}],
+    addOn: [{ name: 'Drinks Box', qty: 2 }, { name: 'Home Businesses', qty: 1 }],
     status: 'completed',
     date: '31,December,2020',
-        time: ['09:00 am','10:00 am','11:00 am'],
-    type:'rent'
+    time: ['09:00 am', '10:00 am', '11:00 am'],
+    type: 'rent'
 
 
   },
@@ -719,7 +719,7 @@ const HistoryServicesData = [
     total: 200,
     servicename: 'Cleaning',
     size: '4 x 6',
-    subtype:'towing'
+    subtype: 'towing'
   },
   {
     name: 'Luxury Auto Detailing',
@@ -732,7 +732,7 @@ const HistoryServicesData = [
     total: 350,
     servicename: 'Detailing',
     size: 'Full Size',
-    subtype:'towing'
+    subtype: 'towing'
 
   },
   {
@@ -746,7 +746,7 @@ const HistoryServicesData = [
     total: 500,
     servicename: 'Polishing',
     size: '75 ft',
-    subtype:'towing'
+    subtype: 'towing'
 
   },
   {
@@ -760,7 +760,7 @@ const HistoryServicesData = [
     total: 250,
     servicename: 'Maintenance',
     size: '20 ft',
-    subtype:'towing'
+    subtype: 'towing'
 
   },
   {
@@ -774,7 +774,7 @@ const HistoryServicesData = [
     total: 150,
     servicename: 'Cleaning',
     size: '10 x 20',
-    subtype:'washing'
+    subtype: 'washing'
 
   },
   {
@@ -788,7 +788,7 @@ const HistoryServicesData = [
     total: 400,
     servicename: 'Landscaping',
     size: '30 x 40',
-    subtype:'towing'
+    subtype: 'towing'
 
   },
 ];
@@ -866,12 +866,12 @@ const HistoryBuildData = [
     servicename: 'Landscaping',
   },
 ];
-const HistoryHeaders = [{name: 'Rent'}, {name: 'Services'}, {name: 'Build'}];
+const HistoryHeaders = [{ name: 'Rent' }, { name: 'Services' }, { name: 'Build' }];
 const AboutCompanyData =
   'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren';
 const MyBuildHeader = [
-  {id: 1, name: 'Standard'},
-  {id: 2, name: 'Custom'},
+  { id: 1, name: 'Standard' },
+  { id: 2, name: 'Custom' },
 ];
 const MybuildStandardData = [
   {
@@ -925,16 +925,16 @@ const MybuildCustomData = [
     type: 'booked',
   },
 ]
-const PointHistoryData=[
-    { name: 'Rentals', date: '03 Jun 2021', image: Rent_White, point: 120, type: 'inc' },
-    { name: 'Services', date: '02 Jun 2021', image: Towing_White, point: 120, type: 'inc' },
-    { name: 'Builds', date: '01 Jun 2021', image: Build_White, point: 120, type: 'dec' },
-    { name: 'Rentals', date: '03 Jun 2021', image: Rent_White, point: 120, type: 'inc' },
-    { name: 'Services', date: '02 Jun 2021', image: Towing_White, point: 120, type: 'inc' },
-    { name: 'Builds', date: '01 Jun 2021', image: Build_White, point: 120, type: 'dec' },
-    { name: 'Rentals', date: '03 Jun 2021', image: Rent_White, point: 120, type: 'inc' },
-    { name: 'Services', date: '02 Jun 2021', image: Towing_White, point: 120, type: 'inc' },
-    { name: 'Builds', date: '01 Jun 2021', image: Build_White, point: 120, type: 'dec' },
+const PointHistoryData = [
+  { name: 'Rentals', date: '03 Jun 2021', image: Rent_White, point: 120, type: 'inc' },
+  { name: 'Services', date: '02 Jun 2021', image: Towing_White, point: 120, type: 'inc' },
+  { name: 'Builds', date: '01 Jun 2021', image: Build_White, point: 120, type: 'dec' },
+  { name: 'Rentals', date: '03 Jun 2021', image: Rent_White, point: 120, type: 'inc' },
+  { name: 'Services', date: '02 Jun 2021', image: Towing_White, point: 120, type: 'inc' },
+  { name: 'Builds', date: '01 Jun 2021', image: Build_White, point: 120, type: 'dec' },
+  { name: 'Rentals', date: '03 Jun 2021', image: Rent_White, point: 120, type: 'inc' },
+  { name: 'Services', date: '02 Jun 2021', image: Towing_White, point: 120, type: 'inc' },
+  { name: 'Builds', date: '01 Jun 2021', image: Build_White, point: 120, type: 'dec' },
 ]
 
 export default {
@@ -972,5 +972,5 @@ export default {
   HistoryBuildData,
   HistoryHeaders,
   LanguagetoCheck,
-  PickupData,PointHistoryData
+  PickupData, PointHistoryData
 };

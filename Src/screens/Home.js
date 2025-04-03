@@ -21,7 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Utils from '../Utils';
 import { setMembership } from '../redux/slice/MembershipSlice';
 import { setUserData } from '../redux/slice/UserSlice';
-import { Profile_Damu } from '../assets/Images';
+import { Profile_Damu, ProfileImage } from '../assets/Images';
 
 const { Colors } = Constants
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
@@ -190,7 +190,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(setUserData({
-      firstname: 'Reese', lastname: 'Carpenter', profileImage: Profile_Damu, membershipType: 'Gold', mobileNumber: '+9742217718',
+      firstname: 'Reese', lastname: 'Carpenter', profileImage: ProfileImage, membershipType: 'Gold', mobileNumber: '+9742217718',
       email: 'Carpenter.Steve@yoohoo.com',
       qid: '100CBA20241001',
     }))

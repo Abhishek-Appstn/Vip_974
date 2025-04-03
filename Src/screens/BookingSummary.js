@@ -2,7 +2,7 @@ import { View, Text, Image, SafeAreaView, Pressable, FlatList, Modal, ScrollView
 import React, { useRef, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Constants from '../Constants';
-import {  ChevronLeft, ChevronRight,  CrossMark,  Plus, Tick } from '../assets/Images';
+import { ChevronLeft, ChevronRight, CrossMark, Plus, Tick } from '../assets/Images';
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent';
 import ActionSheet from 'react-native-actions-sheet';
 import CustomButton from '../components/CustomButton/CustomButton';
@@ -62,7 +62,7 @@ const ActionsheetComponent = ({ ActionsheetRef, Choosen, CustomFlexDirection, Se
           <Text style={{ color: Colors.Green1, fontFamily: 'Gibson', fontSize: 12 }}>(3) Items</Text>
         </View>
 
-        <FlatList contentContainerStyle={{ marginTop: 10, paddingBottom: SCREEN_HEIGHT*.02 }} data={Choosen == 'Drinks Box' ? softDrinks : Services} renderItem={item => <FlatListRenderItem item={item.item} index={item.index} setSelectedAddon={setSelectedAddon} SelectedAddon={SelectedAddon} Choosen={Choosen} />} />
+        <FlatList contentContainerStyle={{ marginTop: 10, paddingBottom: SCREEN_HEIGHT * .02 }} data={Choosen == 'Drinks Box' ? softDrinks : Services} renderItem={item => <FlatListRenderItem item={item.item} index={item.index} setSelectedAddon={setSelectedAddon} SelectedAddon={SelectedAddon} Choosen={Choosen} />} />
       </View>
 
     </ActionSheet>
@@ -164,7 +164,8 @@ const PaymentComponent = ({ params }) => {
 
   return (
     <View
-      style={{ paddingHorizontal: SCREEN_WIDTH * .07, paddingVertical: SCREEN_HEIGHT * .02,
+      style={{
+        paddingHorizontal: SCREEN_WIDTH * .07, paddingVertical: SCREEN_HEIGHT * .02,
       }}>
       <Text
         style={[{
@@ -223,9 +224,6 @@ const HeaderComponent = ({ params }) => {
   const language = useSelector(state => state.Language.value)
   const CustomFlexDirection = Utils.flexDirection(language)
   const CustomTextAlign = Utils.textAlign(language)
-
-
-
   return (
     <View
       style={{
@@ -305,10 +303,10 @@ const HeaderComponent = ({ params }) => {
           </Text>
         </View>
       </View>
-      {params.type !== 'services' ? <View style={{ marginTop: SCREEN_WIDTH * 0.05, }}>
+      {params.type !== 'services' ? <View style={{ marginTop: SCREEN_HEIGHT * 0.03, }}>
         <LocationComponent address={params.location} header={'Pick up Location'} width={SCREEN_WIDTH * .85} />
       </View> : null}
-      <TimeSlot params={params} header={'Timeslot'} selectedDate={params.selectedDate} selectedTime={params.selectedTime} style={{ marginHorizontal: SCREEN_WIDTH * .04 }} />
+      <TimeSlot params={params} header={'Timeslot'} selectedDate={params.selectedDate} selectedTime={params.selectedTime} style={{}} />
     </View>
   );
 };
@@ -316,7 +314,6 @@ const BookingSummary = (props) => {
   const [Choosen, setChoosen] = useState('')
   const [Visible, setVisible] = useState(false)
   const [SelectedAddon, setSelectedAddon] = useState({})
-  console.log("Selected Addon", JSON.stringify(SelectedAddon));
 
   const navigation = useNavigation()
   const params = props.route.params;
@@ -327,26 +324,29 @@ const BookingSummary = (props) => {
   const CustomTextAlign = Utils.textAlign(language)
 
   return (
-    <SafeAreaView style={{flex:1, backgroundColor:Colors.Green1 }}>
-      <View style={{backgroundColor: Colors.Black_Bg, borderRadius: 15, borderTopRightRadius: 0, borderTopLeftRadius: 0,flex:1}}>
-      <DrawerHeaderComponent name={params.type == 'services' ? "Summary" : "Rent"} search={true} type='login' />
-      <ScrollView bounces={false}>
-       <View style={{ height: params.type !== 'services' ? SCREEN_HEIGHT * .44 : SCREEN_HEIGHT * .3, width: SCREEN_WIDTH, }}>
-            <View style={{ marginHorizontal: SCREEN_WIDTH * .07 }}>
-              
+    <>
+      <View style={{ flex: 1, backgroundColor: Colors.Green1 }}>
+        <View style={{ backgroundColor: Colors.Black_Bg, borderRadius: 15, borderTopRightRadius: 0, borderTopLeftRadius: 0, height: SCREEN_HEIGHT * .9 }}>
+
+          <DrawerHeaderComponent name={params.type == 'services' ? "Summary" : "Rent"} search={true} type='login' />
+          <ScrollView contentContainerStyle={{ paddingBottom: SCREEN_HEIGHT * .2 }} bounces={false}>
+            <View style={{ height: params.type !== 'services' ? SCREEN_HEIGHT * .44 : SCREEN_HEIGHT * .3, width: SCREEN_WIDTH, }}>
+              <HeaderComponent params={params} />
             </View>
-            <HeaderComponent params={params} />
+            <View style={{ backgroundColor: Colors.Black, paddingTop: SCREEN_WIDTH * .04 }}>
+              <MiddleComponent SelectedAddon={SelectedAddon} params={params} ActionsheetRef={ActionsheetRef} setChoosen={setChoosen} CustomFlexDirection={CustomFlexDirection} CustomAlignItems={CustomAlignItems} />
+            </View>
+            <PaymentComponent params={params} />
+          </ScrollView>
+          <ButtonComponent name="Proceed to payment" setVisible={setVisible} />
         </View>
-      <View style={{ backgroundColor: Colors.Black, paddingTop: SCREEN_WIDTH * .04 }}>
-          <MiddleComponent SelectedAddon={SelectedAddon} params={params} ActionsheetRef={ActionsheetRef} setChoosen={setChoosen} CustomFlexDirection={CustomFlexDirection} CustomAlignItems={CustomAlignItems} />
-        </View>
-        <PaymentComponent params={params} />
-      </ScrollView>
       </View>
-      <ButtonComponent name="Proceed to payment" setVisible={setVisible} />
       <ActionsheetComponent Choosen={Choosen} SelectedAddon={SelectedAddon} setSelectedAddon={setSelectedAddon} CustomFlexDirection={CustomFlexDirection} ActionsheetRef={ActionsheetRef} CustomTextAlign={CustomTextAlign} CustomAlignItems={CustomAlignItems} />
+
       <ModalComponent Visible={Visible} navigation={navigation} setVisible={setVisible} />
-    </SafeAreaView>
+
+    </>
+
   );
 };
 

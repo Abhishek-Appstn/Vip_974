@@ -103,6 +103,9 @@ import DesertBike2 from './DesertBike2/DesertBike2.png';
 import Background_Home_Icon from './Background_Home_Icon/Background_Home_Icon.png';
 import Background_Icon_Services from './Background_Icon_Services/Background_Icon_Services.png';
 import Background_Icon_ServiceHeader from './Background_Icon_ServiceHeader/Background_Icon_ServiceHeader.png';
+import DrawerLowerImage from './DrawerLowerImage/DrawerLowerImage.png';
+import ProfileImage from './ProfileImage/ProfileImage.png';
+
 
 
 
@@ -208,5 +211,5 @@ export {
   Coin_Stacks,
   DesertBike,
   Cameraicon,
-  ChevronLeftWhite, Yamahawave1, Yamahawave2, calendar_White, DesertBike2, DesertBike3, Background_Home_Icon, Background_Icon_Services, Background_Icon_ServiceHeader
+  ChevronLeftWhite, Yamahawave1, Yamahawave2, calendar_White, DesertBike2, DesertBike3, Background_Home_Icon, Background_Icon_Services, Background_Icon_ServiceHeader, DrawerLowerImage, ProfileImage
 };

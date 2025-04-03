@@ -7,7 +7,7 @@ import Utils from '../Utils'
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 const { Colors } = Constants
 
-const TimeSlot = ({ params, header, style, selectedDate, selectedTime,icon }) => {
+const TimeSlot = ({ params, header, style, selectedDate, selectedTime, icon }) => {
   const language = useSelector(state => state.Language.value)
   const CustomFlexDirection = Utils.flexDirection(language)
   const CustomAlignSelf = Utils.alignSelf(language)
@@ -26,12 +26,12 @@ const TimeSlot = ({ params, header, style, selectedDate, selectedTime,icon }) =>
         {header}
       </Text> : null : null}
       <View style={[{ flexDirection: 'row', }, CustomFlexDirection]}>
-        <View style={{ padding: SCREEN_HEIGHT*.01, backgroundColor: Colors.Black }}>
-          <Image source={icon?icon:calendar} style={{ height: SCREEN_WIDTH * .05, width: SCREEN_WIDTH * .05, resizeMode: 'contain' }} />
+        <View style={{ padding: SCREEN_HEIGHT * .01, backgroundColor: Colors.Black }}>
+          <Image source={icon ? icon : calendar} style={{ height: SCREEN_WIDTH * .05, width: SCREEN_WIDTH * .05, resizeMode: 'contain' }} />
         </View>
         <View style={{ marginHorizontal: SCREEN_WIDTH * .016, justifyContent: "center" }}>
           <Text style={[{ fontFamily: 'Gibson', fontSize: 12, color: Colors.Green1, marginBottom: SCREEN_HEIGHT * .006 }, CustomTextAlign]}>{selectedDate}</Text>
-          <Text style={[{ fontFamily: 'Gibson-Regular', fontSize: 12, color: Colors.White },CustomTextAlign]}> {params?.type == 'rent' && selectedTime ? selectedTime.join(' | ') : selectedTime}</Text>
+          <Text style={[{ fontFamily: 'Gibson-Regular', fontSize: 12, color: Colors.White }, CustomTextAlign]}> {params?.type == 'rent' && selectedTime ? selectedTime.join(' | ') : selectedTime}</Text>
         </View>
       </View>
     </View>

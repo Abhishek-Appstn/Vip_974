@@ -7,7 +7,7 @@ import {
   FlatList,
   Platform,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Constants from '../Constants';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent';
@@ -180,6 +180,13 @@ const ChooseServices = props => {
   const navigation = useNavigation();
   const params = props.route.params;
   const language = useSelector(state => state.Language.value)
+  const Data = params == 'rent'
+    ? DataConstants.RentData
+    : params == 'services'
+      ? DataConstants.ServicesData
+      : params == 'build'
+        ? DataConstants.BuildData
+        : null
 
 
   const HandleNavigation = () => {
@@ -191,6 +198,9 @@ const ChooseServices = props => {
         text: "Select a service to Continue", backgroundColor: 'red'
       });
   };
+  useEffect(() => {
+    setSelectedItem(Data[0].name)
+  }, [])
   return (
     <View style={{ backgroundColor: Colors.Black, height: SCREEN_HEIGHT }}>
       <HeaderComponent params={params} />
@@ -201,15 +211,7 @@ const ChooseServices = props => {
             marginHorizontal: 25,
             marginTop: SCREEN_WIDTH * 0.2,
           }}
-          data={
-            params == 'rent'
-              ? DataConstants.RentData
-              : params == 'services'
-                ? DataConstants.ServicesData
-                : params == 'build'
-                  ? DataConstants.BuildData
-                  : null
-          }
+          data={Data}
           scrollEnabled={false}
           numColumns={2}
           renderItem={({ item, index }) => {
@@ -226,6 +228,7 @@ const ChooseServices = props => {
       </SafeAreaView>
     </View>
   );
+
 };
 
 export default ChooseServices;
