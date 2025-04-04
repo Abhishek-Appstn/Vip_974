@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Pressable, ScrollView, Image, TextInput, Alert } from 'react-native'
+import { View, Text, FlatList, Pressable, ScrollView, Image, TextInput, Alert, SafeAreaView, StatusBar } from 'react-native'
 import React, { useState } from 'react'
 import ItemLayout from '../components/ItemLayout'
 import Constants from '../Constants'
@@ -37,15 +37,19 @@ const ChooseLocation = (props) => {
     const [Active, setActive] = useState(null)
     return (
         <ItemLayout buttonTitle="Done" colors={Colors.Black_Bg} onPress={() => HandleNavigation({ navigation: navigation, Active: Active, params: params })} >
-            <View style={{ width: SCREEN_WIDTH * .9, alignSelf: 'center', }}>
-                <View style={[{ height: SCREEN_WIDTH * .15, backgroundColor: Colors.Black, alignItems: 'center', padding: SCREEN_WIDTH * .05, flexDirection: 'row', borderRadius: SCREEN_WIDTH * .02 }, CustomFlexDirection]}>
-                    <Image source={Search} />
-                    <TextInput style={[{ height: SCREEN_WIDTH * .12, width: SCREEN_WIDTH * .78, color: Colors.White, marginHorizontal: SCREEN_WIDTH * .02, fontFamily: 'Gibson', fontWeight: '400' }, CustomTextAlign]} />
+            <SafeAreaView>
+
+                <View style={{ width: SCREEN_WIDTH * .9, alignSelf: 'center', marginTop: StatusBar.currentHeight }}>
+                    <View style={[{ height: SCREEN_WIDTH * .15, backgroundColor: Colors.Black, alignItems: 'center', padding: SCREEN_WIDTH * .05, flexDirection: 'row', borderRadius: SCREEN_WIDTH * .02 }, CustomFlexDirection]}>
+                        <Image source={Search} />
+                        <TextInput style={[{ height: SCREEN_WIDTH * .12, width: SCREEN_WIDTH * .78, color: Colors.White, marginHorizontal: SCREEN_WIDTH * .02, fontFamily: 'Gibson', fontWeight: '400' }, CustomTextAlign]} />
+                    </View>
+                    <FlatList bounces={false} showsVerticalScrollIndicator={false} ListHeaderComponent={<Text style={[{ color: Colors.White, fontSize: 18, textTransform: 'uppercase', marginTop: SCREEN_WIDTH * .05 }, CustomTextAlign]}>Choose Location</Text>} contentContainerStyle={{ paddingTop: SCREEN_WIDTH * .02, paddingBottom: SCREEN_HEIGHT * .25 }} data={places} renderItem={item => <RenderFlatlistItem item={item.item} index={item.index} Active={Active} setActive={setActive} />} />
+
+
                 </View>
-                <FlatList showsVerticalScrollIndicator={false} ListHeaderComponent={<Text style={[{ color: Colors.White, fontSize: 18, textTransform: 'uppercase', marginTop: SCREEN_WIDTH * .05 }, CustomTextAlign]}>Choose Location</Text>} contentContainerStyle={{ paddingTop: SCREEN_WIDTH * .02, paddingBottom: SCREEN_HEIGHT * .2 }} data={places} renderItem={item => <RenderFlatlistItem item={item.item} index={item.index} Active={Active} setActive={setActive} />} />
+            </SafeAreaView>
 
-
-            </View>
         </ItemLayout>
     )
 }

@@ -155,7 +155,7 @@ const MyActivities = () => {
       <SafeAreaView>
         <View style={{ marginHorizontal: SCREEN_WIDTH * .07 }}>
           <DrawerHeaderComponent name='MY Activities' type='login' />
-          <FlatList scrollEnabled={false} contentContainerStyle={[{ flexDirection: 'row', justifyContent: 'space-between', marginTop: SCREEN_WIDTH * .129, overflow: 'hidden' }, CustomFlexDirection]} data={HistoryHeaders} renderItem={({ item, index }) => {
+          <FlatList scrollEnabled={false} contentContainerStyle={[{ flexDirection: 'row', justifyContent: 'space-between', overflow: 'hidden' }, CustomFlexDirection]} data={HistoryHeaders} renderItem={({ item, index }) => {
             return (
               <Pressable style={{ height: SCREEN_HEIGHT * .05, alignItems: 'center', justifyContent: "center", borderBottomWidth: 3, borderBottomColor: item.name === selectedType ? Colors.Green1 : Colors.Black_Bg, width: SCREEN_WIDTH * .22 }} onPress={() => { setselectedType(item.name) }}>
                 <Text style={{ fontFamily: 'Gibson', fontSize: 18, color: item.name === selectedType ? Colors.Green1 : Colors.White }}>{item.name}</Text>

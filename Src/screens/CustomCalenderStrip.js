@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Pressable, Image, SafeAreaView, Platform } from 'react-native';
+import { View, Text, FlatList, Pressable, Image, SafeAreaView, Platform, ScrollView } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import Constants from '../Constants';
 import { ChevronLeft, ChevronLeftGreen, ChevronRight, ChevronRightGreen, Tick } from '../assets/Images';
@@ -18,8 +18,9 @@ const TimeDisplay = ({ selectedTime, AvailableSlots, setselectedTime, params, Bo
   const language = useSelector(state => state.Language.value)
   const CustomFlexDirection = Utils.flexDirection(language)
   const CustomTextAlign = Utils.textAlign(language)
+
   return (
-    <View style={{
+    <ScrollView style={{
       width: SCREEN_WIDTH, backgroundColor: Colors.Black, height: SCREEN_HEIGHT * .7, paddingHorizontal: SCREEN_WIDTH * .02, paddingTop: 20
     }}>
       <Text style={{ color: Colors.White, fontSize: 18, fontFamily: "Gibson", fontWeight: '500' }}>Select Time</Text>
@@ -37,19 +38,75 @@ const TimeDisplay = ({ selectedTime, AvailableSlots, setselectedTime, params, Bo
             <Text style={{ color: Colors.White, fontFamily: 'Gibson-Regular', fontSize: 12 }}>{item}</Text>
           </Pressable>
         )
-      }} /> : <FlatList contentContainerStyle={{ marginTop: SCREEN_WIDTH * .02 }} scrollEnabled={false} data={DataConstants.WashTimes} renderItem={({ item, index }) => {
-        return (
-          <Pressable style={[{ width: SCREEN_WIDTH * .9, height: SCREEN_WIDTH * .25, marginHorizontal: 10, marginVertical: 10, borderRadius: 4, alignItems: 'center', justifyContent: 'space-between', padding: 3, backgroundColor: Colors.Black_Bg, paddingHorizontal: SCREEN_WIDTH * .05, flexDirection: 'row' }, CustomFlexDirection]} onPress={() => { item.name === selectedTime ? setselectedTime(null) : setselectedTime(item.slot) }}>
-            <View>
-              <Text style={[{ color: Colors.White, fontFamily: 'Gibson-Regular', fontSize: 18, marginVertical: SCREEN_WIDTH * .012, textTransform: 'uppercase', fontWeight: '600' }, CustomTextAlign]}>{item.name}</Text>
-              <Text style={[{ color: Colors.Green1, fontFamily: 'Gibson-Regular', fontSize: 12, marginVertical: SCREEN_WIDTH * .012 }, CustomTextAlign]}>{item.slot}</Text>
-            </View>
-            <SelectionComponent ActiveItem={selectedTime} Item={item.slot} />
-          </Pressable>
-        )
-      }} />
+      }} /> :
+        <FlatList
+          contentContainerStyle={{ marginTop: SCREEN_WIDTH * 0.02 }}
+          scrollEnabled={false}
+          data={DataConstants.WashTimes}
+          renderItem={({ item, index }) => {
+            return (
+              <Pressable
+                style={[
+                  {
+                    height: SCREEN_HEIGHT * .1,
+                    marginHorizontal: 10,
+                    marginVertical: 10,
+                    borderRadius: 4,
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: 3,
+                    borderColor: item.slot === selectedTime ? Colors.Green1 : null,
+                    borderWidth: 1,
+                    backgroundColor: Colors.Black_Bg,
+                    paddingHorizontal: SCREEN_WIDTH * 0.05,
+                    flexDirection: 'row',
+                  },
+                  CustomFlexDirection,
+                ]}
+                onPress={() => {
+                  item.name === selectedTime
+                    ? setselectedTime(null)
+                    : setselectedTime(item.slot);
+                }}
+              >
+                <View>
+                  <Text
+                    style={[
+                      {
+                        color: Colors.White,
+                        fontFamily: 'Gibson-Regular',
+                        fontSize: 18,
+                        marginVertical: SCREEN_WIDTH * 0.012,
+                        textTransform: 'uppercase',
+                        fontWeight: '600',
+                      },
+                      CustomTextAlign,
+                    ]}
+                  >
+                    {item.name}
+                  </Text>
+                  <Text
+                    style={[
+                      {
+                        color: Colors.Green1,
+                        fontFamily: 'Gibson-Regular',
+                        fontSize: 12,
+                        marginVertical: SCREEN_WIDTH * 0.012,
+                      },
+                      CustomTextAlign,
+                    ]}
+                  >
+                    {item.slot}
+                  </Text>
+                </View>
+                <SelectionComponent ActiveItem={selectedTime} Item={item.slot} />
+              </Pressable>
+            );
+          }}
+        />
+
       }
-    </View>
+    </ScrollView>
   )
 }
 

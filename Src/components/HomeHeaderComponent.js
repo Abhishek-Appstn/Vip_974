@@ -13,7 +13,8 @@ const HomeHeaderComponent = ({ height, width, SvgHeight, SvgWidth, header, logoS
     <View
       style={{
         backgroundColor: Colors.Black_Bg,
-        height: height ? height : SCREEN_HEIGHT * .35,
+        height: height ? height : null,
+        flex: 1,
         width: width ? width : SCREEN_WIDTH,
         overflow: 'hidden',
         borderBottomLeftRadius: SCREEN_HEIGHT * .015,
@@ -32,8 +33,7 @@ const HomeHeaderComponent = ({ height, width, SvgHeight, SvgWidth, header, logoS
         <View
           style={{
             alignItems: 'center',
-            justifyContent: 'center',
-            height: SCREEN_HEIGHT * 0.2,
+            justifyContent: 'center'
           }}>
           <Image source={Logo_White} style={{ width: SCREEN_WIDTH * .16, height: SCREEN_HEIGHT * .1 }} resizeMode='contain' />
           <Text

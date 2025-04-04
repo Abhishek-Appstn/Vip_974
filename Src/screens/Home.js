@@ -203,14 +203,13 @@ const Home = () => {
       <UpperSvg />
       <Animated.View style={[animatedStyle, { flex: 1, elevation: 10, shadowColor: Colors.Black, backgroundColor: Colors.Black_Bg, paddingTop: Platform.OS === 'android' ? SCREEN_HEIGHT * .02 : 0, overflow: 'hidden', zIndex: 1, }]}>
         <HomeHeaderComponent header={DataConstants.HomeHeader} headerText={"Vip-974"} />
-        <View style={{ backgroundColor: Colors.Black, height: SCREEN_HEIGHT * .65 }}>
+        <View style={{ backgroundColor: Colors.Black, flex: 1.5 }}>
           <FlatList
             keyExtractor={item => item.header}
             scrollEnabled={false}
             data={DataConstants.HomeData}
             contentContainerStyle={{
-              height: SCREEN_HEIGHT * .65,
-              backgroundColor: Colors.Black,
+
               paddingHorizontal: SCREEN_WIDTH * .05,
               paddingTop: SCREEN_HEIGHT * .014,
             }}

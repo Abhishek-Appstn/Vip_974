@@ -51,7 +51,8 @@ const CustomTextInput = ({ name, type, onChangeText, value, width, error, multil
             value={value}
             inputMode={type == 'PhoneNumber' || type == 'size' ? 'numeric' : 'default'}
             style={[{
-              height: multiline ? SCREEN_HEIGHT * .13 : Platform.OS === 'ios' ? SCREEN_HEIGHT * .032 : SCREEN_HEIGHT * .045,
+              height: multiline ? SCREEN_HEIGHT * .13 : Platform.OS === 'ios' ? SCREEN_HEIGHT * .032 : null,
+              flex: 1,
               fontSize: 16,
               fontFamily: 'Gibson',
               alignSelf: 'flex-start',
@@ -67,7 +68,7 @@ const CustomTextInput = ({ name, type, onChangeText, value, width, error, multil
             placeholder={!IsFocussed ? name : null}
             placeholderTextColor={Colors.White_Text}
           />
-          {type == 'size' && value ? (
+          {type == 'size' && (IsFocussed || value) ? (
             <Text
               style={{
                 color: Colors.White,

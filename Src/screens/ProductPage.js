@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import Constants from '../Constants'
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent'
-import { ChevronLeft, ChevronRight, CompassNorthEast, DesertBike, Location_White, LocationPin, YamahaJetski1 } from '../assets/Images'
+import { ChevronLeft, ChevronRight, CompassNorthEast, DesertBike, Expand, Location_White, LocationPin, YamahaJetski1 } from '../assets/Images'
 import StarComponent from '../components/StarComponent'
 import Utils from '../Utils'
 import { useSelector } from 'react-redux'
@@ -58,7 +58,7 @@ const HeaderComponent = ({ params, Visible, setVisible, ActiveImage, setActiveIm
             <Imagecarousal setActive={setActive} images={params.images} setVisible={setVisible} ActiveImage={ActiveImage} setActiveImage={setActiveImage} />
             <View style={{ position: 'absolute', width: SCREEN_WIDTH * .9, alignSelf: 'center', alignItems: 'center' }}>
                 <SafeAreaView style={{ alignItems: 'center' }}>
-                    <DrawerHeaderComponent name={'rent'} setVisible={setVisible} />
+                    <DrawerHeaderComponent name={'rent'} setVisible={setVisible} rightimage={Expand} onRightPress={() => setVisible(true)} />
                     <ImageModal visible={Visible} image={params.images} setVisible={setVisible} index={ActiveImage} />
                 </SafeAreaView>
 

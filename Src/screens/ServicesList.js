@@ -36,10 +36,10 @@ const ServicesRenderItem = ({ item, index, params, CustomFlexDirection, CustomAl
     )
     return (
         <Animated.View style={[animatedStyle]}>
-            <Pressable style={[{ width: SCREEN_WIDTH * .92, marginVertical: SCREEN_HEIGHT * .01, alignSelf: 'center', height: SCREEN_HEIGHT * .17, backgroundColor: Colors.Black_Bg, borderRadius: 12, flexDirection: 'row', alignItems: 'center', paddingHorizontal: SCREEN_WIDTH * .03, }, CustomFlexDirection]} onPress={() => HandleNavigation(item)}>
+            <Pressable style={[{ width: SCREEN_WIDTH * .92, marginVertical: SCREEN_HEIGHT * .01, alignSelf: 'center', flex: 1, backgroundColor: Colors.Black_Bg, borderRadius: 12, flexDirection: 'row', alignItems: 'center', paddingHorizontal: SCREEN_WIDTH * .03, }, CustomFlexDirection]} onPress={() => HandleNavigation(item)}>
                 <View style={[{ flexDirection: 'row', }, CustomFlexDirection]}>
 
-                    <View style={{ height: SCREEN_HEIGHT * .09, width: SCREEN_WIDTH * .2, borderRadius: 10, overflow: 'hidden', alignItems: 'center', }}>
+                    <View style={{ height: SCREEN_HEIGHT * .08, width: SCREEN_WIDTH * .2, borderRadius: 10, overflow: 'hidden', alignItems: 'center', alignSelf: 'center' }}>
                         <Image source={item?.images[0]} resizeMode='cover' style={{ height: SCREEN_HEIGHT * .09, width: SCREEN_WIDTH * .2 }} />
                     </View>
 
@@ -74,13 +74,12 @@ const ServicesList = (props) => {
         <View style={{ flex: 1, backgroundColor: Colors.Black, }}>
             <View style={{ backgroundColor: Colors.Black_Bg }}>
                 <SafeAreaView>
-                    <View style={{ backgroundColor: Colors.Black_Bg, paddingHorizontal: SCREEN_WIDTH * .05, height: SCREEN_HEIGHT * .21 }}>
+                    <View style={{ backgroundColor: Colors.Black_Bg, paddingHorizontal: SCREEN_WIDTH * .05, paddingBottom: SCREEN_HEIGHT * .02 }}>
                         <DrawerHeaderComponent name={params.subtype} filter={true} />
                         <TimeSlot params={params} selectedDate={params.selectedDate} selectedTime={params.selectedTime} style={{ marginTop: SCREEN_HEIGHT * .03 }} />
                     </View>
                 </SafeAreaView>
             </View>
-
             <FlatList showsVerticalScrollIndicator={false} ListFooterComponent={<Text style={{ color: Colors.White, alignSelf: 'center', fontFamily: 'Gibson' }}>--------End---------</Text>} keyExtractor={item => item.name} data={type == 'Beach' ? DataConstants.BeachServiceData : DataConstants.DesertServiceData} contentContainerStyle={{ marginTop: SCREEN_HEIGHT * .015, paddingBottom: SCREEN_HEIGHT * .3 }} renderItem={item => <ServicesRenderItem item={item.item} index={item.index} params={params} CustomFlexDirection={CustomFlexDirection} CustomAlignItems={CustomAlignItems} />} />
 
         </View>

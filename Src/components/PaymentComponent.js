@@ -4,19 +4,19 @@ import Constants from '../Constants'
 import DataConstants from '../assets/DataConstants'
 import { useSelector } from 'react-redux'
 import Utils from '../Utils'
-const {Colors}=Constants
-const {SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
-const{paymentData,ServicePay}=DataConstants
+const { Colors } = Constants
+const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
+const { paymentData, ServicePay } = DataConstants
 
-const PaymentComponent = ({data,header,backgroundColor}) => {
-    const language=useSelector(state=>state.Language.value)
-    const CustomFlexDirection=Utils.flexDirection(language)
-        const CustomTextAlign=Utils.textAlign(language)
-    
+const PaymentComponent = ({ data, header, backgroundColor }) => {
+    const language = useSelector(state => state.Language.value)
+    const CustomFlexDirection = Utils.flexDirection(language)
+    const CustomTextAlign = Utils.textAlign(language)
+
     return (
         <View
             style={{
-              backgroundColor: Colors.Black_Bg,borderRadius: SCREEN_WIDTH*.04, paddingHorizontal: SCREEN_WIDTH * .07, paddingVertical: SCREEN_WIDTH * .05,overflow:'hidden'
+                backgroundColor: Colors.Black_Bg, borderRadius: SCREEN_WIDTH * .04, paddingHorizontal: SCREEN_WIDTH * .07, paddingVertical: SCREEN_WIDTH * .05, overflow: 'hidden'
             }}>
             <Text
                 style={[{
@@ -26,11 +26,11 @@ const PaymentComponent = ({data,header,backgroundColor}) => {
                     textTransform: 'uppercase',
                     fontWeight: '400',
                     marginVertical: SCREEN_WIDTH * 0.01,
-                },CustomTextAlign]}>Payments</Text>
+                }, CustomTextAlign]}>Payments</Text>
 
-            <FlatList scrollEnabled={false} data={data.type=='rent'?paymentData:ServicePay} renderItem={({ item, index }) => {
+            <FlatList scrollEnabled={false} data={data.type == 'rent' ? paymentData : ServicePay} renderItem={({ item, index }) => {
                 return (
-                    <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: SCREEN_WIDTH * .014 },CustomFlexDirection]}>
+                    <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: SCREEN_WIDTH * .014 }, CustomFlexDirection]}>
                         <Text
                             style={{
                                 color: Colors.White,
@@ -53,7 +53,7 @@ const PaymentComponent = ({data,header,backgroundColor}) => {
                     </View>
                 )
             }} />
-            <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: SCREEN_WIDTH * .05 },CustomFlexDirection]}>
+            <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: SCREEN_WIDTH * .05 }, CustomFlexDirection]}>
 
                 <Text
                     style={{
@@ -64,7 +64,7 @@ const PaymentComponent = ({data,header,backgroundColor}) => {
                         marginVertical: SCREEN_WIDTH * 0.01,
                     }}>Total</Text>
 
-                <Text style={{ fontSize: 31, fontWeight: 'bold', color:data.type==='rent'?Colors.White:Colors.Green1 }}>250<Text style={{ fontSize: 12, fontWeight: 'bold' }}>/ QAR</Text></Text>
+                <Text style={{ fontSize: 31, fontWeight: 'bold', color: data.type === 'rent' ? Colors.White : Colors.Green1 }}>250<Text style={{ fontSize: 12, fontWeight: 'bold' }}>/ QAR</Text></Text>
 
             </View>
         </View>

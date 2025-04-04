@@ -7,13 +7,14 @@ import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHea
 import ActionSheet from 'react-native-actions-sheet';
 import CustomButton from '../components/CustomButton/CustomButton';
 import DataConstants from '../assets/DataConstants';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Utils from '../Utils';
 import LocationComponent from '../components/LocationComponent';
 import CartIncrementButtons from '../components/CartIncrementButtons';
 import TimeSlot from '../components/TimeSlot';
 import MapViewComponent from '../components/MapViewComponent';
 import IconComponent from '../components/IconComponent';
+import { LowerButtonComponent } from '../components/ItemLayout';
 const { Colors } = Constants;
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS;
 const { ServicePay, Services, paymentData, softDrinks } = DataConstants
@@ -85,22 +86,9 @@ const ModalComponent = ({ Visible, setVisible, navigation }) => {
   )
 }
 
-const ButtonComponent = ({ name, setVisible }) => {
-  return (
-    <Pressable style={{ backgroundColor: Colors.Green1, height: SCREEN_HEIGHT * 0.12, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }} onPress={() => { setVisible(true) }}>
-      <Image source={ChevronRight} style={{ opacity: .3, marginRight: SCREEN_WIDTH * .003 }} />
-      <Image source={ChevronRight} style={{ opacity: .5, marginRight: SCREEN_WIDTH * .003 }} />
-      <Image source={ChevronRight} style={{ opacity: 1, marginRight: SCREEN_WIDTH * .003 }} />
-      <Text style={{ fontFamily: 'Gibson', fontWeight: 'semibold', fontSize: 18, marginHorizontal: SCREEN_WIDTH * .045, textTransform: 'uppercase' }}>{name}</Text>
-      <Image source={ChevronLeft} style={{ opacity: 1, marginRight: SCREEN_WIDTH * .003 }} />
-      <Image source={ChevronLeft} style={{ opacity: .5, marginRight: SCREEN_WIDTH * .003 }} />
-      <Image source={ChevronLeft} style={{ opacity: .3, marginRight: SCREEN_WIDTH * .003 }} />
-    </Pressable>
-  )
-}
 const MiddleComponent = ({ params, ActionsheetRef, setChoosen, SelectedAddon, CustomFlexDirection, CustomAlignItems }) => {
   return (
-    <View style={{ height: params.type == 'services' ? SCREEN_WIDTH * .9 : SCREEN_WIDTH * .4, padding: SCREEN_WIDTH * .04 }}>{
+    <View style={{ paddingHorizontal: SCREEN_WIDTH * .04, justifyContent: 'center' }}>{
       params.type == 'services' ? <MapViewComponent data={params} header={"Enter Location"} style={{ paddingVertical: 0 }} /> :
         <FlatList data={params.addOn} contentContainerStyle={{ marginHorizontal: SCREEN_WIDTH * 0.07, paddingVertical: params.type === 'rent' ? 0 : SCREEN_WIDTH * .025, }} scrollEnabled={false} renderItem={({ item, index }) => {
           return (
@@ -133,20 +121,7 @@ const MiddleComponent = ({ params, ActionsheetRef, setChoosen, SelectedAddon, Cu
                 </Text>
 
               </View>
-              {/* <Image
-                source={Plus}
-                style={{
-                  height: SCREEN_WIDTH * 0.08,
-                  width: SCREEN_WIDTH * 0.08,
-                  backgroundColor: Colors.Black,
-                  padding: SCREEN_WIDTH * 0.015,
-                  resizeMode: 'contain',
-                  borderRadius: 4,
-                  borderColor: Colors.Green1,
-                  borderWidth: 0.5,
-                }}
-              /> */}
-              <IconComponent image={Plus} />
+              <IconComponent image={Plus} onPress={() => { setChoosen(item.name), ActionsheetRef.current?.show() }} />
             </Pressable>
           )
         }} />
@@ -159,13 +134,10 @@ const PaymentComponent = ({ params }) => {
   const language = useSelector(state => state.Language.value)
   const CustomFlexDirection = Utils.flexDirection(language)
   const CustomAlignSelf = Utils.alignSelf(language)
-
-
-
   return (
     <View
       style={{
-        paddingHorizontal: SCREEN_WIDTH * .07, paddingVertical: SCREEN_HEIGHT * .02,
+        paddingHorizontal: SCREEN_WIDTH * .07, paddingVertical: SCREEN_HEIGHT * .02, borderRadius: 20
       }}>
       <Text
         style={[{
@@ -174,12 +146,11 @@ const PaymentComponent = ({ params }) => {
           fontFamily: 'Gibson',
           textTransform: 'uppercase',
           fontWeight: '400',
-          marginVertical: SCREEN_WIDTH * 0.01,
         }, CustomAlignSelf]}>Payments</Text>
 
       <FlatList scrollEnabled={false} data={params.type == 'services' ? ServicePay : paymentData} renderItem={({ item, index }) => {
         return (
-          <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: SCREEN_WIDTH * .014 }, CustomFlexDirection]}>
+          <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: SCREEN_HEIGHT * .005 }, CustomFlexDirection]}>
             <Text
               style={{
                 color: Colors.White,
@@ -228,8 +199,8 @@ const HeaderComponent = ({ params }) => {
     <View
       style={{
         marginHorizontal: SCREEN_WIDTH * 0.07,
-        marginTop: SCREEN_WIDTH * 0.08,
-        backgroundColor: Colors.Black_Bg
+        marginTop: SCREEN_HEIGHT * 0.01,
+        backgroundColor: Colors.Black_Bg,
       }}>
       <View
         style={[{
@@ -322,15 +293,15 @@ const BookingSummary = (props) => {
   const CustomFlexDirection = Utils.flexDirection(language)
   const CustomAlignItems = Utils.alignItems(language)
   const CustomTextAlign = Utils.textAlign(language)
-
   return (
     <>
-      <View style={{ flex: 1, backgroundColor: Colors.Green1 }}>
-        <View style={{ backgroundColor: Colors.Black_Bg, borderRadius: 15, borderTopRightRadius: 0, borderTopLeftRadius: 0, height: SCREEN_HEIGHT * .9 }}>
-
-          <DrawerHeaderComponent name={params.type == 'services' ? "Summary" : "Rent"} search={true} type='login' />
-          <ScrollView contentContainerStyle={{ paddingBottom: SCREEN_HEIGHT * .2 }} bounces={false}>
-            <View style={{ height: params.type !== 'services' ? SCREEN_HEIGHT * .44 : SCREEN_HEIGHT * .3, width: SCREEN_WIDTH, }}>
+      <View style={{ flex: 1, backgroundColor: Colors.Green1, }}>
+        <View style={{ backgroundColor: Colors.Black_Bg, borderRadius: 15, borderTopRightRadius: 0, borderTopLeftRadius: 0, height: SCREEN_HEIGHT * .9, overflow: 'hidden' }}>
+          <SafeAreaView>
+            <DrawerHeaderComponent name={params.type == 'services' ? "Summary" : "Rent"} search={true} type='login' />
+          </SafeAreaView>
+          <ScrollView contentContainerStyle={{}} bounces={false}>
+            <View style={{ height: null, paddingBottom: SCREEN_HEIGHT * .02, width: SCREEN_WIDTH, }}>
               <HeaderComponent params={params} />
             </View>
             <View style={{ backgroundColor: Colors.Black, paddingTop: SCREEN_WIDTH * .04 }}>
@@ -338,8 +309,8 @@ const BookingSummary = (props) => {
             </View>
             <PaymentComponent params={params} />
           </ScrollView>
-          <ButtonComponent name="Proceed to payment" setVisible={setVisible} />
         </View>
+        <LowerButtonComponent buttonTitle={'Proceed to Payment'} onPress={() => { setVisible(true) }} />
       </View>
       <ActionsheetComponent Choosen={Choosen} SelectedAddon={SelectedAddon} setSelectedAddon={setSelectedAddon} CustomFlexDirection={CustomFlexDirection} ActionsheetRef={ActionsheetRef} CustomTextAlign={CustomTextAlign} CustomAlignItems={CustomAlignItems} />
 
