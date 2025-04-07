@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Alert, Image, ScrollView } from 'react-native';
+import { View, Text, FlatList, Alert, Image, ScrollView, KeyboardAvoidingView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import ItemLayout from '../components/ItemLayout';
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent';
@@ -54,24 +54,24 @@ const PageHeader = ({ item, ActiveStep, Percentage, CustomFlexDirection, CustomA
     </View>
   );
 };
-const StepContent = ({ JsonData, setJsonData, Data ,CustomAlignItems}) => {
+const StepContent = ({ JsonData, setJsonData, Data, CustomAlignItems }) => {
   return (
     Data.key !== 'NameOfCustomization' ?
-      <View style={{ alignItems: 'center', justifyContent: 'center', height: SCREEN_HEIGHT * .7, width: SCREEN_WIDTH, backgroundColor: Colors.Black_Bg }}>
+      <KeyboardAvoidingView behavior='padding' style={{ alignItems: 'center', justifyContent: 'center', height: SCREEN_HEIGHT * .7, width: SCREEN_WIDTH, backgroundColor: Colors.Black_Bg }}>
         <ScrollView contentContainerStyle={{ alignItems: 'center', justifyContent: 'center', marginTop: SCREEN_HEIGHT * .05 }}>
           <Image source={Data.image} />
           <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 24, marginVertical: SCREEN_HEIGHT * .02, textTransform: 'uppercase' }}>{Data.title}</Text>
           <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 16, maxWidth: SCREEN_WIDTH * .75, textAlign: 'center', marginBottom: SCREEN_HEIGHT * .02 }}>{Data.description}</Text>
           <FlatList
             scrollEnabled={false}
-            key={item=>item.id}
+            key={item => item.id}
             data={Data.flatlistData}
             renderItem={({ item }) => <InputRenderItem Item={item} name={Data.key} JsonData={JsonData} setJsonData={setJsonData} />}
           />
         </ScrollView>
-      </View> :
-      <View style={[{ justifyContent: 'center', height: SCREEN_HEIGHT * .7, width: SCREEN_WIDTH, backgroundColor: Colors.Black_Bg, paddingHorizontal: SCREEN_WIDTH * .05 },]}>
-        <ScrollView contentContainerStyle={[{ justifyContent: 'center', marginTop: SCREEN_HEIGHT * .05 },CustomAlignItems]}>
+      </KeyboardAvoidingView> :
+      <KeyboardAvoidingView behavior='padding' style={[{ justifyContent: 'center', height: SCREEN_HEIGHT * .7, width: SCREEN_WIDTH, backgroundColor: Colors.Black_Bg, paddingHorizontal: SCREEN_WIDTH * .05 },]}>
+        <ScrollView contentContainerStyle={[{ justifyContent: 'center', marginTop: SCREEN_HEIGHT * .05 }, CustomAlignItems]}>
           <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 24, marginVertical: SCREEN_HEIGHT * .02, textTransform: 'uppercase' }}>{Data.title}</Text>
 
           <FlatList
@@ -98,7 +98,7 @@ const StepContent = ({ JsonData, setJsonData, Data ,CustomAlignItems}) => {
           </View>
 
         </ScrollView>
-      </View>
+      </KeyboardAvoidingView>
   );
 };
 
@@ -178,13 +178,15 @@ const CustomBuild = () => {
   const language = useSelector(state => state.Language.value)
   const CustomFlexDirection = Utils.flexDirection(language)
   const CustomAlignItems = Utils.alignItems(language)
-  
+
   return (
     <ItemLayout
-      name={ActiveStep === Steplength ? "Submit" : 'Next'}
+      buttonTitle={ActiveStep === Steplength ? "Submit" : 'Next'}
       onPress={() =>
         handlePress({ ActiveStep: ActiveStep, setActiveStep: setActiveStep, JsonData: JsonData, keys: keys, Steplength, navigation: navigation })
       }>
+      {/* <KeyboardAvoidingView behavior='padding'> */}
+
       <View style={{ marginHorizontal: SCREEN_WIDTH * 0.04 }}>
         <DrawerHeaderComponent
           back={handlebackpress}
@@ -197,6 +199,8 @@ const CustomBuild = () => {
         <PageHeader CustomAlignItems={CustomAlignItems} CustomFlexDirection={CustomFlexDirection} item={Data} ActiveStep={ActiveStep} Percentage={Percentage} />
       </View>
       <StepContent CustomAlignItems={CustomAlignItems} JsonData={JsonData} setJsonData={setJsonData} Data={Data} />
+      {/* </KeyboardAvoidingView> */}
+
     </ItemLayout>
   );
 };

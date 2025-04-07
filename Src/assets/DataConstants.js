@@ -43,6 +43,8 @@ import {
   Yamahawave2,
   DesertBike2,
   DesertBike3,
+  Cabana2,
+  CabanaImages,
 } from './Images';
 
 const CompanyName = 'Vip_974';
@@ -539,7 +541,7 @@ const CabanaList = [
     builder: 'Al-Rayyan Co.',
     size: '6X4',
     price: 250,
-    image: Family_Cabana,
+    images: [Family_Cabana, Cabana2, CabanaImages],
     address: 'Mirqab Mall Al Mirqab Al Jadeed St, Doha, Qatar',
     features: [
       { featureName: 'Kitchen', qty: 1, image: Kitchen },
@@ -553,14 +555,28 @@ const CabanaList = [
     builder: 'Al-Sad Co.',
     size: '6X4',
     price: 250,
-    image: CoffeeCabana,
+    images: [CoffeeCabana, Cabana2, CabanaImages],
+    address: 'Mirqab Mall Al Mirqab Al Jadeed St, Doha, Qatar',
+    features: [
+      { featureName: 'Kitchen', qty: 1, image: Kitchen },
+      { featureName: 'Rooms', qty: 1, image: Rooms },
+      { featureName: 'AC', qty: 1, image: Condition },
+      { featureName: 'Bathroom', qty: 1, image: BathroomSide },
+    ],
   },
   {
     name: 'XL Family Cabana',
     builder: 'Amaar Co.',
     size: '6X4',
     price: 250,
-    image: XlCabana,
+    images: [XlCabana, Cabana2, CabanaImages],
+    address: 'Mirqab Mall Al Mirqab Al Jadeed St, Doha, Qatar',
+    features: [
+      { featureName: 'Kitchen', qty: 1, image: Kitchen },
+      { featureName: 'Rooms', qty: 1, image: Rooms },
+      { featureName: 'AC', qty: 1, image: Condition },
+      { featureName: 'Bathroom', qty: 1, image: BathroomSide },
+    ],
   },
 ];
 const SupportData = [
@@ -879,15 +895,32 @@ const MybuildStandardData = [
     builder: 'Al-Rayyan Co.',
     size: '6X4',
     price: 250,
-    image: Family_Cabana,
+    bookedDate: '03-02-2025',
+    images: [Family_Cabana, Cabana2, CabanaImages],
     type: 'booked',
+    address: 'Mirqab Mall Al Mirqab Al Jadeed St, Doha, Qatar',
+    features: [
+      { featureName: 'Kitchen', qty: 1, image: Kitchen },
+      { featureName: 'Rooms', qty: 1, image: Rooms },
+      { featureName: 'AC', qty: 1, image: Condition },
+      { featureName: 'Bathroom', qty: 1, image: BathroomSide },
+    ],
   },
+
   {
     name: 'Coffee Shop Cabana',
     builder: 'Al-Sad Co.',
     size: '6X4',
     price: 250,
-    image: CoffeeCabana,
+    images: [CoffeeCabana, Cabana2, CabanaImages],
+    bookedDate: '01-03-2025',
+    address: 'Mirqab Mall Al Mirqab Al Jadeed St, Doha, Qatar',
+    features: [
+      { featureName: 'Kitchen', qty: 1, image: Kitchen },
+      { featureName: 'Rooms', qty: 1, image: Rooms },
+      { featureName: 'AC', qty: 1, image: Condition },
+      { featureName: 'Bathroom', qty: 1, image: BathroomSide },
+    ],
     type: 'booked',
   },
   {
@@ -895,8 +928,16 @@ const MybuildStandardData = [
     builder: 'Amaar Co.',
     size: '6X4',
     price: 250,
-    image: XlCabana,
+    images: [XlCabana, Cabana2, CabanaImages],
+    bookedDate: '01-02-2025',
     type: 'booked',
+    address: 'Mirqab Mall Al Mirqab Al Jadeed St, Doha, Qatar',
+    features: [
+      { featureName: 'Kitchen', qty: 1, image: Kitchen },
+      { featureName: 'Rooms', qty: 1, image: Rooms },
+      { featureName: 'AC', qty: 1, image: Condition },
+      { featureName: 'Bathroom', qty: 1, image: BathroomSide },
+    ],
   },
 ];
 const MybuildCustomData = [
@@ -905,24 +946,51 @@ const MybuildCustomData = [
     builder: 'Al-Sad Co.',
     size: '6X4',
     price: 250,
-    image: CoffeeCabana,
+    images: [CoffeeCabana, Cabana2, CabanaImages],
     type: 'booked',
+    bookedDate: '05-02-2025',
+    address: 'Mirqab Mall Al Mirqab Al Jadeed St, Doha, Qatar',
+    features: [
+      { featureName: 'Kitchen', qty: 1, image: Kitchen },
+      { featureName: 'Rooms', qty: 1, image: Rooms },
+      { featureName: 'AC', qty: 1, image: Condition },
+      { featureName: 'Bathroom', qty: 1, image: BathroomSide },
+    ],
+
   },
   {
     name: 'XL Family Cabana',
     builder: 'Amaar Co.',
     size: '6X4',
     price: 250,
-    image: XlCabana,
+    images: [XlCabana, Cabana2, CabanaImages],
     type: 'booked',
+    bookedDate: '21-02-2025',
+    address: 'Mirqab Mall Al Mirqab Al Jadeed St, Doha, Qatar',
+    features: [
+      { featureName: 'Kitchen', qty: 1, image: Kitchen },
+      { featureName: 'Rooms', qty: 1, image: Rooms },
+      { featureName: 'AC', qty: 1, image: Condition },
+      { featureName: 'Bathroom', qty: 1, image: BathroomSide },
+    ],
+
   },
   {
     name: 'Family Cabana',
     builder: 'Al-Rayyan Co.',
     size: '6X4',
     price: 250,
-    image: Family_Cabana,
+    images: [Family_Cabana, Cabana2, CabanaImages],
     type: 'booked',
+    bookedDate: '01-12-2025',
+    address: 'Mirqab Mall Al Mirqab Al Jadeed St, Doha, Qatar',
+    features: [
+      { featureName: 'Kitchen', qty: 1, image: Kitchen },
+      { featureName: 'Rooms', qty: 1, image: Rooms },
+      { featureName: 'AC', qty: 1, image: Condition },
+      { featureName: 'Bathroom', qty: 1, image: BathroomSide },
+    ],
+
   },
 ]
 const PointHistoryData = [
@@ -937,7 +1005,12 @@ const PointHistoryData = [
   { name: 'Builds', date: '01 Jun 2021', image: Build_White, point: 120, type: 'dec' },
 ]
 
+const successResponse = 'Request Done Successfully'
+const failedResponse = 'Request Failed'
+const successResponseSubtext = 'Thank you. The lease has been successful. You can follow the order from the My Rentals  page'
+const failedResponseSubtext = 'Sorry. The lease has failed. You can follow the order from the My Rentals  page'
 export default {
+  successResponse, failedResponse, successResponseSubtext, failedResponseSubtext,
   MembershipData,
   MyBuildHeader,
   MybuildCustomData,

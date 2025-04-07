@@ -22,7 +22,7 @@ const CustomTextInput = ({ name, type, onChangeText, value, width, error, multil
           height: multiline ? SCREEN_HEIGHT * .16 : SCREEN_HEIGHT * .07,
           paddingVertical: Platform.OS === 'android' ? SCREEN_HEIGHT * .002 : SCREEN_HEIGHT * .007,
           paddingHorizontal: SCREEN_WIDTH * .04,
-          width: width ? width : null,
+          width: width ? width : SCREEN_WIDTH * .9,
           backgroundColor: Colors.Black_2,
         },]}>
         {IsFocussed || value ? <Text

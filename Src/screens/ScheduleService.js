@@ -22,7 +22,7 @@ const ScheduleService = (props) => {
       params?.type == 'services' || params?.type == 'build' ?
         navigation.navigate('CabanSize', { ...params, selectedDate: selectedDate.format("DD MMMM YYYY"), selectedTime: selectedTime })
         :
-        navigation.navigate('ServicesList', { ...params, selectedDate: selectedDate.format("DD MMMM YYYY"), selectedTime: selectedTime }) : Snackbar.show({ text: "Select a time to continue", backgroundColor: 'red' }) : Snackbar.show({ text: "Select a Date to continue", backgroundColor: 'red' })
+        navigation.navigate('ServicesList', { ...params, selectedDate: selectedDate.format("DD MMMM YYYY"), selectedTime: selectedTime.sort((a, b) => moment(a, 'h:mm A').diff(moment(b, 'h:mm A'))) }) : Snackbar.show({ text: "Select a time to continue", backgroundColor: 'red' }) : Snackbar.show({ text: "Select a Date to continue", backgroundColor: 'red' })
   }
   return (
     <ItemLayout buttonTitle='Submit' colors={Colors.Black_Bg} onPress={HandleNavigation}>

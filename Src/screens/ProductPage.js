@@ -18,7 +18,7 @@ const HandleNavigation = (name, item, navigation) => {
     navigation.navigate(name, item)
 }
 
-const ImageSelector = ({ length, ActiveImage, setActiveImage }) => {
+export const ImageSelector = ({ length, ActiveImage, setActiveImage }) => {
     return (
         <View style={{ flexDirection: 'row', alignSelf: 'center', backgroundColor: Colors.Black }}>
             {Array.from({ length: length }).map((_, index) => (
@@ -27,10 +27,10 @@ const ImageSelector = ({ length, ActiveImage, setActiveImage }) => {
         </View>
     )
 }
-const Imagecarousal = ({ images, ActiveImage, setActiveImage, setActive }) => {
+export const Imagecarousal = ({ images, ActiveImage, setActiveImage, setActive }) => {
     const imageRef = useRef()
     useEffect(() => {
-        imageRef.current ?
+        imageRef?.current ?
             imageRef.current.scrollToIndex({ index: ActiveImage, animated: true }) : null
     }, [ActiveImage])
 
@@ -39,8 +39,9 @@ const Imagecarousal = ({ images, ActiveImage, setActiveImage, setActive }) => {
     })
     const onViewableItemsChanged = useRef(({ viewableItems }) => {
         viewableItems.length > 0 ?
-            (setActiveImage(viewableItems[0].index),
-                setActive(viewableItems[0].item))
+            (setActiveImage(viewableItems[0].index)
+                // setActive(viewableItems[0].item)
+            )
             : null
     })
     return (

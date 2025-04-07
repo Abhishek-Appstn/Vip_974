@@ -204,11 +204,12 @@ const ChooseServices = props => {
   return (
     <View style={{ backgroundColor: Colors.Black, height: SCREEN_HEIGHT }}>
       <HeaderComponent params={params} />
-      <SafeAreaView>
+      <SafeAreaView style={{ flex: 1 }}>
         <FlatList
           contentContainerStyle={{
             justifyContent: 'center',
-            marginHorizontal: 25,
+            alignItems: 'center',
+            marginHorizontal: SCREEN_WIDTH * .03,
             marginTop: SCREEN_WIDTH * 0.2,
           }}
           data={Data}
@@ -216,13 +217,13 @@ const ChooseServices = props => {
           numColumns={2}
           renderItem={({ item, index }) => {
             return (
-              <View style={{ marginLeft: index !== 0 ? 17 : 0 }}>
+              <View style={{ marginHorizontal: SCREEN_WIDTH * .02 }}>
                 {SelectionBox(item.image, item.name, index, Active, setActive, setSelectedItem, language)}
               </View>
             );
           }}
         />
-        <View style={{ marginHorizontal: SCREEN_WIDTH * .05, marginTop: SCREEN_WIDTH * 0.14 }}>
+        <View style={{ marginHorizontal: SCREEN_WIDTH * .05, justifyContent: 'flex-end', flex: 1, marginBottom: Platform.OS === 'android' ? SCREEN_HEIGHT * .05 : SCREEN_HEIGHT * .02 }}>
           <CustomButton title="Next" onPress={HandleNavigation} />
         </View>
       </SafeAreaView>

@@ -4,31 +4,35 @@ import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHea
 import Constants from '../Constants'
 import SelectorComponentRenderItem from '../components/SelectorComponentRenderItem'
 import CabanaListRenderItem from '../components/CabanaListRenderItem'
-import { CoffeeCabana, Family_Cabana, XlCabana } from '../assets/Images'
 import DataConstants from '../assets/DataConstants'
+import moment from 'moment'
 
 const MyBuilds = () => {
-    const{Colors}=Constants
-    const{SCREEN_HEIGHT,SCREEN_WIDTH}=Constants.SCREEN_DIMENSIONS
-    const [SelectedIndex, setSelectedIndex] = useState(0)
-    const [Data, setData] = useState([])
-const {MyBuildHeader,MybuildCustomData,MybuildStandardData}=DataConstants
+  const { Colors } = Constants
+  const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
+  const [SelectedIndex, setSelectedIndex] = useState(0)
+  const [Data, setData] = useState([])
+  const { MyBuildHeader, MybuildCustomData, MybuildStandardData } = DataConstants
 
-   
-    useEffect(() => {
-      SelectedIndex===0?setData(MybuildStandardData): SelectedIndex===1?setData(MybuildCustomData):null
-    }, [SelectedIndex])
-    
+
+  useEffect(() => {
+    SelectedIndex === 0 ? setData(MybuildStandardData) : SelectedIndex === 1 ? setData(MybuildCustomData) : null
+  }, [SelectedIndex])
+
+  const sortedData = [...Data].sort((a, b) => {
+    const dateA = moment(a.bookedDate, 'DD-MM-YYYY');
+    const dateB = moment(b.bookedDate, 'DD-MM-YYYY');
+    return dateA - dateB;
+  });
   return (
-    <View style={{backgroundColor:Colors.Black_Bg,height:SCREEN_HEIGHT}}>
-     <SafeAreaView style={{alignSelf:'center'}}>
-    <View style={{width:SCREEN_WIDTH*.9,marginVertical:SCREEN_HEIGHT*.02}}>
-    <DrawerHeaderComponent name={"My Builds"} type={"login"} search={true}/>
-    </View>
-    <FlatList horizontal style={{alignSelf:'center'}} contentContainerStyle={{alignItems:'center',justifyContent:'space-between',width:SCREEN_WIDTH*.7,}} data={MyBuildHeader} renderItem={item=><SelectorComponentRenderItem item={item.item} index={item.index} SelectedIndex={SelectedIndex}setSelectedIndex={setSelectedIndex}/>}/>
+    <View style={{ backgroundColor: Colors.Black_Bg, height: SCREEN_HEIGHT }}>
+      <SafeAreaView style={{ alignSelf: 'center', flex: 1, marginHorizontal: SCREEN_WIDTH * .05 }}>
+        <DrawerHeaderComponent name={"My Builds"} type={"login"} search={true} />
+        <FlatList horizontal style={{ alignSelf: 'center', }} contentContainerStyle={{ justifyContent: 'space-between', width: SCREEN_WIDTH * .7, }} data={MyBuildHeader} renderItem={item => <SelectorComponentRenderItem item={item.item} index={item.index} SelectedIndex={SelectedIndex} setSelectedIndex={setSelectedIndex} />} />
 
-<FlatList data={Data} showsVerticalScrollIndicator={false} contentContainerStyle={{alignItems:'center'}} renderItem={item=><CabanaListRenderItem index={item.index} item={item.item}/>}/>
-     </SafeAreaView>
+        <FlatList bounces={false} data={sortedData} showsVerticalScrollIndicator={false} contentContainerStyle={{ marginTop: SCREEN_HEIGHT * .02 }} renderItem={item => <CabanaListRenderItem index={item.index} item={item.item} />} />
+
+      </SafeAreaView>
     </View>
   )
 }

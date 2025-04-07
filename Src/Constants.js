@@ -1,5 +1,5 @@
-import {Dimensions} from 'react-native';
-const {height, width} = Dimensions.get('screen');
+import { Dimensions } from 'react-native';
+const { height, width } = Dimensions.get('screen');
 
 const Colors = {
   Moss_Green: '#1bd6b5',
@@ -25,11 +25,11 @@ const Colors = {
   Black_Bg: '#181D23',
   White_Text: '#DBDBDB',
   Black_2: '#0E1216',
-  Gray_Text:'#636B74',
-  Gray_Border:'#8AA8C7',
-  Circle_Border:'#252B31',
-  Gold:'#ecca4b',
-  Black_M:'#0E1114'
+  Gray_Text: '#636B74',
+  Gray_Border: '#8AA8C7',
+  Circle_Border: '#252B31',
+  Gold: '#ecca4b',
+  Black_M: '#0E1114'
 };
 
 const SCREEN_DIMENSIONS = {
@@ -37,7 +37,11 @@ const SCREEN_DIMENSIONS = {
   SCREEN_WIDTH: width,
 };
 
+const RESPONSIVEFONTSIZE = (size) => {
+  return ((size / 100) * width)
+}
 export default {
   Colors,
   SCREEN_DIMENSIONS,
+  RESPONSIVEFONTSIZE
 };

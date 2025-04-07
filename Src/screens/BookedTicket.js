@@ -59,7 +59,6 @@ const ActionsheetComponent = ({ params, ActionsheetRef }) => {
 const BookedTicket = (props) => {
   const ActionsheetRef = useRef()
   const params = props.route.params;
-  console.log('Params', params);
 
   return (
     <ItemLayout colors={Colors.Black_Bg} type="barcode" buttonTitle={'SCan Barcode'} onPress={() => { ActionsheetRef.current.show() }}>

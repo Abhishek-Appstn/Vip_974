@@ -68,7 +68,7 @@ const HomeNavigation = () => {
       <homestack.Screen name='ChooseServices' component={ChooseServices} />
       <homestack.Screen name='ScheduleServices' component={ScheduleService} />
       <homestack.Screen name='ServicesList' component={ServicesList} />
-      <homestack.Screen name='ProductPage' component={ProductPage} />
+      <homestack.Screen name='ProductPage' component={ProductPage} options={{ animation: 'slide_from_bottom', animationDuration: 300 }} />
       <homestack.Screen name='BookingSummary' component={BookingSummary} />
       <homestack.Screen name='MyActivities' component={MyActivities} />
       <homestack.Screen name='BookedTicket' component={BookedTicket} />
@@ -79,7 +79,7 @@ const HomeNavigation = () => {
       <homestack.Screen name='SelectCabanas' component={SelectCabanas} />
       <homestack.Screen name='MyBuilds' component={MyBuilds} />
       <homestack.Screen name='CustomBuild' component={CustomBuild} />
-      <homestack.Screen name='CabanaView' component={CabanaView} />
+      <homestack.Screen name='CabanaView' component={CabanaView} options={{ animation: 'slide_from_bottom', animationDuration: 300 }} />
       <homestack.Screen name='RequestConfirmation' component={RequestConfirmation} />
       <homestack.Screen name='MyProfile' component={Myprofile} />
       <homestack.Screen name='EditProfile' component={EditProfile} />
