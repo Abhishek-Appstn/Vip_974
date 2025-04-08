@@ -18,6 +18,7 @@ import DrawerSceneContainer from '../components/DrawerSceneContainer'
 import { DrawerUpperImage } from '../assets/Images'
 import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import TowingSummary from '../screens/TowingSummary'
 
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 const { Colors } = Constants
@@ -67,7 +68,7 @@ const DrawerNavigation = () => {
 
       return <CustomDrawer {...props} />
     }}  >
-      <drawer.Screen name='HomeStack' component={HomeNavigation} />
+      <drawer.Screen name='HomeStack' component={AnimatedStyle(HomeNavigation)} />
     </drawer.Navigator>
 
   )
@@ -102,7 +103,7 @@ const HomeNavigation = () => {
 
     //   <Animated.View style={[{ flex: 1 }, animatedStyle]}>
     <homestack.Navigator screenOptions={{ headerShown: false }}>
-      <homestack.Screen name='Home' component={AnimatedStyle(Home)} />
+      <homestack.Screen name='Home' component={Home} />
       <homestack.Screen name='ChooseServices' component={ChooseServices} />
       <homestack.Screen name='ScheduleServices' component={ScheduleService} />
       <homestack.Screen name='ServicesList' component={ServicesList} />
@@ -118,7 +119,7 @@ const HomeNavigation = () => {
       <homestack.Screen name='MyBuilds' component={MyBuilds} />
       <homestack.Screen name='CustomBuild' component={CustomBuild} />
       <homestack.Screen name='CabanaView' component={CabanaView} options={{ animation: 'slide_from_bottom', animationDuration: 300 }} />
-      <homestack.Screen name='RequestConfirmation' component={RequestConfirmation} />
+      <homestack.Screen name='RequestConfirmation' component={RequestConfirmation} options={{ animation: 'fade' }} />
       <homestack.Screen name='MyProfile' component={Myprofile} />
       <homestack.Screen name='EditProfile' component={EditProfile} />
       <homestack.Screen name='Membership' component={Membership} />
@@ -128,6 +129,8 @@ const HomeNavigation = () => {
       <homestack.Screen name='PrivacyPolicy' component={PrivacyPolicy} />
       <homestack.Screen name='AdminHome' component={AdminHome} />
       <homestack.Screen name='AdminAddProduct' component={AdminAddProduct} />
+      <homestack.Screen name='TowingSummary' component={TowingSummary} />
+
 
 
 

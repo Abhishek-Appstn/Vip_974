@@ -9,10 +9,10 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import Snackbar from 'react-native-snackbar'
 
 const HandleNavigation = ({ navigation, params, SizeDimensions, Size }) => {
-  SizeDimensions !== '' && Size !== '' ?
-    params?.type == 'services' ?
+  SizeDimensions !== '' || Size !== '' ?
+    params?.subtype !== 'Towing' ?
       navigation.navigate('ServicesPage', { ...params, Size }) :
-      navigation.navigate('BuildLocations', { ...params, ...SizeDimensions }) : Snackbar.show({
+      navigation.navigate('TowingSummary', { ...params, ...SizeDimensions }) : Snackbar.show({
         text: 'Enter size to continue', backgroundColor: 'red'
       })
 
@@ -45,7 +45,7 @@ const CabanSizeDetail = (props) => {
             <Text style={{ fontSize: 24, fontFamily: 'Gibson', textTransform: 'uppercase', fontWeight: 'semibold', marginTop: 30, color: Colors.White }}>Caban Size</Text>
             <Text style={{ fontSize: 16, fontFamily: 'Gibson', fontWeight: 'semibold', marginTop: 30, color: Colors.White, width: SCREEN_WIDTH * .7, textAlign: 'center', textTransform: 'capitalize' }}>Please enter the cubicle area to be washed in square meters</Text>
             <View style={{ marginVertical: SCREEN_WIDTH * .07 }}>
-              {params?.type !== 'build' ?
+              {params?.subtype !== 'Towing'  ?
                 <CustomTextInput value={Size} onChangeText={text => HandleTextChange(text)} name={"Caban Size"} type='size' /> :
                 <View style={{ flexDirection: 'row', alignSelf: 'center', justifyContent: 'space-evenly', width: SCREEN_WIDTH * .9 }}>
                   <CustomTextInput width={SCREEN_WIDTH * .4} value={SizeDimensions.length} onChangeText={text => HandleTextChange(text, 'length')} name={"Length"} />
