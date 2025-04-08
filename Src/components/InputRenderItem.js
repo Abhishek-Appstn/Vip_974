@@ -1,4 +1,4 @@
-import { View, Text, Image, FlatList, Pressable } from 'react-native';
+import { View, Text, Image, FlatList, Pressable, KeyboardAvoidingView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Constants from '../Constants';
 import CustomTextInput from './CustomTextInput/CustomTextInput';
@@ -36,7 +36,7 @@ const InputRenderItem = ({ Item, key, name, JsonData, setJsonData }) => {
                 switch (Item.inputType) {
                     case 'TextInput':
                         return (
-                            <View style={{ marginVertical: SCREEN_HEIGHT * 0.02 }}>
+                            <KeyboardAvoidingView behavior='padding' style={{ marginVertical: SCREEN_HEIGHT * 0.02 }}>
                                 <CustomTextInput
                                     name={item}
                                     onChangeText={(text) =>
@@ -49,7 +49,7 @@ const InputRenderItem = ({ Item, key, name, JsonData, setJsonData }) => {
                                         }))
                                     }
                                 />
-                            </View>
+                            </KeyboardAvoidingView>
                         );
                     case 'Selection':
                         return (

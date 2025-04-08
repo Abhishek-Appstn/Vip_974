@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, FlatList, ScrollView, Keyboard, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, SafeAreaView, FlatList, ScrollView, Keyboard, TouchableWithoutFeedback, Platform, KeyboardAvoidingView } from 'react-native'
 import React, { useState } from 'react'
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent'
 import Layout from '../components/Layout/Layout'
@@ -29,25 +29,25 @@ const handleTextChange = ({ text, key, FormData, setFormData }) => {
 const RenderSupportFields = ({ item, index, data, setData, Unfilled }) => {
 
     return (
-        <View style={{ marginVertical: SCREEN_HEIGHT * .02 }}>
+        <View behavior='padding' style={{}}>
             <CustomTextInput type={item.key == 'PhoneNumber' ? 'PhoneNumber' : null} error={Unfilled ? Unfilled.includes(item.key) ? true : false : null} multiline={item.title === 'Message' ? true : false} value={data[item.key]} name={item.title} onChangeText={text => handleTextChange({ text: text, key: item.key, FormData: data, setFormData: setData })} />
         </View>
     )
 }
 
-const SupportFields = ({ Data, setData }) => {
-    const [Unfilled, setUnfilled] = useState()
+const SupportFields = ({ Data, setData, Unfilled, setUnfilled }) => {
     const navigation = useNavigation()
 
     return (
-        <ScrollView bounces={false} showsVerticalScrollIndicator={false} contentContainerStyle={{}} >
-            <Text style={{ fontSize: 32, fontWeight: '400', color: Colors.White, textTransform: 'uppercase', marginBottom: SCREEN_HEIGHT * .02 }}>Get In TOuch !</Text>
-            <FlatList scrollEnabled={false} ListFooterComponentStyle={{ marginTop: SCREEN_HEIGHT * .04 }} ListFooterComponent={<CustomButton title={"Send"} onPress={() => CreateSupportTicket({ FormData: Data, setUnfilled: setUnfilled, navigation: navigation })} />} showsVerticalScrollIndicator={false} contentContainerStyle={{ height: SCREEN_HEIGHT * .8 }} data={DataConstants.SupportData} renderItem={item => RenderSupportFields({ item: item.item, index: item.index, data: Data, setData: setData, Unfilled: Unfilled })} />
-
+        <ScrollView scrollEventThrottle={16} bounces={false} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: SCREEN_HEIGHT * .04, flexGrow: 1, }} >
+            <Text style={{ fontSize: 32, fontWeight: '400', color: Colors.White, textTransform: 'uppercase', marginVertical: SCREEN_HEIGHT * .04, }}>Get In TOuch !</Text>
+            <FlatList scrollEnabled={false} ListFooterComponentStyle={{ marginTop: SCREEN_HEIGHT * .04 }} showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1 }} data={DataConstants.SupportData} renderItem={item => RenderSupportFields({ item: item.item, index: item.index, data: Data, setData: setData, Unfilled: Unfilled })} />
         </ScrollView>
     )
 }
 const Support = () => {
+    const navigation = useNavigation()
+    const [Unfilled, setUnfilled] = useState()
     const [FormData, setFormData] = useState({
         Name: '',
         Email: '',
@@ -58,13 +58,35 @@ const Support = () => {
     return (
         <Layout>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss()}>
-                <SafeAreaView>
-                    <View style={{ margin: SCREEN_WIDTH * .05 }}>
-                        <DrawerHeaderComponent name={"Support"} type={"login"} search={true} />
-                        <SupportFields Data={FormData} setData={setFormData} />
+                <View style={{ flex: 1 }}>
+                    <KeyboardAvoidingView behavior='padding' style={{ flex: 1 }}>
+                        <SafeAreaView style={{ flex: 1 }}>
+                            <View style={{ flex: 1, margin: SCREEN_WIDTH * 0.05 }}>
+                                <DrawerHeaderComponent name={"Support"} type={"login"} search={true} />
+                                <SupportFields
+                                    Data={FormData}
+                                    setData={setFormData}
+                                    Unfilled={Unfilled}
+                                    setUnfilled={setUnfilled}
+                                />
+                            </View>
+                        </SafeAreaView>
+                    </KeyboardAvoidingView>
+
+                    {/* Ensure the button stays fixed here */}
+                    <View style={{
+                        width: SCREEN_WIDTH * 0.9,
+                        alignSelf: 'center',
+                        marginBottom: Platform.OS === 'ios' ? SCREEN_HEIGHT * 0.02 : SCREEN_HEIGHT * 0.05
+                    }}>
+                        <CustomButton
+                            title={"Send"}
+                            onPress={() => CreateSupportTicket({ FormData: FormData, setUnfilled: setUnfilled, navigation: navigation })}
+                        />
                     </View>
-                </SafeAreaView>
+                </View>
             </TouchableWithoutFeedback>
+
         </Layout>
     )
 }

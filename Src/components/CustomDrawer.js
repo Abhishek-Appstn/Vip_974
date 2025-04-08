@@ -9,6 +9,7 @@ import { languageSignout, setLanguage } from '../redux/slice/languageSlice'
 import Utils from '../Utils'
 import { setUserData, Signout } from '../redux/slice/UserSlice'
 import Snackbar from 'react-native-snackbar'
+import { useDrawerProgress } from '@react-navigation/drawer'
 const { Colors } = Constants
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 const LowerSvg = () => {
@@ -35,6 +36,9 @@ const CustomDrawer = (props) => {
   }, [language])
 
   const dispatch = useDispatch()
+  const progresss = useDrawerProgress()
+  console.log("progresss", progresss);
+
   return (
     <SafeAreaView style={{ backgroundColor: Colors.Black_Bg, flex: 1, overflow: 'hidden' }}>
       <View style={[{ marginVertical: SCREEN_HEIGHT * .1, marginHorizontal: SCREEN_WIDTH * .05 }, CustomAlignSelf]}>

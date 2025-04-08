@@ -35,7 +35,7 @@ const DrawerHeaderComponent = ({ name, leftimage, rightimage, type, filter, back
 
   return (
     <View style={{ flexDirection: 'row', height: SCREEN_HEIGHT * .07, alignItems: 'center', overflow: 'hidden', marginTop: StatusBar.currentHeight, alignSelf: 'center' }}>
-      <HeaderIcons icon={leftimage ? leftimage : type == 'home' ? Drawer : ArrowLeft} onPress={(() => { type == 'home' ? navigation.dispatch(DrawerActions.toggleDrawer()) : navigation.goBack() })} />
+      <HeaderIcons icon={leftimage ? leftimage : type == 'home' ? Drawer : ArrowLeft} onPress={onLeftPress ? onLeftPress : (() => { type == 'home' ? navigation.dispatch(DrawerActions.toggleDrawer()) : navigation.goBack() })} />
       <TextView header={name} />
       <HeaderIcons icon={rightimage ? rightimage : Search} filter={filter} onPress={onRightPress ? onRightPress : null} />
     </View>

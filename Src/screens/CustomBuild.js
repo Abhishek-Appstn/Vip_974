@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Alert, Image, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { View, Text, FlatList, Alert, Image, ScrollView, KeyboardAvoidingView, BackHandler } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import ItemLayout from '../components/ItemLayout';
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent';
@@ -12,6 +12,7 @@ import CustomBuildData from '../assets/CustomBuildData';
 import Snackbar from 'react-native-snackbar';
 import { useSelector } from 'react-redux';
 import Utils from '../Utils';
+import Animated, { useAnimatedStyle, useSharedValue, interpolate, withTiming } from 'react-native-reanimated';
 const CustomData = CustomBuildData()
 
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS;
@@ -57,8 +58,8 @@ const PageHeader = ({ item, ActiveStep, Percentage, CustomFlexDirection, CustomA
 const StepContent = ({ JsonData, setJsonData, Data, CustomAlignItems }) => {
   return (
     Data.key !== 'NameOfCustomization' ?
-      <KeyboardAvoidingView behavior='padding' style={{ alignItems: 'center', justifyContent: 'center', height: SCREEN_HEIGHT * .7, width: SCREEN_WIDTH, backgroundColor: Colors.Black_Bg }}>
-        <ScrollView contentContainerStyle={{ alignItems: 'center', justifyContent: 'center', marginTop: SCREEN_HEIGHT * .05 }}>
+      <KeyboardAvoidingView behavior='padding' style={{ alignItems: 'center', justifyContent: 'center', height: SCREEN_HEIGHT * .7, width: SCREEN_WIDTH, }}>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: SCREEN_HEIGHT * .05 }}>
           <Image source={Data.image} />
           <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 24, marginVertical: SCREEN_HEIGHT * .02, textTransform: 'uppercase' }}>{Data.title}</Text>
           <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 16, maxWidth: SCREEN_WIDTH * .75, textAlign: 'center', marginBottom: SCREEN_HEIGHT * .02 }}>{Data.description}</Text>
@@ -68,10 +69,10 @@ const StepContent = ({ JsonData, setJsonData, Data, CustomAlignItems }) => {
             data={Data.flatlistData}
             renderItem={({ item }) => <InputRenderItem Item={item} name={Data.key} JsonData={JsonData} setJsonData={setJsonData} />}
           />
-        </ScrollView>
+        </View>
       </KeyboardAvoidingView> :
-      <KeyboardAvoidingView behavior='padding' style={[{ justifyContent: 'center', height: SCREEN_HEIGHT * .7, width: SCREEN_WIDTH, backgroundColor: Colors.Black_Bg, paddingHorizontal: SCREEN_WIDTH * .05 },]}>
-        <ScrollView contentContainerStyle={[{ justifyContent: 'center', marginTop: SCREEN_HEIGHT * .05 }, CustomAlignItems]}>
+      <KeyboardAvoidingView behavior='padding' style={[{ justifyContent: 'center', height: SCREEN_HEIGHT * .7, width: SCREEN_WIDTH, paddingHorizontal: SCREEN_WIDTH * .05 },]}>
+        <View contentContainerStyle={[{ justifyContent: 'center', marginTop: SCREEN_HEIGHT * .05 }, CustomAlignItems]}>
           <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 24, marginVertical: SCREEN_HEIGHT * .02, textTransform: 'uppercase' }}>{Data.title}</Text>
 
           <FlatList
@@ -97,7 +98,7 @@ const StepContent = ({ JsonData, setJsonData, Data, CustomAlignItems }) => {
             </View>
           </View>
 
-        </ScrollView>
+        </View>
       </KeyboardAvoidingView>
   );
 };
@@ -174,10 +175,34 @@ const CustomBuild = () => {
   useEffect(() => {
     setData(CustomData[keys[ActiveStep - 1]])
   }, [ActiveStep])
+
   const [JsonData, setJsonData] = useState({});
   const language = useSelector(state => state.Language.value)
   const CustomFlexDirection = Utils.flexDirection(language)
   const CustomAlignItems = Utils.alignItems(language)
+
+  const animated = useSharedValue(SCREEN_WIDTH)
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return { transform: [{ translateX: animated.value }] }
+  })
+  useEffect(() => {
+    animated.value = SCREEN_WIDTH
+    animated.value = withTiming(0)
+  }, [ActiveStep])
+  useEffect(() => {
+    const backpressed = BackHandler.addEventListener('hardwareBackPress', () => {
+      if (ActiveStep > 1) {
+        setActiveStep(ActiveStep - 1);
+        return true;
+      } else {
+        navigation.goBack();
+        return true;
+      }
+    });
+
+    return () => backpressed.remove();
+  }, [ActiveStep]);
 
   return (
     <ItemLayout
@@ -185,11 +210,10 @@ const CustomBuild = () => {
       onPress={() =>
         handlePress({ ActiveStep: ActiveStep, setActiveStep: setActiveStep, JsonData: JsonData, keys: keys, Steplength, navigation: navigation })
       }>
-      {/* <KeyboardAvoidingView behavior='padding'> */}
 
       <View style={{ marginHorizontal: SCREEN_WIDTH * 0.04 }}>
         <DrawerHeaderComponent
-          back={handlebackpress}
+          onLeftPress={handlebackpress}
           active={ActiveStep}
           setactive={setActiveStep}
           name={'Custom'}
@@ -198,8 +222,13 @@ const CustomBuild = () => {
         />
         <PageHeader CustomAlignItems={CustomAlignItems} CustomFlexDirection={CustomFlexDirection} item={Data} ActiveStep={ActiveStep} Percentage={Percentage} />
       </View>
-      <StepContent CustomAlignItems={CustomAlignItems} JsonData={JsonData} setJsonData={setJsonData} Data={Data} />
-      {/* </KeyboardAvoidingView> */}
+      <View style={{ backgroundColor: Colors.Black_Bg }}>
+
+        <Animated.View style={[animatedStyle]}>
+          <StepContent CustomAlignItems={CustomAlignItems} JsonData={JsonData} setJsonData={setJsonData} Data={Data} />
+
+        </Animated.View>
+      </View>
 
     </ItemLayout>
   );

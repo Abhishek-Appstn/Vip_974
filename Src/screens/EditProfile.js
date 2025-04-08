@@ -102,7 +102,7 @@ const EditProfile = (props) => {
         <ProfileImage />
         <FlatList showsVerticalScrollIndicator={false} scrollEnabled={false} data={data} renderItem={({ item, index }) => {
           return (
-            <View style={{ marginTop: 20, marginBottom: 10 }}>
+            <View style={{}}>
               <CustomTextInput value={FormData[item.key]} placeholder={item.name} name={item.name} type={item.name == 'Phone' ? "PhoneNumber" : null} onChangeText={text => handleTextChange(text, item.key)} />
             </View>
           )

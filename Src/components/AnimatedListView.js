@@ -6,7 +6,6 @@ const AnimatedListView = ({ children }) => {
     const animationProgress = useSharedValue(0);
 
     useEffect(() => {
-        // Trigger the animation after the component mounts
         animationProgress.value = withTiming(1, { duration: 500 });
     }, []);
 

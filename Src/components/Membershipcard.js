@@ -1,10 +1,10 @@
-import { View, Text, Image, Pressable } from 'react-native'
-import React from 'react'
+import { View, Text, Image, Pressable, ImageBackground } from 'react-native'
+import React, { Children } from 'react'
 import Constants from '../Constants'
 import UpperRightSvg from './UpperRightSvg'
 import MembershipSvg from './MembershipSvg'
-import Svg, { Defs, LinearGradient, Path, Stop } from 'react-native-svg'
-import { Background_Icon, BackgroundIconMembership, ChevronRight, ChevronRightWhite, king } from '../assets/Images'
+import Svg, { Defs, LinearGradient, Path, Stop, Text as SvgText, Image as SvgImage, ClipPath, G } from 'react-native-svg'
+import { Background_Icon, BackgroundIconMembership, ChevronRight, ChevronRightWhite, GoldTextBg, king } from '../assets/Images'
 import { useNavigation } from '@react-navigation/native'
 import DataConstants from '../assets/DataConstants'
 import { useSelector } from 'react-redux'
@@ -43,42 +43,73 @@ const MembershipLayout = ({ children }) => {
         d={`M${Width},0a6,6,0,0,1,6,${Height * 0.03}V${Height - 6}a6,6,0,0,1-6,5.993H6a6,6,0,0,1-6-5.993v-${Height * 0.1}s.1-${Height * 0.12},0-${Height * 0.12}c.986-${Height * 0.09},5.054-${Height * 0.21},33.944-${Height * 0.26},48.553-${Height * 0.08},86.648,36.038,160.27,12.111S${Width},0,${Width},0Z`}
         fill="url(#linear-gradient)"
       />
+
+
+
     </Svg>
   )
 }
 
+
+const TextWithImage = ({ text }) => {
+  return (
+    <Svg height={SCREEN_HEIGHT} width={SCREEN_WIDTH}>
+      <ClipPath id="clip">
+        <SvgText
+
+          fontSize="20"
+          fontWeight="bold"
+        >
+          {text}VIP-Gold
+        </SvgText>
+      </ClipPath>
+      <SvgImage
+        href={GoldTextBg}
+        width={SCREEN_WIDTH}
+        height={SCREEN_HEIGHT * .4}
+        clipPath="url(#clip)"
+      />
+    </Svg>
+  );
+};
+
+
+
 const Membershipcard = () => {
   const navigation = useNavigation()
-    const {points,pointexpirydate,membershipName}=useSelector(state=>state.Membership)
-  const language=useSelector(state=>state.Language.value)
-  const CustomFlexDirection=Utils.flexDirection(language)
-  const CustomImageTransform=Utils.ImageTransform(language)
-  const CustomAlignSelf=Utils.alignSelf(language)
-  const CustomTextAlign=Utils.textAlign(language)
+  const { points, pointexpirydate, membershipName } = useSelector(state => state.Membership)
+  const language = useSelector(state => state.Language.value)
+  const CustomFlexDirection = Utils.flexDirection(language)
+  const CustomImageTransform = Utils.ImageTransform(language)
+  const CustomAlignSelf = Utils.alignSelf(language)
+  const CustomTextAlign = Utils.textAlign(language)
 
 
   return (
     <View style={{ backgroundColor: "#0e1114", elevation: 100, height: SCREEN_HEIGHT * .23, overflow: "hidden", width: SCREEN_WIDTH * .9, alignSelf: 'center', borderRadius: SCREEN_WIDTH * .02 }}>
       <MembershipSvg />
-      <Image source={BackgroundIconMembership} style={{ height: SCREEN_HEIGHT * .15, alignSelf: 'flex-end', right: 10, position: 'absolute', zIndex: -2 }} resizeMode='contain' />
+      <Image source={BackgroundIconMembership} style={{ position: 'absolute', right: SCREEN_WIDTH * .2, top: SCREEN_HEIGHT * .01, zIndex: -1 }} resizeMode='contain' />
       <View style={{ margin: SCREEN_WIDTH * .05 }}>
         <Text style={{ color: Colors.Green1, fontWeight: '500', zIndex: 10, fontFamily: 'Gibson', fontSize: 14 }}><Text style={{ fontSize: 24 }}>{points}</Text>Points</Text>
         <Text style={{ color: Colors.White_Text, fontWeight: '400', fontFamily: 'Gibson', fontSize: 12 }}>Expiring on {pointexpirydate} </Text>
       </View>
+
       <MembershipLayout />
-      <View style={[{ position: 'absolute', bottom: SCREEN_HEIGHT*.015, marginHorizontal: SCREEN_WIDTH*.06, flexDirection: 'row', alignItems: 'center'},CustomFlexDirection,CustomAlignSelf]}>
+      <View style={[{ marginHorizontal: SCREEN_WIDTH * .06, bottom: SCREEN_HEIGHT * .015, position: 'absolute', flexDirection: 'row', alignItems: 'center', }, CustomFlexDirection, CustomAlignSelf]}>
         <View style={{ backgroundColor: Colors.Black_Bg, borderRadius: SCREEN_WIDTH * .02, alignItems: 'center', justifyContent: 'center', width: SCREEN_WIDTH * .1, height: SCREEN_HEIGHT * .065, padding: SCREEN_HEIGHT * .03 }}>
           <Image source={king} style={{ height: SCREEN_HEIGHT * .08, resizeMode: 'contain' }} />
         </View>
         <View style={{ marginHorizontal: SCREEN_WIDTH * .02 }}>
-          <Pressable style={[{flexDirection:'row',alignItems:'center'},CustomFlexDirection]} onPress={() => navigation.navigate('MembershipDesc')} >
-            <Text style={[{ color: Colors.Gold, fontWeight: '500', zIndex: 10, fontFamily: 'Gibson', fontSize: 18, textTransform: 'capitalize' },CustomTextAlign]}>{membershipName}</Text>
-          <Image source={ChevronRightWhite} style={[{marginHorizontal:SCREEN_WIDTH*.01},CustomImageTransform]}/>
-          </Pressable>
-          <Text style={[{ color: Colors.White_Text, fontWeight: '400', fontFamily: 'Gibson', maxWidth: SCREEN_WIDTH * .45, marginVertical: SCREEN_HEIGHT * .005, fontSize: 12, textTransform: 'capitalize' },CustomTextAlign]}>{SubText}</Text>
-        </View>
+          <Pressable style={[{ flexDirection: 'row', alignItems: 'center' }, CustomFlexDirection]} onPress={() => navigation.navigate('MembershipDesc')} >
 
+            <Text style={[{ color: Colors.Gold, fontWeight: '500', fontFamily: 'Gibson', fontSize: 18, textTransform: 'capitalize' }, CustomTextAlign]}>{membershipName}</Text>
+            <Image source={ChevronRightWhite} style={[{ marginHorizontal: SCREEN_WIDTH * .01 }, CustomImageTransform]} />
+
+          </Pressable>
+          <Text style={[{ color: Colors.White_Text, fontWeight: '400', fontFamily: 'Gibson', maxWidth: SCREEN_WIDTH * .45, marginVertical: SCREEN_HEIGHT * .005, fontSize: 12, textTransform: 'capitalize' }, CustomTextAlign]}>{SubText}</Text>
+        </View>
       </View>
+
     </View>
   )
 }

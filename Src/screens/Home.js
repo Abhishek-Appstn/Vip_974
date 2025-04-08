@@ -25,6 +25,7 @@ import { Profile_Damu, ProfileImage } from '../assets/Images';
 
 const { Colors } = Constants
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
+
 const HomeRenderItem = ({ item, index, CustomFlexDirection, CustomTextAlign }) => {
   const navigation = useNavigation();
   const HandleNavigation = (name, params) => {
@@ -113,79 +114,13 @@ const FlatlistSvg = () => {
   );
 };
 
-const UpperSvg = () => {
-  return (
-    <View style={{ position: 'absolute', left: 20, top: -210, }}>
-      <Svg
-        id="Group_12531"
-        data-name="Group 12531"
-        width={223.778}
-        height={305.401}
-        viewBox="0 0 223.778 405.401">
-        <Path
-          id="Path_8641"
-          data-name="Path 8641"
-          d="M129.2,133.71h31.526L31.526,361.567H0Z"
-          transform="translate(46.875 -49.916)"
-          fill="#0fc1a1"
-        />
-        <Path
-          id="Path_8642"
-          data-name="Path 8642"
-          d="M129.2,133.71h31.526L31.526,361.567H0Z"
-          transform="translate(56.83 43.833)"
-          fill="#e50c58"
-        />
-        <Path
-          id="Path_8645"
-          data-name="Path 8645"
-          d="M129.2,133.71h31.526L31.526,361.567H0Z"
-          transform="translate(31.112 -133.71)"
-          fill="#1ec0de"
-        />
-        <Path
-          id="Path_8643"
-          data-name="Path 8643"
-          d="M129.2,133.71h31.526L31.526,361.567H0Z"
-          transform="translate(43.556 11.477)"
-          fill="#ff5f00"
-        />
-        <Path
-          id="Path_8646"
-          data-name="Path 8646"
-          d="M129.2,133.71h31.526L31.526,361.567H0Z"
-          transform="translate(0 -133.71)"
-          fill="#e91ccf"
-        />
-        <Path
-          id="Path_8644"
-          data-name="Path 8644"
-          d="M129.2,133.71h31.526L31.526,361.567H0Z"
-          transform="translate(63.053 -133.71)"
-          fill="#8a50ee"
-        />
-      </Svg>
-    </View>
-  );
-};
+
 
 const Home = () => {
-  const DrawerProgress = useDrawerProgress()
   const dispatch = useDispatch()
   const language = useSelector(state => state.Language.value)
   const CustomFlexDirection = Utils.flexDirection(language)
   const CustomTextAlign = Utils.textAlign(language)
-  const animatedStyle = useAnimatedStyle(() => {
-    const scale = interpolate(DrawerProgress.value, [0, 1], [1, 0.73]);
-    const borderRadius = interpolate(DrawerProgress.value, [0, 1], [0, SCREEN_HEIGHT * 0.03]);
-
-    return {
-      transform: [{ scale }],
-      borderRadius,
-      backfaceVisibility: 'hidden',
-      overflow: 'hidden',
-    };
-  });
 
 
   useEffect(() => {
@@ -199,24 +134,24 @@ const Home = () => {
   }, [])
 
   return (
-    <KeyboardAvoidingView style={{ backgroundColor: Colors.Black_Bg, flex: 1, overflow: 'hidden', zIndex: 1, }}>
-      <UpperSvg />
-      <Animated.View style={[animatedStyle, { flex: 1, elevation: 10, shadowColor: Colors.Black, backgroundColor: Colors.Black_Bg, paddingTop: Platform.OS === 'android' ? SCREEN_HEIGHT * .02 : 0, overflow: 'hidden', zIndex: 1, }]}>
-        <HomeHeaderComponent header={DataConstants.HomeHeader} headerText={"Vip-974"} />
-        <View style={{ backgroundColor: Colors.Black, flex: 1.5 }}>
-          <FlatList
-            keyExtractor={item => item.header}
-            scrollEnabled={false}
-            data={DataConstants.HomeData}
-            contentContainerStyle={{
+    // <KeyboardAvoidingView style={{ backgroundColor: Colors.Black_Bg, flex: 1, overflow: 'hidden', zIndex: 1, }}>
 
-              paddingHorizontal: SCREEN_WIDTH * .05,
-              paddingTop: SCREEN_HEIGHT * .014,
-            }}
-            renderItem={item => <HomeRenderItem item={item.item} index={item.index} CustomFlexDirection={CustomFlexDirection} CustomTextAlign={CustomTextAlign} />}
-          />
-        </View>
-      </Animated.View>
+    <KeyboardAvoidingView style={[{ flex: 1, elevation: 10, shadowColor: Colors.Black, backgroundColor: Colors.Black_Bg, paddingTop: Platform.OS === 'android' ? SCREEN_HEIGHT * .02 : 0, overflow: 'hidden', zIndex: 1, }]}>
+      <HomeHeaderComponent header={DataConstants.HomeHeader} headerText={"Vip-974"} />
+      <View style={{ backgroundColor: Colors.Black, flex: 1.5 }}>
+        <FlatList
+          keyExtractor={item => item.header}
+          scrollEnabled={false}
+          data={DataConstants.HomeData}
+          contentContainerStyle={{
+
+            paddingHorizontal: SCREEN_WIDTH * .05,
+            paddingTop: SCREEN_HEIGHT * .014,
+          }}
+          renderItem={item => <HomeRenderItem item={item.item} index={item.index} CustomFlexDirection={CustomFlexDirection} CustomTextAlign={CustomTextAlign} />}
+        />
+      </View>
+      {/* </View> */}
     </KeyboardAvoidingView>
   );
 };
