@@ -45,7 +45,7 @@ const ItemLayout = ({ buttonTitle, children, size, colors, onPress, screenname, 
   return (
     <View style={{ backgroundColor: Colors.Green1, flex: 1 }}>
       <View style={{ backgroundColor: colors ? colors : Colors.Black, height: SCREEN_HEIGHT * .9, width: SCREEN_WIDTH, borderRadius: 15, overflow: "hidden", borderTopRightRadius: 0, borderTopLeftRadius: 0 }}>
-        <SafeAreaView style={{ width: SCREEN_WIDTH, alignSelf: 'center' }}>
+        <SafeAreaView style={{ width: SCREEN_WIDTH, alignSelf: 'center',flex:1 }}>
           {children}
         </SafeAreaView>
       </View>

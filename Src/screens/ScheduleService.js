@@ -27,7 +27,7 @@ const ScheduleService = (props) => {
   return (
     <ItemLayout buttonTitle='Submit' colors={Colors.Black_Bg} onPress={HandleNavigation}>
       <View style={{ backgroundColor: Colors.Black_Bg }}>
-        <DrawerHeaderComponent type='login' name={params?.type ? params.type : "Rent"} search={true} />
+        <DrawerHeaderComponent type='login' name={params?.subtype ? params.subtype : "Rent"} search={true} />
       </View>
       <View style={{ backgroundColor: Colors.Black_Bg }}>
         <CustomCalenderStrip params={params} selectedDate={selectedDate} selectedTime={selectedTime} setselectedDate={setselectedDate} setselectedTime={setselectedTime} />

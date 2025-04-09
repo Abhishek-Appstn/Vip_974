@@ -24,7 +24,8 @@ const ConfirmationMessage = ({ status }) => (
 
 )
 
-const RequestConfirmation = () => {
+const RequestConfirmation = (props) => {
+  const params=props?.route?.params
 
   const navigation = useNavigation()
   return (
@@ -33,7 +34,7 @@ const RequestConfirmation = () => {
         {/* <View style={{ backgroundColor: Colors.Black_Bg,  }}> */}
         <ConfirmationIcon />
         <ConfirmationMessage />
-        <CustomButton width={SCREEN_WIDTH * .55} title="My Builds" onPress={() => { navigation.navigate("MyBuilds") }} />
+        <CustomButton width={SCREEN_WIDTH * .55} title={params?.type=='rent'?'My Rents':params?.type=='services'?"My Services":"My Builds"} onPress={() => { navigation.navigate("MyBuilds") }} />
       </View>
     </View>
   )

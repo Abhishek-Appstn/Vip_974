@@ -7,7 +7,7 @@ import Utils from '../Utils'
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 const { Colors } = Constants
 
-const TimeSlot = ({ params, header, style, selectedDate, selectedTime, icon }) => {
+const TimeSlot = ({ params, header, style, selectedDate, selectedTime, icon,iconContainer }) => {
   const language = useSelector(state => state.Language.value)
   const CustomFlexDirection = Utils.flexDirection(language)
   const CustomAlignSelf = Utils.alignSelf(language)
@@ -26,7 +26,7 @@ const TimeSlot = ({ params, header, style, selectedDate, selectedTime, icon }) =
         {header}
       </Text> : null : null}
       <View style={[{ flexDirection: 'row', }, CustomFlexDirection]}>
-        <View style={{ padding: SCREEN_HEIGHT * .01, backgroundColor: Colors.Black }}>
+        <View style={[{ padding: SCREEN_HEIGHT * .01, backgroundColor: Colors.Black },iconContainer]}>
           <Image source={icon ? icon : calendar} style={{ height: SCREEN_WIDTH * .05, width: SCREEN_WIDTH * .05, resizeMode: 'contain' }} />
         </View>
         <View style={{ marginHorizontal: SCREEN_WIDTH * .016, justifyContent: "center" }}>

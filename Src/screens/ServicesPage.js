@@ -13,8 +13,8 @@ import Utils from '../Utils'
 import SelectionComponent from '../components/SelectionComponent'
 
 const HandleNavigation = ({ navigation, item, params }) => {
-  item ?
-    navigation.navigate('BookingSummary', { ...item, type: 'services', ...params }) : Snackbar.show({
+  item ?params?.subtype!=='Towing'?
+    navigation.navigate('BookingSummary', { ...item, type: 'services', ...params }) :navigation.navigate('RequestConfirmation',params) : Snackbar.show({
       text: "Select a service to continue", backgroundColor: 'red'
     })
 }
@@ -61,6 +61,7 @@ const ServicesPage = (props) => {
   const CustomAlignItems = Utils.alignItems(language)
   const CustomTextAlign = Utils.textAlign(language)
 
+console.log("paraaaams",params);
 
   const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
   const { Colors } = Constants
@@ -68,13 +69,13 @@ const ServicesPage = (props) => {
   const [SelectedItem, setSelectedItem] = useState(null)
 
   return (
-    <ItemLayout buttonTitle="Choose Service" onPress={() => HandleNavigation({ navigation: navigation, item: SelectedItem, params: params })}>
+    <ItemLayout buttonTitle={params?.subtype!=='Towing'?"Choose Service":'Proceed To Payment'} onPress={() => HandleNavigation({ navigation: navigation, item: SelectedItem, params: params })}>
       <View style={{ width: SCREEN_WIDTH * .9, alignSelf: 'center' }}>
         <DrawerHeaderComponent type='filter' name={params?.type} />
         <View style={{ flex: 1 }}>
 
         </View>
-        <FlatList contentContainerStyle={{ marginTop: SCREEN_WIDTH * .04, paddingBottom: SCREEN_HEIGHT * .3 }} showsVerticalScrollIndicator={false} data={DataConstants.ServicesList} renderItem={({ item, index }) => {
+        <FlatList contentContainerStyle={{ marginTop: SCREEN_WIDTH * .04, paddingBottom: SCREEN_HEIGHT * .3,flexGrow:1 }} showsVerticalScrollIndicator={false} data={DataConstants.ServicesList} renderItem={({ item, index }) => {
           return (
             <Pressable style={[{ flex: 1, flexDirection: 'row', backgroundColor: Colors.Black_Bg, borderRadius: 7, marginVertical: SCREEN_HEIGHT * .01, paddingHorizontal: SCREEN_WIDTH * .03, paddingVertical: SCREEN_WIDTH * .05, borderWidth: 1, borderColor: SelectedService === item.name ? Colors.Green1 : null }, CustomFlexDirection]} onPress={() => { setSelectedService(item.name), setSelectedItem(item) }}>
               <View style={{ borderColor: Colors.Black, borderWidth: 2, padding: SCREEN_WIDTH * .03, borderRadius: SCREEN_WIDTH, backgroundColor: 'rgba(0,30,20,0.5)', height: SCREEN_WIDTH * .15, width: SCREEN_WIDTH * .15, alignItems: 'center', justifyContent: 'center' }} ><Image source={item.image} style={{ height: SCREEN_WIDTH * .08, width: SCREEN_WIDTH * .08 }} resizeMode='contain' /></View>
