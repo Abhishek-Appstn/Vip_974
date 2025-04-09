@@ -1,5 +1,5 @@
 import { View, Text, Image } from 'react-native'
-import React, { Children } from 'react'
+import React from 'react'
 import { useDrawerProgress } from '@react-navigation/drawer'
 import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated'
 import Constants from '../Constants'

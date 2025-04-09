@@ -68,7 +68,7 @@ const DrawerNavigation = () => {
 
       return <CustomDrawer {...props} />
     }}  >
-      <drawer.Screen name='HomeStack' component={AnimatedStyle(HomeNavigation)} />
+      <drawer.Screen name='HomeStack' component={HomeNavigation} />
     </drawer.Navigator>
 
   )
@@ -87,57 +87,60 @@ const AnimatedStyle = (Component) => {
 
 
 const HomeNavigation = () => {
-  // const DrawerProgress = useDrawerProgress()
-  // const animatedStyle = useAnimatedStyle(() => {
-  //   const scale = interpolate(DrawerProgress.value, [0, 1], [1, 0.63]);
-  //   const borderRadius = interpolate(DrawerProgress.value, [0, 1], [0, SCREEN_HEIGHT * 0.03]);
+  const DrawerProgress = useDrawerProgress()
+  const animatedStyle = useAnimatedStyle(() => {
+    const scale = interpolate(DrawerProgress.value, [0, 1], [1, 0.63]);
+    const borderRadius = interpolate(DrawerProgress.value, [0, 1], [0, SCREEN_HEIGHT * 0.03]);
 
-  //   return {
-  //     transform: [{ scale }],
-  //     borderRadius,
-  //   };
-  // });
+    return {
+      transform: [{ scale }],
+      borderRadius,
+    };
+  });
   return (
-    // <View style={{ flex: 1, backgroundColor: Colors.Black_Bg }}>
-    //   <Image source={DrawerUpperImage} style={{ position: 'absolute', left: SCREEN_WIDTH * .2 }} />
+    <View style={{ flex: 1, backgroundColor: Colors.Black_Bg }}>
+      <Image source={DrawerUpperImage} style={{ position: 'absolute', left: SCREEN_WIDTH * .2 }} />
+      <View style={{ flex: 1, shadowColor: Colors.Black, shadowRadius: 40, shadowOpacity: 1, }}>
 
-    //   <Animated.View style={[{ flex: 1 }, animatedStyle]}>
-    <homestack.Navigator screenOptions={{ headerShown: false }}>
-      <homestack.Screen name='Home' component={Home} />
-      <homestack.Screen name='ChooseServices' component={ChooseServices} />
-      <homestack.Screen name='ScheduleServices' component={ScheduleService} />
-      <homestack.Screen name='ServicesList' component={ServicesList} />
-      <homestack.Screen name='ProductPage' component={ProductPage} options={{ animation: 'slide_from_bottom', animationDuration: 300 }} />
-      <homestack.Screen name='BookingSummary' component={BookingSummary} />
-      <homestack.Screen name='MyActivities' component={MyActivities} />
-      <homestack.Screen name='BookedTicket' component={BookedTicket} />
-      <homestack.Screen name='ChooseLocation' component={ChooseLocation} />
-      <homestack.Screen name='CabanSize' component={CabanSizeDetail} />
-      <homestack.Screen name='ServicesPage' component={ServicesPage} />
-      <homestack.Screen name='BuildLocations' component={BuildLocations} />
-      <homestack.Screen name='SelectCabanas' component={SelectCabanas} />
-      <homestack.Screen name='MyBuilds' component={MyBuilds} />
-      <homestack.Screen name='CustomBuild' component={CustomBuild} />
-      <homestack.Screen name='CabanaView' component={CabanaView} options={{ animation: 'slide_from_bottom', animationDuration: 300 }} />
-      <homestack.Screen name='RequestConfirmation' component={RequestConfirmation} options={{ animation: 'fade' }} />
-      <homestack.Screen name='MyProfile' component={Myprofile} />
-      <homestack.Screen name='EditProfile' component={EditProfile} />
-      <homestack.Screen name='Membership' component={Membership} />
-      <homestack.Screen name='MembershipDesc' component={MembershipDesc} />
-      <homestack.Screen name='AboutUs' component={AboutUs} />
-      <homestack.Screen name='Support' component={Support} />
-      <homestack.Screen name='PrivacyPolicy' component={PrivacyPolicy} />
-      <homestack.Screen name='AdminHome' component={AdminHome} />
-      <homestack.Screen name='AdminAddProduct' component={AdminAddProduct} />
-      <homestack.Screen name='TowingSummary' component={TowingSummary} />
+        <Animated.View style={[{ flex: 1, overflow: 'hidden', shadowColor: Colors.Black, borderWidth: 1 }, animatedStyle]}>
+          <homestack.Navigator screenOptions={{ headerShown: false }}>
+            <homestack.Screen name='Home' component={Home} />
+            <homestack.Screen name='ChooseServices' component={ChooseServices} />
+            <homestack.Screen name='ScheduleServices' component={ScheduleService} />
+            <homestack.Screen name='ServicesList' component={ServicesList} />
+            <homestack.Screen name='ProductPage' component={ProductPage} options={{ animation: 'slide_from_bottom', animationDuration: 300 }} />
+            <homestack.Screen name='BookingSummary' component={BookingSummary} />
+            <homestack.Screen name='MyActivities' component={MyActivities} />
+            <homestack.Screen name='BookedTicket' component={BookedTicket} />
+            <homestack.Screen name='ChooseLocation' component={ChooseLocation} />
+            <homestack.Screen name='CabanSize' component={CabanSizeDetail} />
+            <homestack.Screen name='ServicesPage' component={ServicesPage} />
+            <homestack.Screen name='BuildLocations' component={BuildLocations} />
+            <homestack.Screen name='SelectCabanas' component={SelectCabanas} />
+            <homestack.Screen name='MyBuilds' component={MyBuilds} />
+            <homestack.Screen name='CustomBuild' component={CustomBuild} />
+            <homestack.Screen name='CabanaView' component={CabanaView} options={{ animation: 'slide_from_bottom', animationDuration: 300 }} />
+            <homestack.Screen name='RequestConfirmation' component={RequestConfirmation} options={{ animation: 'fade' }} />
+            <homestack.Screen name='MyProfile' component={Myprofile} />
+            <homestack.Screen name='EditProfile' component={EditProfile} />
+            <homestack.Screen name='Membership' component={Membership} />
+            <homestack.Screen name='MembershipDesc' component={MembershipDesc} />
+            <homestack.Screen name='AboutUs' component={AboutUs} />
+            <homestack.Screen name='Support' component={Support} />
+            <homestack.Screen name='PrivacyPolicy' component={PrivacyPolicy} />
+            <homestack.Screen name='AdminHome' component={AdminHome} />
+            <homestack.Screen name='AdminAddProduct' component={AdminAddProduct} />
+            <homestack.Screen name='TowingSummary' component={TowingSummary} />
 
 
 
 
-    </homestack.Navigator>
-    //   </Animated.View>
+          </homestack.Navigator>
 
-    // </View>
+        </Animated.View>
+      </View>
+
+    </View >
   )
 }
 

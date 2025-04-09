@@ -36,9 +36,10 @@ const InputRenderItem = ({ Item, key, name, JsonData, setJsonData }) => {
                 switch (Item.inputType) {
                     case 'TextInput':
                         return (
-                            <KeyboardAvoidingView behavior='padding' style={{ marginVertical: SCREEN_HEIGHT * 0.02 }}>
+                            <KeyboardAvoidingView behavior='padding' style={{ marginVertical: SCREEN_HEIGHT * .01 }}>
                                 <CustomTextInput
                                     name={item}
+                                    value={JsonData[name]}
                                     onChangeText={(text) =>
                                         setJsonData((prevFormData) => ({
                                             ...prevFormData,

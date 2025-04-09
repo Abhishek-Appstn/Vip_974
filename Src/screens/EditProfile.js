@@ -3,7 +3,7 @@ import { FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, View
 import CustomTextInput from '../components/CustomTextInput/CustomTextInput'
 import CustomButton from '../components/CustomButton/CustomButton'
 import Constants from '../Constants'
-import { Cameraicon, Logo_White, Profile_Damu } from '../assets/Images'
+import { Background_Icon_ServiceHeader, Cameraicon, Logo_White, Profile_Damu } from '../assets/Images'
 import { useNavigation } from '@react-navigation/native'
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent'
 import Animated from 'react-native-reanimated'
@@ -97,16 +97,24 @@ const EditProfile = (props) => {
         height: SCREEN_HEIGHT,
         backgroundColor: Colors.Black_Bg
       }}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ padding: SCREEN_WIDTH * .05 }}>
-        <DrawerHeaderComponent type={'login'} name="Edit Profile" search={true} />
+      <Image
+        style={{
+          position: 'absolute',
+          right: 0, top: 0
+        }}
+        source={Background_Icon_ServiceHeader}
+      />
+      <DrawerHeaderComponent type={'login'} name="Edit Profile" search={true} />
+
+      <ScrollView bounces={false} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: SCREEN_WIDTH * .05 }}>
         <ProfileImage />
+
         <FlatList showsVerticalScrollIndicator={false} scrollEnabled={false} data={data} renderItem={({ item, index }) => {
           return (
-            <View style={{}}>
+            <View style={{ marginVertical: SCREEN_HEIGHT * .01 }}>
               <CustomTextInput value={FormData[item.key]} placeholder={item.name} name={item.name} type={item.name == 'Phone' ? "PhoneNumber" : null} onChangeText={text => handleTextChange(text, item.key)} />
             </View>
           )
-
         }} />
         <View style={{ marginTop: 30 }}>
           <CustomButton title={'Save'} onPress={() => HandleNavigation({ screen: 'Home', dispatch: dispatch })} />

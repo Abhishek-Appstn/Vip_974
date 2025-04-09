@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, FlatList, ScrollView, Keyboard, TouchableWithoutFeedback, Platform, KeyboardAvoidingView } from 'react-native'
+import { View, Text, SafeAreaView, FlatList, ScrollView, Keyboard, TouchableWithoutFeedback, Platform, KeyboardAvoidingView, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import DrawerHeaderComponent from '../components/DrawerHeaderComponent/DrawerHeaderComponent'
 import Layout from '../components/Layout/Layout'
@@ -9,6 +9,7 @@ import DataConstants from '../assets/DataConstants'
 import { useNavigation } from '@react-navigation/native'
 import Helpers from '../Helpers'
 import Snackbar from 'react-native-snackbar'
+import MaterialTextInput from '../components/MaterialTextInput'
 const { SCREEN_HEIGHT, SCREEN_WIDTH } = Constants.SCREEN_DIMENSIONS
 const { Colors } = Constants
 
@@ -29,7 +30,7 @@ const handleTextChange = ({ text, key, FormData, setFormData }) => {
 const RenderSupportFields = ({ item, index, data, setData, Unfilled }) => {
 
     return (
-        <View behavior='padding' style={{}}>
+        <View behavior='padding' style={{ marginVertical: SCREEN_HEIGHT * .015 }}>
             <CustomTextInput type={item.key == 'PhoneNumber' ? 'PhoneNumber' : null} error={Unfilled ? Unfilled.includes(item.key) ? true : false : null} multiline={item.title === 'Message' ? true : false} value={data[item.key]} name={item.title} onChangeText={text => handleTextChange({ text: text, key: item.key, FormData: data, setFormData: setData })} />
         </View>
     )
@@ -57,8 +58,8 @@ const Support = () => {
     })
     return (
         <Layout>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss()}>
-                <View style={{ flex: 1 }}>
+            <TouchableWithoutFeedback style={{ flex: 1 }} onPress={Keyboard.dismiss()}>
+                <SafeAreaView style={{ flex: 1 }}>
                     <KeyboardAvoidingView behavior='padding' style={{ flex: 1 }}>
                         <SafeAreaView style={{ flex: 1 }}>
                             <View style={{ flex: 1, margin: SCREEN_WIDTH * 0.05 }}>
@@ -73,7 +74,6 @@ const Support = () => {
                         </SafeAreaView>
                     </KeyboardAvoidingView>
 
-                    {/* Ensure the button stays fixed here */}
                     <View style={{
                         width: SCREEN_WIDTH * 0.9,
                         alignSelf: 'center',
@@ -84,7 +84,9 @@ const Support = () => {
                             onPress={() => CreateSupportTicket({ FormData: FormData, setUnfilled: setUnfilled, navigation: navigation })}
                         />
                     </View>
-                </View>
+
+
+                </SafeAreaView>
             </TouchableWithoutFeedback>
 
         </Layout>

@@ -1,4 +1,4 @@
-import { BathroomSize, BathroomType, CabanSize, carpet, CompassNorthEast, Condition, CornerWardrobe, Fiber, GalvanisedIron, HingeDoor, Lifters, LocationPin, Maps, Nothing, OuterCover, Paint, parquet, RoomFloor, SlidingDoor, tile, TowHook, WalkinWardrobe, Wall, Wallpaper, Wardrobe, WaterTank, WindowShutter, WindowSize } from './Images';
+import { BathroomSize, BathroomType, CabanSize, CabanSize_green, carpet, CompassNorthEast, Condition, CornerWardrobe, Fiber, GalvanisedIron, HingeDoor, Lifters, LocationPin, Maps, Nothing, OuterCover, Paint, parquet, RoomFloor, SlidingDoor, tile, TowHook, WalkinWardrobe, Wall, Wallpaper, Wardrobe, WaterTank, WindowShutter, WindowSize } from './Images';
 
 const CustomBuildData = () => {
   const data = {
@@ -6,7 +6,7 @@ const CustomBuildData = () => {
       id: 1,
       title: "Caban Size",
       key: "cabanSize",
-      image: CabanSize,
+      image: CabanSize_green,
       description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
       flatlistData: [
         { inputType: "TextInput", data: ["height", "width"] }
@@ -20,11 +20,12 @@ const CustomBuildData = () => {
       image: BathroomSize,
       description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy",
       flatlistData: [
-        { inputType: 'Selection',
+        {
+          inputType: 'Selection',
           data: [
-            {Dataname: 'Standard', size: '160 x 160 CM²'},
-            {Dataname: 'Medium', size: '180 x 180 CM²'},
-            {Dataname: 'Large Size', size: '200 x 200 CM²'},
+            { Dataname: 'Standard', size: '160 x 160 CM²' },
+            { Dataname: 'Medium', size: '180 x 180 CM²' },
+            { Dataname: 'Large Size', size: '200 x 200 CM²' },
           ],
         }
       ],
@@ -39,10 +40,10 @@ const CustomBuildData = () => {
         {
           inputType: 'Selection-Image',
           data: [
-            {Dataname: 'Paraquet', image: parquet},
-            {Dataname: 'Carpets', image: carpet},
-            {Dataname: 'Marble Alternative', image: tile},
-            {Dataname: 'Nothing', image: Nothing},
+            { Dataname: 'Paraquet', image: parquet },
+            { Dataname: 'Carpets', image: carpet },
+            { Dataname: 'Marble Alternative', image: tile },
+            { Dataname: 'Nothing', image: Nothing },
           ],
         },
       ],
@@ -57,10 +58,10 @@ const CustomBuildData = () => {
         {
           inputType: 'Selection-Image',
           data: [
-            {Dataname: 'Sliding Door', image: SlidingDoor},
-            {Dataname: 'Hinge Door', image: HingeDoor},
-            {Dataname: 'Corner Wardrobe', image: CornerWardrobe},
-            {Dataname: 'Walk-in-wardrobe', image: WalkinWardrobe},
+            { Dataname: 'Sliding Door', image: SlidingDoor },
+            { Dataname: 'Hinge Door', image: HingeDoor },
+            { Dataname: 'Corner Wardrobe', image: CornerWardrobe },
+            { Dataname: 'Walk-in-wardrobe', image: WalkinWardrobe },
           ],
         },
       ],
@@ -75,9 +76,9 @@ const CustomBuildData = () => {
         {
           inputType: 'Selection-Image',
           data: [
-            {Dataname: 'WallPaper', image: Wallpaper},
-            {Dataname: 'Paint', image: Paint},
-            {Dataname: 'Nothing', image: Nothing},
+            { Dataname: 'WallPaper', image: Wallpaper },
+            { Dataname: 'Paint', image: Paint },
+            { Dataname: 'Nothing', image: Nothing },
           ],
         },
       ],
@@ -92,9 +93,9 @@ const CustomBuildData = () => {
         {
           inputType: 'Selection',
           data: [
-            {Dataname: 'Standard', size: '160 x 160 CM²'},
-            {Dataname: 'Medium', size: '180 x 180 CM²'},
-            {Dataname: 'Large Size', size: '200 x 200 CM²'},
+            { Dataname: 'Standard', size: '160 x 160 CM²' },
+            { Dataname: 'Medium', size: '180 x 180 CM²' },
+            { Dataname: 'Large Size', size: '200 x 200 CM²' },
           ],
         },
       ],
@@ -109,8 +110,8 @@ const CustomBuildData = () => {
         {
           inputType: 'Selection-Horizontal',
           data: [
-            {Dataname: 'Yes', subData: 'With Shutters'},
-            {Dataname: 'No', subData: 'Without Shutters'},
+            { Dataname: 'Yes', subData: 'With Shutters' },
+            { Dataname: 'No', subData: 'Without Shutters' },
           ],
         },
       ],
@@ -125,8 +126,8 @@ const CustomBuildData = () => {
         {
           inputType: 'Selection-Horizontal',
           data: [
-            {Dataname: '(X2) Lifters', subData: 'Only in the front'},
-            {Dataname: '(X4) Lifters', subData: 'To all sides'},
+            { Dataname: '(X2) Lifters', subData: 'Only in the front' },
+            { Dataname: '(X4) Lifters', subData: 'To all sides' },
           ],
         },
       ],
@@ -141,8 +142,8 @@ const CustomBuildData = () => {
         {
           inputType: 'Selection-Horizontal',
           data: [
-            {Dataname: 'Standard', subData: 'Classic'},
-            {Dataname: 'Custome', subData: 'Select One'},
+            { Dataname: 'Standard', subData: 'Classic' },
+            { Dataname: 'Custome', subData: 'Select One' },
           ],
         },
       ],
@@ -157,13 +158,13 @@ const CustomBuildData = () => {
         {
           inputType: 'Selection-Horizontal2',
           data: [
-            {Dataname: '(1) Ton'},
-            {Dataname: '(1) Ton X 2'},
-            {Dataname: '(2) Ton'},
-            {Dataname: '(2) Ton X 2'},
-            {Dataname: '(2.5) Ton'},
-            {Dataname: '(2.5) Ton X 2'},
-            {Dataname: 'Without'},
+            { Dataname: '(1) Ton' },
+            { Dataname: '(1) Ton X 2' },
+            { Dataname: '(2) Ton' },
+            { Dataname: '(2) Ton X 2' },
+            { Dataname: '(2.5) Ton' },
+            { Dataname: '(2.5) Ton X 2' },
+            { Dataname: 'Without' },
           ],
         },
       ],
@@ -178,8 +179,8 @@ const CustomBuildData = () => {
         {
           inputType: 'Selection-Image',
           data: [
-            {Dataname: 'Galvanised Iron', image: GalvanisedIron},
-            {Dataname: 'Fiber Door', image: Fiber},
+            { Dataname: 'Galvanised Iron', image: GalvanisedIron },
+            { Dataname: 'Fiber Door', image: Fiber },
           ],
         },
       ],
@@ -194,10 +195,10 @@ const CustomBuildData = () => {
         {
           inputType: 'Selection',
           data: [
-            {Dataname: '500 Liter'},
-            {Dataname: '1000 Liter'},
-            {Dataname: '1500 Liter'},
-            {Dataname: '2000 Liter'},
+            { Dataname: '500 Liter' },
+            { Dataname: '1000 Liter' },
+            { Dataname: '1500 Liter' },
+            { Dataname: '2000 Liter' },
           ],
         },
       ],
