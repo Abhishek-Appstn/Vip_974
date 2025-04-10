@@ -164,7 +164,7 @@ const CustomTextInput = ({
         borderRadius: 10, overflow: 'hidden',
         borderWidth: 1, borderColor: isFocused ? Colors.Green1 : null
       }, containerStyle]}>
-        <View style={{ flexDirection: 'row', alignItems: 'flex-end', paddingBottom: SCREEN_WIDTH * .02, paddingHorizontal: SCREEN_WIDTH * .02, flex: 1, }}>
+        <View style={{ flexDirection: 'row', alignItems: 'flex-end',  paddingHorizontal: SCREEN_WIDTH * .02, flex: 1, }}>
           {(isFocused || value) && type == 'PhoneNumber' ? <TextInput style={{ color: Colors.Green1, fontSize: 16, fontFamily: 'Gibson', }} value='+974'></TextInput> : null}
           <TextInput
             ref={inputRef}

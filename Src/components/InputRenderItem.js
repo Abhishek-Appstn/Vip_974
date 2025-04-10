@@ -36,7 +36,7 @@ const InputRenderItem = ({ Item, key, name, JsonData, setJsonData }) => {
                 switch (Item.inputType) {
                     case 'TextInput':
                         return (
-                            <KeyboardAvoidingView behavior='padding' style={{ marginVertical: SCREEN_HEIGHT * .01 }}>
+                            <View style={{ marginVertical: SCREEN_HEIGHT * .01 }}>
                                 <CustomTextInput
                                     name={item}
                                     value={JsonData[name]}
@@ -50,7 +50,7 @@ const InputRenderItem = ({ Item, key, name, JsonData, setJsonData }) => {
                                         }))
                                     }
                                 />
-                            </KeyboardAvoidingView>
+                            </View>
                         );
                     case 'Selection':
                         return (
