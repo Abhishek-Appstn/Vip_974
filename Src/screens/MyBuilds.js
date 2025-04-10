@@ -30,7 +30,7 @@ const MyBuilds = () => {
         <DrawerHeaderComponent name={"My Builds"} type={"login"} search={true} />
         <FlatList horizontal style={{ alignSelf: 'center', }} contentContainerStyle={{ justifyContent: 'space-between', width: SCREEN_WIDTH * .7, }} data={MyBuildHeader} renderItem={item => <SelectorComponentRenderItem item={item.item} index={item.index} SelectedIndex={SelectedIndex} setSelectedIndex={setSelectedIndex} />} />
 
-        <FlatList bounces={false} data={sortedData} showsVerticalScrollIndicator={false} contentContainerStyle={{ marginTop: SCREEN_HEIGHT * .02 }} renderItem={item => <CabanaListRenderItem index={item.index} item={item.item} />} />
+        <FlatList keyExtractor={(item, index) => item.name} bounces={false} data={sortedData} showsVerticalScrollIndicator={false} contentContainerStyle={{ marginTop: SCREEN_HEIGHT * .02,paddingBottom:SCREEN_HEIGHT*.025}} renderItem={item => <CabanaListRenderItem index={item.index} item={item.item} />} />
 
       </SafeAreaView>
     </View>

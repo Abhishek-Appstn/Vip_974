@@ -49,7 +49,9 @@ const ItemLayout = ({ buttonTitle, children, size, colors, onPress, screenname, 
           {children}
         </SafeAreaView>
       </View>
+      <SafeAreaView>
       <LowerButtonComponent onPress={onPress} buttonTitle={buttonTitle} type={type} />
+      </SafeAreaView>
     </View>
 
   )

@@ -58,10 +58,10 @@ const PageHeader = ({ item, ActiveStep, Percentage, CustomFlexDirection, CustomA
 const StepContent = ({ JsonData, setJsonData, Data, CustomAlignItems }) => {
   return (
     Data.key !== 'NameOfCustomization' ?
-      <KeyboardAvoidingView behavior='padding' style={{ alignItems: 'center', justifyContent: 'center', height: SCREEN_HEIGHT * .7, width: SCREEN_WIDTH, }}>
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: SCREEN_HEIGHT * .05 }}>
-          <Image source={Data.image} />
-          <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 24, marginVertical: SCREEN_HEIGHT * .02, textTransform: 'uppercase' }}>{Data.title}</Text>
+      <View style={{ alignItems: 'center', justifyContent: 'space-between'}}>
+        <View style={{flex:1,}}/>
+          <Image source={Data.image} style={{height:SCREEN_HEIGHT*.1,}}resizeMode='contain' />
+          <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 24,  textTransform: 'uppercase' }}>{Data.title}</Text>
           <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 16, maxWidth: SCREEN_WIDTH * .75, textAlign: 'center', marginBottom: SCREEN_HEIGHT * .02 }}>{Data.description}</Text>
           <FlatList
             scrollEnabled={false}
@@ -69,8 +69,7 @@ const StepContent = ({ JsonData, setJsonData, Data, CustomAlignItems }) => {
             data={Data.flatlistData}
             renderItem={({ item }) => <InputRenderItem Item={item} name={Data.key} JsonData={JsonData} setJsonData={setJsonData} />}
           />
-        </View>
-      </KeyboardAvoidingView> :
+      </View> :
       <KeyboardAvoidingView behavior='padding' style={[{ justifyContent: 'center', height: SCREEN_HEIGHT * .7, width: SCREEN_WIDTH, paddingHorizontal: SCREEN_WIDTH * .05 },]}>
         <View contentContainerStyle={[{ justifyContent: 'center', marginTop: SCREEN_HEIGHT * .05 }, CustomAlignItems]}>
           <Text style={{ fontFamily: 'Gibson', color: Colors.White, fontSize: 24, marginVertical: SCREEN_HEIGHT * .02, textTransform: 'uppercase' }}>{Data.title}</Text>
@@ -222,9 +221,9 @@ const CustomBuild = () => {
         />
         <PageHeader CustomAlignItems={CustomAlignItems} CustomFlexDirection={CustomFlexDirection} item={Data} ActiveStep={ActiveStep} Percentage={Percentage} />
       </View>
-      <View style={{ backgroundColor: Colors.Black_Bg }}>
+      <View style={{ backgroundColor: Colors.Black_Bg,flex:1,alignItems:'center',justifyContent:'center' }}>
 
-        <Animated.View style={[animatedStyle]}>
+        <Animated.View style={[{flex:1},animatedStyle]}>
           <StepContent CustomAlignItems={CustomAlignItems} JsonData={JsonData} setJsonData={setJsonData} Data={Data} />
 
         </Animated.View>

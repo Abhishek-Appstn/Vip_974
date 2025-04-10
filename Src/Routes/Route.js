@@ -73,17 +73,7 @@ const DrawerNavigation = () => {
 
   )
 }
-const AnimatedStyle = (Component) => {
-  return (props) => (
-    <View style={{ flex: 1, backgroundColor: Colors.Black_Bg }}>
-      <Image source={DrawerUpperImage} style={{ position: 'absolute', left: SCREEN_WIDTH * .2 }} />
-      <DrawerSceneContainer>
-        <Component {...props} />
-      </DrawerSceneContainer>
-    </View>
 
-  )
-}
 
 
 const HomeNavigation = () => {
@@ -98,7 +88,7 @@ const HomeNavigation = () => {
     };
   });
   return (
-    <View style={{ flex: 1, backgroundColor: Colors.Black_Bg }}>
+    <View style={{ flex: 1, backgroundColor: Colors.Black_Bg, }}>
       <Image source={DrawerUpperImage} style={{ position: 'absolute', left: SCREEN_WIDTH * .2 }} />
       <View style={{ flex: 1, shadowColor: Colors.Black, shadowRadius: 40, shadowOpacity: 1, }}>
 
